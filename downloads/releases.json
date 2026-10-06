@@ -2,6 +2,22 @@
   "schemaVersion": 1,
   "releases": [
     {
+      "version": "1.0.64",
+      "name": "English translation",
+      "file": "DQM1-2-English-v1.0.64-public.zip",
+      "bytes": 7356016,
+      "sha256": "ff5e8cac0253ddb37639f9d9b24993976679fc98afdc1d36f72c77d3b0362ac6",
+      "contents": [
+        "DQM1-2-English-v1.0.64.bps",
+        "DQM1-2-English-v1.0.64.cue",
+        "README.txt"
+      ],
+      "notes": [
+        "Fixes overlapping skill descriptions when learning a new skill or choosing an old skill to forget.",
+        "Restores description-window initialization so the skill list is ready before its description is drawn."
+      ]
+    },
+    {
       "version": "1.0.63",
       "name": "English translation",
       "file": "DQM1-2-English-v1.0.63-public.zip",

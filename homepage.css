@@ -228,10 +228,6 @@ a.reference-card:hover { transform: translateY(-4px); box-shadow: 0 7px 0 #d7cab
 .translation-story { border-left: 1px solid var(--paper-line); padding-left: 32px; }
 .game-story [lang="ja"] { line-break: strict; overflow-wrap: anywhere; }
 .story-grid .story-source { margin-top: 20px; font-size: .75rem; color: #5d6267; }
-.project-features { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 32px; margin-top: 38px; padding: 30px 0 32px; border-block: 1px solid var(--paper-line); }
-.feature-number { color: var(--gold-dark); font: 15px var(--font-display); }
-.project-features h3 { font: 500 23px/1.3 var(--font-display); margin: 8px 0 10px; }
-.project-features p { font-size: .875rem; line-height: 1.85; color: #58625f; }
 .project-credits { border-top: 1px solid var(--paper-line); padding-top: 25px; margin-top: 30px; }
 .project-credits h3 { font: 500 24px/1.3 var(--font-display); margin-bottom: 12px; }
 .project-credits p { max-width: 80ch; font-size: .875rem; line-height: 1.85; }
@@ -242,13 +238,10 @@ a.reference-card:hover { transform: translateY(-4px); box-shadow: 0 7px 0 #d7cab
   .hero-description { margin-inline: auto; }
   .story-grid { grid-template-columns: 1fr; gap: 28px; }
   .translation-story { border-left: 0; border-top: 1px solid var(--paper-line); padding: 25px 0 0; }
-  .project-features { gap: 22px; }
 }
 @media (max-width: 600px) {
   .about-section { padding-top: 45px; }
   .main-nav { gap: 8px 18px; flex-wrap: wrap; }
   .main-nav a { padding-block: 5px; }
   .story-grid h3 { font-size: 24px; }
-  .project-features { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; }
-  .project-features h3 { margin-top: 4px; }
 }

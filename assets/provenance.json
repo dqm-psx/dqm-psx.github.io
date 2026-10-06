@@ -1,0 +1,548 @@
+[
+  {
+    "file": "great-tree.png",
+    "description": "In-game castle interior overlooking a distant tree and blue skyline; captured while testing shrine exit.",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "issue39-shrine-exit.png",
+    "sha256": "be41746053f771fea525b420fe8dafc734e7e971f41da26d3e411d161918f434"
+  },
+  {
+    "file": "battle.png",
+    "description": "English translation battle scene in a cave.",
+    "width": 320,
+    "height": 240,
+    "sourceFile": "runtime-evidence-003.png",
+    "sha256": "1b7d5d5969fb884ef4bf3ce045142cbb0cb2adefc0ff3ad78326c24c8b0f1488"
+  },
+  {
+    "file": "adventure.png",
+    "description": "Terry and his monster party exploring a treasure room.",
+    "width": 320,
+    "height": 240,
+    "sourceFile": "runtime-evidence-011.png",
+    "sha256": "4a507f1f58667efa01ba6a211ef9405f2acec9b59bafdb4897ef4a4b904c9d2d"
+  },
+  {
+    "file": "slime.gif",
+    "description": "Slime native encyclopedia directional preview, cycling three static direction views at 180 ms; not a walking cycle.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "4813_decoded_field.gif",
+    "sha256": "84443aff44be966e9fc3456be04cfa16b69e1f0807f66db80c13073276bc3aa3"
+  },
+  {
+    "file": "dracky.gif",
+    "description": "Dracky native encyclopedia directional preview, cycling three static direction views at 180 ms; not a walking cycle.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "4900_decoded_field.gif",
+    "sha256": "23a2184a0da24e64b710115067f338c78451f3477dc1d58d550e59e25a149ed4"
+  },
+  {
+    "file": "healslime.gif",
+    "description": "Healslime native encyclopedia directional preview, cycling three static direction views at 180 ms; not a walking cycle.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "4815_decoded_field.gif",
+    "sha256": "cbe9c8896a14e8233884e821d715cb21edec7b5ff5ed2c5a7f8f9ac34c860e49"
+  },
+  {
+    "file": "dragon.gif",
+    "description": "Dragon native encyclopedia directional preview, cycling three static direction views at 180 ms; not a walking cycle.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "4847_decoded_field.gif",
+    "sha256": "f8f9c1d2cc2abe22828c7fc47ce16d0313792156c070e4f66f3be57a1b3539de"
+  },
+  {
+    "file": "watabou.gif",
+    "description": "Watabou native encyclopedia directional preview, cycling three static direction views at 180 ms; not a walking cycle.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "4943_decoded_field.gif",
+    "sha256": "5cb1ca5a1d887b0a18d2831d5bdc9b3fccafc7a54a895d2e321790ddf510b15f"
+  },
+  {
+    "file": "terry.gif",
+    "description": "Terry native front-facing four-frame walking animation, 100 ms per frame.",
+    "width": 20,
+    "height": 32,
+    "sourceFile": "characters/terry/animations/walk_down.gif",
+    "gitBlobSha": "d3768b1ab8019d0284e6a9ef8290b7730a2e83ca",
+    "sha256": "5b1ec3eb39aa68acec4e5a5bed6c8441bb71fc90b6097b34932df763254c363e"
+  },
+  {
+    "file": "terry.png",
+    "description": "Terry native front-facing idle frame.",
+    "width": 20,
+    "height": 32,
+    "sourceFile": "characters/terry/frames/down_idle.png",
+    "gitBlobSha": "6b3020774c471e95a62d4eca4e8530f91d49d00c",
+    "sha256": "37f9f231be6578425abf6a8a56fb8beef3619b5fb30e1b4074c564e06f705847"
+  },
+  {
+    "file": "slime-still.png",
+    "description": "Slime first native animation frame, extracted without changes for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "slime.gif",
+    "sha256": "fba6cba829a4b86c6b5269fe41780b7ed830a7bad75d27b05dc4fff3403b0c44"
+  },
+  {
+    "file": "dracky-still.png",
+    "description": "Dracky first native animation frame, extracted without changes for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "dracky.gif",
+    "sha256": "d87f15a8ba188afa2754269e354211cd1561f910491aa0822a1d4eaf4afbd5b9"
+  },
+  {
+    "file": "healslime-still.png",
+    "description": "Healslime first native animation frame, extracted without changes for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "healslime.gif",
+    "sha256": "c904afb387565a6c955e970f916c06ccc11bc316cc9d4212997d1252684cb071"
+  },
+  {
+    "file": "dragon-still.png",
+    "description": "Dragon first native animation frame, extracted without changes for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "dragon.gif",
+    "sha256": "bff607fe70c03a0a6d7acf04b3a534c66b89660fcde517e3e462044fadc78eb4"
+  },
+  {
+    "file": "watabou-still.png",
+    "description": "Watabou first native animation frame, extracted without changes for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sourceFile": "watabou.gif",
+    "sha256": "01926f68e6bfe2d1edd7e5c78a28643ffea7c854b0596fafd5dead6da3267de5"
+  },
+  {
+    "file": "terry-still.png",
+    "description": "Terry native idle frame, identical to the first animation frame, for reduced motion.",
+    "width": 20,
+    "height": 32,
+    "sourceFile": "terry.png",
+    "sha256": "37f9f231be6578425abf6a8a56fb8beef3619b5fb30e1b4074c564e06f705847"
+  },
+  {
+    "file": "item.png",
+    "description": "Medicinal Herb native overworld pickup sprite, copied unchanged from the guide reference data.",
+    "width": 20,
+    "height": 20,
+    "sourceFile": "reference.json items[id=1].sprite.image",
+    "archiveResource": 5542,
+    "graphicId": 6,
+    "sha256": "0270d5a0ec4440147eb3fc5845ba15a76b27f2ec641a90aa266064b2d1180c31"
+  },
+  {
+    "file": "slime-walk.gif",
+    "description": "Slime authentic native forward-facing walk cycle; presentation timing 120 ms per frame.",
+    "width": 32,
+    "height": 32,
+    "sha256": "ff981ef4728f6cc8bbb98fd01328607a99f4247ef10f803908e368a5ab95dddb",
+    "sourceFile": "1213_field_00.png",
+    "sourceAssetId": "dqm-1213-field_00",
+    "archiveResource": 1213,
+    "compressedSourceOffset": 356,
+    "sourceSheetSha256": "1d964115f28677b338375c4b5c9e6efa29a08611c37e17fa4d10e6d444623031",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "file": "slime-walk-still.png",
+    "description": "Slime authentic native forward-facing neutral pose for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sha256": "fba6cba829a4b86c6b5269fe41780b7ed830a7bad75d27b05dc4fff3403b0c44",
+    "sourceFile": "1213_field_00.png",
+    "sourceAssetId": "dqm-1213-field_00",
+    "archiveResource": 1213,
+    "compressedSourceOffset": 356,
+    "sourceSheetSha256": "1d964115f28677b338375c4b5c9e6efa29a08611c37e17fa4d10e6d444623031",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
+  },
+  {
+    "file": "dracky-walk.gif",
+    "description": "Dracky authentic native forward-facing walk cycle; presentation timing 120 ms per frame.",
+    "width": 32,
+    "height": 32,
+    "sha256": "074a4e862b492ce389a491ab8f29f1009a2f10413ef0cabdea7b76d6c50c60c3",
+    "sourceFile": "1213_field_02.png",
+    "sourceAssetId": "dqm-1213-field_02",
+    "archiveResource": 1213,
+    "compressedSourceOffset": 6512,
+    "sourceSheetSha256": "78605b3c6403f481105eb256f4d9ac6bc6980036bd37fb693c929d356ff95e1b",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "file": "dracky-walk-still.png",
+    "description": "Dracky authentic native forward-facing neutral pose for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sha256": "d87f15a8ba188afa2754269e354211cd1561f910491aa0822a1d4eaf4afbd5b9",
+    "sourceFile": "1213_field_02.png",
+    "sourceAssetId": "dqm-1213-field_02",
+    "archiveResource": 1213,
+    "compressedSourceOffset": 6512,
+    "sourceSheetSha256": "78605b3c6403f481105eb256f4d9ac6bc6980036bd37fb693c929d356ff95e1b",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
+  },
+  {
+    "file": "healslime-walk.gif",
+    "description": "Healslime authentic native forward-facing walk cycle; presentation timing 120 ms per frame.",
+    "width": 32,
+    "height": 32,
+    "sha256": "072ee31df7b31bfb30abaa17035c62ceb3f01a6908a0b6037bc4c92b3bdcc126",
+    "sourceFile": "1210_field_00.png",
+    "sourceAssetId": "dqm-1210-field_00",
+    "archiveResource": 1210,
+    "compressedSourceOffset": 252,
+    "sourceSheetSha256": "7f4ff1ba21b140cbdcb2593b80e60f95cc1a8aad63d9cf2580c30335a0912994",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "file": "healslime-walk-still.png",
+    "description": "Healslime authentic native forward-facing neutral pose for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sha256": "c904afb387565a6c955e970f916c06ccc11bc316cc9d4212997d1252684cb071",
+    "sourceFile": "1210_field_00.png",
+    "sourceAssetId": "dqm-1210-field_00",
+    "archiveResource": 1210,
+    "compressedSourceOffset": 252,
+    "sourceSheetSha256": "7f4ff1ba21b140cbdcb2593b80e60f95cc1a8aad63d9cf2580c30335a0912994",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
+  },
+  {
+    "file": "dragon-walk.gif",
+    "description": "Dragon authentic native forward-facing walk cycle; presentation timing 120 ms per frame.",
+    "width": 32,
+    "height": 32,
+    "sha256": "8255aac9c9a14cbce3e8b0c83bb6f77abc910d9b883fb8e52fbeceaeb6667419",
+    "sourceFile": "1364_field_00.png",
+    "sourceAssetId": "dqm-1364-field_00",
+    "archiveResource": 1364,
+    "compressedSourceOffset": 416,
+    "sourceSheetSha256": "61b17dc25b27ed4e5c045b0bddf944ad45ef5d00e8b6b5e20b61fd6bd707c386",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "file": "dragon-walk-still.png",
+    "description": "Dragon authentic native forward-facing neutral pose for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sha256": "bff607fe70c03a0a6d7acf04b3a534c66b89660fcde517e3e462044fadc78eb4",
+    "sourceFile": "1364_field_00.png",
+    "sourceAssetId": "dqm-1364-field_00",
+    "archiveResource": 1364,
+    "compressedSourceOffset": 416,
+    "sourceSheetSha256": "61b17dc25b27ed4e5c045b0bddf944ad45ef5d00e8b6b5e20b61fd6bd707c386",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
+  },
+  {
+    "file": "watabou-walk.gif",
+    "description": "Watabou authentic native forward-facing walk cycle; presentation timing 120 ms per frame.",
+    "width": 32,
+    "height": 32,
+    "sha256": "ebadd6ed1512c65afed1a8359997c11151fe393e96368839fb2c7fdc1df95a7d",
+    "sourceFile": "1679_field_01.png",
+    "sourceAssetId": "dqm-1679-field_01",
+    "archiveResource": 1679,
+    "compressedSourceOffset": 6612,
+    "sourceSheetSha256": "3c236875f668f5d11e01951bc6ebf183c33edf8260e50c4d4308a86f020ca58a",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "file": "watabou-walk-still.png",
+    "description": "Watabou authentic native forward-facing neutral pose for reduced motion.",
+    "width": 32,
+    "height": 32,
+    "sha256": "01926f68e6bfe2d1edd7e5c78a28643ffea7c854b0596fafd5dead6da3267de5",
+    "sourceFile": "1679_field_01.png",
+    "sourceAssetId": "dqm-1679-field_01",
+    "archiveResource": 1679,
+    "compressedSourceOffset": 6612,
+    "sourceSheetSha256": "3c236875f668f5d11e01951bc6ebf183c33edf8260e50c4d4308a86f020ca58a",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "identityVerification": "The center front-facing pose is pixel-identical to the matching monster encyclopedia front pose. All three selected poses visually verified front-facing.",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
+  },
+  {
+    "file": "slime-spin-strip.png",
+    "description": "The existing spinning Slime directional GIF frames in one horizontal strip for an animated cursor or loading indicator.",
+    "width": 96,
+    "height": 32,
+    "frameWidth": 32,
+    "frameHeight": 32,
+    "frameCount": 3,
+    "sourceFile": "slime.gif",
+    "sha256": "3290fd16080a4b23dd85b4e58db2b265712b0a2f7d6576f8572a20d7c611c24d"
+  }
+]

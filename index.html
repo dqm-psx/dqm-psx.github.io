@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142844">
+  <meta name="description" content="Dragon Quest Monsters 1 & 2 for PlayStation. English translation patches, installation help, monster and item reference, and breeding tools.">
+  <title>Dragon Quest Monsters 1 & 2 · The PlayStation adventures</title>
+  <link rel="icon" href="assets/slime-walk.gif" type="image/gif">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="homepage.css">
+  <script src="loading.js" defer></script>
+  <script src="homepage.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#" aria-label="DQM PSX home">
+        <img class="pixel" src="assets/slime-walk.gif" width="40" height="40" alt="">
+        <span>DQM <b>PSX</b><small>A MONSTER-SIZED ADVENTURE</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#reference">Explore the guide</a>
+        <a href="#patches">Patches &amp; setup</a>
+        <a href="#community">Community</a>
+      </nav>
+      <a class="header-discord" href="https://discord.gg/6V9p6Y2pBt">Join the Discord <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero night-surface" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">PlayStation <span aria-hidden="true">·</span> English fan translation</p>
+          <h1 id="hero-title">Dragon Quest<span>Monsters <em>1 &amp; 2</em></span></h1>
+          <p class="hero-subtitle">The Starry Night Hero and Friends at the Ranch</p>
+          <div class="button-row">
+            <a class="button button-gold" href="#patches"><span aria-hidden="true">↓</span> Get the English patch</a>
+            <a class="button button-outline" href="https://dqm-psx.github.io/guide/">Open the guide</a>
+          </div>
+          <p class="translation-origin">Fan translation of
+            <span class="original-title" lang="ja">ドラゴンクエストモンスターズ1・2<wbr> 星降りの勇者と牧場の仲間たち</span>
+            <span class="romanized-title" lang="ja-Latn">Dragon Quest Monsters 1 &amp; 2: Hoshifuri no Yuusha to Bokujou no Nakama-tachi</span>
+          </p>
+          <div class="hero-party">
+            <div class="party-sprites" aria-hidden="true">
+              <img class="pixel animated-sprite party-terry" src="assets/terry.gif" width="28" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/slime-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/dracky-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/healslime-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/dragon-walk.gif" width="44" height="44" alt="">
+            </div>
+            <p>A few friends for the journey.</p>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="screenshot-frame">
+            <div class="window-heading"><span aria-hidden="true">✦</span> Adventure log <span>PLAYSTATION · 1 &amp; 2</span></div>
+            <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
+              <img id="featured-screen" src="assets/great-tree.png" width="960" height="720" alt="A scene from the PlayStation version of Dragon Quest Monsters" fetchpriority="high">
+              <div class="screenshot-loading" id="screenshot-loading" hidden><img class="pixel" src="assets/slime.gif" width="32" height="32" alt=""><span>Loading screenshot…</span></div>
+            </div>
+            <div class="screen-caption"><span id="screen-caption">A world beyond the Travelers’ Gates</span><span id="screen-number" aria-hidden="true">01 / 03</span></div>
+          </div>
+          <div class="scene-picker" role="group" aria-label="Choose a game screenshot">
+            <button class="scene-button" type="button" data-scene="0" aria-pressed="true"><span>01</span> The world</button>
+            <button class="scene-button" type="button" data-scene="1" aria-pressed="false"><span>02</span> The adventure</button>
+            <button class="scene-button" type="button" data-scene="2" aria-pressed="false"><span>03</span> The battles</button>
+          </div>
+          <p class="screenshot-status" id="screenshot-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div class="hero-bottom" aria-hidden="true"><span>✦</span></div>
+    </section>
+
+    <section id="reference" class="reference-section paper-surface" aria-labelledby="reference-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">The traveler’s bookshelf</p><h2 id="reference-title">A companion for every adventure.</h2></div>
+          <p>Find that elusive monster. Plan your next pairing.<br> Get to know the world, one discovery at a time.</p>
+        </div>
+
+        <div class="reference-grid">
+          <a class="reference-card monster-card" href="https://dqm-psx.github.io/guide/#monsters">
+            <div class="card-top"><span class="card-link-label">Open reference <span aria-hidden="true">↗</span></span></div>
+            <div class="card-art monster-art" aria-hidden="true"><span class="sprite-halo"></span><img class="pixel animated-sprite" src="assets/dragon-walk.gif" width="96" height="96" alt=""><img class="pixel animated-sprite little-slime" src="assets/slime-walk.gif" width="52" height="52" alt=""></div>
+            <h3>Meet the monsters</h3><p>Species, stats, skills, and locations.<br> Your next teammate is in here somewhere.</p>
+            <span class="card-footer">Monster reference <span aria-hidden="true">✦</span></span>
+          </a>
+          <a class="reference-card breeding-card" href="https://dqm-psx.github.io/guide/#breeding">
+            <div class="card-top"><span class="card-link-label">Open tools <span aria-hidden="true">↗</span></span></div>
+            <div class="card-art pairing-art" aria-hidden="true"><img class="pixel animated-sprite" src="assets/slime-walk.gif" width="66" height="66" alt=""><span class="pairing-plus">+</span><img class="pixel animated-sprite" src="assets/dracky-walk.gif" width="66" height="66" alt=""></div>
+            <h3>Raise something great</h3><p>Find breeding pairs and offspring.<br> Bring a little planning to your monster farm.</p>
+            <span class="card-footer">Breeding &amp; team planner <span aria-hidden="true">✦</span></span>
+          </a>
+          <a class="reference-card items-card" href="https://dqm-psx.github.io/guide/#items">
+            <div class="card-top"><span class="card-link-label">Open reference <span aria-hidden="true">↗</span></span></div>
+            <div class="card-art" aria-hidden="true"><span class="sprite-halo"></span><img class="pixel" src="assets/item.png" width="80" height="80" alt=""></div>
+            <h3>Pack for the journey</h3><p>Items and their descriptions.<br> Know what to keep in your adventurer’s bag.</p>
+            <span class="card-footer">Item reference <span aria-hidden="true">✦</span></span>
+          </a>
+        </div>
+
+        <a class="translation-link" href="https://dqm-psx.github.io/translations/">
+          <span class="translation-glyph" aria-hidden="true">あ <span>↔</span> A</span>
+          <span><strong>Lost in translation?</strong><span>Compare names and terminology across translations.</span></span>
+          <span class="translation-action">Browse translations <span aria-hidden="true">↗</span></span>
+        </a>
+
+        <div class="next-chapters">
+          <div class="next-intro"><p class="eyebrow">The next chapters</p><h3>A growing world of knowledge.</h3><p>More of the reference is taking shape.</p></div>
+          <ul class="chapter-list">
+            <li><span aria-hidden="true">01</span><div><h4>Characters &amp; dialogue</h4><p>Familiar faces, animated sprites, and the things they say.</p></div></li>
+            <li><span aria-hidden="true">02</span><div><h4>Maps &amp; places</h4><p>Explore the world and find the people who call it home.</p></div></li>
+            <li><span aria-hidden="true">03</span><div><h4>Breeding trees</h4><p>Trace a monster’s recipe back through each generation.</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="patches" class="patch-section night-surface" aria-labelledby="patch-title">
+      <div class="container patch-grid">
+        <div class="patch-intro">
+          <p class="eyebrow">Patch downloads</p>
+          <h2 id="patch-title">Play the adventures<br> in English.</h2>
+          <p>Download the translation package, then follow the setup instructions to patch your Japanese PlayStation game.</p>
+          <div class="release-download" aria-labelledby="release-title">
+            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.63</span></div>
+            <p>Includes the BPS patch, matching CUE file, and README.</p>
+            <a class="button button-gold" href="downloads/DQM1-2-English-v1.0.63-public.zip" download="DQM1-2-English-v1.0.63-public.zip"><span aria-hidden="true">↓</span> Download v1.0.63</a>
+            <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> 7.36 MB</span>
+            <details class="release-notes"><summary>Release notes</summary><ul><li>Fixes the reproduced crash after breeding and leaving the shrine.</li><li>Reduces audio memory usage and adds an audio-capacity safeguard.</li></ul><p>See the included README for the full change history and credits.</p></details>
+          </div>
+          <p class="patch-note"><a href="https://www.romhacking.net/translations/7734/">Project page on ROMhacking.net <span aria-hidden="true">↗</span></a></p>
+          <div class="patch-companion"><img class="pixel animated-sprite" src="assets/watabou-walk.gif" width="70" height="70" alt="Watabou"><p>Keep your memory-card saves safe.<br> <span>Back them up before updating your patch.</span></p></div>
+        </div>
+        <div class="install-panel menu-panel">
+          <div class="panel-heading"><h3>How to install</h3><span class="panel-label">PLAYSTATION</span></div>
+          <ol class="install-steps">
+            <li><span class="step-number" aria-hidden="true">1</span><div><h4>Gather your supplies</h4><p>Download and extract the patch package. You’ll need an unmodified Japanese PlayStation BIN of the game (<strong>SLPM-87050</strong>). Check the package’s README for release-specific instructions.</p></div></li>
+            <li><span class="step-number" aria-hidden="true">2</span><div><h4>Apply the English patch</h4><p>Open <a href="https://www.marcrobledo.com/RomPatcher.js/">Rom Patcher JS</a>, select your original BIN and the <code>.bps</code> patch, then apply it. Keep checksum validation enabled.</p></div></li>
+            <li><span class="step-number" aria-hidden="true">3</span><div><h4>Keep the BIN and CUE together</h4><p>Give the patched BIN the exact filename listed inside the accompanying CUE file. Place both files in the same folder.</p></div></li>
+            <li><span class="step-number" aria-hidden="true">4</span><div><h4>Start your adventure</h4><p>Open the CUE in your PlayStation emulator. When updating, boot the game fresh and load a normal memory-card save, rather than a save state from an older patch.</p></div></li>
+          </ol>
+          <details class="source-check"><summary>Check your original game image</summary><div><p>The original Japanese BIN should be <strong>260,975,568 bytes</strong>.</p><p class="hash-label">SHA-256</p><code class="file-hash">a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29</code><p>If validation fails, check that you selected an unmodified BIN and the correct patch. Follow the included README if a release has different requirements.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="community" class="community-section paper-surface" aria-label="Community and support">
+      <div class="container">
+        <div class="community-grid">
+          <article class="community-card"><span class="eyebrow">The gathering place</span><h2>Meet the community</h2><p>Talk monsters, trade breeding tips, follow the translation, or get a hand setting things up.</p><a class="button button-blue" href="https://discord.gg/6V9p6Y2pBt">Join us on Discord <span aria-hidden="true">↗</span></a></article>
+          <article class="community-card report-card"><span class="eyebrow">Help make it better</span><h2>Something not quite right?</h2><p>For game or translation bugs, tell us your patch version, campaign, location, and how to reproduce the problem. Screenshots and a save from before the issue help.</p><div class="report-actions"><a class="text-link" href="https://discord.gg/6V9p6Y2pBt">Report a bug on Discord <span aria-hidden="true">↗</span></a><button class="text-button" id="copy-report" type="button" hidden>Copy report template</button></div><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p><details class="report-template" id="report-template"><summary>View the bug report template</summary><pre id="report-text">Patch version:
+Campaign (Terry / Cobi / Tara):
+Location:
+Emulator and version:
+What happened:
+What I expected:
+Steps to reproduce:
+Screenshot / memory-card save:</pre></details><p class="guide-feedback">Found an issue in the reference? <a href="https://github.com/dqm-psx/guide/issues/new">Report a guide issue.</a></p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><div class="footer-brand"><img class="pixel" src="assets/slime-walk.gif" width="32" height="32" alt=""><span>DQM <b>PSX</b></span></div><p>A fan project celebrating Dragon Quest Monsters 1 &amp; 2.<br> Dragon Quest and its characters belong to their respective owners.</p><div class="footer-links"><a href="https://www.romhacking.net/translations/7734/">ROMhacking.net</a><a href="https://discord.gg/6V9p6Y2pBt">Discord</a><a href="#">Back to top <span aria-hidden="true">↑</span></a></div><button class="motion-toggle" id="motion-toggle" type="button" hidden>Pause sprite animation</button></div></footer>
+</body>
+</html>

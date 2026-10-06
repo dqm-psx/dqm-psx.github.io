@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "releases": [
+    {
+      "version": "1.0.63",
+      "name": "English translation",
+      "file": "DQM1-2-English-v1.0.63-public.zip",
+      "bytes": 7355514,
+      "sha256": "1086e2b5fcd27482aad3dfa475741105c59eb9d8543d319d320efc7fda6fe184",
+      "contents": [
+        "DQM1-2-English-v1.0.63.bps",
+        "DQM1-2-English-v1.0.63.cue",
+        "README.txt"
+      ]
+    }
+  ]
+}

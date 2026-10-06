@@ -232,12 +232,34 @@ a.reference-card:hover { transform: translateY(-4px); box-shadow: 0 7px 0 #d7cab
 .project-credits h3 { font: 500 24px/1.3 var(--font-display); margin-bottom: 12px; }
 .project-credits p { max-width: 80ch; font-size: .875rem; line-height: 1.85; }
 .project-credits p + p { margin-top: 12px; }
+.credits-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, .55fr); gap: 40px; align-items: start; }
+.contributor-panel { min-width: 0; padding: 18px 20px 12px; border: 1px solid var(--paper-line); border-radius: 4px; background: #fffdf566; }
+.contributor-panel h4 { font-size: .875rem; font-weight: 650; margin: 0 0 12px; }
+.contributors-viewport { height: 12rem; overflow-y: auto; scrollbar-gutter: stable; padding: 6px 8px; }
+.contributors-viewport:focus-visible { outline: 3px solid #805916; outline-offset: 2px; }
+.contributor-list { padding-left: 1.2rem; margin: 0; }
+.contributor-list li { min-height: 2.7rem; padding: .5rem 0; line-height: 1.7rem; font-size: .9375rem; overflow-wrap: anywhere; }
+.contributor-list li::marker { color: var(--gold-dark); }
+.contributor-controls { margin-top: 10px; border-top: 1px solid var(--paper-line); padding-top: 5px; }
+.contributor-paging { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.contributor-paging button { width: 44px; font-size: 1.2rem; }
+.contributor-paging span { color: #5d6267; font-size: .75rem; }
+.contributor-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 12px; }
+.contributor-controls button { min-height: 44px; padding: 5px 4px; background: transparent; border: 0; color: var(--blue-link); cursor: pointer; }
+.contributor-controls button:disabled { color: #86827a; cursor: default; }
+.contributor-actions button { font-size: .75rem; text-decoration: underline; text-underline-offset: 4px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .header-inner { flex-wrap: wrap; }
 @media (max-width: 1100px) { .header-discord { display: none; } }
 @media (max-width: 850px) {
   .hero-description { margin-inline: auto; }
   .story-grid { grid-template-columns: 1fr; gap: 28px; }
   .translation-story { border-left: 0; border-top: 1px solid var(--paper-line); padding: 25px 0 0; }
+  .credits-grid { gap: 24px; }
+}
+@media (max-width: 700px) {
+  .credits-grid { grid-template-columns: 1fr; }
+  .contributor-panel { width: 100%; max-width: 420px; }
 }
 @media (max-width: 600px) {
   .about-section { padding-top: 45px; }

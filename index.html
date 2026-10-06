@@ -49,6 +49,7 @@
               <img class="pixel animated-sprite" src="assets/dragon-walk.gif" width="44" height="44" alt="">
               <img class="pixel animated-sprite" src="assets/sabrecat-walk.gif" width="44" height="44" alt="">
             </div>
+            <p>Friends for the journey.</p>
           </div>
         </div>
 
@@ -93,10 +94,42 @@
         </div>
         <div class="project-credits">
           <h3>Made together, improved by players</h3>
-          <p>That same wish to play became a collaboration between diethylpentane (3xad) and Astra (ChatGPT). Together, they created this independent fan translation and connected game reference to make these adventures easier to enjoy and understand.</p>
-          <p>The project keeps improving through community playtesting, translation suggestions, screenshots, and memory-card saves. Thank you to everyone who has shared their time and discoveries.</p>
-          <p>Special thanks to Cats4gold for helping with the breeding tool.</p>
-          <p>Release-specific contributor thanks are preserved in the patch’s README. Kingcom and Tom are acknowledged for their earlier translation efforts and inspiration.</p>
+          <div class="credits-grid">
+            <div class="credits-story">
+              <p>That same wish to play became a collaboration between diethylpentane (3xad) and Astra (ChatGPT). Together, they created this independent fan translation and connected game reference to make these adventures easier to enjoy and understand.</p>
+              <p>The project keeps improving through community playtesting, translation suggestions, screenshots, and memory-card saves. Thank you to everyone who has shared their time and discoveries, and to Cats4gold for helping with the breeding tool.</p>
+              <p>Kingcom and Tom are acknowledged for their earlier translation efforts and inspiration.</p>
+            </div>
+            <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
+              <h4 id="contributor-title">Bug reporters &amp; contributors</h4>
+              <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
+                <!-- contributors:begin -->
+                <ul class="contributor-list" id="contributor-list">
+                  <li>BalK</li>
+                  <li>Cats4gold</li>
+                  <li>gollum_007</li>
+                  <li>Lori</li>
+                  <li>nextlvlroy</li>
+                  <li>Schnaki</li>
+                  <li>Wingforth</li>
+                  <li>_Zev</li>
+                </ul>
+                <!-- contributors:end -->
+              </div>
+              <div class="contributor-controls" id="contributor-controls" hidden>
+                <div class="contributor-paging">
+                  <button type="button" id="contributors-prev" aria-label="Previous contributors" aria-controls="contributor-list">←</button>
+                  <span id="contributor-position"></span>
+                  <button type="button" id="contributors-next" aria-label="Next contributors" aria-controls="contributor-list">→</button>
+                </div>
+                <div class="contributor-actions">
+                  <button type="button" id="contributors-pause" aria-controls="contributor-list">Pause rotation</button>
+                  <button type="button" id="contributors-all" aria-expanded="false" aria-controls="contributor-list">Show all names</button>
+                </div>
+              </div>
+              <span class="visually-hidden" id="contributor-announcement" role="status"></span>
+            </section>
+          </div>
         </div>
       </div>
     </section>

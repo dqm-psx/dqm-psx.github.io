@@ -101,3 +101,110 @@ motionButton.addEventListener("click", () => {
 motionPreference.addEventListener("change", event => {
   if (!storedMotion) { paused = event.matches; applyMotionPreference(); }
 });
+
+// The committed list remains complete and scrollable without JavaScript.
+// Enhance it into four-name groups without changing the panel's height.
+(() => {
+  const panel = document.getElementById("contributor-panel");
+  const viewport = document.getElementById("contributors-viewport");
+  const list = document.getElementById("contributor-list");
+  const names = [...list.children];
+  const controls = document.getElementById("contributor-controls");
+  const previous = document.getElementById("contributors-prev");
+  const next = document.getElementById("contributors-next");
+  const pauseButton = document.getElementById("contributors-pause");
+  const allButton = document.getElementById("contributors-all");
+  const position = document.getElementById("contributor-position");
+  const announcement = document.getElementById("contributor-announcement");
+  const groupSize = 4;
+  const groupCount = Math.ceil(names.length / groupSize);
+  if (groupCount < 2) return;
+
+  let group = 0;
+  let showAll = false;
+  let userPaused = motionPreference.matches;
+  let hovered = panel.matches(":hover");
+  let focusHeld = panel.contains(document.activeElement);
+  let inView = !("IntersectionObserver" in window);
+  let timer = null;
+
+  function schedule() {
+    clearTimeout(timer);
+    timer = null;
+    if (userPaused || showAll || hovered || focusHeld || !inView || document.hidden) return;
+    timer = setTimeout(() => {
+      group = (group + 1) % groupCount;
+      render();
+      schedule();
+    }, 7000);
+  }
+
+  function updateControls() {
+    previous.disabled = next.disabled = showAll;
+    pauseButton.disabled = showAll;
+    pauseButton.textContent = userPaused ? "Resume rotation" : "Pause rotation";
+    allButton.textContent = showAll ? "Show groups" : "Show all names";
+    allButton.setAttribute("aria-expanded", String(showAll));
+  }
+
+  function render(manual = false) {
+    const start = group * groupSize;
+    names.forEach((name, index) => {
+      name.hidden = !showAll && (index < start || index >= start + groupSize);
+    });
+    viewport.scrollTop = 0;
+    position.textContent = showAll ? `All ${names.length} names` : `${start + 1}–${Math.min(start + groupSize, names.length)} of ${names.length}`;
+    updateControls();
+    // Automatic swaps stay quiet for screen readers; announce manual navigation.
+    if (manual) announcement.textContent = showAll ? `All ${names.length} contributors are shown. Scroll the list to read every name.` : `Contributors ${position.textContent}.`;
+  }
+
+  function browse(delta) {
+    userPaused = true;
+    group = (group + delta + groupCount) % groupCount;
+    render(true);
+    schedule();
+  }
+  previous.addEventListener("click", () => browse(-1));
+  next.addEventListener("click", () => browse(1));
+  pauseButton.addEventListener("click", () => {
+    userPaused = !userPaused;
+    // An explicit Resume works even while the rotation button has focus.
+    focusHeld = false;
+    updateControls();
+    schedule();
+  });
+  allButton.addEventListener("click", () => {
+    showAll = !showAll;
+    userPaused = true;
+    render(true);
+    schedule();
+  });
+  panel.addEventListener("mouseenter", () => { hovered = true; schedule(); });
+  panel.addEventListener("mouseleave", () => { hovered = false; schedule(); });
+  panel.addEventListener("focusin", event => {
+    focusHeld = true;
+    // The rotation button keeps its current action until activated.
+    if (event.target !== pauseButton) userPaused = true;
+    updateControls();
+    schedule();
+  });
+  panel.addEventListener("focusout", event => {
+    if (!panel.contains(event.relatedTarget)) { focusHeld = false; schedule(); }
+  });
+  document.addEventListener("visibilitychange", schedule);
+  motionPreference.addEventListener("change", event => {
+    if (event.matches) { userPaused = true; updateControls(); schedule(); }
+  });
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      inView = entries[0].isIntersecting;
+      schedule();
+    });
+    observer.observe(panel);
+  }
+
+  render();
+  controls.hidden = false;
+  schedule();
+})();

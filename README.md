@@ -16,7 +16,7 @@ Open `http://127.0.0.1:4173/`. GitHub Pages serves the root of the `main` branch
 
 ## Site files
 
-- `index.html` contains the game and project introduction, reference roadmap, patch download, installation instructions, and community links. Historical sources are linked beside the relevant text.
+- `index.html` contains the game and project introduction, reference navigation, patch download, installation instructions, and community links. Historical sources are linked beside the relevant text.
 - `theme.css` provides the shared colors, typography, buttons, and RPG-style panels. `homepage.css` controls the homepage layout.
 - `homepage.js` manages screenshots, the bug-report template, and animation preferences.
 - `loading.js` provides a spinning-slime loading indicator. Call `const finish = DqmLoading.begin()` before an asynchronous task and `finish()` when it settles.
@@ -38,14 +38,32 @@ card in `index.html`. Commit the package, manifest, and generated HTML together.
 The committed page works without JavaScript; there is no visitor-time build or
 GitHub API request. Existing packages are retained.
 
-## Reference roadmap
+## Launch navigation
 
-The breeding tools and translation comparison have their own sites. Monster and
-item references are planned sections, displayed without dead-end links. Characters
-and dialogue, maps and locations, and recursive breeding trees are also planned.
-Future pages should share native game IDs so names in recipes, dialogue, and maps
-can link to the same reference entries. Keep a feature marked as planned until its
-public destination and content are ready.
+The homepage presents the complete reference site intended for launch. Its links
+use the full guide’s established routes; they are a destination contract, not a
+statement that the currently published guide already contains every section.
+
+| Homepage entry | Destination |
+| --- | --- |
+| Monsters | `/guide/#monsters` |
+| Items | `/guide/#items` |
+| Breeding tools | `/guide/#pair-finder` |
+| Characters and dialogue | `/guide/#characters` |
+| Maps and places | `/guide/#maps` |
+| Breeding trees | `/guide/#team-planner` |
+| Translation comparison | `/translations/` |
+
+Before publishing the homepage, integrate and publish the complete reference
+content, then check every destination above. Verify the team planner retains
+recursive breeding trees when combining the guide implementations. Verify links
+from recipes to monster entries and from character dialogue to maps, using shared
+native game IDs. Confirm the promised sprites, dialogue, item descriptions, and
+monster data are available through those pages. Keep integration status here;
+the visitor-facing homepage should describe the finished experience.
+
+The hero party is Terry with three monsters: Hale (Healslime), Dragon, and
+SabreCat. Cats4gold is credited on the homepage for helping with the breeding tool.
 
 The patch ZIP contains a BPS patch, a matching CUE file, and its original README. Follow the included README for release-specific instructions. No game disc images are included.
 

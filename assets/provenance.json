@@ -544,5 +544,98 @@
     "frameCount": 3,
     "sourceFile": "slime.gif",
     "sha256": "3290fd16080a4b23dd85b4e58db2b265712b0a2f7d6576f8572a20d7c611c24d"
+  },
+  {
+    "description": "Great Sabrecat authentic native forward-facing walk frames; homepage presentation timing of 120 ms per frame, not a claim of original gameplay timing.",
+    "speciesIndex": 83,
+    "nativeMonsterId": 155,
+    "japaneseName": "キラーパンサー",
+    "guideName": "Great Sabrecat",
+    "archiveResource": 3406,
+    "compressedSourceOffset": 0,
+    "sourceAssetId": "dqm-3406-decoded",
+    "sourceSheetSha256": "2d4e60d76939fcf0f75e0563c41b86ddee4c8b30841dbaafa0b3cad4937776dc",
+    "archiveResourceSha256": "dd3e2362d8f3e9f5555296bcde1e3ca93b2eeda56f5dc6774e21d1a4ebee309a",
+    "identityVerification": "Source archive hash matches the guide native mapping. Center front pose is pixel-identical to encyclopedia resource4884 front pose. All three top-row selected poses visually verified front-facing.",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "file": "sabrecat-walk.gif",
+    "width": 32,
+    "height": 32,
+    "frameCount": 4,
+    "sha256": "d36b039189dbe7ad126684061453f42ae3330172c1cae8a202a907f250539f6b",
+    "bytes": 4632,
+    "sourceFile": "3406_decoded.png",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "description": "Great Sabrecat authentic native forward-facing neutral pose for reduced motion.",
+    "speciesIndex": 83,
+    "nativeMonsterId": 155,
+    "japaneseName": "キラーパンサー",
+    "guideName": "Great Sabrecat",
+    "archiveResource": 3406,
+    "compressedSourceOffset": 0,
+    "sourceAssetId": "dqm-3406-decoded",
+    "sourceSheetSha256": "2d4e60d76939fcf0f75e0563c41b86ddee4c8b30841dbaafa0b3cad4937776dc",
+    "archiveResourceSha256": "dd3e2362d8f3e9f5555296bcde1e3ca93b2eeda56f5dc6774e21d1a4ebee309a",
+    "identityVerification": "Source archive hash matches the guide native mapping. Center front pose is pixel-identical to encyclopedia resource4884 front pose. All three top-row selected poses visually verified front-facing.",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "file": "sabrecat-walk-still.png",
+    "width": 32,
+    "height": 32,
+    "frameCount": 1,
+    "sha256": "f94778da42b2b8d845467641d36bb59e62ff608e0707042109ab2b7ad9086f0d",
+    "bytes": 731,
+    "sourceFile": "3406_decoded.png",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
   }
 ]

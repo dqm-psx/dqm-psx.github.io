@@ -544,5 +544,197 @@
     "frameCount": 3,
     "sourceFile": "slime.gif",
     "sha256": "3290fd16080a4b23dd85b4e58db2b265712b0a2f7d6576f8572a20d7c611c24d"
+  },
+  {
+    "description": "Great Sabrecat authentic native forward-facing walk frames; homepage presentation timing of 120 ms per frame, not a claim of original gameplay timing.",
+    "speciesIndex": 83,
+    "nativeMonsterId": 155,
+    "japaneseName": "キラーパンサー",
+    "guideName": "Great Sabrecat",
+    "archiveResource": 3406,
+    "compressedSourceOffset": 0,
+    "sourceAssetId": "dqm-3406-decoded",
+    "sourceSheetSha256": "2d4e60d76939fcf0f75e0563c41b86ddee4c8b30841dbaafa0b3cad4937776dc",
+    "archiveResourceSha256": "dd3e2362d8f3e9f5555296bcde1e3ca93b2eeda56f5dc6774e21d1a4ebee309a",
+    "identityVerification": "Source archive hash matches the guide native mapping. Center front pose is pixel-identical to encyclopedia resource4884 front pose. All three top-row selected poses visually verified front-facing.",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "file": "sabrecat-walk.gif",
+    "width": 32,
+    "height": 32,
+    "frameCount": 4,
+    "sha256": "d36b039189dbe7ad126684061453f42ae3330172c1cae8a202a907f250539f6b",
+    "bytes": 4632,
+    "sourceFile": "3406_decoded.png",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameOrder": [
+      1,
+      0,
+      1,
+      2
+    ],
+    "frameDurationMs": 120,
+    "timingNote": "Homepage presentation timing; original gameplay timing not asserted."
+  },
+  {
+    "description": "Great Sabrecat authentic native forward-facing neutral pose for reduced motion.",
+    "speciesIndex": 83,
+    "nativeMonsterId": 155,
+    "japaneseName": "キラーパンサー",
+    "guideName": "Great Sabrecat",
+    "archiveResource": 3406,
+    "compressedSourceOffset": 0,
+    "sourceAssetId": "dqm-3406-decoded",
+    "sourceSheetSha256": "2d4e60d76939fcf0f75e0563c41b86ddee4c8b30841dbaafa0b3cad4937776dc",
+    "archiveResourceSha256": "dd3e2362d8f3e9f5555296bcde1e3ca93b2eeda56f5dc6774e21d1a4ebee309a",
+    "identityVerification": "Source archive hash matches the guide native mapping. Center front pose is pixel-identical to encyclopedia resource4884 front pose. All three top-row selected poses visually verified front-facing.",
+    "sourceFrameRects": [
+      [
+        0,
+        0,
+        32,
+        32
+      ],
+      [
+        32,
+        0,
+        64,
+        32
+      ],
+      [
+        64,
+        0,
+        96,
+        32
+      ]
+    ],
+    "direction": "down",
+    "file": "sabrecat-walk-still.png",
+    "width": 32,
+    "height": 32,
+    "frameCount": 1,
+    "sha256": "f94778da42b2b8d845467641d36bb59e62ff608e0707042109ab2b7ad9086f0d",
+    "bytes": 731,
+    "sourceFile": "3406_decoded.png",
+    "frameMapping": "Row 0, columns 0/1/2: forward step A / neutral / forward step B; side and rear direction groups excluded.",
+    "frameIndex": 1
+  },
+  {
+    "file": "screenshots/balk-championship.png",
+    "description": "Terry and his monster party receive encouragement to win the championship.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-2363927a-8396-403b-93eb-5b4cdf5e53c8.png",
+    "sha256": "66fb5ca008cdb20bc9472cc3a46136bda86d807c8a190012120234df5cce3ac2"
+  },
+  {
+    "file": "screenshots/balk-travelers-gate.png",
+    "description": "Terry and his monster party approach a swirling gate in a stone dungeon.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-a3c11d80-7a1f-41d7-acaa-cbe9428087bf.png",
+    "sha256": "1b5336a56139e59bb1a11b265ec3bffc74d40f8b07a0cfaeffd7cbadf30764fb"
+  },
+  {
+    "file": "screenshots/balk-kings-praise.png",
+    "description": "The king praises Terry in the throne room, with translated English dialogue.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-463fa24f-859b-4470-b300-281c19f9a73a.png",
+    "sha256": "99c2f95dc32cd20725940c385029b52f46d3b2dee098350f90a24d9317c45e51"
+  },
+  {
+    "file": "screenshots/balk-cave-encounter.png",
+    "description": "Terry confronts a monster in a cave, with translated English dialogue.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-0a5c17b7-7a35-41b8-abc1-28e5fffbcb19.png",
+    "sha256": "b2cecd0e849b79c245edf4777b05715e2d1cec6d8abdfd2a1a9ed9156fe395e5"
+  },
+  {
+    "file": "screenshots/balk-field-skills.png",
+    "description": "English field skill menus display the Seek skill and its description.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-c8569e69-4d6b-4301-bcb2-4250896ce954.png",
+    "sha256": "7957bf178acb81439d1a6ed41e9fe0e8f0763be3634a0d30749074e6daf465ba"
+  },
+  {
+    "file": "screenshots/balk-adventure-record.png",
+    "description": "The English information screen shows Terry's adventure progress and collected monster families.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-9731657b-735a-4184-8bf7-7d7e4e2d564b.png",
+    "sha256": "d712c851d1e6fa266d5c3f774f7d47a8cf07575c345f8fb991722d84d8e4a40c"
+  },
+  {
+    "file": "screenshots/balk-party-flee.png",
+    "description": "A monster party member urges everyone to run away, with translated English dialogue.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-588f01da-f46c-47a5-a726-a080125305c4.png",
+    "sha256": "d67db8f988a6393e5591028918926546fe438cd9b0f1268e7fc8bd52754df1d0"
+  },
+  {
+    "file": "screenshots/balk-party-together.png",
+    "description": "A monster party member emphasizes sticking together, with translated English dialogue.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-4089196e-c1b5-44ae-adc9-21db0dcd783e.png",
+    "sha256": "131e4a4a83aa1afe8dc602fc2dab4575a7baeb98d86880dcbc7225867b2aabaf"
+  },
+  {
+    "file": "screenshots/balk-party-attack.png",
+    "description": "A monster party member favors attacking over healing, with translated English dialogue.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-b2ca2c07-d725-4d10-a8eb-642353e61137.png",
+    "sha256": "315ca8cefbdcd60cdc3015337c76b65030963d65f39d970cf597fde5bde8ba84"
+  },
+  {
+    "file": "screenshots/balk-arena-rival.png",
+    "description": "Terry and an opposing monster master face each other in the arena, with translated English dialogue.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-ff12a6fd-41c9-493d-9546-05604a4e6795.png",
+    "sha256": "ff984be991cbc48e466c18f14985a313d3cc2b037c7db4da84d5c4d341ff9f7d"
+  },
+  {
+    "file": "screenshots/balk-volcanic-trail.png",
+    "description": "Terry and his monster party explore a volcanic landscape.",
+    "contributor": "BalK",
+    "width": 960,
+    "height": 720,
+    "sourceFile": "codex-clipboard-44a2a3ec-26ae-4b4f-ab4f-39c82ddbe426.png",
+    "sha256": "3ce0b11f4dc5c7b939bcfacdc84ec540b433526a7acadf8188c33a61c3143946"
   }
 ]

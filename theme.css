@@ -42,6 +42,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .night-surface .eyebrow { color: var(--gold); }
 .paper-surface { background-color: var(--paper); background-image: radial-gradient(#b99b6417 .6px, transparent .6px); background-size: 5px 5px; }
 .paper-surface .eyebrow { color: var(--gold-dark); }
+.paper-surface :is(button, a, summary):focus-visible { outline-color: #805916; }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 48px; padding: 12px 22px; border: 1px solid transparent; border-radius: 3px; font-size: .9rem; line-height: 1.4; font-weight: 700; text-decoration: none; transition: background .18s, transform .18s, box-shadow .18s; }
 .button:hover { transform: translateY(-2px); }
 .button-gold, .night-surface .button-gold { color: #30291f; background: linear-gradient(#f1d18e, #dfb362); border-color: #f6d89b #c6984b #bc8c40; box-shadow: inset 0 0 0 2px #f3d49370, 0 3px 0 #715329; }

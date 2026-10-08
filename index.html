@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#142844">
-  <meta name="description" content="Dragon Quest Monsters 1 & 2 for PlayStation. English translation patches, installation help, monster and item reference, and breeding tools.">
+  <meta name="description" content="Discover the Japan-only PlayStation remake of Dragon Quest Monsters 1 & 2. Find the English fan translation, installation help, monsters, items, characters, maps, and breeding tools.">
   <title>Dragon Quest Monsters 1 & 2 · The PlayStation adventures</title>
   <link rel="icon" href="assets/slime-walk.gif" type="image/gif">
   <link rel="stylesheet" href="theme.css">
@@ -21,6 +21,7 @@
         <span>DQM <b>PSX</b><small>A MONSTER-SIZED ADVENTURE</small></span>
       </a>
       <nav class="main-nav" aria-label="Main navigation">
+        <a href="#about">The game &amp; project</a>
         <a href="#reference">Explore the guide</a>
         <a href="#patches">Patches &amp; setup</a>
         <a href="#community">Community</a>
@@ -33,74 +34,133 @@
     <section class="hero night-surface" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">PlayStation <span aria-hidden="true">·</span> English fan translation</p>
           <h1 id="hero-title">Dragon Quest<span>Monsters <em>1 &amp; 2</em></span></h1>
           <p class="hero-subtitle">The Starry Night Hero and Friends at the Ranch</p>
+          <p class="hero-description">The Japan-only PlayStation remake of the original Game Boy adventures, now translated into English.</p>
           <div class="button-row">
             <a class="button button-gold" href="#patches"><span aria-hidden="true">↓</span> Get the English patch</a>
-            <a class="button button-outline" href="https://dqm-psx.github.io/guide/">Open the guide</a>
+            <a class="button button-outline" href="https://dqm-psx.github.io/guide/#pair-finder">Explore breeding</a>
           </div>
-          <p class="translation-origin">Fan translation of
-            <span class="original-title" lang="ja">ドラゴンクエストモンスターズ1・2<wbr> 星降りの勇者と牧場の仲間たち</span>
-            <span class="romanized-title" lang="ja-Latn">Dragon Quest Monsters 1 &amp; 2: Hoshifuri no Yuusha to Bokujou no Nakama-tachi</span>
-          </p>
           <div class="hero-party">
             <div class="party-sprites" aria-hidden="true">
               <img class="pixel animated-sprite party-terry" src="assets/terry.gif" width="28" height="44" alt="">
-              <img class="pixel animated-sprite" src="assets/slime-walk.gif" width="44" height="44" alt="">
-              <img class="pixel animated-sprite" src="assets/dracky-walk.gif" width="44" height="44" alt="">
               <img class="pixel animated-sprite" src="assets/healslime-walk.gif" width="44" height="44" alt="">
               <img class="pixel animated-sprite" src="assets/dragon-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/sabrecat-walk.gif" width="44" height="44" alt="">
             </div>
-            <p>A few friends for the journey.</p>
+            <p>Friends for the journey.</p>
           </div>
         </div>
 
-        <div class="hero-visual">
+        <div class="hero-visual" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
           <div class="screenshot-frame">
-            <div class="window-heading"><span aria-hidden="true">✦</span> Adventure log <span>PLAYSTATION · 1 &amp; 2</span></div>
             <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
-              <img id="featured-screen" src="assets/great-tree.png" width="960" height="720" alt="A scene from the PlayStation version of Dragon Quest Monsters" fetchpriority="high">
+              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" fetchpriority="high">
               <div class="screenshot-loading" id="screenshot-loading" hidden><img class="pixel" src="assets/slime.gif" width="32" height="32" alt=""><span>Loading screenshot…</span></div>
             </div>
-            <div class="screen-caption"><span id="screen-caption">A world beyond the Travelers’ Gates</span><span id="screen-number" aria-hidden="true">01 / 03</span></div>
+            <div class="screen-caption"><span id="screen-caption">Through the Travelers’ Gates</span><span id="screen-number">01 / 14</span></div>
+            <p class="screen-credit" id="screen-credit">Screenshot by BalK</p>
           </div>
-          <div class="scene-picker" role="group" aria-label="Choose a game screenshot">
-            <button class="scene-button" type="button" data-scene="0" aria-pressed="true"><span>01</span> The world</button>
-            <button class="scene-button" type="button" data-scene="1" aria-pressed="false"><span>02</span> The adventure</button>
-            <button class="scene-button" type="button" data-scene="2" aria-pressed="false"><span>03</span> The battles</button>
+          <div class="scene-picker" id="scene-controls" hidden>
+            <div class="scene-navigation" role="group" aria-label="Screenshot controls">
+              <button class="scene-button" id="scene-previous" type="button" aria-label="Previous screenshot" aria-controls="screenshot-stage">← Previous</button>
+              <button class="scene-button" id="scene-pause" type="button" aria-controls="screenshot-stage">Pause slideshow</button>
+              <button class="scene-button" id="scene-next" type="button" aria-label="Next screenshot" aria-controls="screenshot-stage">Next →</button>
+            </div>
+            <select class="scene-select" id="scene-select" aria-label="Choose a screenshot" aria-controls="screenshot-stage"></select>
           </div>
-          <p class="screenshot-status" id="screenshot-status" role="status" aria-live="polite"></p>
+          <p class="screenshot-status visually-hidden" id="screenshot-status" role="status" aria-live="polite"></p>
         </div>
       </div>
       <div class="hero-bottom" aria-hidden="true"><span>✦</span></div>
+    </section>
+
+    <section id="about" class="about-section paper-surface" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">The game &amp; the project</p><h2 id="about-title">Three adventures, one long wait.</h2></div>
+          <p>A familiar world, with a new way in.</p>
+        </div>
+        <div class="story-grid">
+          <article class="game-story">
+            <h3>A PlayStation chapter you may have missed</h3>
+            <p>Released in Japan on <time datetime="2002-05-30">May 30, 2002</time> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <em>Dragon Quest Monsters 1 &amp; 2</em> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
+            <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation.</p>
+            <p class="story-source">Game background: <a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Official release record</a> · <a href="https://blog.ja.playstation.com/?p=278297">PlayStation retrospective</a></p>
+          </article>
+          <article class="translation-story">
+            <h3>Years of looking forward to an English adventure</h3>
+            <p>Earlier translation efforts by Kingcom and Tom (RetroTranslator) gave fans something to look forward to. <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">By January 2012, fans were already sharing Kingcom’s progress updates.</a> Their work was an inspiration for this independently developed patch.</p>
+            <p>For this project’s creator, <em>Dragon Warrior Monsters</em> was an absolute childhood favorite, played again and again. That love of the game carried through more than a decade of returning to forums and translation sites, hoping an English version of the PlayStation remake was ready.</p>
+          </article>
+        </div>
+        <div class="project-credits">
+          <h3>Made together, improved by players</h3>
+          <div class="credits-grid">
+            <div class="credits-story">
+              <p>That same wish to play became a collaboration between diethylpentane (3xad) and Astra (ChatGPT). Together, they created this independent fan translation and connected game reference to make these adventures easier to enjoy and understand.</p>
+              <p>The project keeps improving through community playtesting, translation suggestions, screenshots, and memory-card saves. Thank you to everyone who has shared their time and discoveries, and to Cats4gold for helping with the breeding tool.</p>
+              <p>Kingcom and Tom are acknowledged for their earlier translation efforts and inspiration.</p>
+            </div>
+            <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
+              <h4 id="contributor-title">Bug reporters &amp; contributors</h4>
+              <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
+                <!-- contributors:begin -->
+                <ul class="contributor-list" id="contributor-list">
+                  <li>BalK</li>
+                  <li>Cats4gold</li>
+                  <li>gollum_007</li>
+                  <li>Lori</li>
+                  <li>nextlvlroy</li>
+                  <li>Schnaki</li>
+                  <li>Wingforth</li>
+                  <li>_Zev</li>
+                </ul>
+                <!-- contributors:end -->
+              </div>
+              <div class="contributor-controls" id="contributor-controls" hidden>
+                <div class="contributor-paging">
+                  <button type="button" id="contributors-prev" aria-label="Previous contributors" aria-controls="contributor-list">←</button>
+                  <span id="contributor-position"></span>
+                  <button type="button" id="contributors-next" aria-label="Next contributors" aria-controls="contributor-list">→</button>
+                </div>
+                <div class="contributor-actions">
+                  <button type="button" id="contributors-pause" aria-controls="contributor-list">Pause rotation</button>
+                  <button type="button" id="contributors-all" aria-expanded="false" aria-controls="contributor-list">Show all names</button>
+                </div>
+              </div>
+              <span class="visually-hidden" id="contributor-announcement" role="status"></span>
+            </section>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="reference" class="reference-section paper-surface" aria-labelledby="reference-title">
       <div class="container">
         <div class="section-heading">
           <div><p class="eyebrow">The traveler’s bookshelf</p><h2 id="reference-title">A companion for every adventure.</h2></div>
-          <p>Find that elusive monster. Plan your next pairing.<br> Get to know the world, one discovery at a time.</p>
+          <p>Find a monster, plan a family tree, or chart your next journey.<br> Follow the connections through the world of Dragon Quest Monsters.</p>
         </div>
 
         <div class="reference-grid">
           <a class="reference-card monster-card" href="https://dqm-psx.github.io/guide/#monsters">
             <div class="card-top"><span class="card-link-label">Open reference <span aria-hidden="true">↗</span></span></div>
             <div class="card-art monster-art" aria-hidden="true"><span class="sprite-halo"></span><img class="pixel animated-sprite" src="assets/dragon-walk.gif" width="96" height="96" alt=""><img class="pixel animated-sprite little-slime" src="assets/slime-walk.gif" width="52" height="52" alt=""></div>
-            <h3>Meet the monsters</h3><p>Species, stats, skills, and locations.<br> Your next teammate is in here somewhere.</p>
-            <span class="card-footer">Monster reference <span aria-hidden="true">✦</span></span>
+            <h3>Meet the monsters</h3><p>A home for each monster’s stats, skills, locations, sprites, and breeding recipes.</p>
+            <span class="card-footer">Browse monsters <span aria-hidden="true">↗</span></span>
           </a>
-          <a class="reference-card breeding-card" href="https://dqm-psx.github.io/guide/#breeding">
+          <a class="reference-card breeding-card" href="https://dqm-psx.github.io/guide/#pair-finder">
             <div class="card-top"><span class="card-link-label">Open tools <span aria-hidden="true">↗</span></span></div>
             <div class="card-art pairing-art" aria-hidden="true"><img class="pixel animated-sprite" src="assets/slime-walk.gif" width="66" height="66" alt=""><span class="pairing-plus">+</span><img class="pixel animated-sprite" src="assets/dracky-walk.gif" width="66" height="66" alt=""></div>
             <h3>Raise something great</h3><p>Find breeding pairs and offspring.<br> Bring a little planning to your monster farm.</p>
-            <span class="card-footer">Breeding &amp; team planner <span aria-hidden="true">✦</span></span>
+            <span class="card-footer">Open breeding tools <span aria-hidden="true">↗</span></span>
           </a>
           <a class="reference-card items-card" href="https://dqm-psx.github.io/guide/#items">
             <div class="card-top"><span class="card-link-label">Open reference <span aria-hidden="true">↗</span></span></div>
             <div class="card-art" aria-hidden="true"><span class="sprite-halo"></span><img class="pixel" src="assets/item.png" width="80" height="80" alt=""></div>
-            <h3>Pack for the journey</h3><p>Items and their descriptions.<br> Know what to keep in your adventurer’s bag.</p>
-            <span class="card-footer">Item reference <span aria-hidden="true">✦</span></span>
+            <h3>Pack for the journey</h3><p>Item descriptions, uses, and overworld sprites, gathered into a browsable reference.</p>
+            <span class="card-footer">Browse items <span aria-hidden="true">↗</span></span>
           </a>
         </div>
 
@@ -110,12 +170,12 @@
           <span class="translation-action">Browse translations <span aria-hidden="true">↗</span></span>
         </a>
 
-        <div class="next-chapters">
-          <div class="next-intro"><p class="eyebrow">The next chapters</p><h3>A growing world of knowledge.</h3><p>More of the reference is taking shape.</p></div>
+        <div class="reference-connections">
+          <div class="connections-intro"><p class="eyebrow">Explore the world</p><h3>A connected world of knowledge.</h3><p>Follow a monster from a breeding recipe to its own page, or a character from their dialogue to a map.</p></div>
           <ul class="chapter-list">
-            <li><span aria-hidden="true">01</span><div><h4>Characters &amp; dialogue</h4><p>Familiar faces, animated sprites, and the things they say.</p></div></li>
-            <li><span aria-hidden="true">02</span><div><h4>Maps &amp; places</h4><p>Explore the world and find the people who call it home.</p></div></li>
-            <li><span aria-hidden="true">03</span><div><h4>Breeding trees</h4><p>Trace a monster’s recipe back through each generation.</p></div></li>
+            <li><span aria-hidden="true">01</span><div><h4><a href="https://dqm-psx.github.io/guide/#characters">Characters &amp; dialogue <span aria-hidden="true">↗</span></a></h4><p>Familiar faces, animated sprites, and the things they say.</p></div></li>
+            <li><span aria-hidden="true">02</span><div><h4><a href="https://dqm-psx.github.io/guide/#maps">Maps &amp; places <span aria-hidden="true">↗</span></a></h4><p>Explore the world and find the people who call it home.</p></div></li>
+            <li><span aria-hidden="true">03</span><div><h4><a href="https://dqm-psx.github.io/guide/#team-planner">Breeding trees <span aria-hidden="true">↗</span></a></h4><p>Trace a target monster’s parents and grandparents through a complete breeding tree.</p></div></li>
           </ul>
         </div>
       </div>
@@ -127,13 +187,15 @@
           <p class="eyebrow">Patch downloads</p>
           <h2 id="patch-title">Play the adventures<br> in English.</h2>
           <p>Download the translation package, then follow the setup instructions to patch your Japanese PlayStation game.</p>
+          <!-- release:begin -->
           <div class="release-download" aria-labelledby="release-title">
-            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.63</span></div>
+            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.64</span></div>
             <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <a class="button button-gold" href="downloads/DQM1-2-English-v1.0.63-public.zip" download="DQM1-2-English-v1.0.63-public.zip"><span aria-hidden="true">↓</span> Download v1.0.63</a>
+            <a class="button button-gold" href="downloads/DQM1-2-English-v1.0.64-public.zip" download="DQM1-2-English-v1.0.64-public.zip"><span aria-hidden="true">↓</span> Download v1.0.64</a>
             <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> 7.36 MB</span>
-            <details class="release-notes"><summary>Release notes</summary><ul><li>Fixes the reproduced crash after breeding and leaving the shrine.</li><li>Reduces audio memory usage and adds an audio-capacity safeguard.</li></ul><p>See the included README for the full change history and credits.</p></details>
+            <details class="release-notes"><summary>Release notes</summary><ul><li>Fixes overlapping skill descriptions when learning a new skill or choosing an old skill to forget.</li><li>Restores description-window initialization so the skill list is ready before its description is drawn.</li></ul><p>See the included README for the full change history and credits.</p></details>
           </div>
+          <!-- release:end -->
           <p class="patch-note"><a href="https://www.romhacking.net/translations/7734/">Project page on ROMhacking.net <span aria-hidden="true">↗</span></a></p>
           <div class="patch-companion"><img class="pixel animated-sprite" src="assets/watabou-walk.gif" width="70" height="70" alt="Watabou"><p>Keep your memory-card saves safe.<br> <span>Back them up before updating your patch.</span></p></div>
         </div>

@@ -1,60 +1,153 @@
 "use strict";
 
 const scenes = [
+  { src: "assets/screenshots/balk-travelers-gate.png", alt: "Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon", caption: "Through the Travelers’ Gates", credit: "BalK" },
+  { src: "assets/screenshots/balk-championship.png", alt: "Terry is encouraged to win the championship in a richly decorated room", caption: "A championship to chase", credit: "BalK" },
+  { src: "assets/screenshots/balk-kings-praise.png", alt: "The king praises Terry and his monster party in the throne room", caption: "An audience with the king", credit: "BalK" },
+  { src: "assets/screenshots/balk-cave-encounter.png", alt: "Terry faces an angry monster among broken pots in a cave", caption: "An unexpected encounter", credit: "BalK" },
+  { src: "assets/screenshots/balk-field-skills.png", alt: "The English field skills menu with Seek selected and its description visible", caption: "The right skill for the journey", credit: "BalK" },
+  { src: "assets/screenshots/balk-adventure-record.png", alt: "Terry’s information screen showing play time, farm monsters, gates cleared, and species found", caption: "Every adventure leaves a record", credit: "BalK" },
+  { src: "assets/screenshots/balk-party-flee.png", alt: "A monster in Terry’s party warns everyone to run away quickly", caption: "Knowing when to run", credit: "BalK" },
+  { src: "assets/screenshots/balk-party-together.png", alt: "A party member says it is important to stick together", caption: "Better together", credit: "BalK" },
+  { src: "assets/screenshots/balk-party-attack.png", alt: "A party member declares that healing wastes time and urges an attack", caption: "A party with plenty of personality", credit: "BalK" },
+  { src: "assets/screenshots/balk-arena-rival.png", alt: "A rival challenges Terry and his three monsters before an arena match", caption: "Ready for the arena", credit: "BalK" },
+  { src: "assets/screenshots/balk-volcanic-trail.png", alt: "Terry leads a monster party along a rocky trail beside glowing lava", caption: "A trail through a fiery world", credit: "BalK" },
   { src: "assets/great-tree.png", alt: "A colorful scene from the world of Dragon Quest Monsters on PlayStation", caption: "A world beyond the Travelers’ Gates" },
   { src: "assets/adventure.png", alt: "The party exploring a room of treasure chests in the English translation", caption: "A new discovery around every corner" },
   { src: "assets/battle.png", alt: "An English-language monster battle in the PlayStation game", caption: "A little courage. A few good monsters." }
 ];
-const featuredScreen = document.getElementById("featured-screen");
-const screenshotStage = document.getElementById("screenshot-stage");
-const screenshotLoading = document.getElementById("screenshot-loading");
-const screenshotStatus = document.getElementById("screenshot-status");
-const sceneButtons = [...document.querySelectorAll("[data-scene]")];
-let latestSceneRequest = 0;
-let activeScene = 0;
-let finishSceneLoading = null;
-function clearSceneLoading() {
-  finishSceneLoading?.();
-  finishSceneLoading = null;
-  screenshotStage.setAttribute("aria-busy", "false");
-  screenshotLoading.hidden = true;
-  screenshotStatus.classList.remove("loading-announcement");
-  sceneButtons.forEach(button => button.removeAttribute("data-loading"));
-}
-sceneButtons.forEach(button => {
-  button.addEventListener("click", async () => {
-    const index = Number(button.dataset.scene);
-    const scene = scenes[index];
-    const request = ++latestSceneRequest;
-    clearSceneLoading();
-    screenshotStatus.textContent = "";
-    if (index === activeScene && featuredScreen.complete && featuredScreen.naturalWidth > 0) return;
+(() => {
+  const gallery = document.getElementById("screenshot-gallery");
+  const featuredScreen = document.getElementById("featured-screen");
+  const stage = document.getElementById("screenshot-stage");
+  const loading = document.getElementById("screenshot-loading");
+  const status = document.getElementById("screenshot-status");
+  const selection = document.getElementById("scene-select");
+  const pauseButton = document.getElementById("scene-pause");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let latestRequest = 0;
+  let activeScene = 0;
+  let requestedScene = 0;
+  let userPaused = reducedMotion.matches;
+  let hovered = gallery.matches(":hover");
+  let focusHeld = gallery.contains(document.activeElement);
+  let inView = !("IntersectionObserver" in window);
+  let autoPending = false;
+  let timer = null;
+  let finishLoading = null;
 
-    finishSceneLoading = window.DqmLoading.begin();
-    screenshotStage.setAttribute("aria-busy", "true");
-    screenshotLoading.hidden = false;
-    button.setAttribute("data-loading", "");
-    screenshotStatus.textContent = "Loading screenshot…";
-    screenshotStatus.classList.add("loading-announcement");
+  scenes.forEach((scene, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = `${String(index + 1).padStart(2, "0")} · ${scene.caption}`;
+    selection.append(option);
+  });
+
+  function clearLoading() {
+    finishLoading?.();
+    finishLoading = null;
+    stage.setAttribute("aria-busy", "false");
+    loading.hidden = true;
+  }
+
+  function updatePauseButton() {
+    pauseButton.textContent = userPaused ? "Play slideshow" : "Pause slideshow";
+  }
+
+  function schedule() {
+    clearTimeout(timer);
+    if (userPaused || hovered || focusHeld || !inView || document.hidden) {
+      // Pausing also cancels any automatic image still being decoded.
+      if (autoPending) {
+        ++latestRequest;
+        autoPending = false;
+        requestedScene = activeScene;
+        clearLoading();
+      }
+      return;
+    }
+    timer = setTimeout(() => showScene((activeScene + 1) % scenes.length), 7000);
+  }
+
+  async function showScene(index, manual = false) {
+    clearTimeout(timer);
+    const request = ++latestRequest;
+    requestedScene = index;
+    autoPending = !manual;
+    clearLoading();
+    status.textContent = "";
+    status.classList.add("visually-hidden");
+    const scene = scenes[index];
+    if (manual) {
+      userPaused = true;
+      updatePauseButton();
+    }
+    finishLoading = window.DqmLoading.begin();
+    stage.setAttribute("aria-busy", "true");
+    loading.hidden = false;
     const nextImage = new Image();
     nextImage.src = scene.src;
     try {
       await nextImage.decode();
-      if (request !== latestSceneRequest) return;
+      if (request !== latestRequest) return;
       featuredScreen.src = scene.src;
       featuredScreen.alt = scene.alt;
       activeScene = index;
       document.getElementById("screen-caption").textContent = scene.caption;
-      document.getElementById("screen-number").textContent = `0${index + 1} / 03`;
-      sceneButtons.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
-      screenshotStatus.textContent = "";
+      document.getElementById("screen-number").textContent = `${String(index + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
+      document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}` : "From the English translation";
+      selection.value = String(index);
+      // Automatic rotation stays quiet for screen readers.
+      if (manual) status.textContent = `Screenshot ${index + 1} of ${scenes.length}: ${scene.caption}.`;
     } catch {
-      if (request === latestSceneRequest) screenshotStatus.textContent = "That screenshot couldn’t load. Please try again.";
+      if (request === latestRequest) {
+        status.textContent = "That screenshot couldn’t load. Please try again or choose another image.";
+        status.classList.remove("visually-hidden");
+        selection.value = String(activeScene);
+        requestedScene = activeScene;
+        userPaused = true;
+        updatePauseButton();
+      }
     } finally {
-      if (request === latestSceneRequest) clearSceneLoading();
+      if (request === latestRequest) {
+        autoPending = false;
+        clearLoading();
+        schedule();
+      }
     }
+  }
+
+  document.getElementById("scene-previous").addEventListener("click", () => showScene((requestedScene - 1 + scenes.length) % scenes.length, true));
+  document.getElementById("scene-next").addEventListener("click", () => showScene((requestedScene + 1) % scenes.length, true));
+  selection.addEventListener("change", () => showScene(Number(selection.value), true));
+  pauseButton.addEventListener("click", () => {
+    userPaused = !userPaused;
+    // Explicit Play may resume while this button retains keyboard focus.
+    focusHeld = false;
+    updatePauseButton();
+    schedule();
   });
-});
+  gallery.addEventListener("mouseenter", () => { hovered = true; schedule(); });
+  gallery.addEventListener("mouseleave", () => { hovered = false; schedule(); });
+  gallery.addEventListener("focusin", () => { focusHeld = true; schedule(); });
+  gallery.addEventListener("focusout", event => {
+    if (!gallery.contains(event.relatedTarget)) { focusHeld = false; schedule(); }
+  });
+  document.addEventListener("visibilitychange", schedule);
+  reducedMotion.addEventListener("change", event => {
+    if (event.matches) { userPaused = true; updatePauseButton(); schedule(); }
+  });
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      inView = entries[0].isIntersecting;
+      schedule();
+    });
+    observer.observe(gallery);
+  }
+  updatePauseButton();
+  document.getElementById("scene-controls").hidden = false;
+  schedule();
+})();
 
 const copyButton = document.getElementById("copy-report");
 copyButton.hidden = false;

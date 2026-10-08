@@ -24,6 +24,19 @@ Open `http://127.0.0.1:4173/`. GitHub Pages serves the root of the `main` branch
 - `downloads/releases.json` records packages newest first. The first entry supplies the current download card and release notes; every retained package supplies its explicitly credited contributors.
 - `data/contributors.json` records project contributors credited separately from release READMEs, with a contribution and its source. It currently includes Cats4gold's help with the breeding tool, confirmed by the project owner.
 
+## Screenshot gallery
+
+The screenshot gallery rotates through fourteen screenshots every seven seconds,
+including eleven original 960×720 captures shared by BalK. The new captures live
+in `assets/screenshots/`, with credit, source filenames, and hashes recorded in
+`assets/provenance.json`. Each appears uncropped with its own caption and credit.
+
+Previous, Next, and the screenshot selector pause automatic rotation until Play
+slideshow is chosen. Hover, keyboard focus, hidden tabs, and an offscreen gallery
+also suspend rotation; reduced-motion users start paused. The first screenshot
+and its BalK credit remain visible without JavaScript. To add another image,
+extend `scenes` in `homepage.js` and update the initial total in `index.html`.
+
 ## Updating the patch download and contributor credits
 
 Add the new public ZIP to `downloads/` and prepend its version, filename, byte size,

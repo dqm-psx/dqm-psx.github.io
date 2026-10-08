@@ -34,10 +34,9 @@
     <section class="hero night-surface" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">PlayStation <span aria-hidden="true">·</span> English fan translation</p>
           <h1 id="hero-title">Dragon Quest<span>Monsters <em>1 &amp; 2</em></span></h1>
           <p class="hero-subtitle">The Starry Night Hero and Friends at the Ranch</p>
-          <p class="hero-description">Terry, Cobi, and Tara’s adventures, brought together on PlayStation. Discover the Japan-only remake with an English fan translation.</p>
+          <p class="hero-description">The Japan-only PlayStation remake of the original Game Boy adventures, now translated into English.</p>
           <div class="button-row">
             <a class="button button-gold" href="#patches"><span aria-hidden="true">↓</span> Get the English patch</a>
             <a class="button button-outline" href="https://dqm-psx.github.io/guide/#pair-finder">Explore breeding</a>
@@ -53,21 +52,24 @@
           </div>
         </div>
 
-        <div class="hero-visual">
+        <div class="hero-visual" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
           <div class="screenshot-frame">
-            <div class="window-heading"><span aria-hidden="true">✦</span> Adventure log <span>PLAYSTATION · 1 &amp; 2</span></div>
             <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
-              <img id="featured-screen" src="assets/great-tree.png" width="960" height="720" alt="A scene from the PlayStation version of Dragon Quest Monsters" fetchpriority="high">
+              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" fetchpriority="high">
               <div class="screenshot-loading" id="screenshot-loading" hidden><img class="pixel" src="assets/slime.gif" width="32" height="32" alt=""><span>Loading screenshot…</span></div>
             </div>
-            <div class="screen-caption"><span id="screen-caption">A world beyond the Travelers’ Gates</span><span id="screen-number" aria-hidden="true">01 / 03</span></div>
+            <div class="screen-caption"><span id="screen-caption">Through the Travelers’ Gates</span><span id="screen-number">01 / 14</span></div>
+            <p class="screen-credit" id="screen-credit">Screenshot by BalK</p>
           </div>
-          <div class="scene-picker" role="group" aria-label="Choose a game screenshot">
-            <button class="scene-button" type="button" data-scene="0" aria-pressed="true"><span>01</span> The world</button>
-            <button class="scene-button" type="button" data-scene="1" aria-pressed="false"><span>02</span> The adventure</button>
-            <button class="scene-button" type="button" data-scene="2" aria-pressed="false"><span>03</span> The battles</button>
+          <div class="scene-picker" id="scene-controls" hidden>
+            <div class="scene-navigation" role="group" aria-label="Screenshot controls">
+              <button class="scene-button" id="scene-previous" type="button" aria-label="Previous screenshot" aria-controls="screenshot-stage">← Previous</button>
+              <button class="scene-button" id="scene-pause" type="button" aria-controls="screenshot-stage">Pause slideshow</button>
+              <button class="scene-button" id="scene-next" type="button" aria-label="Next screenshot" aria-controls="screenshot-stage">Next →</button>
+            </div>
+            <select class="scene-select" id="scene-select" aria-label="Choose a screenshot" aria-controls="screenshot-stage"></select>
           </div>
-          <p class="screenshot-status" id="screenshot-status" role="status" aria-live="polite"></p>
+          <p class="screenshot-status visually-hidden" id="screenshot-status" role="status" aria-live="polite"></p>
         </div>
       </div>
       <div class="hero-bottom" aria-hidden="true"><span>✦</span></div>

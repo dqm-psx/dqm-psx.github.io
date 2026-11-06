@@ -82,11 +82,14 @@ including eleven original 960×720 captures shared by BalK. The new captures liv
 in `assets/screenshots/`, with credit, source filenames, and hashes recorded in
 `assets/provenance.json`. Each appears uncropped with its own caption and credit.
 
-Previous, Next, and the screenshot selector pause automatic rotation until Play
-slideshow is chosen. Hover, keyboard focus, hidden tabs, and an offscreen gallery
+The screenshot footer contains the selector, credit, and previous/pause/next
+icons. The selected option is the single visible caption; the standalone caption
+is retained only as the no-JavaScript fallback. All icon buttons keep accessible
+labels and tooltips. Previous, Next, and the screenshot selector pause automatic
+rotation until the play icon is chosen. Hover, keyboard focus, hidden tabs, and an offscreen gallery
 also suspend rotation; reduced-motion users start paused. The first screenshot
 and its BalK credit remain visible without JavaScript. To add another image,
-extend `scenes` in `homepage.js` and update the initial total in `index.html`.
+extend `scenes` in `homepage.js`; the dropdown count updates automatically.
 
 ## Updating the patch download and contributor credits
 

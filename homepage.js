@@ -50,7 +50,7 @@ const scenes = [
   scenes.forEach((scene, index) => {
     const option = document.createElement("option");
     option.value = String(index);
-    option.textContent = `${String(index + 1).padStart(2, "0")} · ${scene.caption}`;
+    option.textContent = `${String(index + 1).padStart(2, "0")} / ${scenes.length} · ${scene.caption}`;
     selection.append(option);
   });
 
@@ -62,7 +62,10 @@ const scenes = [
   }
 
   function updatePauseButton() {
-    pauseButton.textContent = userPaused ? "Play slideshow" : "Pause slideshow";
+    const label = userPaused ? "Play slideshow" : "Pause slideshow";
+    pauseButton.setAttribute("aria-label", label);
+    pauseButton.title = label;
+    pauseButton.classList.toggle("is-paused", userPaused);
   }
 
   function schedule() {
@@ -104,8 +107,6 @@ const scenes = [
       featuredScreen.src = scene.src;
       featuredScreen.alt = scene.alt;
       activeScene = index;
-      document.getElementById("screen-caption").textContent = scene.caption;
-      document.getElementById("screen-number").textContent = `${String(index + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
       document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}` : "From the English translation";
       selection.value = String(index);
       // Automatic rotation stays quiet for screen readers.
@@ -156,6 +157,8 @@ const scenes = [
     observer.observe(gallery);
   }
   updatePauseButton();
+  // The selected option is the visible caption; keep the static caption for no-JS.
+  document.getElementById("screen-caption").hidden = true;
   document.getElementById("scene-controls").hidden = false;
   schedule();
 })();

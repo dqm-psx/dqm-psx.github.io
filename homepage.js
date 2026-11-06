@@ -25,7 +25,10 @@ const scenes = [
   { src: "assets/screenshots/balk-volcanic-trail.png", alt: "Terry leads a monster party along a rocky trail beside glowing lava", caption: "A trail through a fiery world", credit: "BalK" },
   { src: "assets/great-tree.png", alt: "A colorful scene from the world of Dragon Quest Monsters on PlayStation", caption: "A world beyond the Travelers’ Gates" },
   { src: "assets/adventure.png", alt: "The party exploring a room of treasure chests in the English translation", caption: "A new discovery around every corner" },
-  { src: "assets/battle.png", alt: "An English-language monster battle in the PlayStation game", caption: "A little courage. A few good monsters." }
+  { src: "assets/battle.png", alt: "An English-language monster battle in the PlayStation game", caption: "A little courage. A few good monsters." },
+  { src: "assets/screenshots/3xad-title-screen.png", alt: "English title screen for Dragon Quest Monsters 1 & 2: The Starry Night Hero and Friends at the Ranch", caption: "The adventures begin", credit: "3xad", viewport: { x: 162, y: 29, width: 673, height: 500 } },
+  { src: "assets/screenshots/3xad-field-menu.png", alt: "English field menu with Items selected and current and maximum HP and MP for Terry’s monster party", caption: "A clearer view of your party", credit: "3xad", viewport: { x: 125, y: 5, width: 748, height: 557 } },
+  { src: "assets/screenshots/3xad-monster-table.png", alt: "Terry sits with his monsters at the dining table while one says Everything is best in moderation", caption: "A little table talk", credit: "3xad", viewport: { x: 125, y: 5, width: 748, height: 557 } }
 ];
 (() => {
   const gallery = document.getElementById("screenshot-gallery");
@@ -106,6 +109,14 @@ const scenes = [
       if (request !== latestRequest) return;
       featuredScreen.src = scene.src;
       featuredScreen.alt = scene.alt;
+      // Frame the original pixels; exclude emulator chrome without regenerating screenshots.
+      const crop = scene.viewport;
+      featuredScreen.classList.toggle("is-cropped", Boolean(crop));
+      stage.style.aspectRatio = crop ? `${crop.width} / ${crop.height}` : "";
+      featuredScreen.style.width = crop ? `${nextImage.naturalWidth / crop.width * 100}%` : "";
+      featuredScreen.style.height = crop ? `${nextImage.naturalHeight / crop.height * 100}%` : "";
+      featuredScreen.style.left = crop ? `${-crop.x / crop.width * 100}%` : "";
+      featuredScreen.style.top = crop ? `${-crop.y / crop.height * 100}%` : "";
       activeScene = index;
       document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}` : "From the English translation";
       selection.value = String(index);

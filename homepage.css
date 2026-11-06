@@ -239,6 +239,12 @@ a.reference-card:hover { transform: translateY(-4px); box-shadow: 0 7px 0 #d7cab
 .resource-links a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font: 500 24px/1.4 var(--font-display); }
 .about-section > .container > .eyebrow { margin-bottom: 24px; }
 .game-story { max-width: 960px; }
+.game-introduction { display: grid; grid-template-columns: minmax(230px, .65fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+.game-cover { margin: 0; max-width: 380px; width: 100%; justify-self: center; }
+.game-cover a { display: block; border: 1px solid var(--paper-line); box-shadow: 0 5px 18px #392e1814; }
+.game-cover img { display: block; width: 100%; height: auto; }
+.game-cover figcaption { margin-top: 10px; text-align: center; color: var(--muted); font-size: .75rem; }
+.screenshot-stage > img.is-cropped { position: absolute; max-width: none; object-fit: fill; }
 .game-story p { font-size: .9375rem; line-height: 1.85; }
 .game-story p + p { margin-top: 16px; }
 .game-story [lang="ja"] { line-break: strict; overflow-wrap: anywhere; }
@@ -259,9 +265,12 @@ a.reference-card:hover { transform: translateY(-4px); box-shadow: 0 7px 0 #d7cab
 @media (max-width: 1100px) { .header-discord { display: none; } }
 @media (max-width: 850px) {
   .hero-description { margin-inline: auto; }
+  .game-introduction { grid-template-columns: minmax(200px, .6fr) minmax(0, 1fr); gap: 24px; }
 }
 @media (max-width: 600px) {
   .about-section { padding-top: 45px; }
+  .game-introduction { grid-template-columns: 1fr; gap: 28px; }
+  .game-cover { max-width: 320px; }
   .main-nav { gap: 8px 18px; flex-wrap: wrap; }
   .main-nav a { padding-block: 5px; }
   html { --site-header-height: 140px; }

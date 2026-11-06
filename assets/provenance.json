@@ -736,5 +736,89 @@
     "height": 720,
     "sourceFile": "codex-clipboard-44a2a3ec-26ae-4b4f-ab4f-39c82ddbe426.png",
     "sha256": "3ce0b11f4dc5c7b939bcfacdc84ec540b433526a7acadf8188c33a61c3143946"
+  },
+  {
+    "file": "screenshots/3xad-title-screen.png",
+    "description": "English title screen.",
+    "contributor": "3xad",
+    "width": 1000,
+    "height": 541,
+    "bytes": 640205,
+    "sourceFile": "yfei7tcx66ph1.png",
+    "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
+    "sourceUrl": "https://i.redd.it/yfei7tcx66ph1.png",
+    "sha256": "fb57142bc8354f859956cde19adbd43095b27623d353c12dcac34c796afcfb5b",
+    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
+    "displayCrop": {
+      "x": 162,
+      "y": 29,
+      "width": 673,
+      "height": 500,
+      "units": "source pixels",
+      "method": "CSS viewport crop",
+      "note": "Excludes emulator title/menu bars, bottom status bar, and black side margins."
+    }
+  },
+  {
+    "file": "screenshots/3xad-field-menu.png",
+    "description": "English field item menu with party HP/MP status.",
+    "contributor": "3xad",
+    "width": 1000,
+    "height": 562,
+    "bytes": 518746,
+    "sourceFile": "h7gtpscx66ph1.png",
+    "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
+    "sourceUrl": "https://i.redd.it/h7gtpscx66ph1.png",
+    "sha256": "dc97a8d82cfbfb1a13b5eb652bd8fde0e04124c1d490fdd2ca03b7391ecb4173",
+    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
+    "displayCrop": {
+      "x": 125,
+      "y": 5,
+      "width": 748,
+      "height": 557,
+      "units": "source pixels",
+      "method": "CSS viewport crop",
+      "note": "Excludes black side margins and top strip."
+    }
+  },
+  {
+    "file": "screenshots/3xad-monster-table.png",
+    "description": "Monster table conversation in Terry's adventure.",
+    "contributor": "3xad",
+    "width": 1000,
+    "height": 562,
+    "bytes": 353877,
+    "sourceFile": "vlilutcx66ph1.png",
+    "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
+    "sourceUrl": "https://i.redd.it/vlilutcx66ph1.png",
+    "sha256": "bd0be47edcafbd83616637fc10f62cb4ad1e8f828d26965f3f201e6a1cb1291a",
+    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
+    "displayCrop": {
+      "x": 125,
+      "y": 5,
+      "width": 748,
+      "height": 557,
+      "units": "source pixels",
+      "method": "CSS viewport crop",
+      "note": "Excludes black side margins, top strip, and the fast-forward overlay in the upper-right black margin."
+    }
+  },
+  {
+    "file": "artwork/dqm-1-2-english-cover.png",
+    "description": "English fan adaptation of the original Japanese Dragon Quest Monsters 1 & 2 PlayStation front cover, displayed in the About section.",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2665135,
+    "sha256": "9c97004f9d466b695fc8cb89c5191e915036e09f8a55743fdef79075bcd6a9ef",
+    "sourceFile": "bdjogos-front.jpg",
+    "sourcePage": "https://bdjogos.com.br/jogo.php?id=10712",
+    "sourceUrl": "https://bdjogos.com.br/capas/10712-dragon-quest-monsters-1-2-hoshiori-no-yusha-to-bokujo-no-nakama-tachi-playstation-capa-1.jpg",
+    "sourceWidth": 735,
+    "sourceHeight": 735,
+    "sourceSha256": "af877e1a8b3cc458a959ab97fd26930ee8f996f2f7c10a873be11fc2c21f69ee",
+    "processing": "English title and subtitle adaptation using the OpenAI built-in image generation tool. This is generated artwork based on a 735 x 735 source, not a higher-resolution original scan.",
+    "generatedOn": "2026-11-06",
+    "promptFile": "artwork/english-cover-prompt.txt",
+    "promptSha256": "1362e9e5fe95ed1f1466fbb621fcc3b6522011d315cd920949c07a4003827f46"
   }
 ]

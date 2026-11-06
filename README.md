@@ -46,11 +46,11 @@ Preview changes on a branch before merging; after Pages is enabled, pushes to
 
 ## Site files
 
-- `index.html` contains the patch download and installation instructions, game and project introduction, future plans, and community links. Historical sources are linked beside the relevant text.
+- `index.html` contains the patch download and installation instructions, game and project introduction, FAQ, live reference links, and community support. Historical sources are linked beside the relevant text.
 - `theme.css` provides the shared colors, typography, buttons, and RPG-style panels. `homepage.css` controls the homepage layout.
 - `homepage.js` manages screenshots, the bug-report template, animation preferences, contributor rotation, and anchor offsets for the sticky navigation.
 - `loading.js` provides a spinning-slime loading indicator. Call `const finish = DqmLoading.begin()` before an asynchronous task and `finish()` when it settles.
-- `assets/provenance.json` records the game assets and their hashes. Sprite animation can be paused and respects reduced-motion preferences.
+- `assets/provenance.json` records asset sources, dimensions, hashes, and screenshot display crops. Sprite animation can be paused and respects reduced-motion preferences.
 - `downloads/releases.json` records packages newest first. The first entry supplies the current download card and release notes; every retained package supplies its explicitly credited contributors.
 - `data/contributors.json` records project contributors credited separately from release READMEs, with a contribution and its source. It includes Cats4gold's help with the breeding tool and Nejimakipiyo's translation review, confirmed by the project owner.
 
@@ -77,10 +77,18 @@ remains an alternative for corrections and general help.
 
 ## Screenshot gallery
 
-The screenshot gallery rotates through fourteen screenshots every seven seconds,
-including eleven original 960×720 captures shared by BalK. The new captures live
-in `assets/screenshots/`, with credit, source filenames, and hashes recorded in
-`assets/provenance.json`. Each appears uncropped with its own caption and credit.
+The screenshot gallery rotates through seventeen screenshots every seven seconds,
+including eleven original 960×720 captures shared by BalK and three screenshots
+posted by [3xad on Reddit](https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/).
+The added 3xad images show the title screen, field item menu and HP/MP status,
+and a monster table conversation. They live in `assets/screenshots/`, with
+credit, source URLs, dimensions, and SHA-256 hashes in `assets/provenance.json`.
+
+All three 3xad PNGs are byte-for-byte copies of their downloaded sources. CSS
+shows only their game viewports, hiding black side margins, the title screenshot's
+emulator bars, and the table screenshot's fast-forward overlay. The source-pixel
+crop rectangles are recorded in the provenance file. The other fourteen images
+appear uncropped. No generated or repainted screenshot is used.
 
 The screenshot footer contains the selector, credit, and previous/pause/next
 icons. The selected option is the single visible caption; the standalone caption
@@ -88,8 +96,19 @@ is retained only as the no-JavaScript fallback. All icon buttons keep accessible
 labels and tooltips. Previous, Next, and the screenshot selector pause automatic
 rotation until the play icon is chosen. Hover, keyboard focus, hidden tabs, and an offscreen gallery
 also suspend rotation; reduced-motion users start paused. The first screenshot
-and its BalK credit remain visible without JavaScript. To add another image,
+and its credit remain visible without JavaScript. To add another image,
 extend `scenes` in `homepage.js`; the dropdown count updates automatically.
+
+## Cover artwork
+
+The About section uses an English fan adaptation of the Japanese cover, made
+with the built-in image generation tool from the
+[735×735 BD Jogos source](https://bdjogos.com.br/jogo.php?id=10712).
+`assets/artwork/dqm-1-2-english-cover.png` is the 1254×1254 generated output;
+that size is not the resolution of an original scan. The edit localizes the title
+and subtitle. Its exact prompt is retained in
+`assets/artwork/english-cover-prompt.txt`, and the source URL and both image hashes
+are recorded in `assets/provenance.json`.
 
 ## Updating the patch download and contributor credits
 

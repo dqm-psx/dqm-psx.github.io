@@ -2,6 +2,8 @@
 
 Run after editing downloads/releases.json. --check validates without writing.
 The generated HTML is committed, so viewing the site needs no build or JS.
+An optional downloadUrl selects a pinned public dqm-psx/patch release asset.
+Local packages remain required for integrity checks and historical credits.
 """
 import argparse
 import hashlib
@@ -31,14 +33,32 @@ COLLECTIVE_THANKS = re.compile(
 )
 
 
-def validate_package(release, root):
-    """Return the size and README from the same bytes whose hash was checked."""
+def package_identity(release):
+    """Keep package names and remote release paths tied to the recorded version."""
     version = release['version']
     if not isinstance(version, str) or not re.fullmatch(r'\d+\.\d+\.\d+', version):
         raise ValueError('Release version must contain three numeric components')
     filename = f'DQM1-2-English-v{version}-public.zip'
     if release['file'] != filename:
         raise ValueError('Package filename does not match the release version')
+    return version, filename
+
+
+def download_target(release):
+    """Validate a configured public asset URL; availability is checked at release time."""
+    version, filename = package_identity(release)
+    if 'downloadUrl' not in release:
+        return f'downloads/{filename}'
+    expected = f'https://github.com/dqm-psx/patch/releases/download/v{version}/{filename}'
+    if release['downloadUrl'] != expected:
+        raise ValueError(f'downloadUrl must be the pinned dqm-psx/patch asset URL: {expected}')
+    return expected
+
+
+def validate_package(release, root):
+    """Return the size and README from the same bytes whose hash was checked."""
+    version, filename = package_identity(release)
+    download_target(release)
     data = (root / 'downloads' / filename).read_bytes()
     if len(data) != release['bytes'] or hashlib.sha256(data).hexdigest() != release['sha256']:
         raise ValueError(f'Package size or SHA-256 differs from the release record: {filename}')
@@ -57,7 +77,10 @@ def validate_package(release, root):
 
 
 def download_card(release, package_size):
-    version, filename = release['version'], release['file']
+    version, filename = package_identity(release)
+    target = download_target(release)
+    # Cross-origin GitHub downloads use the asset response's Content-Disposition.
+    download_attribute = f' download="{filename}"' if 'downloadUrl' not in release else ''
     notes = release.get('notes')
     if not isinstance(notes, list) or not notes or not all(isinstance(n, str) and n.strip() for n in notes):
         raise ValueError('The latest release needs a nonempty list of release notes')
@@ -65,7 +88,7 @@ def download_card(release, package_size):
     return f'''          <div class="release-download" aria-labelledby="release-title">
             <div class="release-heading"><h3 id="release-title">{escape(release['name'])}</h3><span class="release-version">v{version}</span></div>
             <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <a class="button button-gold" href="downloads/{filename}" download="{filename}"><span aria-hidden="true">↓</span> Download v{version}</a>
+            <a class="button button-gold" href="{escape(target, quote=True)}"{download_attribute}><span aria-hidden="true">↓</span> Download v{version}</a>
             <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> {package_size / 1_000_000:.2f} MB</span>
             <details class="release-notes"><summary>Release notes</summary><ul>{items}</ul><p>See the included README for the full change history and credits.</p></details>
           </div>

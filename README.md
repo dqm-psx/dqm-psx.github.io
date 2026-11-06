@@ -4,9 +4,9 @@ The project homepage for the English fan translation of **Dragon Quest Monsters 
 
 [Visit the homepage](https://dqm-psx.github.io/) · [Discord](https://discord.gg/6V9p6Y2pBt) · [ROMhacking.net](https://www.romhacking.net/translations/7734/)
 
-The site is being prepared as the public landing page for the English patch developed in `phakic/dqm1`. It provides a verified download, installation instructions, screenshots, project credits, a FAQ, and community support. The release home will be `dqm-psx/patch`. This preview retains a verified local v1.0.72 package until the public release destination is ready.
+The site is being prepared as the public landing page for the English patch developed in `phakic/dqm1`. It provides a verified download, installation instructions, screenshots, project credits, a FAQ, and community support. The release home is `dqm-psx/patch`, which remains private. The website bundles the exact published v1.0.73 package locally so its download does not require access to that repository.
 
-**Launch status:** GitHub Pages is disabled. Enable publication only after the project owner gives the go-ahead.
+**Launch status:** GitHub Pages is disabled and the launch PR remains unmerged. Enable publication only after the project owner gives the go-ahead.
 
 ## Local preview
 
@@ -25,10 +25,12 @@ The hosting repository is `dqm-psx/dqm-psx.github.io`. Publish its `main` branch
 a branch**. The committed `.nojekyll` file keeps this a plain static site; no
 build service, framework, API key, or client-side GitHub API request is needed.
 
-On GitHub Free, the hosting repository must be public to enable Pages. Only this
-website repository needs public visibility; the patch development and release
-repositories can remain private. Before changing visibility, review the hosting
-repository’s files and history for anything not intended for publication.
+On GitHub Free, the hosting repository must be public to enable Pages. The patch
+development repository can remain private. Public release-asset downloads and
+bug submissions in `dqm-psx/patch` require that repository to be publicly accessible;
+the website currently uses its bundled package while the release repository is
+private. Before changing visibility, review each repository’s files and history
+for anything not intended for publication.
 
 Before pushing an update to `main`, run:
 
@@ -68,8 +70,15 @@ FAQ answers and navigation use native HTML disclosures and work without JavaScri
 
 FAQ content comes from the project owner's Discord FAQ and covers the project,
 AI assistance, installation and updating, restored content, quality-of-life
-changes, troubleshooting, and contributing. The restored content and interface
-features were checked against v1.0.72. The full report template distinguishes
+changes, troubleshooting, and contributing. The FAQ covers v1.0.73, including
+Terry’s restored table conversations and special dungeon floors, plus restored
+monster wagers and expanded rules in the title-screen Colosseum. It explains the prize
+transfer’s effect on both Adventure Logs and the need for save backups.
+Movement settings under **Tactics → Movement** let each adventure choose independent
+Walk and R1 speeds of 1×, 2×, or 4×, with Hold or Toggle controls. The defaults are
+1× walking and 2× while holding R1. **Time** encounters, the default, preserve roughly
+the usual encounter frequency per minute of travel; **Distance** uses the normal
+rate per step. The full report template distinguishes
 memory-card saves for normal play from patch-matched save states for debugging.
 The bug-report button opens a prefilled issue in `dqm-psx/patch`; visitors review
 and submit it on GitHub. Its URL body must match the visible `report-text`
@@ -182,16 +191,30 @@ Historical source links on the homepage sit beside the relevant text.
 
 ## Updating the patch download and contributor credits
 
-Publish future patch releases in `dqm-psx/patch`. Once a release is ready and its
-public download is verified, update the website's download destination and
-release metadata together. Do not link visitors to the private development
-repository or promote a draft release. v1.0.73 is being prepared by the project
-owner; wait for their confirmation before replacing v1.0.72.
+`dqm-psx/patch` is the release home. v1.0.73 is published and verified, but the
+repository remains private. The website therefore serves the exact release ZIP
+from its own `downloads/` directory. A manifest entry’s `releaseUrl` records the
+upstream release as provenance; it does not change the download destination.
+
+The release repository now contains all 28 packages from the source repository’s
+root and archive, copied unchanged with verified hashes. Its
+[`release-manifest.json`](https://github.com/dqm-psx/patch/blob/main/release-manifest.json)
+records the source snapshot and every migrated package. v1.0.73 is marked latest.
+
+Only after a release asset is accessible without signing in and its downloaded
+bytes match the recorded size and SHA-256 should an entry gain `downloadUrl`.
+The helper accepts only the pinned form
+`https://github.com/dqm-psx/patch/releases/download/v{version}/{filename}`,
+matching that entry’s version and package filename. It rejects other destinations,
+floating latest-release links, queries, and fragments. Omit `downloadUrl` while
+the repository is private to retain the local download. Public availability is
+verified separately; the helper performs its validation offline. Do not link
+visitors to the private development repository or promote a draft release.
 
 The current preview uses the existing local package workflow below. Retained
 packages also preserve historical credits and allow integrity checks offline.
 
-Add the new public ZIP to `downloads/` and prepend its version, filename, byte size,
+Copy the published ZIP unchanged to `downloads/` and prepend its version, filename, byte size,
 SHA-256, contents, and player-facing `notes` to `downloads/releases.json`. Then run:
 
 ```sh
@@ -273,14 +296,17 @@ migration is needed for this launch.
 
 ## Release and support notes
 
-The current package is v1.0.72, verified against its GitHub release asset’s size
-and SHA-256. It includes only the BPS patch, CUE, and original README. Draft v1.0.73
-and unreleased development features are not part of this site’s download.
+The current package is `DQM1-2-English-v1.0.73-public.zip`, verified against its
+published release asset: **7,558,537 bytes**, SHA-256
+`652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a`.
+The local copy is byte-for-byte identical and includes only the BPS patch, matching
+CUE, and original README. Published release status does not make the private
+release repository publicly accessible; the website’s download remains local.
 
-The published package’s README contains an expired Discord invitation. Use the
-current [website invitation](https://discord.gg/6V9p6Y2pBt) for support, and fix the
-invitation in the next release’s source README. Do not rewrite existing ZIPs:
-the manifest tracks their original published hashes.
+Some retained release READMEs contain an expired Discord invitation. Use the
+current [website invitation](https://discord.gg/6V9p6Y2pBt) for support, and make
+any invitation corrections in a future release’s source README. Do not rewrite
+existing ZIPs: the manifest tracks their original published hashes.
 
 The hero party is Terry with three monsters: Hale (Healslime), Dragon, and
 SabreCat. Cats4gold is credited on the homepage for helping with the breeding tool.

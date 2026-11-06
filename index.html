@@ -123,11 +123,11 @@
           <p>Download the translation package, then follow the setup instructions to patch your Japanese PlayStation game. The translation continues to improve through player feedback.</p>
           <!-- release:begin -->
           <div class="release-download" aria-labelledby="release-title">
-            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.72</span></div>
+            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.73</span></div>
             <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <a class="button button-gold" href="downloads/DQM1-2-English-v1.0.72-public.zip" download="DQM1-2-English-v1.0.72-public.zip"><span aria-hidden="true">↓</span> Download v1.0.72</a>
-            <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> 7.52 MB</span>
-            <details class="release-notes"><summary>Release notes</summary><ul><li>Updates community-suggested monster and kingdom names, including CoilBird, Drakeling, Slimeborg, Slabbit, Darck, DeadTree, and BigTrunk.</li><li>Clarifies breeding dialogue and corrects the Sky Shield text. Includes the earlier translation and gameplay fixes.</li></ul><p>See the included README for the full change history and credits.</p></details>
+            <a class="button button-gold" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73-public.zip"><span aria-hidden="true">↓</span> Download v1.0.73</a>
+            <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> 7.56 MB</span>
+            <details class="release-notes"><summary>Release notes</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul><p>See the included README for the full change history and credits.</p></details>
           </div>
           <!-- release:end -->
           <p class="patch-note"><a href="https://www.romhacking.net/translations/7734/">Project page on ROMhacking.net <span aria-hidden="true">↗</span></a></p>
@@ -151,7 +151,7 @@
         <h2 id="about-title" class="eyebrow">The game &amp; the project</h2>
         <div class="game-story">
             <p><a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Released in Japan on <time datetime="2002-05-30">May 30, 2002</time></a> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <a href="https://blog.ja.playstation.com/?p=278297"><em>Dragon Quest Monsters 1 &amp; 2</em></a> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
-            <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation—and now it is here. With great thanks to <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a>, whose incredible early translation efforts inspired this independent project.</p>
+            <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation. Thanks to community effort, an English translation patch is now available. Many thanks to <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a>, whose incredible early hacking and translation efforts inspired this independent project.</p>
         </div>
         <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
               <h3 id="contributor-title">Contributors</h3>
@@ -260,20 +260,41 @@
             <div class="faq-answer"><p>In the Arena dining room, walk onto the east stool at the right table with one to three living, visible party monsters.</p><ul><li><strong>Up, Left, and Down</strong> select the north, west, and south monster respectively.</li><li><strong>Confirm/Talk</strong> starts the conversation.</li><li><strong>Cancel or Right</strong> makes you stand up.</li></ul><p>Revive any fallen party members first, and leave the stool before sitting again.</p></div>
           </details>
           <details>
-            <summary>How do I leave the traveling colosseum?</summary>
+            <summary>How do I leave Terry’s traveling colosseum?</summary>
             <div class="faq-answer"><p>Leave through its north door. Travel Bookmark cannot be used inside the traveling colosseum.</p></div>
+          </details>
+          <details>
+            <summary>Can we wager monsters in two-player Colosseum battles?</summary>
+            <div class="faq-answer">
+              <p>Yes. v1.0.73 restores monster wagers in the <strong>title-screen Colosseum</strong>, which offers Free Battle, Enix Rules, and Local Rules. Choose <strong>Local Rules</strong> and enable prizes, which are off by default.</p>
+              <ul><li>Use saves from two different players. Each offers an awake farm monster outside their saved adventure party, and both farms need room to receive a prize.</li><li>The winner receives the loser’s offered monster and keeps their own. A draw transfers nothing.</li></ul>
+              <p>Local Rules also lets you set skill restrictions, total or individual level limits, allowed monster families, turns, a command timer, combos, and accessories. Set <strong>Turns to 0</strong> for no turn limit.</p>
+              <p><strong>A transfer saves both Adventure Logs.</strong> Back up your saves beforehand, and keep the game running with both memory cards inserted until both saves finish. If a card error occurs, retry without resetting. Resetting or losing power between saves can lose the prize monster.</p>
+            </div>
           </details>
         </section>
 
         <section id="faq-quality" class="faq-group" aria-labelledby="faq-quality-title">
           <h3 id="faq-quality-title">Quality of life</h3>
           <details>
+            <summary>How do I run or change my movement speed?</summary>
+            <div class="faq-answer">
+              <p>In v1.0.73, open <strong>Tactics → Movement</strong>, just below Text Speed, in Terry’s, Cobi’s, or Tara’s adventure. By default, walking is 1× speed and holding <strong>R1</strong> runs at 2×. You can set Walk and R1 speeds independently to <strong>1×, 2×, or 4×</strong>, and choose Hold or Toggle. Toggle switches speeds each time you press R1.</p>
+              <p>Use <strong>Up/Down</strong> to select a setting and <strong>Left/Right</strong> to change it. <strong>Circle or Triangle</strong> applies changes; <strong>Cross</strong> cancels; <strong>Square</strong> cancels and closes the field menu.</p>
+              <p>Save normally to keep each adventure’s settings. Toggle stays active through doors, battles, and menus, but loading an adventure starts at Walk speed. Riding, sliding floors, and scripted movement keep their original controls.</p>
+            </div>
+          </details>
+          <details>
+            <summary>What do the Time and Distance encounter settings do?</summary>
+            <div class="faq-answer"><p>Under <strong>Tactics → Movement</strong>, <strong>Time</strong> is the default: it keeps roughly the usual number of encounters per minute of travel, even when running. <strong>Distance</strong> uses the normal encounter rate per step, so faster movement brings battles closer together in time.</p></div>
+          </details>
+          <details>
             <summary>What changed in the HP and MP displays?</summary>
             <div class="faq-answer"><p>The field and combat displays have expanded HP/MP information, with current and maximum values and visual bars.</p></div>
           </details>
           <details>
             <summary>How do grouped items and bulk selling work?</summary>
-            <div class="faq-answer"><p>Duplicate items are grouped with quantities in the field item menu, battle item menu, and shop Sell menu.</p><p>To sell multiple copies of the same item, choose the quantity and confirm the sale.</p></div>
+            <div class="faq-answer"><p>Duplicate items are grouped with quantities in the field item menu, battle item menu, and shop Sell menu.</p><p>To sell multiple copies of the same item, choose the quantity and confirm the sale. Using, discarding, or selling part of a stack keeps the remaining copies in the same inventory position.</p></div>
           </details>
           <details>
             <summary>Can I carry more than 30 items now?</summary>

@@ -52,7 +52,7 @@ Preview changes on a branch before merging; after Pages is enabled, pushes to
 - `index.html` contains the patch download and installation instructions, game and project introduction, FAQ, live reference links, and community support. Historical sources are linked beside the relevant text.
 - `theme.css` provides the shared colors, typography, buttons, and RPG-style panels. `homepage.css` controls the homepage layout.
 - `homepage.js` manages screenshots, the bug-report template, animation preferences, contributor rotation, and anchor offsets for the sticky navigation.
-- `cover-intro.js` reveals the English cover during ordinary page scrolling, with a reduced-motion alternative.
+- `cover-intro.js` reveals the English title over shared cover artwork during ordinary page scrolling, with a reduced-motion alternative.
 - `data/screenshots.json` is the reviewed gallery catalog. `tools/update_screenshots.py` validates it and generates `gallery-data.js`, loaded before `homepage.js`.
 - `loading.js` provides a spinning-slime loading indicator. Call `const finish = DqmLoading.begin()` before an asynchronous task and `finish()` when it settles.
 - `assets/provenance.json` records asset sources, dimensions, hashes, and screenshot display crops. Sprite animation can be paused and respects reduced-motion preferences.
@@ -112,6 +112,7 @@ attach an original image, choose their credit name, describe the scene, and
 optionally enter the patch version. Opening the form does not submit the issue.
 The template becomes available after this PR is merged into the default branch;
 public submissions also require the planned public repository launch.
+The link has no accompanying submission teaser; the approval process is unchanged.
 
 Submissions never enter the slideshow automatically. A maintainer reviews the
 issue and image, then prepares an approved addition in a branch for review and
@@ -141,21 +142,43 @@ verify the catalog, or omit `--check` to regenerate after an intentional edit.
 
 ## Cover artwork
 
-The opening panel starts with the original Japanese cover supplied by the owner.
-Scrolling reveals the English cover from top to bottom, with a soft edge; older
-browsers use an opacity blend. The cover stays in view during the transition,
-then ordinary scrolling continues into the patch homepage. Navigation and
-**Explore the English patch** bypass the intro. Direct section URLs still work.
-Reduced-motion mode swaps the image without a blend or extra scroll distance;
-without JavaScript, the Japanese cover and direct link remain available.
+The opening panel assembles a Japanese title over shared artwork from the English
+fan cover and a fixed paper background. Scrolling replaces only the title and
+subtitle with their English counterparts, from top to bottom with a soft edge;
+older browsers blend the title layers. The artwork and paper stay fixed throughout.
+The cover stays in view during the transition, then ordinary scrolling continues
+into the patch homepage. Navigation and **Explore the English patch** bypass the
+intro. Direct section URLs still work. Reduced-motion mode swaps the title without
+a blend or extra scroll distance; without JavaScript, the assembled Japanese-title
+cover and direct link remain available. There is no separate cover caption.
+
+The shared background uses `assets/artwork/cover-paper-base.png`, a generated
+1254×1254 version of the English cover with its title removed. This plate is not
+pixel-identical to its source: its upper paper area and small portions of the
+highest artwork remain visible. A static overlay of `dqm-1-2-english-cover.png`
+restores the existing lower artwork, beginning at 28.6% of the cover height and
+becoming fully opaque at 29.2%. Neither background layer participates in the
+scroll reveal.
+
+`cover-title-japanese.png` and `cover-title-english.png` are generated 2172×724
+transparent PNGs, based on the supplied Japanese cover and the English fan cover
+respectively. The Japanese PNG's generated subtitle contains a duplicated character,
+so its bottom 23% is hidden and an inline SVG renders the exact text
+`星降りの勇者と牧場の仲間たち`. Both title compositions occupy the same frame: 6%
+from the left, 2% from the top, 88% wide, and 25.4% high. Only these title layers
+receive the scroll masks. The original
+640×640 Japanese cover remains as a source asset; it is no longer displayed in
+full. The layer-generation and Japanese refinement prompts are retained in
+`assets/artwork/cover-layers-prompts.txt`.
 
 The English fan adaptation was made with the built-in image generation tool from the
 [735×735 BD Jogos source](https://bdjogos.com.br/jogo.php?id=10712).
 `assets/artwork/dqm-1-2-english-cover.png` is the 1254×1254 generated output;
 that size is not the resolution of an original scan. The edit localizes the title
 and subtitle. Its exact prompt is retained in
-`assets/artwork/english-cover-prompt.txt`, and the source URL and both image hashes
-are recorded in `assets/provenance.json`.
+`assets/artwork/english-cover-prompt.txt`. Sources, dimensions, hashes, transparency,
+and display roles for the cover assets are recorded in `assets/provenance.json`.
+Historical source links on the homepage sit beside the relevant text.
 
 ## Updating the patch download and contributor credits
 

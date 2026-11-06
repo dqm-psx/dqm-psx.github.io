@@ -1,16 +1,14 @@
 "use strict";
 
-// Ordinary page scrolling reveals the English cover; no scroll interception.
+// Scroll changes only the transparent title layers. Artwork and paper stay fixed.
 (() => {
   const intro = document.getElementById("cover-intro");
   const sticky = intro.querySelector(".cover-sticky");
-  const english = document.getElementById("intro-english-cover");
-  const caption = document.getElementById("cover-caption");
+  const titles = intro.querySelectorAll(".cover-title-layers img");
   const header = document.querySelector(".site-header");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let ready = false;
   let frame = null;
-  let lastCaption = "";
 
   function render() {
     frame = null;
@@ -22,8 +20,6 @@
       ? Number(offset >= 64)
       : Math.max(0, Math.min(1, offset / distance));
     intro.style.setProperty("--cover-progress", progress.toFixed(4));
-    const label = progress < 0.5 ? "Original Japanese release" : "English fan translation";
-    if (label !== lastCaption) { caption.textContent = label; lastCaption = label; }
   }
 
   function schedule() {
@@ -37,11 +33,11 @@
 
   // Reserve the scroll space during initialization, before images finish loading.
   updateMotion();
-  english.decode().then(() => {
+  Promise.all([...titles].map(image => image.decode())).then(() => {
     ready = true;
     schedule();
   }).catch(() => {
-    // The Japanese cover and direct link still work if the English image fails.
+    // The Japanese title and direct link remain available if the English title fails.
     intro.classList.remove("is-enhanced");
   });
   window.addEventListener("scroll", schedule, { passive: true });

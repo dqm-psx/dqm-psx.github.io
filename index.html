@@ -15,11 +15,11 @@
   <meta property="og:image:alt" content="Terry and his monster party approaching a Travelers’ Gate in the English translation">
   <link rel="icon" href="assets/slime-walk.gif" type="image/gif">
   <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="homepage.css?v=20261106-community-3">
+  <link rel="stylesheet" href="homepage.css?v=20261106-title-layers-2">
   <script src="loading.js" defer></script>
-  <script src="cover-intro.js?v=20261106-community-3" defer></script>
-  <script src="gallery-data.js?v=20261106-community-3" defer></script>
-  <script src="homepage.js?v=20261106-community-3" defer></script>
+  <script src="cover-intro.js?v=20261106-title-layers-2" defer></script>
+  <script src="gallery-data.js?v=20261106-title-layers-2" defer></script>
+  <script src="homepage.js?v=20261106-title-layers-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -52,11 +52,17 @@
 
   <section class="cover-intro night-surface" id="cover-intro" aria-label="From the Japanese original to the English fan translation">
     <div class="cover-sticky">
-      <figure class="cover-reveal" role="img" aria-label="The original Japanese Dragon Quest Monsters 1 &amp; 2 cover changes to the English fan adaptation as you scroll.">
-        <img class="cover-japanese" src="assets/artwork/dqm-1-2-japanese-cover.png" width="640" height="640" alt="" fetchpriority="high">
-        <img class="cover-english" id="intro-english-cover" src="assets/artwork/dqm-1-2-english-cover.png" width="1254" height="1254" alt="" decoding="async">
+      <figure class="cover-reveal" role="img" aria-label="The Japanese Dragon Quest Monsters 1 &amp; 2 title changes to English as you scroll, over the same cover artwork.">
+        <img class="cover-paper" src="assets/artwork/cover-paper-base.png" width="1254" height="1254" alt="" fetchpriority="high">
+        <img class="cover-artwork" src="assets/artwork/dqm-1-2-english-cover.png" width="1254" height="1254" alt="" decoding="async">
+        <div class="cover-title-layers" aria-hidden="true">
+          <div class="cover-title-japanese">
+            <img class="cover-title-japanese-logo" src="assets/artwork/cover-title-japanese.png" width="2172" height="724" alt="">
+            <svg class="cover-title-subtitle" viewBox="0 0 2172 724" preserveAspectRatio="none" aria-hidden="true" focusable="false"><text x="1086" y="681" text-anchor="middle" textLength="1300" lengthAdjust="spacingAndGlyphs" lang="ja">星降りの勇者と牧場の仲間たち</text></svg>
+          </div>
+          <img class="cover-title-english" id="intro-english-title" src="assets/artwork/cover-title-english.png" width="2172" height="724" alt="" decoding="async">
+        </div>
       </figure>
-      <p class="cover-caption" id="cover-caption">Original Japanese release</p>
       <a class="cover-continue" href="#main">Explore the English patch <span aria-hidden="true">↓</span></a>
     </div>
   </section>
@@ -103,7 +109,7 @@
               <p class="screenshot-status visually-hidden" id="screenshot-status" role="status" aria-live="polite"></p>
             </div>
           </div>
-          <p class="screenshot-submission"><a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml" target="_blank" rel="noopener noreferrer">Submit a screenshot <span aria-hidden="true">↗</span></a><span>Reviewed before joining the gallery.</span></p>
+          <p class="screenshot-submission"><a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml" target="_blank" rel="noopener noreferrer">Submit a screenshot <span aria-hidden="true">↗</span></a></p>
         </div>
       </div>
       <div class="hero-bottom" aria-hidden="true"><span>✦</span></div>
@@ -144,10 +150,8 @@
       <div class="container">
         <h2 id="about-title" class="eyebrow">The game &amp; the project</h2>
         <div class="game-story">
-            <p>Released in Japan on <time datetime="2002-05-30">May 30, 2002</time> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <em>Dragon Quest Monsters 1 &amp; 2</em> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
-            <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation.</p>
-            <p class="story-source">Game background: <a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Official release record</a> · <a href="https://blog.ja.playstation.com/?p=278297">PlayStation retrospective</a></p>
-          <p class="translation-inspiration">Early translation work by <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a> helped inspire this independent project.</p>
+            <p><a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Released in Japan on <time datetime="2002-05-30">May 30, 2002</time></a> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <a href="https://blog.ja.playstation.com/?p=278297"><em>Dragon Quest Monsters 1 &amp; 2</em></a> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
+            <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation—and now it is here. With great thanks to <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a>, whose incredible early translation efforts inspired this independent project.</p>
         </div>
         <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
               <h3 id="contributor-title">Contributors</h3>

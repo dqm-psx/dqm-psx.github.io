@@ -137,10 +137,32 @@ def project_contributors(root):
     return names
 
 
-def contributor_list(names):
+def project_contributor_aliases(root):
+    """Resolve only aliases explicitly recorded with a project's named credit."""
+    records = json.loads((root / 'data/contributors.json').read_text(encoding='utf-8'))['contributors']
+    aliases = {}
+    for record in records:
+        name = valid_name(record['name'])
+        aliases.setdefault(name.casefold(), name)
+    for record in records:
+        name = aliases[valid_name(record['name']).casefold()]
+        values = record.get('aliases', [])
+        if not isinstance(values, list):
+            raise ValueError('Contributor aliases must be a list of names')
+        for value in values:
+            key = valid_name(value).casefold()
+            if key in aliases and aliases[key] != name:
+                raise ValueError('Contributor alias belongs to more than one name')
+            aliases[key] = name
+    return aliases
+
+
+def contributor_list(names, aliases=None):
+    aliases = aliases or {}
     unique = {}
     for name in names:
         name = valid_name(name)
+        name = aliases.get(name.casefold(), name)
         unique.setdefault(name.casefold(), name)
     ordered = sorted(unique.values(), key=lambda name: (name.lstrip('_').casefold(), name.casefold()))
     items = ''.join(f'                  <li>{escape(name)}</li>\n' for name in ordered)
@@ -164,13 +186,14 @@ def update(root=ROOT, check=False):
         raise ValueError('Duplicate release version in manifest')
     packages = [validate_package(release, root) for release in releases]
     names = project_contributors(root)
+    aliases = project_contributor_aliases(root)
     for release, (_, readme) in zip(releases, packages):
         try:
             names.extend(readme_contributors(readme))
         except ValueError as error:
             raise ValueError(f'{release["file"]}: {error}') from error
     card = download_card(releases[0], packages[0][0])
-    credits = contributor_list(names)
+    credits = contributor_list(names, aliases)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
     updated = replace_block(source, START, END, card, 10)

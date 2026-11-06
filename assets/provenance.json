@@ -805,7 +805,7 @@
   },
   {
     "file": "artwork/dqm-1-2-english-cover.png",
-    "description": "English fan adaptation of the original Japanese Dragon Quest Monsters 1 & 2 PlayStation front cover, displayed in the About section.",
+    "description": "English fan adaptation of the original Japanese Dragon Quest Monsters 1 & 2 PlayStation front cover, revealed in the opening cover transition.",
     "width": 1254,
     "height": 1254,
     "bytes": 2665135,
@@ -820,5 +820,15 @@
     "generatedOn": "2026-11-06",
     "promptFile": "artwork/english-cover-prompt.txt",
     "promptSha256": "1362e9e5fe95ed1f1466fbb621fcc3b6522011d315cd920949c07a4003827f46"
+  },
+  {
+    "file": "artwork/dqm-1-2-japanese-cover.png",
+    "description": "Original Japanese front cover, shown before the English adaptation in the opening scroll transition.",
+    "width": 640,
+    "height": 640,
+    "bytes": 720954,
+    "sha256": "91526ea52884e66638579fb819f4c74b77476a2c6bf2d330ed66dd64653432cd",
+    "sourceFile": "codex-clipboard-be5c34b0-d2ed-4e6c-95c9-7e4ca4233250.png",
+    "processing": "User-supplied original cover copied unchanged."
   }
 ]

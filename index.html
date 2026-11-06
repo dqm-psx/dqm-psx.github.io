@@ -15,9 +15,11 @@
   <meta property="og:image:alt" content="Terry and his monster party approaching a Travelers’ Gate in the English translation">
   <link rel="icon" href="assets/slime-walk.gif" type="image/gif">
   <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="homepage.css?v=20261106-media">
+  <link rel="stylesheet" href="homepage.css?v=20261106-community-3">
   <script src="loading.js" defer></script>
-  <script src="homepage.js?v=20261106-media" defer></script>
+  <script src="cover-intro.js?v=20261106-community-3" defer></script>
+  <script src="gallery-data.js?v=20261106-community-3" defer></script>
+  <script src="homepage.js?v=20261106-community-3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -48,7 +50,18 @@
     </div>
   </header>
 
-  <main id="main">
+  <section class="cover-intro night-surface" id="cover-intro" aria-label="From the Japanese original to the English fan translation">
+    <div class="cover-sticky">
+      <figure class="cover-reveal" role="img" aria-label="The original Japanese Dragon Quest Monsters 1 &amp; 2 cover changes to the English fan adaptation as you scroll.">
+        <img class="cover-japanese" src="assets/artwork/dqm-1-2-japanese-cover.png" width="640" height="640" alt="" fetchpriority="high">
+        <img class="cover-english" id="intro-english-cover" src="assets/artwork/dqm-1-2-english-cover.png" width="1254" height="1254" alt="" decoding="async">
+      </figure>
+      <p class="cover-caption" id="cover-caption">Original Japanese release</p>
+      <a class="cover-continue" href="#main">Explore the English patch <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <main id="main" tabindex="-1">
     <section class="hero night-surface" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -73,7 +86,7 @@
         <div class="hero-visual" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
           <div class="screenshot-frame">
             <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
-              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" fetchpriority="high">
+              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" loading="lazy">
               <div class="screenshot-loading" id="screenshot-loading" hidden><img class="pixel" src="assets/slime.gif" width="32" height="32" alt=""><span>Loading screenshot…</span></div>
             </div>
             <div class="screenshot-footer">
@@ -90,6 +103,7 @@
               <p class="screenshot-status visually-hidden" id="screenshot-status" role="status" aria-live="polite"></p>
             </div>
           </div>
+          <p class="screenshot-submission"><a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml" target="_blank" rel="noopener noreferrer">Submit a screenshot <span aria-hidden="true">↗</span></a><span>Reviewed before joining the gallery.</span></p>
         </div>
       </div>
       <div class="hero-bottom" aria-hidden="true"><span>✦</span></div>
@@ -129,19 +143,11 @@
     <section id="about" class="about-section paper-surface" aria-labelledby="about-title">
       <div class="container">
         <h2 id="about-title" class="eyebrow">The game &amp; the project</h2>
-        <div class="game-introduction">
-          <figure class="game-cover">
-            <a href="assets/artwork/dqm-1-2-english-cover.png" aria-label="View the English cover adaptation at full size">
-              <img src="assets/artwork/dqm-1-2-english-cover.png" width="1254" height="1254" loading="lazy" decoding="async" alt="English adaptation of the Dragon Quest Monsters 1 &amp; 2 cover, with Terry, Cobi, Tara, and their monsters beneath the title The Starry Night Hero and Friends at the Ranch">
-            </a>
-            <figcaption>English cover adaptation</figcaption>
-          </figure>
-          <div class="game-story">
+        <div class="game-story">
             <p>Released in Japan on <time datetime="2002-05-30">May 30, 2002</time> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <em>Dragon Quest Monsters 1 &amp; 2</em> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
             <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation.</p>
             <p class="story-source">Game background: <a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Official release record</a> · <a href="https://blog.ja.playstation.com/?p=278297">PlayStation retrospective</a></p>
           <p class="translation-inspiration">Early translation work by <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a> helped inspire this independent project.</p>
-          </div>
         </div>
         <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
               <h3 id="contributor-title">Contributors</h3>
@@ -151,9 +157,9 @@
                   <li>Astra (ChatGPT)</li>
                   <li>BalK</li>
                   <li>Cats4gold</li>
+                  <li>Claude Fable</li>
                   <li>Claude Opus</li>
                   <li>diethylpentane (3xad)</li>
-                  <li>Fable</li>
                   <li>gollum_007</li>
                   <li>Grok</li>
                   <li>Lori</li>
@@ -195,7 +201,7 @@
           </details>
           <details>
             <summary>Was AI used to make the patch?</summary>
-            <div class="faq-answer"><p>Yes. The project uses AI assistance, mainly ChatGPT (Astra), with help from Claude Opus and Fable, plus some Grok.</p><p>Mistakes are possible, and translation review and testing are ongoing. Corrections, explanations of awkward or inaccurate wording, and reproducible bug reports are welcome.</p></div>
+            <div class="faq-answer"><p>Yes. The project uses AI assistance, mainly ChatGPT (Astra), with help from Claude Opus and Claude Fable, plus some Grok.</p><p>Mistakes are possible, and translation review and testing are ongoing. Corrections, explanations of awkward or inaccurate wording, and reproducible bug reports are welcome.</p></div>
           </details>
           <details>
             <summary>Is it ready to play?</summary>

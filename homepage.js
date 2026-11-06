@@ -11,26 +11,9 @@
   else window.addEventListener("resize", updateHeaderHeight);
 })();
 
-const scenes = [
-  { src: "assets/screenshots/balk-travelers-gate.png", alt: "Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon", caption: "Through the Travelers’ Gates", credit: "BalK" },
-  { src: "assets/screenshots/balk-championship.png", alt: "Terry is encouraged to win the championship in a richly decorated room", caption: "A championship to chase", credit: "BalK" },
-  { src: "assets/screenshots/balk-kings-praise.png", alt: "The king praises Terry and his monster party in the throne room", caption: "An audience with the king", credit: "BalK" },
-  { src: "assets/screenshots/balk-cave-encounter.png", alt: "Terry faces an angry monster among broken pots in a cave", caption: "An unexpected encounter", credit: "BalK" },
-  { src: "assets/screenshots/balk-field-skills.png", alt: "The English field skills menu with Seek selected and its description visible", caption: "The right skill for the journey", credit: "BalK" },
-  { src: "assets/screenshots/balk-adventure-record.png", alt: "Terry’s information screen showing play time, farm monsters, gates cleared, and species found", caption: "Every adventure leaves a record", credit: "BalK" },
-  { src: "assets/screenshots/balk-party-flee.png", alt: "A monster in Terry’s party warns everyone to run away quickly", caption: "Knowing when to run", credit: "BalK" },
-  { src: "assets/screenshots/balk-party-together.png", alt: "A party member says it is important to stick together", caption: "Better together", credit: "BalK" },
-  { src: "assets/screenshots/balk-party-attack.png", alt: "A party member declares that healing wastes time and urges an attack", caption: "A party with plenty of personality", credit: "BalK" },
-  { src: "assets/screenshots/balk-arena-rival.png", alt: "A rival challenges Terry and his three monsters before an arena match", caption: "Ready for the arena", credit: "BalK" },
-  { src: "assets/screenshots/balk-volcanic-trail.png", alt: "Terry leads a monster party along a rocky trail beside glowing lava", caption: "A trail through a fiery world", credit: "BalK" },
-  { src: "assets/great-tree.png", alt: "A colorful scene from the world of Dragon Quest Monsters on PlayStation", caption: "A world beyond the Travelers’ Gates" },
-  { src: "assets/adventure.png", alt: "The party exploring a room of treasure chests in the English translation", caption: "A new discovery around every corner" },
-  { src: "assets/battle.png", alt: "An English-language monster battle in the PlayStation game", caption: "A little courage. A few good monsters." },
-  { src: "assets/screenshots/3xad-title-screen.png", alt: "English title screen for Dragon Quest Monsters 1 & 2: The Starry Night Hero and Friends at the Ranch", caption: "The adventures begin", credit: "3xad", viewport: { x: 162, y: 29, width: 673, height: 500 } },
-  { src: "assets/screenshots/3xad-field-menu.png", alt: "English field menu with Items selected and current and maximum HP and MP for Terry’s monster party", caption: "A clearer view of your party", credit: "3xad", viewport: { x: 125, y: 5, width: 748, height: 557 } },
-  { src: "assets/screenshots/3xad-monster-table.png", alt: "Terry sits with his monsters at the dining table while one says Everything is best in moderation", caption: "A little table talk", credit: "3xad", viewport: { x: 125, y: 5, width: 748, height: 557 } }
-];
+const scenes = window.DqmScreenshots;
 (() => {
+  if (!Array.isArray(scenes) || !scenes.length) return;
   const gallery = document.getElementById("screenshot-gallery");
   const featuredScreen = document.getElementById("featured-screen");
   const stage = document.getElementById("screenshot-stage");
@@ -86,11 +69,11 @@ const scenes = [
     timer = setTimeout(() => showScene((activeScene + 1) % scenes.length), 7000);
   }
 
-  async function showScene(index, manual = false) {
+  async function showScene(index, manual = false, initial = false) {
     clearTimeout(timer);
     const request = ++latestRequest;
     requestedScene = index;
-    autoPending = !manual;
+    autoPending = !manual && !initial;
     clearLoading();
     status.textContent = "";
     status.classList.add("visually-hidden");
@@ -118,7 +101,7 @@ const scenes = [
       featuredScreen.style.left = crop ? `${-crop.x / crop.width * 100}%` : "";
       featuredScreen.style.top = crop ? `${-crop.y / crop.height * 100}%` : "";
       activeScene = index;
-      document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}` : "From the English translation";
+      document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}${scene.patchVersion ? ` (v${scene.patchVersion})` : ""}` : "From the English translation";
       selection.value = String(index);
       // Automatic rotation stays quiet for screen readers.
       if (manual) status.textContent = `Screenshot ${index + 1} of ${scenes.length}: ${scene.caption}.`;
@@ -171,7 +154,8 @@ const scenes = [
   // The selected option is the visible caption; keep the static caption for no-JS.
   document.getElementById("screen-caption").hidden = true;
   document.getElementById("scene-controls").hidden = false;
-  schedule();
+  // Read the first scene's credit/version too, even when automatic rotation is paused.
+  showScene(0, false, true);
 })();
 
 const copyButton = document.getElementById("copy-report");

@@ -34,8 +34,11 @@ Before pushing an update to `main`, run:
 
 ```sh
 python tools/update_release.py --check
+python tools/update_screenshots.py --check
 python -m unittest discover -s tools -p 'test_*.py'
 node --check homepage.js
+node --check cover-intro.js
+node --check gallery-data.js
 node --check loading.js
 ```
 
@@ -49,10 +52,12 @@ Preview changes on a branch before merging; after Pages is enabled, pushes to
 - `index.html` contains the patch download and installation instructions, game and project introduction, FAQ, live reference links, and community support. Historical sources are linked beside the relevant text.
 - `theme.css` provides the shared colors, typography, buttons, and RPG-style panels. `homepage.css` controls the homepage layout.
 - `homepage.js` manages screenshots, the bug-report template, animation preferences, contributor rotation, and anchor offsets for the sticky navigation.
+- `cover-intro.js` reveals the English cover during ordinary page scrolling, with a reduced-motion alternative.
+- `data/screenshots.json` is the reviewed gallery catalog. `tools/update_screenshots.py` validates it and generates `gallery-data.js`, loaded before `homepage.js`.
 - `loading.js` provides a spinning-slime loading indicator. Call `const finish = DqmLoading.begin()` before an asynchronous task and `finish()` when it settles.
 - `assets/provenance.json` records asset sources, dimensions, hashes, and screenshot display crops. Sprite animation can be paused and respects reduced-motion preferences.
 - `downloads/releases.json` records packages newest first. The first entry supplies the current download card and release notes; every retained package supplies its explicitly credited contributors.
-- `data/contributors.json` records project contributors credited separately from release READMEs, with a contribution and its source. It includes Cats4gold's help with the breeding tool and Nejimakipiyo's translation review, confirmed by the project owner.
+- `data/contributors.json` records project contributors credited separately from release READMEs, with a contribution and its source. Optional aliases preserve corrected names such as Claude Fable when an older release says Fable. It includes Cats4gold's help with the breeding tool and Nejimakipiyo's translation review, confirmed by the project owner.
 
 ## Navigation and FAQ
 
@@ -96,13 +101,55 @@ is retained only as the no-JavaScript fallback. All icon buttons keep accessible
 labels and tooltips. Previous, Next, and the screenshot selector pause automatic
 rotation until the play icon is chosen. Hover, keyboard focus, hidden tabs, and an offscreen gallery
 also suspend rotation; reduced-motion users start paused. The first screenshot
-and its credit remain visible without JavaScript. To add another image,
-extend `scenes` in `homepage.js`; the dropdown count updates automatically.
+and its credit remain visible without JavaScript. The dropdown count updates
+automatically from the reviewed screenshot catalog.
+
+## Screenshot submissions and approval
+
+The gallery's **Submit a screenshot** link opens
+`.github/ISSUE_TEMPLATE/screenshot.yml` in this website repository. Visitors
+attach an original image, choose their credit name, describe the scene, and
+optionally enter the patch version. Opening the form does not submit the issue.
+The template becomes available after this PR is merged into the default branch;
+public submissions also require the planned public repository launch.
+
+Submissions never enter the slideshow automatically. A maintainer reviews the
+issue and image, then prepares an approved addition in a branch for review and
+merge. Closing an issue or adding a label does not publish an image. The website
+only reads its committed gallery catalog; it does not fetch issues or uploads.
+
+For maintainer checks and imports, install Pillow with
+`python -m pip install Pillow`. This dependency is not used by the website.
+After reviewing a submission, download its original image and run, for example:
+
+```sh
+python tools/update_screenshots.py --image "path/to/screenshot.png" --name player-gate --credit PlayerName --caption "Through the gate" --alt "Terry approaches a Travelers’ Gate with three monsters." --issue https://github.com/dqm-psx/dqm-psx.github.io/issues/123 --patch-version v1.0.72
+```
+
+Replace the example issue URL with the real submission. Omit `--patch-version`
+when unknown. A known version displays as `Screenshot by PlayerName (v1.0.72)`;
+an unknown version displays as `Screenshot by PlayerName`. Existing screenshot
+versions are deliberately left unknown rather than inferred from a release date.
+Optional `--crop X Y WIDTH HEIGHT` hides emulator borders using source-pixel
+coordinates without modifying the original image.
+
+The helper validates the image, metadata, and provenance before copying anything.
+Review the image in the local preview and commit its asset, catalog entry,
+provenance, and regenerated JavaScript together. It never contacts GitHub,
+commits, pushes, or deploys. Run `python tools/update_screenshots.py --check` to
+verify the catalog, or omit `--check` to regenerate after an intentional edit.
 
 ## Cover artwork
 
-The About section uses an English fan adaptation of the Japanese cover, made
-with the built-in image generation tool from the
+The opening panel starts with the original Japanese cover supplied by the owner.
+Scrolling reveals the English cover from top to bottom, with a soft edge; older
+browsers use an opacity blend. The cover stays in view during the transition,
+then ordinary scrolling continues into the patch homepage. Navigation and
+**Explore the English patch** bypass the intro. Direct section URLs still work.
+Reduced-motion mode swaps the image without a blend or extra scroll distance;
+without JavaScript, the Japanese cover and direct link remain available.
+
+The English fan adaptation was made with the built-in image generation tool from the
 [735×735 BD Jogos source](https://bdjogos.com.br/jogo.php?id=10712).
 `assets/artwork/dqm-1-2-english-cover.png` is the 1254×1254 generated output;
 that size is not the resolution of an original scan. The edit localizes the title

@@ -97,6 +97,35 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.assertEqual(updater.readme_contributors(text),
                          ['Wingforth', 'nextlvlroy', 'Schnaki', '_Zev', 'Alice', 'Bob', 'Carol'])
 
+    def test_explicit_alias_merges_old_and_new_release_credits(self):
+        self.write_contributors([{'name': 'Claude Fable', 'aliases': ['Fable'],
+                                  'contribution': 'AI assistance', 'source': 'Owner correction'}])
+        old = self.package('1.0.63', 'PUBLIC RELEASE HIGHLIGHTS\nThanks to Fable for testing!\n')
+        latest = self.package('1.0.72', 'CONTRIBUTORS\n- CLAUDE FABLE\n- fable\n- Other\n')
+        self.manifest(latest, old)
+        updater.update(self.root)
+        source = self.page.read_text(encoding='utf-8')
+        self.assertEqual(source.count('<li>Claude Fable</li>'), 1)
+        self.assertNotIn('<li>Fable</li>', source)
+        self.assertNotIn('<li>fable</li>', source)
+        self.assertNotIn('<li>CLAUDE FABLE</li>', source)
+        self.assertIn('<li>Other</li>', source)
+        updater.update(self.root, check=True)
+
+    def test_conflicting_or_malformed_aliases_do_not_write(self):
+        self.manifest(self.package('1.0.72', 'CONTRIBUTORS\n- Other\n'))
+        original = self.page.read_bytes()
+        for aliases in ('Fable', ['Other']):
+            with self.subTest(aliases=aliases):
+                self.write_contributors([
+                    {'name': 'Claude Fable', 'aliases': aliases,
+                     'contribution': 'AI assistance', 'source': 'Owner'},
+                    {'name': 'Other', 'contribution': 'Testing', 'source': 'Release'},
+                ])
+                with self.assertRaisesRegex(ValueError, 'alias'):
+                    updater.update(self.root)
+                self.assertEqual(self.page.read_bytes(), original)
+
     def test_ambiguous_or_unparsed_thanks_do_not_write(self):
         examples = [
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice / Bob for testing!\n',

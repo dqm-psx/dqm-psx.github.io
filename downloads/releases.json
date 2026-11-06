@@ -2,6 +2,22 @@
   "schemaVersion": 1,
   "releases": [
     {
+      "version": "1.0.72",
+      "name": "English translation",
+      "file": "DQM1-2-English-v1.0.72-public.zip",
+      "bytes": 7521723,
+      "sha256": "0e49542b40eb5a35859566980fbb30e53247912169983abe8f66de659155e082",
+      "contents": [
+        "DQM1-2-English-v1.0.72.bps",
+        "DQM1-2-English-v1.0.72.cue",
+        "README.txt"
+      ],
+      "notes": [
+        "Updates community-suggested monster and kingdom names, including CoilBird, Drakeling, Slimeborg, Slabbit, Darck, DeadTree, and BigTrunk.",
+        "Clarifies breeding dialogue and corrects the Sky Shield text. Includes the earlier translation and gameplay fixes."
+      ]
+    },
+    {
       "version": "1.0.64",
       "name": "English translation",
       "file": "DQM1-2-English-v1.0.64-public.zip",

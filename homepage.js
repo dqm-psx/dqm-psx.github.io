@@ -1,5 +1,16 @@
 "use strict";
 
+// Keep anchor headings below the sticky navigation, including when it wraps.
+(() => {
+  const header = document.querySelector(".site-header");
+  const updateHeaderHeight = () => document.documentElement.style.setProperty(
+    "--site-header-height", `${header.getBoundingClientRect().height}px`
+  );
+  updateHeaderHeight();
+  if ("ResizeObserver" in window) new ResizeObserver(updateHeaderHeight).observe(header);
+  else window.addEventListener("resize", updateHeaderHeight);
+})();
+
 const scenes = [
   { src: "assets/screenshots/balk-travelers-gate.png", alt: "Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon", caption: "Through the Travelers’ Gates", credit: "BalK" },
   { src: "assets/screenshots/balk-championship.png", alt: "Terry is encouraged to win the championship in a richly decorated room", caption: "A championship to chase", credit: "BalK" },
@@ -157,7 +168,7 @@ copyButton.addEventListener("click", async () => {
   try {
     if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
     await navigator.clipboard.writeText(template);
-    status.textContent = "Copied. Fill it in and share it on Discord.";
+    status.textContent = "Copied. Fill it in and submit it on GitHub.";
   } catch {
     document.getElementById("report-template").open = true;
     const selection = window.getSelection();

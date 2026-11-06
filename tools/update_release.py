@@ -21,6 +21,14 @@ HEADING = re.compile(r"[A-Z][A-Z0-9 '&/():-]*")
 HANDLE = r'[\w][\w.-]*'
 THANKS_NAMES = re.compile(rf'{HANDLE}(?:, {HANDLE})*(?:,? and {HANDLE})?')
 COLLECTIVE_CREDITS = {'all', 'everyone', 'everybody', 'contributors', 'testers', 'team', 'you', 'those'}
+# Recognize unnamed gratitude without mistaking it for a contributor handle.
+# Keep the activity vocabulary bounded so a mixed or unfamiliar credit still fails.
+CONTRIBUTION = r'(?:translation suggestions|reports|suggestions|feedback|testing)'
+COLLECTIVE_THANKS = re.compile(
+    rf'thanks(?: also)?(?: to)? (?:everyone|everybody) (?:who contributed|for) '
+    rf'{CONTRIBUTION}(?:, {CONTRIBUTION})*(?:,? and {CONTRIBUTION})?[.!?](?= |$)',
+    re.IGNORECASE,
+)
 
 
 def validate_package(release, root):
@@ -91,6 +99,8 @@ def readme_contributors(readme):
     for paragraph in re.split(r'\n\s*\n', '\n'.join(highlights)):
         paragraph = ' '.join(paragraph.split())
         for thanks in re.finditer(r'\bthanks\b', paragraph, re.IGNORECASE):
+            if COLLECTIVE_THANKS.match(paragraph[thanks.start():]):
+                continue
             match = re.match(
                 r'thanks(?: also)?(?: to)? (.+?) for ([^.!?]+)[.!?](?= |$)',
                 paragraph[thanks.start():], re.IGNORECASE,

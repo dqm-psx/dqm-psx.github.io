@@ -103,7 +103,9 @@ class ReleaseUpdateTests(unittest.TestCase):
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice Smith for testing!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice for testing\n',
-            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone for testing!\n',
+            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone and Alice for testing!\n',
+            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone who contributed testing and Alice for reporting!\n',
+            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone who contributed testing, especially Alice!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice for reports and Bob for testing!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice for reports, Bob for testing!\n',
             'REQUIRED GAME\nThanks to Alice for testing!\n',
@@ -116,6 +118,21 @@ class ReleaseUpdateTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     updater.update(self.root)
                 self.assertEqual(self.page.read_bytes(), original)
+
+    def test_collective_gratitude_preserves_adjacent_named_credits(self):
+        readme = ('PUBLIC RELEASE HIGHLIGHTS\n'
+                  'Thanks to everyone who contributed translation suggestions and feedback!\n'
+                  'Thanks to Nelin and Sparrow for the reports and help!\n'
+                  'Thanks to everyone who contributed reports, suggestions, and testing!\n'
+                  'Thanks to everybody for testing. Thanks to Suppi for the report!\n')
+        self.assertEqual(updater.readme_contributors(readme), ['Nelin', 'Sparrow', 'Suppi'])
+        self.manifest(self.package('1.0.72', readme))
+        updater.update(self.root)
+        source = self.page.read_text(encoding='utf-8')
+        for name in ('Nelin', 'Sparrow', 'Suppi'):
+            self.assertIn(f'<li>{name}</li>', source)
+        self.assertNotIn('<li>everyone</li>', source)
+        self.assertNotIn('<li>everybody</li>', source)
 
     def test_check_detects_stale_credit_list_without_writing(self):
         self.manifest(self.package('1.0.64', 'CONTRIBUTORS\n- Alice\n'))
@@ -180,6 +197,10 @@ class PublishedCreditsTests(unittest.TestCase):
                 with self.subTest(version=release['version']):
                     _, readme = updater.validate_package(release, updater.ROOT)
                     self.assertEqual(set(updater.readme_contributors(readme)), expected)
+            elif release['version'] == '1.0.72':
+                _, readme = updater.validate_package(release, updater.ROOT)
+                self.assertEqual(set(updater.readme_contributors(readme)),
+                                 expected | {'Nelin', 'Sparrow', 'Suppi', 'PkmnTrainerAbram'})
 
 
 if __name__ == '__main__':

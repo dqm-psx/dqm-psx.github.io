@@ -206,8 +206,41 @@ motionPreference.addEventListener("change", event => {
   if (!storedMotion) { paused = event.matches; applyMotionPreference(); }
 });
 
-// The committed list remains complete and scrollable without JavaScript.
-// Enhance it into four-name groups without changing the panel's height.
+// Hover opens the FAQ topics; native details also supports keyboard and touch.
+(() => {
+  const menu = document.getElementById("faq-dropdown");
+  const trigger = menu.querySelector("summary");
+  const hover = window.matchMedia("(hover: hover)");
+  let openedByHover = false;
+  menu.addEventListener("mouseenter", () => {
+    if (hover.matches && !menu.open) { menu.open = true; openedByHover = true; }
+  });
+  trigger.addEventListener("click", event => {
+    // A pointer click should not immediately undo the hover that preceded it.
+    if (event.detail > 0 && menu.open && openedByHover) event.preventDefault();
+    openedByHover = false;
+  });
+  menu.addEventListener("mouseleave", () => {
+    if (!menu.contains(document.activeElement)) menu.open = false;
+  });
+  menu.addEventListener("focusout", event => {
+    if (!menu.contains(event.relatedTarget) && !menu.matches(":hover")) menu.open = false;
+  });
+  menu.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      menu.open = false;
+      openedByHover = false;
+      trigger.focus();
+      event.preventDefault();
+    }
+  });
+  menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { menu.open = false; }));
+  document.addEventListener("click", event => {
+    if (!menu.contains(event.target)) menu.open = false;
+  });
+})();
+
+// The complete list remains scrollable without JavaScript. Rotation is optional.
 (() => {
   const panel = document.getElementById("contributor-panel");
   const viewport = document.getElementById("contributors-viewport");
@@ -217,15 +250,12 @@ motionPreference.addEventListener("change", event => {
   const previous = document.getElementById("contributors-prev");
   const next = document.getElementById("contributors-next");
   const pauseButton = document.getElementById("contributors-pause");
-  const allButton = document.getElementById("contributors-all");
-  const position = document.getElementById("contributor-position");
   const announcement = document.getElementById("contributor-announcement");
   const groupSize = 4;
   const groupCount = Math.ceil(names.length / groupSize);
   if (groupCount < 2) return;
 
   let group = 0;
-  let showAll = false;
   let userPaused = motionPreference.matches;
   let hovered = panel.matches(":hover");
   let focusHeld = panel.contains(document.activeElement);
@@ -234,8 +264,7 @@ motionPreference.addEventListener("change", event => {
 
   function schedule() {
     clearTimeout(timer);
-    timer = null;
-    if (userPaused || showAll || hovered || focusHeld || !inView || document.hidden) return;
+    if (userPaused || hovered || focusHeld || !inView || document.hidden) return;
     timer = setTimeout(() => {
       group = (group + 1) % groupCount;
       render();
@@ -244,23 +273,18 @@ motionPreference.addEventListener("change", event => {
   }
 
   function updateControls() {
-    previous.disabled = next.disabled = showAll;
-    pauseButton.disabled = showAll;
-    pauseButton.textContent = userPaused ? "Resume rotation" : "Pause rotation";
-    allButton.textContent = showAll ? "Show groups" : "Show all names";
-    allButton.setAttribute("aria-expanded", String(showAll));
+    const label = userPaused ? "Resume contributor rotation" : "Pause contributor rotation";
+    pauseButton.setAttribute("aria-label", label);
+    pauseButton.title = label;
+    pauseButton.classList.toggle("is-paused", userPaused);
   }
 
   function render(manual = false) {
     const start = group * groupSize;
-    names.forEach((name, index) => {
-      name.hidden = !showAll && (index < start || index >= start + groupSize);
-    });
+    names.forEach((name, index) => { name.hidden = index < start || index >= start + groupSize; });
     viewport.scrollTop = 0;
-    position.textContent = showAll ? `All ${names.length} names` : `${start + 1}–${Math.min(start + groupSize, names.length)} of ${names.length}`;
     updateControls();
-    // Automatic swaps stay quiet for screen readers; announce manual navigation.
-    if (manual) announcement.textContent = showAll ? `All ${names.length} contributors are shown. Scroll the list to read every name.` : `Contributors ${position.textContent}.`;
+    if (manual) announcement.textContent = names.slice(start, start + groupSize).map(name => name.textContent).join(", ");
   }
 
   function browse(delta) {
@@ -273,22 +297,14 @@ motionPreference.addEventListener("change", event => {
   next.addEventListener("click", () => browse(1));
   pauseButton.addEventListener("click", () => {
     userPaused = !userPaused;
-    // An explicit Resume works even while the rotation button has focus.
     focusHeld = false;
     updateControls();
-    schedule();
-  });
-  allButton.addEventListener("click", () => {
-    showAll = !showAll;
-    userPaused = true;
-    render(true);
     schedule();
   });
   panel.addEventListener("mouseenter", () => { hovered = true; schedule(); });
   panel.addEventListener("mouseleave", () => { hovered = false; schedule(); });
   panel.addEventListener("focusin", event => {
     focusHeld = true;
-    // The rotation button keeps its current action until activated.
     if (event.target !== pauseButton) userPaused = true;
     updateControls();
     schedule();
@@ -301,13 +317,11 @@ motionPreference.addEventListener("change", event => {
     if (event.matches) { userPaused = true; updateControls(); schedule(); }
   });
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(entries => {
+    new IntersectionObserver(entries => {
       inView = entries[0].isIntersecting;
       schedule();
-    });
-    observer.observe(panel);
+    }).observe(panel);
   }
-
   render();
   controls.hidden = false;
   schedule();

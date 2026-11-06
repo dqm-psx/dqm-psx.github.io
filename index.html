@@ -30,8 +30,18 @@
       <nav class="main-nav" aria-label="Main navigation">
         <a href="#patches">Patch &amp; setup</a>
         <a href="#about">About</a>
-        <a href="#faq">FAQ</a>
-        <a href="#roadmap">Resources</a>
+        <details class="nav-dropdown" id="faq-dropdown">
+          <summary>FAQ</summary>
+          <div class="faq-menu">
+            <a href="#faq">All questions</a>
+            <a href="#faq-project">The project</a>
+            <a href="#faq-installation">Installation &amp; updates</a>
+            <a href="#faq-content">Restored content</a>
+            <a href="#faq-quality">Quality of life</a>
+            <a href="#faq-help">Help &amp; feedback</a>
+          </div>
+        </details>
+        <a href="#resources">Resources</a>
         <a href="#community">Support</a>
       </nav>
       <a class="header-discord" href="https://discord.gg/6V9p6Y2pBt">Join the Discord <span aria-hidden="true">↗</span></a>
@@ -116,39 +126,26 @@
 
     <section id="about" class="about-section paper-surface" aria-labelledby="about-title">
       <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow">The game &amp; the project</p><h2 id="about-title">Three adventures, one long wait.</h2></div>
-          <p>A familiar world, with a new way in.</p>
-        </div>
-        <div class="story-grid">
-          <article class="game-story">
-            <h3>A PlayStation chapter you may have missed</h3>
+        <h2 id="about-title" class="eyebrow">The game &amp; the project</h2>
+        <div class="game-story">
             <p>Released in Japan on <time datetime="2002-05-30">May 30, 2002</time> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <em>Dragon Quest Monsters 1 &amp; 2</em> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
             <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation.</p>
             <p class="story-source">Game background: <a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Official release record</a> · <a href="https://blog.ja.playstation.com/?p=278297">PlayStation retrospective</a></p>
-          </article>
-          <article class="translation-story">
-            <h3>Years of looking forward to an English adventure</h3>
-            <p>Earlier translation efforts by Kingcom and Tom (RetroTranslator) gave fans something to look forward to. <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">By January 2012, fans were already sharing Kingcom’s progress updates.</a> Their work was an inspiration for this independently developed patch.</p>
-            <p>For this project’s creator, <em>Dragon Warrior Monsters</em> was an absolute childhood favorite, played again and again. That love of the game carried through more than a decade of returning to forums and translation sites, hoping an English version of the PlayStation remake was ready.</p>
-          </article>
+          <p class="translation-inspiration">Early translation work by <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a> helped inspire this independent project.</p>
         </div>
-        <div class="project-credits">
-          <h3>Made together, improved by players</h3>
-          <div class="credits-grid">
-            <div class="credits-story">
-              <p>That same wish to play became a collaboration between diethylpentane (3xad) and Astra (ChatGPT). Together, they created this independent fan translation to make these adventures easier to enjoy and understand.</p>
-              <p>The project keeps improving through community playtesting, translation suggestions, screenshots, and memory-card saves. Thank you to everyone who has shared their time and discoveries, and to Cats4gold for helping with the breeding tool.</p>
-              <p>Kingcom and Tom are acknowledged for their earlier translation efforts and inspiration.</p>
-            </div>
-            <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
-              <h4 id="contributor-title">Bug reporters &amp; contributors</h4>
+        <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
+              <h3 id="contributor-title">Contributors</h3>
               <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
                 <!-- contributors:begin -->
                 <ul class="contributor-list" id="contributor-list">
+                  <li>Astra (ChatGPT)</li>
                   <li>BalK</li>
                   <li>Cats4gold</li>
+                  <li>Claude Opus</li>
+                  <li>diethylpentane (3xad)</li>
+                  <li>Fable</li>
                   <li>gollum_007</li>
+                  <li>Grok</li>
                   <li>Lori</li>
                   <li>Nejimakipiyo</li>
                   <li>Nelin</li>
@@ -163,36 +160,18 @@
                 <!-- contributors:end -->
               </div>
               <div class="contributor-controls" id="contributor-controls" hidden>
-                <div class="contributor-paging">
-                  <button type="button" id="contributors-prev" aria-label="Previous contributors" aria-controls="contributor-list">←</button>
-                  <span id="contributor-position"></span>
-                  <button type="button" id="contributors-next" aria-label="Next contributors" aria-controls="contributor-list">→</button>
-                </div>
-                <div class="contributor-actions">
-                  <button type="button" id="contributors-pause" aria-controls="contributor-list">Pause rotation</button>
-                  <button type="button" id="contributors-all" aria-expanded="false" aria-controls="contributor-list">Show all names</button>
-                </div>
+                <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
+                <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
+                <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
               </div>
               <span class="visually-hidden" id="contributor-announcement" role="status"></span>
-            </section>
-          </div>
-        </div>
+        </section>
       </div>
     </section>
 
     <section id="faq" class="faq-section paper-surface" aria-labelledby="faq-title">
       <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow">Before your next adventure</p><h2 id="faq-title">Frequently asked questions.</h2></div>
-          <p>Getting started, updating your patch, and finding a little help along the way.</p>
-        </div>
-        <nav class="faq-nav" aria-label="FAQ topics">
-          <a href="#faq-project">The project</a>
-          <a href="#faq-installation">Installation &amp; updates</a>
-          <a href="#faq-content">Restored content</a>
-          <a href="#faq-quality">Quality of life</a>
-          <a href="#faq-help">Help &amp; feedback</a>
-        </nav>
+        <div class="section-heading"><h2 id="faq-title">Frequently asked questions.</h2></div>
 
         <section id="faq-project" class="faq-group" aria-labelledby="faq-project-title">
           <h3 id="faq-project-title">The project</h3>
@@ -308,18 +287,10 @@
       </div>
     </section>
 
-    <section id="roadmap" class="roadmap-section paper-surface" aria-labelledby="roadmap-title">
-      <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow">Around the project</p><h2 id="roadmap-title">Explore, and look ahead.</h2></div>
-          <p>The breeding guide and translation comparison are already available. A broader wiki and decompilation reference are future plans.</p>
-        </div>
-        <div class="roadmap-grid">
-          <article><span class="roadmap-number" aria-hidden="true">01</span><div><h3>Wiki &amp; game reference</h3><p><strong>Planned.</strong> A connected reference for monsters, skills, items, characters, and places.</p></div></article>
-          <article><span class="roadmap-number" aria-hidden="true">02</span><div><h3><a href="https://dqm-psx.github.io/guide/">Breeding guide &amp; tools ↗</a></h3><p><strong>Available now.</strong> Browse breeding recipes, find pairs, and plan your next party.</p></div></article>
-          <article><span class="roadmap-number" aria-hidden="true">03</span><div><h3><a href="https://dqm-psx.github.io/translations/">Translation comparison ↗</a></h3><p><strong>Available now.</strong> Compare names and text, and suggest translation corrections through GitHub.</p></div></article>
-          <article><span class="roadmap-number" aria-hidden="true">04</span><div><h3>Decompilation &amp; research</h3><p><strong>Planned.</strong> Documentation of how the PlayStation games work, supporting future preservation and development.</p></div></article>
-        </div>
+    <section id="resources" class="resources-section paper-surface" aria-label="Game resources">
+      <div class="container resource-links">
+        <a href="https://dqm-psx.github.io/translations/">Translation comparison <span aria-hidden="true">↗</span></a>
+        <a href="https://dqm-psx.github.io/guide/">Breeding guide <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 

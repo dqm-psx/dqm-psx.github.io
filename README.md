@@ -57,8 +57,9 @@ Preview changes on a branch before merging; after Pages is enabled, pushes to
 ## Navigation and FAQ
 
 The top navigation stays visible while scrolling. Section links account for its
-height on desktop and mobile, including wrapped navigation. The FAQ uses native
-HTML disclosures and topic links, so its content works without JavaScript.
+height on desktop and mobile, including wrapped navigation. FAQ topic links live
+in a dropdown that opens on hover, or on click, tap, or keyboard activation. The
+FAQ answers and navigation use native HTML disclosures and work without JavaScript.
 
 FAQ content comes from the project owner's Discord FAQ and covers the project,
 AI assistance, installation and updating, restored content, quality-of-life
@@ -119,8 +120,8 @@ first spelling wins: manual project entries first, then releases newest first.
 Retain older packages and manifest entries so credits survive when a newer README
 shortens its release history. To preserve a credit independently of a package,
 add it to `data/contributors.json` with its explicit contribution and source;
-do not infer contributors from commits or issue activity. Creator and historical
-inspiration credits already have their own prose and are not repeated in this list.
+do not infer contributors from commits or issue activity. The creator and named AI assistants are included in the rotating list. Kingcom
+and Tom are acknowledged separately as historical inspiration.
 
 Existing READMEs use `Thanks [also] [to] NAME for ...!` within
 `PUBLIC RELEASE HIGHLIGHTS`. The parser accepts single-word handles with letters,
@@ -154,11 +155,12 @@ browser's optional rotation is presentation only. Run the helper checks with:
 python -m unittest discover -s tools -p 'test_*.py'
 ```
 
-The credits panel shows four names at a time in a fixed-height viewport, advancing
-every seven seconds. Hover, keyboard focus, hidden tabs, and offscreen panels pause
-rotation; manual browsing pauses until Resume is chosen. Reduced-motion users
-start paused. Show all names and the no-JavaScript fallback keep the complete list
-scrollable in the same space.
+The credits panel shows four names at a time, advancing every seven seconds.
+Its centered pause/play icon and previous/next arrows have accessible labels;
+there are no visible page counts. Hover, keyboard focus, hidden tabs, and
+offscreen panels pause rotation. Manual browsing pauses until Resume is chosen.
+Reduced-motion users start paused. Without JavaScript, all names remain in the
+scrollable list.
 
 ## Reference tools and future scope
 
@@ -167,8 +169,9 @@ The patch landing page stands on its own and links to these existing public tool
 - [Breeding reference](https://dqm-psx.github.io/guide/): recipes, pair finding, and team planning.
 - [Translation comparison](https://dqm-psx.github.io/translations/): names, text, and correction proposals to `dqm-psx/translations`.
 
-A broader wiki/game reference and decompilation/research site remain planned.
-Do not advertise unverified monster, item, character, or map pages as complete.
+A broader wiki/game reference and decompilation/research site remain future
+internal plans. The homepage intentionally shows only the two live resource links
+and does not tease unfinished sections.
 Future integration can connect those pages to the existing breeding and
 translation tools while retaining their established routes.
 

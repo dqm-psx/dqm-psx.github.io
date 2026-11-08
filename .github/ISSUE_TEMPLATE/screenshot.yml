@@ -1,0 +1,42 @@
+name: Share a screenshot
+description: Submit an original game screenshot for the website gallery.
+title: "[Screenshot]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share an original screenshot from the English patch. A maintainer will review it before deciding whether to add it to the gallery; submitting this issue does not publish it on the website.
+
+        Please submit one screenshot per issue at its original resolution. PNG is preferred; JPEG and WebP are also accepted. A maintainer can hide emulator borders in the website display without changing your original image.
+  - type: upload
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Attach your original screenshot, up to 10 MB.
+    validations:
+      required: true
+      accept: ".png,.jpg,.jpeg,.webp"
+  - type: input
+    id: credit
+    attributes:
+      label: Credit name
+      description: The name you would like shown beside the screenshot.
+      placeholder: Your name or handle
+    validations:
+      required: true
+  - type: input
+    id: patch-version
+    attributes:
+      label: Patch version (optional)
+      description: Leave this blank if you do not know which patch version was used. Please do not guess.
+      placeholder: v1.0.72
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: What does the screenshot show?
+      description: Describe the scene, campaign, and location. You can suggest a short gallery caption here too.
+      placeholder: Terry and his monsters approaching a Travelers’ Gate.
+    validations:
+      required: true

@@ -2,6 +2,43 @@
   "schemaVersion": 1,
   "releases": [
     {
+      "version": "1.0.73",
+      "file": "DQM1-2-English-v1.0.73-public.zip",
+      "bytes": 7558537,
+      "sha256": "652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a",
+      "contents": [
+        "DQM1-2-English-v1.0.73.bps",
+        "DQM1-2-English-v1.0.73.cue",
+        "README.txt"
+      ],
+      "name": "English translation",
+      "releaseUrl": "https://github.com/dqm-psx/patch/releases/tag/v1.0.73",
+      "sourceReleaseUrl": "https://github.com/phakic/DQM-1-2-PSX-translation/releases/tag/v1.0.73",
+      "notes": [
+        "Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.",
+        "Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.",
+        "Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.",
+        "Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes."
+      ]
+    },
+    {
+      "version": "1.0.72",
+      "name": "English translation",
+      "file": "DQM1-2-English-v1.0.72-public.zip",
+      "bytes": 7521723,
+      "sha256": "0e49542b40eb5a35859566980fbb30e53247912169983abe8f66de659155e082",
+      "contents": [
+        "DQM1-2-English-v1.0.72.bps",
+        "DQM1-2-English-v1.0.72.cue",
+        "README.txt"
+      ],
+      "notes": [
+        "Updates community-suggested monster and kingdom names, including CoilBird, Drakeling, Slimeborg, Slabbit, Darck, DeadTree, and BigTrunk.",
+        "Clarifies breeding dialogue and corrects the Sky Shield text. Includes the earlier translation and gameplay fixes."
+      ],
+      "releaseUrl": "https://github.com/dqm-psx/patch/releases/tag/v1.0.72"
+    },
+    {
       "version": "1.0.64",
       "name": "English translation",
       "file": "DQM1-2-English-v1.0.64-public.zip",
@@ -15,7 +52,8 @@
       "notes": [
         "Fixes overlapping skill descriptions when learning a new skill or choosing an old skill to forget.",
         "Restores description-window initialization so the skill list is ready before its description is drawn."
-      ]
+      ],
+      "releaseUrl": "https://github.com/dqm-psx/patch/releases/tag/v1.0.64"
     },
     {
       "version": "1.0.63",
@@ -27,7 +65,8 @@
         "DQM1-2-English-v1.0.63.bps",
         "DQM1-2-English-v1.0.63.cue",
         "README.txt"
-      ]
+      ],
+      "releaseUrl": "https://github.com/dqm-psx/patch/releases/tag/v1.0.63"
     }
   ]
 }

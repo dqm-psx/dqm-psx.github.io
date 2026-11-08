@@ -2,6 +2,8 @@
 
 Run after editing downloads/releases.json. --check validates without writing.
 The generated HTML is committed, so viewing the site needs no build or JS.
+An optional downloadUrl selects a pinned public dqm-psx/patch release asset.
+Local packages remain required for integrity checks and historical credits.
 """
 import argparse
 import hashlib
@@ -21,16 +23,42 @@ HEADING = re.compile(r"[A-Z][A-Z0-9 '&/():-]*")
 HANDLE = r'[\w][\w.-]*'
 THANKS_NAMES = re.compile(rf'{HANDLE}(?:, {HANDLE})*(?:,? and {HANDLE})?')
 COLLECTIVE_CREDITS = {'all', 'everyone', 'everybody', 'contributors', 'testers', 'team', 'you', 'those'}
+# Recognize unnamed gratitude without mistaking it for a contributor handle.
+# Keep the activity vocabulary bounded so a mixed or unfamiliar credit still fails.
+CONTRIBUTION = r'(?:translation suggestions|reports|suggestions|feedback|testing)'
+COLLECTIVE_THANKS = re.compile(
+    rf'thanks(?: also)?(?: to)? (?:everyone|everybody) (?:who contributed|for) '
+    rf'{CONTRIBUTION}(?:, {CONTRIBUTION})*(?:,? and {CONTRIBUTION})?[.!?](?= |$)',
+    re.IGNORECASE,
+)
 
 
-def validate_package(release, root):
-    """Return the size and README from the same bytes whose hash was checked."""
+def package_identity(release):
+    """Keep package names and remote release paths tied to the recorded version."""
     version = release['version']
     if not isinstance(version, str) or not re.fullmatch(r'\d+\.\d+\.\d+', version):
         raise ValueError('Release version must contain three numeric components')
     filename = f'DQM1-2-English-v{version}-public.zip'
     if release['file'] != filename:
         raise ValueError('Package filename does not match the release version')
+    return version, filename
+
+
+def download_target(release):
+    """Validate a configured public asset URL; availability is checked at release time."""
+    version, filename = package_identity(release)
+    if 'downloadUrl' not in release:
+        return f'downloads/{filename}'
+    expected = f'https://github.com/dqm-psx/patch/releases/download/v{version}/{filename}'
+    if release['downloadUrl'] != expected:
+        raise ValueError(f'downloadUrl must be the pinned dqm-psx/patch asset URL: {expected}')
+    return expected
+
+
+def validate_package(release, root):
+    """Return the size and README from the same bytes whose hash was checked."""
+    version, filename = package_identity(release)
+    download_target(release)
     data = (root / 'downloads' / filename).read_bytes()
     if len(data) != release['bytes'] or hashlib.sha256(data).hexdigest() != release['sha256']:
         raise ValueError(f'Package size or SHA-256 differs from the release record: {filename}')
@@ -49,7 +77,10 @@ def validate_package(release, root):
 
 
 def download_card(release, package_size):
-    version, filename = release['version'], release['file']
+    version, filename = package_identity(release)
+    target = download_target(release)
+    # Cross-origin GitHub downloads use the asset response's Content-Disposition.
+    download_attribute = f' download="{filename}"' if 'downloadUrl' not in release else ''
     notes = release.get('notes')
     if not isinstance(notes, list) or not notes or not all(isinstance(n, str) and n.strip() for n in notes):
         raise ValueError('The latest release needs a nonempty list of release notes')
@@ -57,7 +88,7 @@ def download_card(release, package_size):
     return f'''          <div class="release-download" aria-labelledby="release-title">
             <div class="release-heading"><h3 id="release-title">{escape(release['name'])}</h3><span class="release-version">v{version}</span></div>
             <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <a class="button button-gold" href="downloads/{filename}" download="{filename}"><span aria-hidden="true">↓</span> Download v{version}</a>
+            <a class="button button-gold" href="{escape(target, quote=True)}"{download_attribute}><span aria-hidden="true">↓</span> Download v{version}</a>
             <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> {package_size / 1_000_000:.2f} MB</span>
             <details class="release-notes"><summary>Release notes</summary><ul>{items}</ul><p>See the included README for the full change history and credits.</p></details>
           </div>
@@ -91,6 +122,8 @@ def readme_contributors(readme):
     for paragraph in re.split(r'\n\s*\n', '\n'.join(highlights)):
         paragraph = ' '.join(paragraph.split())
         for thanks in re.finditer(r'\bthanks\b', paragraph, re.IGNORECASE):
+            if COLLECTIVE_THANKS.match(paragraph[thanks.start():]):
+                continue
             match = re.match(
                 r'thanks(?: also)?(?: to)? (.+?) for ([^.!?]+)[.!?](?= |$)',
                 paragraph[thanks.start():], re.IGNORECASE,
@@ -127,10 +160,32 @@ def project_contributors(root):
     return names
 
 
-def contributor_list(names):
+def project_contributor_aliases(root):
+    """Resolve only aliases explicitly recorded with a project's named credit."""
+    records = json.loads((root / 'data/contributors.json').read_text(encoding='utf-8'))['contributors']
+    aliases = {}
+    for record in records:
+        name = valid_name(record['name'])
+        aliases.setdefault(name.casefold(), name)
+    for record in records:
+        name = aliases[valid_name(record['name']).casefold()]
+        values = record.get('aliases', [])
+        if not isinstance(values, list):
+            raise ValueError('Contributor aliases must be a list of names')
+        for value in values:
+            key = valid_name(value).casefold()
+            if key in aliases and aliases[key] != name:
+                raise ValueError('Contributor alias belongs to more than one name')
+            aliases[key] = name
+    return aliases
+
+
+def contributor_list(names, aliases=None):
+    aliases = aliases or {}
     unique = {}
     for name in names:
         name = valid_name(name)
+        name = aliases.get(name.casefold(), name)
         unique.setdefault(name.casefold(), name)
     ordered = sorted(unique.values(), key=lambda name: (name.lstrip('_').casefold(), name.casefold()))
     items = ''.join(f'                  <li>{escape(name)}</li>\n' for name in ordered)
@@ -154,13 +209,14 @@ def update(root=ROOT, check=False):
         raise ValueError('Duplicate release version in manifest')
     packages = [validate_package(release, root) for release in releases]
     names = project_contributors(root)
+    aliases = project_contributor_aliases(root)
     for release, (_, readme) in zip(releases, packages):
         try:
             names.extend(readme_contributors(readme))
         except ValueError as error:
             raise ValueError(f'{release["file"]}: {error}') from error
     card = download_card(releases[0], packages[0][0])
-    credits = contributor_list(names)
+    credits = contributor_list(names, aliases)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
     updated = replace_block(source, START, END, card, 10)

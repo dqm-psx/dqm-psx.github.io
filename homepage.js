@@ -1,22 +1,19 @@
 "use strict";
 
-const scenes = [
-  { src: "assets/screenshots/balk-travelers-gate.png", alt: "Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon", caption: "Through the Travelers’ Gates", credit: "BalK" },
-  { src: "assets/screenshots/balk-championship.png", alt: "Terry is encouraged to win the championship in a richly decorated room", caption: "A championship to chase", credit: "BalK" },
-  { src: "assets/screenshots/balk-kings-praise.png", alt: "The king praises Terry and his monster party in the throne room", caption: "An audience with the king", credit: "BalK" },
-  { src: "assets/screenshots/balk-cave-encounter.png", alt: "Terry faces an angry monster among broken pots in a cave", caption: "An unexpected encounter", credit: "BalK" },
-  { src: "assets/screenshots/balk-field-skills.png", alt: "The English field skills menu with Seek selected and its description visible", caption: "The right skill for the journey", credit: "BalK" },
-  { src: "assets/screenshots/balk-adventure-record.png", alt: "Terry’s information screen showing play time, farm monsters, gates cleared, and species found", caption: "Every adventure leaves a record", credit: "BalK" },
-  { src: "assets/screenshots/balk-party-flee.png", alt: "A monster in Terry’s party warns everyone to run away quickly", caption: "Knowing when to run", credit: "BalK" },
-  { src: "assets/screenshots/balk-party-together.png", alt: "A party member says it is important to stick together", caption: "Better together", credit: "BalK" },
-  { src: "assets/screenshots/balk-party-attack.png", alt: "A party member declares that healing wastes time and urges an attack", caption: "A party with plenty of personality", credit: "BalK" },
-  { src: "assets/screenshots/balk-arena-rival.png", alt: "A rival challenges Terry and his three monsters before an arena match", caption: "Ready for the arena", credit: "BalK" },
-  { src: "assets/screenshots/balk-volcanic-trail.png", alt: "Terry leads a monster party along a rocky trail beside glowing lava", caption: "A trail through a fiery world", credit: "BalK" },
-  { src: "assets/great-tree.png", alt: "A colorful scene from the world of Dragon Quest Monsters on PlayStation", caption: "A world beyond the Travelers’ Gates" },
-  { src: "assets/adventure.png", alt: "The party exploring a room of treasure chests in the English translation", caption: "A new discovery around every corner" },
-  { src: "assets/battle.png", alt: "An English-language monster battle in the PlayStation game", caption: "A little courage. A few good monsters." }
-];
+// Keep anchor headings below the sticky navigation, including when it wraps.
 (() => {
+  const header = document.querySelector(".site-header");
+  const updateHeaderHeight = () => document.documentElement.style.setProperty(
+    "--site-header-height", `${header.getBoundingClientRect().height}px`
+  );
+  updateHeaderHeight();
+  if ("ResizeObserver" in window) new ResizeObserver(updateHeaderHeight).observe(header);
+  else window.addEventListener("resize", updateHeaderHeight);
+})();
+
+const scenes = window.DqmScreenshots;
+(() => {
+  if (!Array.isArray(scenes) || !scenes.length) return;
   const gallery = document.getElementById("screenshot-gallery");
   const featuredScreen = document.getElementById("featured-screen");
   const stage = document.getElementById("screenshot-stage");
@@ -39,7 +36,7 @@ const scenes = [
   scenes.forEach((scene, index) => {
     const option = document.createElement("option");
     option.value = String(index);
-    option.textContent = `${String(index + 1).padStart(2, "0")} · ${scene.caption}`;
+    option.textContent = `${String(index + 1).padStart(2, "0")} / ${scenes.length} · ${scene.caption}`;
     selection.append(option);
   });
 
@@ -51,7 +48,10 @@ const scenes = [
   }
 
   function updatePauseButton() {
-    pauseButton.textContent = userPaused ? "Play slideshow" : "Pause slideshow";
+    const label = userPaused ? "Play slideshow" : "Pause slideshow";
+    pauseButton.setAttribute("aria-label", label);
+    pauseButton.title = label;
+    pauseButton.classList.toggle("is-paused", userPaused);
   }
 
   function schedule() {
@@ -69,11 +69,11 @@ const scenes = [
     timer = setTimeout(() => showScene((activeScene + 1) % scenes.length), 7000);
   }
 
-  async function showScene(index, manual = false) {
+  async function showScene(index, manual = false, initial = false) {
     clearTimeout(timer);
     const request = ++latestRequest;
     requestedScene = index;
-    autoPending = !manual;
+    autoPending = !manual && !initial;
     clearLoading();
     status.textContent = "";
     status.classList.add("visually-hidden");
@@ -92,10 +92,16 @@ const scenes = [
       if (request !== latestRequest) return;
       featuredScreen.src = scene.src;
       featuredScreen.alt = scene.alt;
+      // Frame the original pixels; exclude emulator chrome without regenerating screenshots.
+      const crop = scene.viewport;
+      featuredScreen.classList.toggle("is-cropped", Boolean(crop));
+      stage.style.aspectRatio = crop ? `${crop.width} / ${crop.height}` : "";
+      featuredScreen.style.width = crop ? `${nextImage.naturalWidth / crop.width * 100}%` : "";
+      featuredScreen.style.height = crop ? `${nextImage.naturalHeight / crop.height * 100}%` : "";
+      featuredScreen.style.left = crop ? `${-crop.x / crop.width * 100}%` : "";
+      featuredScreen.style.top = crop ? `${-crop.y / crop.height * 100}%` : "";
       activeScene = index;
-      document.getElementById("screen-caption").textContent = scene.caption;
-      document.getElementById("screen-number").textContent = `${String(index + 1).padStart(2, "0")} / ${String(scenes.length).padStart(2, "0")}`;
-      document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}` : "From the English translation";
+      document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}${scene.patchVersion ? ` (v${scene.patchVersion})` : ""}` : "From the English translation";
       selection.value = String(index);
       // Automatic rotation stays quiet for screen readers.
       if (manual) status.textContent = `Screenshot ${index + 1} of ${scenes.length}: ${scene.caption}.`;
@@ -145,8 +151,11 @@ const scenes = [
     observer.observe(gallery);
   }
   updatePauseButton();
+  // The selected option is the visible caption; keep the static caption for no-JS.
+  document.getElementById("screen-caption").hidden = true;
   document.getElementById("scene-controls").hidden = false;
-  schedule();
+  // Read the first scene's credit/version too, even when automatic rotation is paused.
+  showScene(0, false, true);
 })();
 
 const copyButton = document.getElementById("copy-report");
@@ -157,7 +166,7 @@ copyButton.addEventListener("click", async () => {
   try {
     if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
     await navigator.clipboard.writeText(template);
-    status.textContent = "Copied. Fill it in and share it on Discord.";
+    status.textContent = "Copied. Fill it in and submit it on GitHub.";
   } catch {
     document.getElementById("report-template").open = true;
     const selection = window.getSelection();
@@ -195,8 +204,41 @@ motionPreference.addEventListener("change", event => {
   if (!storedMotion) { paused = event.matches; applyMotionPreference(); }
 });
 
-// The committed list remains complete and scrollable without JavaScript.
-// Enhance it into four-name groups without changing the panel's height.
+// Hover opens the FAQ topics; native details also supports keyboard and touch.
+(() => {
+  const menu = document.getElementById("faq-dropdown");
+  const trigger = menu.querySelector("summary");
+  const hover = window.matchMedia("(hover: hover)");
+  let openedByHover = false;
+  menu.addEventListener("mouseenter", () => {
+    if (hover.matches && !menu.open) { menu.open = true; openedByHover = true; }
+  });
+  trigger.addEventListener("click", event => {
+    // A pointer click should not immediately undo the hover that preceded it.
+    if (event.detail > 0 && menu.open && openedByHover) event.preventDefault();
+    openedByHover = false;
+  });
+  menu.addEventListener("mouseleave", () => {
+    if (!menu.contains(document.activeElement)) menu.open = false;
+  });
+  menu.addEventListener("focusout", event => {
+    if (!menu.contains(event.relatedTarget) && !menu.matches(":hover")) menu.open = false;
+  });
+  menu.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      menu.open = false;
+      openedByHover = false;
+      trigger.focus();
+      event.preventDefault();
+    }
+  });
+  menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { menu.open = false; }));
+  document.addEventListener("click", event => {
+    if (!menu.contains(event.target)) menu.open = false;
+  });
+})();
+
+// The complete list remains scrollable without JavaScript. Rotation is optional.
 (() => {
   const panel = document.getElementById("contributor-panel");
   const viewport = document.getElementById("contributors-viewport");
@@ -206,15 +248,12 @@ motionPreference.addEventListener("change", event => {
   const previous = document.getElementById("contributors-prev");
   const next = document.getElementById("contributors-next");
   const pauseButton = document.getElementById("contributors-pause");
-  const allButton = document.getElementById("contributors-all");
-  const position = document.getElementById("contributor-position");
   const announcement = document.getElementById("contributor-announcement");
   const groupSize = 4;
   const groupCount = Math.ceil(names.length / groupSize);
   if (groupCount < 2) return;
 
   let group = 0;
-  let showAll = false;
   let userPaused = motionPreference.matches;
   let hovered = panel.matches(":hover");
   let focusHeld = panel.contains(document.activeElement);
@@ -223,8 +262,7 @@ motionPreference.addEventListener("change", event => {
 
   function schedule() {
     clearTimeout(timer);
-    timer = null;
-    if (userPaused || showAll || hovered || focusHeld || !inView || document.hidden) return;
+    if (userPaused || hovered || focusHeld || !inView || document.hidden) return;
     timer = setTimeout(() => {
       group = (group + 1) % groupCount;
       render();
@@ -233,23 +271,18 @@ motionPreference.addEventListener("change", event => {
   }
 
   function updateControls() {
-    previous.disabled = next.disabled = showAll;
-    pauseButton.disabled = showAll;
-    pauseButton.textContent = userPaused ? "Resume rotation" : "Pause rotation";
-    allButton.textContent = showAll ? "Show groups" : "Show all names";
-    allButton.setAttribute("aria-expanded", String(showAll));
+    const label = userPaused ? "Resume contributor rotation" : "Pause contributor rotation";
+    pauseButton.setAttribute("aria-label", label);
+    pauseButton.title = label;
+    pauseButton.classList.toggle("is-paused", userPaused);
   }
 
   function render(manual = false) {
     const start = group * groupSize;
-    names.forEach((name, index) => {
-      name.hidden = !showAll && (index < start || index >= start + groupSize);
-    });
+    names.forEach((name, index) => { name.hidden = index < start || index >= start + groupSize; });
     viewport.scrollTop = 0;
-    position.textContent = showAll ? `All ${names.length} names` : `${start + 1}–${Math.min(start + groupSize, names.length)} of ${names.length}`;
     updateControls();
-    // Automatic swaps stay quiet for screen readers; announce manual navigation.
-    if (manual) announcement.textContent = showAll ? `All ${names.length} contributors are shown. Scroll the list to read every name.` : `Contributors ${position.textContent}.`;
+    if (manual) announcement.textContent = names.slice(start, start + groupSize).map(name => name.textContent).join(", ");
   }
 
   function browse(delta) {
@@ -262,22 +295,14 @@ motionPreference.addEventListener("change", event => {
   next.addEventListener("click", () => browse(1));
   pauseButton.addEventListener("click", () => {
     userPaused = !userPaused;
-    // An explicit Resume works even while the rotation button has focus.
     focusHeld = false;
     updateControls();
-    schedule();
-  });
-  allButton.addEventListener("click", () => {
-    showAll = !showAll;
-    userPaused = true;
-    render(true);
     schedule();
   });
   panel.addEventListener("mouseenter", () => { hovered = true; schedule(); });
   panel.addEventListener("mouseleave", () => { hovered = false; schedule(); });
   panel.addEventListener("focusin", event => {
     focusHeld = true;
-    // The rotation button keeps its current action until activated.
     if (event.target !== pauseButton) userPaused = true;
     updateControls();
     schedule();
@@ -290,13 +315,11 @@ motionPreference.addEventListener("change", event => {
     if (event.matches) { userPaused = true; updateControls(); schedule(); }
   });
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(entries => {
+    new IntersectionObserver(entries => {
       inView = entries[0].isIntersecting;
       schedule();
-    });
-    observer.observe(panel);
+    }).observe(panel);
   }
-
   render();
   controls.hidden = false;
   schedule();

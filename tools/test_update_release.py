@@ -97,13 +97,44 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.assertEqual(updater.readme_contributors(text),
                          ['Wingforth', 'nextlvlroy', 'Schnaki', '_Zev', 'Alice', 'Bob', 'Carol'])
 
+    def test_explicit_alias_merges_old_and_new_release_credits(self):
+        self.write_contributors([{'name': 'Claude Fable', 'aliases': ['Fable'],
+                                  'contribution': 'AI assistance', 'source': 'Owner correction'}])
+        old = self.package('1.0.63', 'PUBLIC RELEASE HIGHLIGHTS\nThanks to Fable for testing!\n')
+        latest = self.package('1.0.72', 'CONTRIBUTORS\n- CLAUDE FABLE\n- fable\n- Other\n')
+        self.manifest(latest, old)
+        updater.update(self.root)
+        source = self.page.read_text(encoding='utf-8')
+        self.assertEqual(source.count('<li>Claude Fable</li>'), 1)
+        self.assertNotIn('<li>Fable</li>', source)
+        self.assertNotIn('<li>fable</li>', source)
+        self.assertNotIn('<li>CLAUDE FABLE</li>', source)
+        self.assertIn('<li>Other</li>', source)
+        updater.update(self.root, check=True)
+
+    def test_conflicting_or_malformed_aliases_do_not_write(self):
+        self.manifest(self.package('1.0.72', 'CONTRIBUTORS\n- Other\n'))
+        original = self.page.read_bytes()
+        for aliases in ('Fable', ['Other']):
+            with self.subTest(aliases=aliases):
+                self.write_contributors([
+                    {'name': 'Claude Fable', 'aliases': aliases,
+                     'contribution': 'AI assistance', 'source': 'Owner'},
+                    {'name': 'Other', 'contribution': 'Testing', 'source': 'Release'},
+                ])
+                with self.assertRaisesRegex(ValueError, 'alias'):
+                    updater.update(self.root)
+                self.assertEqual(self.page.read_bytes(), original)
+
     def test_ambiguous_or_unparsed_thanks_do_not_write(self):
         examples = [
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice / Bob for testing!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice Smith for testing!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice for testing\n',
-            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone for testing!\n',
+            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone and Alice for testing!\n',
+            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone who contributed testing and Alice for reporting!\n',
+            'PUBLIC RELEASE HIGHLIGHTS\nThanks to everyone who contributed testing, especially Alice!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice for reports and Bob for testing!\n',
             'PUBLIC RELEASE HIGHLIGHTS\nThanks to Alice for reports, Bob for testing!\n',
             'REQUIRED GAME\nThanks to Alice for testing!\n',
@@ -116,6 +147,21 @@ class ReleaseUpdateTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     updater.update(self.root)
                 self.assertEqual(self.page.read_bytes(), original)
+
+    def test_collective_gratitude_preserves_adjacent_named_credits(self):
+        readme = ('PUBLIC RELEASE HIGHLIGHTS\n'
+                  'Thanks to everyone who contributed translation suggestions and feedback!\n'
+                  'Thanks to Nelin and Sparrow for the reports and help!\n'
+                  'Thanks to everyone who contributed reports, suggestions, and testing!\n'
+                  'Thanks to everybody for testing. Thanks to Suppi for the report!\n')
+        self.assertEqual(updater.readme_contributors(readme), ['Nelin', 'Sparrow', 'Suppi'])
+        self.manifest(self.package('1.0.72', readme))
+        updater.update(self.root)
+        source = self.page.read_text(encoding='utf-8')
+        for name in ('Nelin', 'Sparrow', 'Suppi'):
+            self.assertIn(f'<li>{name}</li>', source)
+        self.assertNotIn('<li>everyone</li>', source)
+        self.assertNotIn('<li>everybody</li>', source)
 
     def test_check_detects_stale_credit_list_without_writing(self):
         self.manifest(self.package('1.0.64', 'CONTRIBUTORS\n- Alice\n'))
@@ -136,6 +182,90 @@ class ReleaseUpdateTests(unittest.TestCase):
         original = self.page.read_bytes()
         with self.assertRaisesRegex(ValueError, 'size or SHA-256'):
             updater.update(self.root)
+        self.assertEqual(self.page.read_bytes(), original)
+
+    def test_local_download_fallback_ignores_release_provenance_url(self):
+        release = self.package('1.0.73', 'CONTRIBUTORS\n- Player\n')
+        release['releaseUrl'] = 'https://github.com/dqm-psx/patch/releases/tag/v1.0.73'
+        self.manifest(release)
+        updater.update(self.root)
+        source = self.page.read_text(encoding='utf-8')
+        self.assertIn(f'href="downloads/{release["file"]}" download="{release["file"]}"', source)
+        self.assertNotIn(release['releaseUrl'], source)
+        updater.update(self.root, check=True)
+
+    def test_pinned_public_asset_renders_without_cross_origin_download_attribute(self):
+        release = self.package('1.0.73', 'CONTRIBUTORS\n- Player\n')
+        release['downloadUrl'] = f'https://github.com/dqm-psx/patch/releases/download/v1.0.73/{release["file"]}'
+        self.manifest(release)
+        updater.update(self.root)
+        source = self.page.read_text(encoding='utf-8')
+        self.assertIn(f'href="{release["downloadUrl"]}"', source)
+        self.assertNotIn(' download=', source)
+        self.assertIn('Download v1.0.73', source)
+        self.assertIn('<li>Player</li>', source)
+        updater.update(self.root, check=True)
+
+    def test_rejects_untrusted_unpinned_or_mismatched_download_urls_before_writing(self):
+        release = self.package('1.0.73', 'CONTRIBUTORS\n- Player\n')
+        expected = f'https://github.com/dqm-psx/patch/releases/download/v1.0.73/{release["file"]}'
+        candidates = [
+            None, '', 73, 'javascript:alert(1)',
+            expected.replace('https:', 'http:'),
+            expected.replace('github.com', 'github.com.evil.example'),
+            expected.replace('github.com', 'github.com@evil.example'),
+            expected.replace('/dqm-psx/patch/', '/phakic/dqm1/'),
+            expected.replace('/dqm-psx/patch/', '/dqm-psx/other/'),
+            expected.replace('/v1.0.73/', '/v1.0.72/'),
+            expected.replace(release['file'], 'other.zip'),
+            expected.replace('/download/v1.0.73/', '/latest/download/'),
+            expected + '?token=anything', expected + '#fragment',
+            expected + '" onclick="alert(1)',
+            ' ' + expected, expected + '\n',
+            expected.replace('/v1.0.73/', '/v1.0.72/../v1.0.73/'),
+        ]
+        original = self.page.read_bytes()
+        for url in candidates:
+            with self.subTest(url=url):
+                release['downloadUrl'] = url
+                self.manifest(release)
+                with self.assertRaisesRegex(ValueError, 'downloadUrl'):
+                    updater.update(self.root)
+                self.assertEqual(self.page.read_bytes(), original)
+
+    def test_retained_release_download_url_is_validated_even_when_not_displayed(self):
+        latest = self.package('1.0.73', 'CONTRIBUTORS\n- Newer\n')
+        older = self.package('1.0.72', 'CONTRIBUTORS\n- Older\n')
+        older['downloadUrl'] = 'https://example.com/old.zip'
+        self.manifest(latest, older)
+        original = self.page.read_bytes()
+        with self.assertRaisesRegex(ValueError, 'downloadUrl'):
+            updater.update(self.root)
+        self.assertEqual(self.page.read_bytes(), original)
+
+    def test_external_download_does_not_bypass_local_integrity_checks(self):
+        original = self.page.read_bytes()
+        for invalid in ('hash', 'cue'):
+            with self.subTest(invalid=invalid):
+                options = {'cue': 'FILE "wrong.bin" BINARY\n'} if invalid == 'cue' else {}
+                release = self.package('1.0.73', 'CONTRIBUTORS\n- Player\n', **options)
+                release['downloadUrl'] = f'https://github.com/dqm-psx/patch/releases/download/v1.0.73/{release["file"]}'
+                if invalid == 'hash':
+                    release['sha256'] = '0' * 64
+                self.manifest(release)
+                with self.assertRaises(ValueError):
+                    updater.update(self.root)
+                self.assertEqual(self.page.read_bytes(), original)
+
+    def test_check_detects_download_destination_change_without_writing(self):
+        release = self.package('1.0.73', 'CONTRIBUTORS\n- Player\n')
+        self.manifest(release)
+        updater.update(self.root)
+        original = self.page.read_bytes()
+        release['downloadUrl'] = f'https://github.com/dqm-psx/patch/releases/download/v1.0.73/{release["file"]}'
+        self.manifest(release)
+        with self.assertRaisesRegex(ValueError, 'stale'):
+            updater.update(self.root, check=True)
         self.assertEqual(self.page.read_bytes(), original)
 
     def test_matching_hash_does_not_bypass_cue_or_zip_contents_validation(self):
@@ -180,6 +310,10 @@ class PublishedCreditsTests(unittest.TestCase):
                 with self.subTest(version=release['version']):
                     _, readme = updater.validate_package(release, updater.ROOT)
                     self.assertEqual(set(updater.readme_contributors(readme)), expected)
+            elif release['version'] == '1.0.72':
+                _, readme = updater.validate_package(release, updater.ROOT)
+                self.assertEqual(set(updater.readme_contributors(readme)),
+                                 expected | {'Nelin', 'Sparrow', 'Suppi', 'PkmnTrainerAbram'})
 
 
 if __name__ == '__main__':

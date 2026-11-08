@@ -736,5 +736,210 @@
     "height": 720,
     "sourceFile": "codex-clipboard-44a2a3ec-26ae-4b4f-ab4f-39c82ddbe426.png",
     "sha256": "3ce0b11f4dc5c7b939bcfacdc84ec540b433526a7acadf8188c33a61c3143946"
+  },
+  {
+    "file": "screenshots/3xad-title-screen.png",
+    "description": "English title screen.",
+    "contributor": "3xad",
+    "width": 1000,
+    "height": 541,
+    "bytes": 640205,
+    "sourceFile": "yfei7tcx66ph1.png",
+    "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
+    "sourceUrl": "https://i.redd.it/yfei7tcx66ph1.png",
+    "sha256": "fb57142bc8354f859956cde19adbd43095b27623d353c12dcac34c796afcfb5b",
+    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
+    "displayCrop": {
+      "x": 162,
+      "y": 29,
+      "width": 673,
+      "height": 500,
+      "units": "source pixels",
+      "method": "CSS viewport crop",
+      "note": "Excludes emulator title/menu bars, bottom status bar, and black side margins."
+    }
+  },
+  {
+    "file": "screenshots/3xad-field-menu.png",
+    "description": "English field item menu with party HP/MP status.",
+    "contributor": "3xad",
+    "width": 1000,
+    "height": 562,
+    "bytes": 518746,
+    "sourceFile": "h7gtpscx66ph1.png",
+    "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
+    "sourceUrl": "https://i.redd.it/h7gtpscx66ph1.png",
+    "sha256": "dc97a8d82cfbfb1a13b5eb652bd8fde0e04124c1d490fdd2ca03b7391ecb4173",
+    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
+    "displayCrop": {
+      "x": 125,
+      "y": 5,
+      "width": 748,
+      "height": 557,
+      "units": "source pixels",
+      "method": "CSS viewport crop",
+      "note": "Excludes black side margins and top strip."
+    }
+  },
+  {
+    "file": "screenshots/3xad-monster-table.png",
+    "description": "Monster table conversation in Terry's adventure.",
+    "contributor": "3xad",
+    "width": 1000,
+    "height": 562,
+    "bytes": 353877,
+    "sourceFile": "vlilutcx66ph1.png",
+    "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
+    "sourceUrl": "https://i.redd.it/vlilutcx66ph1.png",
+    "sha256": "bd0be47edcafbd83616637fc10f62cb4ad1e8f828d26965f3f201e6a1cb1291a",
+    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
+    "displayCrop": {
+      "x": 125,
+      "y": 5,
+      "width": 748,
+      "height": 557,
+      "units": "source pixels",
+      "method": "CSS viewport crop",
+      "note": "Excludes black side margins, top strip, and the fast-forward overlay in the upper-right black margin."
+    }
+  },
+  {
+    "file": "artwork/dqm-1-2-english-cover.png",
+    "description": "Generated English fan cover used as the source for the title layers and paper plate, and as the static lower-artwork overlay in the opening cover composition.",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2665135,
+    "sha256": "9c97004f9d466b695fc8cb89c5191e915036e09f8a55743fdef79075bcd6a9ef",
+    "sourceFile": "bdjogos-front.jpg",
+    "sourcePage": "https://bdjogos.com.br/jogo.php?id=10712",
+    "sourceUrl": "https://bdjogos.com.br/capas/10712-dragon-quest-monsters-1-2-hoshiori-no-yusha-to-bokujo-no-nakama-tachi-playstation-capa-1.jpg",
+    "sourceWidth": 735,
+    "sourceHeight": 735,
+    "sourceSha256": "af877e1a8b3cc458a959ab97fd26930ee8f996f2f7c10a873be11fc2c21f69ee",
+    "processing": "English title and subtitle adaptation using the OpenAI built-in image generation tool. This is generated artwork based on a 735 x 735 source, not a higher-resolution original scan.",
+    "generatedOn": "2026-11-06",
+    "promptFile": "artwork/english-cover-prompt.txt",
+    "promptSha256": "1362e9e5fe95ed1f1466fbb621fcc3b6522011d315cd920949c07a4003827f46",
+    "display": {
+      "role": "Static lower-artwork overlay, unchanged during the scroll transition",
+      "clipTopPercent": 28.6,
+      "blendToOpaquePercent": 29.2,
+      "note": "The generated English cover file is displayed beneath the title layers. Its lower artwork is fully opaque from 29.2% of the cover height; the fixed blend above that joins the generated paper plate."
+    }
+  },
+  {
+    "file": "artwork/dqm-1-2-japanese-cover.png",
+    "description": "User-supplied original Japanese front cover retained as the source for the generated Japanese title layer; no longer displayed as a full cover.",
+    "width": 640,
+    "height": 640,
+    "bytes": 720954,
+    "sha256": "91526ea52884e66638579fb819f4c74b77476a2c6bf2d330ed66dd64653432cd",
+    "sourceFile": "codex-clipboard-be5c34b0-d2ed-4e6c-95c9-7e4ca4233250.png",
+    "processing": "User-supplied original cover copied unchanged."
+  },
+  {
+    "file": "artwork/cover-title-japanese.png",
+    "description": "Generated transparent Japanese title layer; only the main logo is displayed, with the generated subtitle clipped out.",
+    "width": 2172,
+    "height": 724,
+    "bytes": 1483949,
+    "sha256": "bc4dc3d8927808ebd5d208a0d2ef91787c94d5ccaa440995e8dc07325a92d050",
+    "colorMode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "alphaBounds": {
+      "x": 25,
+      "y": 0,
+      "width": 2134,
+      "height": 700
+    },
+    "sourceFile": "artwork/dqm-1-2-japanese-cover.png",
+    "sourceSha256": "91526ea52884e66638579fb819f4c74b77476a2c6bf2d330ed66dd64653432cd",
+    "processing": "Generated title-only adaptation using the OpenAI built-in image generation tool, with a transparent background. This is a generated asset, not a pixel-exact extraction or an original scan. A second generation refined the Japanese title appearance using the original cover as a reference.",
+    "generatedOn": "2026-11-06",
+    "promptFile": "artwork/cover-layers-prompts.txt",
+    "promptSha256": "1ba135a1194625f0b979720398f9fc1d7ff428be73cb4dd331411cfd31872a17",
+    "promptSections": [
+      "jp_title",
+      "jp_title_refine"
+    ],
+    "display": {
+      "role": "Japanese main logo plus a separate native SVG subtitle; the combined title layer changes during scrolling",
+      "frame": {
+        "leftPercent": 6,
+        "topPercent": 2,
+        "widthPercent": 88,
+        "heightPercent": 25.4
+      },
+      "rasterClipBottomPercent": 23,
+      "subtitle": {
+        "text": "星降りの勇者と牧場の仲間たち",
+        "method": "Inline SVG text in index.html",
+        "note": "The PNG contains a duplicated character in its generated subtitle. CSS hides that subtitle; the displayed replacement uses the exact Japanese text, with browser-rendered typography."
+      }
+    }
+  },
+  {
+    "file": "artwork/cover-title-english.png",
+    "description": "Generated transparent English title and subtitle layer for the shared cover composition.",
+    "width": 2172,
+    "height": 724,
+    "bytes": 1723353,
+    "sha256": "51d12d07c8bbae61a1d13751bf8c6c5760e3d69cf13f8c1ce5ef61a8bb53e1c0",
+    "colorMode": "RGBA",
+    "alphaRange": [
+      0,
+      255
+    ],
+    "alphaBounds": {
+      "x": 49,
+      "y": 19,
+      "width": 2093,
+      "height": 683
+    },
+    "sourceFile": "artwork/dqm-1-2-english-cover.png",
+    "sourceSha256": "9c97004f9d466b695fc8cb89c5191e915036e09f8a55743fdef79075bcd6a9ef",
+    "processing": "Generated title-only adaptation using the OpenAI built-in image generation tool, with a transparent background. This is a generated asset, not a pixel-exact extraction or an original scan.",
+    "generatedOn": "2026-11-06",
+    "promptFile": "artwork/cover-layers-prompts.txt",
+    "promptSha256": "1ba135a1194625f0b979720398f9fc1d7ff428be73cb4dd331411cfd31872a17",
+    "promptSections": [
+      "en_title"
+    ],
+    "display": {
+      "role": "English title layer; only the title layers change during scrolling",
+      "frame": {
+        "leftPercent": 6,
+        "topPercent": 2,
+        "widthPercent": 88,
+        "heightPercent": 25.4
+      }
+    }
+  },
+  {
+    "file": "artwork/cover-paper-base.png",
+    "description": "Generated blank-title paper plate used as the static background of the assembled cover.",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2297314,
+    "sha256": "ad547ceb0d1202b5d8a10a13e0eb781a5a0ed61e99086c92ce841aa0dc4d4ebd",
+    "colorMode": "RGB",
+    "sourceFile": "artwork/dqm-1-2-english-cover.png",
+    "sourceSha256": "9c97004f9d466b695fc8cb89c5191e915036e09f8a55743fdef79075bcd6a9ef",
+    "processing": "The OpenAI built-in image generation tool removed the English title, subtitle, and logo ornaments. The generated plate is not pixel-identical to the input; it supplies the upper paper area and small portions of the highest artwork. A separate static overlay restores the existing English cover artwork lower down.",
+    "generatedOn": "2026-11-06",
+    "promptFile": "artwork/cover-layers-prompts.txt",
+    "promptSha256": "1ba135a1194625f0b979720398f9fc1d7ff428be73cb4dd331411cfd31872a17",
+    "promptSections": [
+      "blank_cover"
+    ],
+    "display": {
+      "role": "Static full-frame paper plate, unchanged during the scroll transition",
+      "overlayFile": "artwork/dqm-1-2-english-cover.png",
+      "overlayClipTopPercent": 28.6,
+      "overlayFullyOpaqueFromPercent": 29.2
+    }
   }
 ]

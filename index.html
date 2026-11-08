@@ -147,27 +147,22 @@
           <details id="the-patch">
             <summary>What is this patch?</summary>
             <div class="faq-answer"><p>This is an unofficial English fan translation patch for the Japanese PlayStation release of <em>Dragon Quest Monsters 1 &amp; 2: The Starry Night Hero and Friends at the Ranch</em>. It covers Terry’s, Cobi’s, and Tara’s adventures.</p></div>
-            <a class="answer-link" href="#the-patch" aria-label="Link to this answer: What is this patch?">Link to this answer</a>
           </details>
           <details id="translation-team">
             <summary>Who is working on it? Is this Adrikvej’s project?</summary>
             <div class="faq-answer"><p>This project was started by diethylpentane (3xad). It is a separate project from Adrikvej’s translation.</p><p>Nejimakipiyo, who also worked on <em>DQM: Delocalized</em> for Game Boy, is helping refine the translation. Community playtesting, reports, and suggestions continue to improve the patch. You can propose corrections through the <a href="https://dqm-psx.github.io/translations/">translation comparison</a>.</p></div>
-            <a class="answer-link" href="#translation-team" aria-label="Link to this answer: Who is working on it? Is this Adrikvej’s project?">Link to this answer</a>
           </details>
           <details id="ai-assistance">
             <summary>Was AI used to make the patch?</summary>
             <div class="faq-answer"><p>Yes. The team used ChatGPT (Astra), Claude Opus, Claude Fable, and Grok. Translation review and playtesting continue, and players can <a href="#translation-corrections">suggest corrections</a>.</p></div>
-            <a class="answer-link" href="#ai-assistance" aria-label="Link to this answer: Was AI used to make the patch?">Link to this answer</a>
           </details>
           <details id="ready-to-play">
             <summary>Is it ready to play?</summary>
             <div class="faq-answer"><p>Yes. Several players have completed Terry’s adventure, and players have reported success on a range of devices and emulators. Testing of all three campaigns and different setups continues.</p></div>
-            <a class="answer-link" href="#ready-to-play" aria-label="Link to this answer: Is it ready to play?">Link to this answer</a>
           </details>
           <details id="game-and-bios">
             <summary>Does the download include the game or a PlayStation BIOS?</summary>
             <div class="faq-answer"><p>No. The package contains the patch, its matching CUE file, and a README. You need your own original game image and any BIOS required by your emulator.</p></div>
-            <a class="answer-link" href="#game-and-bios" aria-label="Link to this answer: Does the download include the game or a PlayStation BIOS?">Link to this answer</a>
           </details>
         </section>
 
@@ -177,22 +172,18 @@
           <details id="renaming-disc-files">
             <summary>Can I rename the patched BIN or CUE?</summary>
             <div class="faq-answer"><p>Yes. The CUE’s own filename can differ from the BIN’s, but the quoted filename on its <code>FILE</code> line must exactly match your BIN’s filename, including <code>.bin</code>.</p><p>For example, if you rename the patched image to <code>DQM-English.bin</code>, edit that line in the CUE to:</p><pre><code>FILE "DQM-English.bin" BINARY</code></pre><p>Leave the other CUE lines unchanged and keep both files in the same folder. Save the text file with a <code>.cue</code> extension, not <code>.cue.txt</code>, then open the CUE.</p></div>
-            <a class="answer-link" href="#renaming-disc-files" aria-label="Link to this answer: Can I rename the patched BIN or CUE?">Link to this answer</a>
           </details>
           <details id="earlier-patches">
             <summary>Do I need earlier patches? Can I patch an older English version?</summary>
             <div class="faq-answer"><p>No earlier patches are needed. Each release applies directly to the clean Japanese BIN and includes the earlier translation work and fixes. Do not stack patches or apply a new patch to an already translated image.</p></div>
-            <a class="answer-link" href="#earlier-patches" aria-label="Link to this answer: Do I need earlier patches? Can I patch an older English version?">Link to this answer</a>
           </details>
           <details id="updating-your-patch">
             <summary>How do I update without losing my progress?</summary>
             <div class="faq-answer"><ol><li>Back up your memory-card saves.</li><li>Apply the new patch to the original Japanese BIN to make a new translated image.</li><li>Boot that image fresh through its matching CUE.</li><li>Load your normal in-game memory-card save.</li></ol><p>Avoid loading save states from another patch version: they can restore old game code and bring old bugs back. A memory-card save carries your game progress without restoring that old running state.</p></div>
-            <a class="answer-link" href="#updating-your-patch" aria-label="Link to this answer: How do I update without losing my progress?">Link to this answer</a>
           </details>
           <details id="checksum-mismatch">
             <summary>Why does the patcher report a checksum mismatch?</summary>
             <div class="faq-answer"><p>Compare your Japanese BIN with the <a href="#source-image">original disc image size and SHA-256</a>. Use the clean Japanese image and the BPS file extracted from the ZIP. Keep checksum validation enabled and resolve the mismatch before patching.</p></div>
-            <a class="answer-link" href="#checksum-mismatch" aria-label="Link to this answer: Why does the patcher report a checksum mismatch?">Link to this answer</a>
           </details>
         </section>
 
@@ -201,17 +192,14 @@
           <details id="restored-content">
             <summary>What content has been restored in Terry’s adventure?</summary>
             <div class="faq-answer"><p>The patch restores monster table conversations and special dungeon floors: treasure/Mimic rooms, Lost Forest, the traveling colosseum, mazes, and sliding floors.</p><p>These restorations combine retained PlayStation assets with behavior adapted from the Game Boy original. Some mechanics and encounter rates are reconstruction choices.</p></div>
-            <a class="answer-link" href="#restored-content" aria-label="Link to this answer: What content has been restored in Terry’s adventure?">Link to this answer</a>
           </details>
           <details id="monster-conversations">
             <summary>How do I talk to my monsters at the table?</summary>
             <div class="faq-answer"><p>In the Arena dining room, walk onto the east stool at the right table with one to three living, visible party monsters.</p><ul><li><strong>Up, Left, and Down</strong> select the north, west, and south monster respectively.</li><li><strong>Confirm/Talk</strong> starts the conversation.</li><li><strong>Cancel or Right</strong> makes you stand up.</li></ul><p>Revive any fallen party members first, and leave the stool before sitting again.</p></div>
-            <a class="answer-link" href="#monster-conversations" aria-label="Link to this answer: How do I talk to my monsters at the table?">Link to this answer</a>
           </details>
           <details id="traveling-colosseum">
             <summary>How do I leave Terry’s traveling colosseum?</summary>
             <div class="faq-answer"><p>Leave through its north door. Travel Bookmark cannot be used inside the traveling colosseum.</p></div>
-            <a class="answer-link" href="#traveling-colosseum" aria-label="Link to this answer: How do I leave Terry’s traveling colosseum?">Link to this answer</a>
           </details>
           <details id="colosseum-wagers">
             <summary>Can we wager monsters in two-player Colosseum battles?</summary>
@@ -221,7 +209,6 @@
               <p>Local Rules also lets you set skill restrictions, total or individual level limits, allowed monster families, turns, a command timer, combos, and accessories. Set <strong>Turns to 0</strong> for no turn limit.</p>
               <p><strong>A transfer saves both Adventure Logs.</strong> Back up your saves beforehand, and keep the game running with both memory cards inserted until both saves finish. If a card error occurs, retry without resetting. Resetting or losing power between saves can lose the prize monster.</p>
             </div>
-            <a class="answer-link" href="#colosseum-wagers" aria-label="Link to this answer: Can we wager monsters in two-player Colosseum battles?">Link to this answer</a>
           </details>
         </section>
 
@@ -234,27 +221,22 @@
               <p>Use <strong>Up/Down</strong> to select a setting and <strong>Left/Right</strong> to change it. <strong>Circle or Triangle</strong> applies changes; <strong>Cross</strong> cancels; <strong>Square</strong> cancels and closes the field menu.</p>
               <p>Save normally to keep each adventure’s settings. Toggle stays active through doors, battles, and menus, but loading an adventure starts at Walk speed. Riding, sliding floors, and scripted movement keep their original controls.</p>
             </div>
-            <a class="answer-link" href="#movement-settings" aria-label="Link to this answer: How do I run or change my movement speed?">Link to this answer</a>
           </details>
           <details id="encounter-rates">
             <summary>What do the Time and Distance encounter settings do?</summary>
             <div class="faq-answer"><p>Under <strong>Tactics → Movement</strong>, <strong>Time</strong> is the default: it keeps roughly the usual number of encounters per minute of travel, even when running. <strong>Distance</strong> uses the normal encounter rate per step, so faster movement brings battles closer together in time.</p></div>
-            <a class="answer-link" href="#encounter-rates" aria-label="Link to this answer: What do the Time and Distance encounter settings do?">Link to this answer</a>
           </details>
           <details id="hp-and-mp">
             <summary>What changed in the HP and MP displays?</summary>
             <div class="faq-answer"><p>The field and combat displays have expanded HP/MP information, with current and maximum values and visual bars.</p></div>
-            <a class="answer-link" href="#hp-and-mp" aria-label="Link to this answer: What changed in the HP and MP displays?">Link to this answer</a>
           </details>
           <details id="grouped-inventory">
             <summary>How do grouped items and bulk selling work?</summary>
             <div class="faq-answer"><p>Duplicate items are grouped with quantities in the field item menu, battle item menu, and shop Sell menu.</p><p>To sell multiple copies of the same item, choose the quantity and confirm the sale. Using, discarding, or selling part of a stack keeps the remaining copies in the same inventory position.</p></div>
-            <a class="answer-link" href="#grouped-inventory" aria-label="Link to this answer: How do grouped items and bulk selling work?">Link to this answer</a>
           </details>
           <details id="bag-capacity">
             <summary>Can I carry more than 30 items now?</summary>
             <div class="faq-answer"><p>No. The limit is still 30 items in total, and every copy counts toward it even when duplicates share a single menu row.</p><p>Bigger bags are planned, but are not available in the current patch.</p></div>
-            <a class="answer-link" href="#bag-capacity" aria-label="Link to this answer: Can I carry more than 30 items now?">Link to this answer</a>
           </details>
         </section>
 
@@ -266,22 +248,18 @@
               <p>Read the <a href="#patches">latest release notes</a>, confirm that you patched a clean Japanese BIN, then boot fresh and load an in-game memory-card save. Some area transitions take longer than in the Japanese game.</p>
               <p>If the problem repeats, check <a href="https://github.com/dqm-psx/patch/issues">existing patch issues</a>, then use the <a href="https://github.com/dqm-psx/patch/issues/new?template=bug-report.yml">bug report form</a>. Include your patch version, campaign, setup, and the steps that trigger the issue. A screenshot, a memory-card save just before the problem, or a save state from the affected patch version can help reproduce it.</p>
             </div>
-            <a class="answer-link" href="#report-a-problem" aria-label="Link to this answer: The game froze or something looks wrong. What should I try?">Link to this answer</a>
           </details>
           <details id="translation-corrections">
             <summary>How do I suggest a translation correction?</summary>
             <div class="faq-answer"><p>Find the entry in the <a href="https://dqm-psx.github.io/translations/">translation comparison</a>, enter your proposed wording in <strong>Suggestions</strong>, and choose <strong>Submit on GitHub</strong>. Review the draft issue, explain your reasoning, and submit it with your GitHub account.</p><p>You can also share the exact wording, location, edition, and a screenshot in <a href="#community">the project Discord</a>.</p></div>
-            <a class="answer-link" href="#translation-corrections" aria-label="Link to this answer: How do I suggest a translation correction?">Link to this answer</a>
           </details>
           <details id="helping-out">
             <summary>How else can I help?</summary>
             <div class="faq-answer"><p>Playtest Terry’s, Cobi’s, or Tara’s adventure, share a reproducible bug or wording suggestion, or test a new patch to check whether it resolves an issue you reported. You can also <a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml">submit a screenshot for the gallery</a>.</p></div>
-            <a class="answer-link" href="#helping-out" aria-label="Link to this answer: How else can I help?">Link to this answer</a>
           </details>
           <details id="breeding-guide">
             <summary>Where is the breeding guide?</summary>
             <div class="faq-answer"><p>The <a href="https://dqm-psx.github.io/guide/">breeding guide</a> lists recipes and helps you find breeding pairs and plan your next party.</p></div>
-            <a class="answer-link" href="#breeding-guide" aria-label="Link to this answer: Where is the breeding guide?">Link to this answer</a>
           </details>
         </section>
       </div>

@@ -93,7 +93,7 @@ const scenes = window.DqmScreenshots;
       document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}${scene.patchVersion ? ` (v${scene.patchVersion})` : ""}` : "From the English translation";
       selection.value = String(index);
       // Automatic rotation stays quiet for screen readers.
-      if (manual) status.textContent = `Screenshot ${index + 1} of ${scenes.length}: ${scene.caption}.`;
+      if (manual) status.textContent = `Screenshot ${index + 1} of ${scenes.length}: ${scene.caption}`;
     } catch {
       if (request === latestRequest) {
         status.textContent = "That screenshot couldn’t load. Please try again or choose another image.";

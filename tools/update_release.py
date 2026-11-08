@@ -100,7 +100,7 @@ def download_attributes(release):
     return f'href="{escape(target, quote=True)}"{download_attribute}'
 
 
-def download_card(release):
+def download_card(release, attributes):
     version, _ = package_identity(release)
     notes = release.get('notes')
     if not isinstance(notes, list) or not notes or not all(isinstance(n, str) and n.strip() for n in notes):
@@ -108,7 +108,8 @@ def download_card(release):
     items = ''.join(f'<li>{escape(note)}</li>' for note in notes)
     release_link = (f'<p><a href="https://github.com/dqm-psx/patch/releases/tag/v{version}">'
                     'View release on GitHub</a></p>' if 'downloadUrl' in release else '')
-    return f'''          <div class="release-download" aria-labelledby="release-title">
+    return f'''          <h2 id="patch-title"><a {attributes}>Download</a> &amp; installation</h2>
+          <div class="release-download" aria-labelledby="release-title">
             <div class="release-heading"><h3 id="release-title">{escape(release['name'])}</h3><span class="release-version">v{version}</span></div>
             <p>Includes the BPS patch, matching CUE file, and README.</p>
             <details class="release-notes"><summary>Release notes</summary><ul>{items}</ul>{release_link}</details>
@@ -247,11 +248,11 @@ def rendered_page(root, manifest):
         except ValueError as error:
             raise ValueError(f'{release["file"]}: {error}') from error
     current = releases[0]
-    card = download_card(current)
+    attributes = download_attributes(current)
+    card = download_card(current, attributes)
     credits, ai_credits = contributor_items(names, aliases, ai_names)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
-    attributes = download_attributes(current)
     hero_link = (f'            <a id="download" class="button button-gold" {attributes}>'
                  f'Download v{current["version"]} · {current["bytes"] / 1_000_000:.2f} MB</a>\n')
     install_link = f'                <a {attributes}>Download</a>\n'

@@ -49,4 +49,13 @@ jobs:
             git push origin "HEAD:refs/heads/$branch"
           fi
           echo "Updates the download and credits from the published v$version package. The sync checked the ZIP size, SHA-256, contents, CUE, and README before generating the page." > "$RUNNER_TEMP/release-review.md"
-          gh pr create --base "$BASE_BRANCH" --head "$branch" --title "Update patch download to v$version" --body-file "$RUNNER_TEMP/release-review.md"
+          error_file="$RUNNER_TEMP/release-pr-error.txt"
+          if pr=$(gh pr create --base "$BASE_BRANCH" --head "$branch" --title "Update patch download to v$version" --body-file "$RUNNER_TEMP/release-review.md" 2>"$error_file"); then
+            printf 'Release review: %s\n' "$pr" >> "$GITHUB_STEP_SUMMARY"
+          elif grep -Fq 'GitHub Actions is not permitted to create or approve pull requests' "$error_file"; then
+            compare="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$BASE_BRANCH...$branch?expand=1"
+            printf 'The verified v%s branch is ready. [Open the comparison](%s) and select **Create pull request**.\n' "$version" "$compare" >> "$GITHUB_STEP_SUMMARY"
+          else
+            cat "$error_file" >&2
+            exit 1
+          fi

@@ -112,6 +112,9 @@ class ReleaseUpdateTests(unittest.TestCase):
             raise HTTPError(url, 404, 'Not Found', {}, None)
         self.assertIn('local download', sync_release.sync(self.root, unavailable))
         self.assertEqual(self.page.read_bytes(), page)
+        (self.root / 'downloads' / release['file']).write_bytes(b'damaged preview')
+        with self.assertRaisesRegex(ValueError, 'Package size or SHA-256'):
+            sync_release.sync(self.root, unavailable)
         release['downloadUrl'] = self.public_source(release)['assets'][0]['browser_download_url']
         self.manifest(release)
         with self.assertRaises(HTTPError) as raised:

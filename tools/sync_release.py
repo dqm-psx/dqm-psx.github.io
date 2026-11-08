@@ -74,6 +74,7 @@ def sync(root=site.ROOT, fetch_url=fetch, *, dry_run=False):
     except HTTPError as error:
         if error.code == 404 and 'downloadUrl' not in current:
             error.close()
+            site.validate_package(current, root)
             return 'No public latest release. The verified local download is active.'
         raise
     record = public_record(release, current, fetch_url)

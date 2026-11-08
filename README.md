@@ -108,7 +108,7 @@ The authoritative packages live in [dqm-psx/patch](https://github.com/dqm-psx/pa
 
 The **Sync patch release** workflow checks GitHub’s public latest release every six hours. You can run it immediately from this repository’s Actions tab. It reads the published tag and asset metadata without credentials, downloads the versioned ZIP, checks its declared size and SHA-256, verifies the BPS/CUE/README file list and CUE contents, and reads the named credits. It proposes a site pull request with the pinned release asset URL, notes, checksum, and credits. New publicly accessible releases use the ZIP on GitHub Releases and add only metadata and generated HTML to this repository.
 
-The workflow runs on the website’s default branch and needs its built-in token to write a review branch and open a pull request. A repository administrator can check **Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests**. Review and merge the resulting PR like any other site change. [GitHub’s Actions settings guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#preventing-github-actions-from-creating-or-approving-pull-requests)
+The workflow runs on the website’s default branch and pushes a verified review branch using its built-in token. This repository currently disables **Allow GitHub Actions to create and approve pull requests**. A maintainer can open **Actions → Sync patch release → the completed run → Summary**, follow **Open the comparison**, and select **Create pull request**. If the administrator later enables the option under **Settings → Actions → General → Workflow permissions**, the workflow opens the PR automatically. Review and merge the resulting PR like any other site change. [GitHub’s Actions settings guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#preventing-github-actions-from-creating-or-approving-pull-requests)
 
 To preview the public release check or prepare the same change locally, run:
 
@@ -128,7 +128,7 @@ first spelling wins: manual project entries first, then releases newest first.
 Retain older packages and manifest entries so credits survive when a newer README
 shortens its release history. To preserve a credit independently of a package,
 add it to `data/contributors.json` with its explicit contribution and source;
-do not infer contributors from commits or issue activity. The creator and named AI assistants are included in the rotating list. Kingcom
+do not infer contributors from commits or issue activity. The rotating list labels the four entries with `"creditType": "ai-assistance"` as AI assistance. Kingcom
 and Tom are acknowledged separately as historical inspiration.
 
 Existing READMEs use `Thanks [also] [to] NAME for ...!` within

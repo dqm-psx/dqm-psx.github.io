@@ -8,22 +8,26 @@
     },
     {
       "name": "Astra (ChatGPT)",
+      "creditType": "ai-assistance",
       "contribution": "Primary AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },
     {
       "name": "Claude Opus",
+      "creditType": "ai-assistance",
       "contribution": "AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },
     {
       "name": "Claude Fable",
+      "creditType": "ai-assistance",
       "aliases": ["Fable"],
       "contribution": "AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner; the owner clarified the display name as Claude Fable."
     },
     {
       "name": "Grok",
+      "creditType": "ai-assistance",
       "contribution": "AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },

@@ -25,7 +25,7 @@ MAX_PIXELS = 40_000_000
 FORMATS = {'PNG': '.png', 'JPEG': '.jpg', 'WEBP': '.webp'}
 VERSION = re.compile(r'(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)')
 ISSUE = re.compile(r'https://github\.com/dqm-psx/dqm-psx\.github\.io/issues/[1-9]\d*')
-FIELDS = {'src', 'alt', 'caption', 'credit', 'patchVersion', 'viewport', 'sourceIssue'}
+FIELDS = {'src', 'alt', 'caption', 'credit', 'patchVersion', 'sourceIssue'}
 
 
 def text(value, field, limit=500):
@@ -152,14 +152,10 @@ def validate(manifest, provenance, root, pending=None):
                 raise ValueError(f'{key} differs between screenshot manifest and provenance: {src}')
         if 'credit' in scene and record.get('contributor') != scene['credit']:
             raise ValueError(f'Credit differs between screenshot manifest and provenance: {src}')
-        crop = scene.get('viewport')
-        recorded_crop = record.get('displayCrop')
-        if crop is not None:
-            validate_crop(crop, info['width'], info['height'])
-            if not isinstance(recorded_crop, dict) or any(recorded_crop.get(key) != value for key, value in crop.items()):
-                raise ValueError(f'Viewport differs from provenance displayCrop: {src}')
-        elif recorded_crop is not None:
-            raise ValueError(f'Provenance has a displayCrop missing from the screenshot manifest: {src}')
+        if 'sourceCrop' in record:
+            validate_crop(record['sourceCrop'], record['sourceWidth'], record['sourceHeight'])
+            if (info['width'], info['height']) != (record['sourceCrop']['width'], record['sourceCrop']['height']):
+                raise ValueError(f'Image dimensions differ from source crop: {src}')
     return manifest['screenshots']
 
 
@@ -192,13 +188,30 @@ def update(root=ROOT, check=False):
 
 
 def import_screenshot(image, name, credit, caption, alt, issue, patch_version=None, crop=None, root=ROOT):
-    """Prepare a local, reviewed image for a maintainer's commit. Preserve its bytes."""
+    """Prepare a local, reviewed image for a maintainer's commit. Preserve submitted pixels; optionally frame the game viewport."""
     if not isinstance(name, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', name):
         raise ValueError('name must use lowercase letters/numbers separated by single hyphens')
     if not isinstance(issue, str) or not ISSUE.fullmatch(issue):
         raise ValueError('issue must identify the reviewed submission in dqm-psx/dqm-psx.github.io')
     data = Path(image).read_bytes()
     info = inspect_image(data)
+    original = info
+    crop_record = {}
+    if crop is not None:
+        from PIL import Image
+        if isinstance(crop, (list, tuple)) and len(crop) == 4:
+            crop = dict(zip(('x', 'y', 'width', 'height'), crop))
+        validate_crop(crop, info['width'], info['height'])
+        left, top = crop['x'], crop['y']
+        buffer = BytesIO()
+        with Image.open(BytesIO(data)) as picture:
+            cropped = picture.crop((left, top, left + crop['width'], top + crop['height']))
+            cropped.save(buffer, format='WEBP', lossless=True, exact=True, method=6)
+        data = buffer.getvalue()
+        info = inspect_image(data)
+        crop_record = {'sourceWidth': original['width'], 'sourceHeight': original['height'],
+                       'sourceSha256': original['sha256'], 'sourceBytes': original['bytes'],
+                       'sourceCrop': crop}
     src = f'assets/screenshots/{name}{info["extension"]}'
     destination = image_path(root, src)
     if destination.exists():
@@ -212,10 +225,8 @@ def import_screenshot(image, name, credit, caption, alt, issue, patch_version=No
     version = normalize_version(patch_version)
     if version is not None:
         scene['patchVersion'] = record['patchVersion'] = version
-    if crop is not None:
-        scene['viewport'] = dict(zip(('x', 'y', 'width', 'height'), crop)) if isinstance(crop, (list, tuple)) and len(crop) == 4 else crop
-        validate_crop(scene['viewport'], info['width'], info['height'])
-        record['displayCrop'] = {**scene['viewport'], 'units': 'source pixels', 'method': 'CSS viewport crop'}
+    if crop_record:
+        record.update(crop_record, processing='Game viewport cropped and saved as lossless WebP after maintainer review.')
     manifest, provenance = read_data(root)
     validate(manifest, provenance, root)
     manifest, provenance = deepcopy(manifest), deepcopy(provenance)
@@ -243,7 +254,7 @@ def main():
     parser.add_argument('--alt', help='Description for visitors who cannot see the image')
     parser.add_argument('--issue', help='Reviewed screenshot submission issue URL in the website repository')
     parser.add_argument('--patch-version', help='Optional known version, for example v1.0.72; omit when unknown')
-    parser.add_argument('--crop', type=int, nargs=4, metavar=('X', 'Y', 'WIDTH', 'HEIGHT'), help='Optional CSS viewport in original image pixels')
+    parser.add_argument('--crop', type=int, nargs=4, metavar=('X', 'Y', 'WIDTH', 'HEIGHT'), help='Crop the saved image to this rectangle in original image pixels')
     args = parser.parse_args()
     if args.image is not None:
         if args.check:

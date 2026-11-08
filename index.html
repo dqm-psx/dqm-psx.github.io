@@ -11,92 +11,116 @@
   <meta property="og:title" content="DQM PSX · Dragon Quest Monsters 1 &amp; 2 English Patch">
   <meta property="og:description" content="Play the Japan-only PlayStation adventures in English. Download the fan translation, follow the setup guide, and meet the community.">
   <meta property="og:url" content="https://dqm-psx.github.io/">
-  <meta property="og:image" content="https://dqm-psx.github.io/assets/screenshots/balk-travelers-gate.png">
-  <meta property="og:image:alt" content="Terry and his monster party approaching a Travelers’ Gate in the English translation">
-  <link rel="icon" href="assets/slime-walk.gif" type="image/gif">
-  <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="homepage.css?v=20261106-title-layers-2">
-  <script src="loading.js" defer></script>
-  <script src="cover-intro.js?v=20261106-title-layers-2" defer></script>
-  <script src="gallery-data.js?v=20261106-title-layers-2" defer></script>
-  <script src="homepage.js?v=20261106-title-layers-2" defer></script>
+  <meta property="og:image" content="https://dqm-psx.github.io/assets/artwork/social-card.jpg">
+  <meta property="og:image:alt" content="Japanese PlayStation cover art for Dragon Quest Monsters 1 &amp; 2 alongside the English patch title">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/artwork/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/artwork/apple-touch-icon.png">
+  <link rel="stylesheet" href="theme.css?v=20261107">
+  <link rel="stylesheet" href="homepage.css?v=20261107">
+  <script src="gallery-data.js?v=20261107" defer></script>
+  <script src="homepage.js?v=20261107" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a class="wordmark" href="#" aria-label="DQM PSX home">
-        <img class="pixel" src="assets/slime-walk.gif" width="40" height="40" alt="">
-        <span>DQM <b>PSX</b><small>A MONSTER-SIZED ADVENTURE</small></span>
+        <img class="pixel" src="assets/slime-walk-still.png" data-animated-src="assets/slime-walk.gif" width="40" height="40" alt="">
+        <span>DQM <b>PSX</b></span>
       </a>
       <nav class="main-nav" aria-label="Main navigation">
-        <a href="#patches">Patch &amp; setup</a>
-        <a href="#about">About</a>
-        <details class="nav-dropdown" id="faq-dropdown">
-          <summary>FAQ</summary>
-          <div class="faq-menu">
-            <a href="#faq">All questions</a>
-            <a href="#faq-project">The project</a>
-            <a href="#faq-installation">Installation &amp; updates</a>
-            <a href="#faq-content">Restored content</a>
-            <a href="#faq-quality">Quality of life</a>
-            <a href="#faq-help">Help &amp; feedback</a>
-          </div>
-        </details>
-        <a href="#resources">Resources</a>
-        <a href="#community">Support</a>
+        <a class="nav-download" href="#download">Download</a>
+        <button type="button" class="nav-toggle" aria-controls="nav-links" aria-expanded="false" hidden>Menu</button>
+        <div class="nav-links" id="nav-links">
+          <a href="#install">Install</a>
+          <details class="nav-dropdown" id="faq-dropdown">
+            <summary>FAQ</summary>
+            <div class="faq-menu">
+              <a href="#faq">All questions</a>
+              <a href="#faq-project">The project</a>
+              <a href="#faq-installation">Installation &amp; updates</a>
+              <a href="#faq-content">Restored content</a>
+              <a href="#faq-quality">Quality of life</a>
+              <a href="#faq-help">Help &amp; feedback</a>
+            </div>
+          </details>
+          <a href="https://dqm-psx.github.io/guide/">Breeding guide <span aria-hidden="true">↗</span></a>
+          <a href="https://dqm-psx.github.io/translations/">Translations <span aria-hidden="true">↗</span></a>
+          <a href="https://discord.gg/6V9p6Y2pBt">Discord <span aria-hidden="true">↗</span></a>
+        </div>
       </nav>
-      <a class="header-discord" href="https://discord.gg/6V9p6Y2pBt">Join the Discord <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
-  <section class="cover-intro night-surface" id="cover-intro" aria-label="From the Japanese original to the English fan translation">
-    <div class="cover-sticky">
-      <figure class="cover-reveal" role="img" aria-label="The Japanese Dragon Quest Monsters 1 &amp; 2 title changes to English as you scroll, over the same cover artwork.">
-        <img class="cover-paper" src="assets/artwork/cover-paper-base.png" width="1254" height="1254" alt="" fetchpriority="high">
-        <img class="cover-artwork" src="assets/artwork/dqm-1-2-english-cover.png" width="1254" height="1254" alt="" decoding="async">
-        <div class="cover-title-layers" aria-hidden="true">
-          <div class="cover-title-japanese">
-            <img class="cover-title-japanese-logo" src="assets/artwork/cover-title-japanese.png" width="2172" height="724" alt="">
-            <svg class="cover-title-subtitle" viewBox="0 0 2172 724" preserveAspectRatio="none" aria-hidden="true" focusable="false"><text x="1086" y="681" text-anchor="middle" textLength="1300" lengthAdjust="spacingAndGlyphs" lang="ja">星降りの勇者と牧場の仲間たち</text></svg>
-          </div>
-          <img class="cover-title-english" id="intro-english-title" src="assets/artwork/cover-title-english.png" width="2172" height="724" alt="" decoding="async">
-        </div>
-      </figure>
-      <a class="cover-continue" href="#main">Explore the English patch <span aria-hidden="true">↓</span></a>
-    </div>
-  </section>
-
   <main id="main" tabindex="-1">
-    <section class="hero night-surface" aria-labelledby="hero-title">
-      <div class="container hero-grid">
+    <section class="hero cover-intro night-surface" id="cover-intro" aria-labelledby="hero-title">
+      <div class="container cover-sticky">
+        <figure class="cover-reveal" role="img" aria-label="Original Japanese PlayStation cover of Dragon Quest Monsters 1 &amp; 2. Scroll to reveal the English fan title.">
+          <img class="cover-print" src="assets/artwork/cover-japanese-560.webp" srcset="assets/artwork/cover-japanese-560.webp 560w, assets/artwork/cover-japanese-1120.webp 1120w" sizes="(max-width: 720px) min(85vw, 36svh), (max-width: 1100px) 44vw, 520px" width="1120" height="1137" alt="" fetchpriority="high">
+          <img class="cover-english" src="assets/artwork/cover-english-overlay-560.webp" srcset="assets/artwork/cover-english-overlay-560.webp 560w, assets/artwork/cover-english-overlay-1120.webp 1120w" sizes="(max-width: 720px) min(85vw, 36svh), (max-width: 1100px) 44vw, 520px" width="1120" height="336" alt="" decoding="async">
+        </figure>
         <div class="hero-copy">
-          <h1 id="hero-title">Dragon Quest<span>Monsters <em>1 &amp; 2</em></span></h1>
+          <h1 id="hero-title">Dragon Quest <span>Monsters <em>1 &amp; 2</em></span></h1>
           <p class="hero-subtitle">The Starry Night Hero and Friends at the Ranch</p>
-          <p class="hero-description">An English fan translation of the Japan-only PlayStation collection. Rediscover Terry’s, Cobi’s, and Tara’s adventures with your monster companions.</p>
+          <p class="hero-description">Play Terry’s, Cobi’s, and Tara’s adventures in English with this fan translation for the original Japanese PlayStation game.</p>
           <div class="button-row">
-            <a class="button button-gold" href="#patches"><span aria-hidden="true">↓</span> Get the English patch</a>
-            <a class="button button-outline" href="#about">Meet the project</a>
+            <!-- hero-download:begin -->
+            <a id="download" class="button button-gold" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download v1.0.73 · 7.56 MB</a>
+            <!-- hero-download:end -->
+            <a class="button button-outline" href="#install">How to install</a>
           </div>
           <div class="hero-party">
             <div class="party-sprites" aria-hidden="true">
-              <img class="pixel animated-sprite party-terry" src="assets/terry.gif" width="28" height="44" alt="">
-              <img class="pixel animated-sprite" src="assets/healslime-walk.gif" width="44" height="44" alt="">
-              <img class="pixel animated-sprite" src="assets/dragon-walk.gif" width="44" height="44" alt="">
-              <img class="pixel animated-sprite" src="assets/sabrecat-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite party-terry" src="assets/terry-still.png" data-animated-src="assets/terry.gif" width="28" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/healslime-walk-still.png" data-animated-src="assets/healslime-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/dragon-walk-still.png" data-animated-src="assets/dragon-walk.gif" width="44" height="44" alt="">
+              <img class="pixel animated-sprite" src="assets/sabrecat-walk-still.png" data-animated-src="assets/sabrecat-walk.gif" width="44" height="44" alt="">
             </div>
-            <p>Friends for the journey.</p>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-visual" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
+    <section id="patches" class="patch-section night-surface" aria-labelledby="patch-title">
+      <div class="container patch-grid">
+        <div class="patch-intro">
+          <h2 id="patch-title">Download &amp; installation</h2>
+          <!-- release:begin -->
+          <div class="release-download" aria-labelledby="release-title">
+            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.73</span></div>
+            <p>Includes the BPS patch, matching CUE file, and README.</p>
+            <details class="release-notes"><summary>Release notes</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul></details>
+            <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · 7,558,537 bytes</p><code class="file-hash">652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a</code></details>
+          </div>
+          <!-- release:end -->
+        </div>
+        <div class="install-panel menu-panel" id="install">
+          <div class="panel-heading"><h3>How to install</h3></div>
+          <ol class="install-steps">
+            <li><span class="step-number" aria-hidden="true">1</span><div><h4>Check your original Japanese BIN</h4><p>Use your own unmodified Japanese PlayStation disc image (<strong>SLPM-87050</strong>). Download and extract the patch ZIP.</p>
+              <details class="source-check" id="source-image"><summary>Original BIN size and SHA-256</summary><div><p><strong>260,975,568 bytes</strong></p><code class="file-hash">a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29</code></div></details></div></li>
+            <li><span class="step-number" aria-hidden="true">2</span><div><h4>Apply the English patch</h4><p>Open <a href="https://www.marcrobledo.com/RomPatcher.js/">Rom Patcher JS</a>, select your original BIN and the <code>.bps</code> patch, then apply it. Keep checksum validation enabled.</p></div></li>
+            <li><span class="step-number" aria-hidden="true">3</span><div><h4>Keep the BIN and CUE together</h4><p>Give the patched BIN the exact filename listed inside the accompanying CUE file. Place both files in the same folder.</p></div></li>
+            <li><span class="step-number" aria-hidden="true">4</span><div><h4>Start your adventure</h4><p>Open the CUE in your PlayStation emulator. If you’re <a href="#updating-your-patch">updating an existing game</a>, boot fresh and load your in-game memory-card save.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section night-surface" aria-labelledby="gallery-title">
+      <div class="container gallery-inner">
+        <h2 id="gallery-title">Screenshots</h2>
+        <div class="gallery-view" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
           <div class="screenshot-frame">
             <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
-              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" loading="lazy">
-              <div class="screenshot-loading" id="screenshot-loading" hidden><img class="pixel" src="assets/slime.gif" width="32" height="32" alt=""><span>Loading screenshot…</span></div>
+              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" decoding="async">
+              <div class="screenshot-loading" id="screenshot-loading" hidden>Loading screenshot…</div>
             </div>
             <div class="screenshot-footer">
-              <p class="screen-caption" id="screen-caption">Through the Travelers’ Gates</p>
+              <p class="screen-caption" id="screen-caption">Terry at a Travelers’ Gate</p>
               <div class="scene-picker" id="scene-controls" hidden>
                 <select class="scene-select" id="scene-select" aria-label="Choose a screenshot" aria-controls="screenshot-stage"></select>
                 <div class="scene-navigation" role="group" aria-label="Screenshot controls">
@@ -112,37 +136,170 @@
           <p class="screenshot-submission"><a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml" target="_blank" rel="noopener noreferrer">Submit a screenshot <span aria-hidden="true">↗</span></a></p>
         </div>
       </div>
-      <div class="hero-bottom" aria-hidden="true"><span>✦</span></div>
     </section>
 
-    <section id="patches" class="patch-section night-surface" aria-labelledby="patch-title">
-      <div class="container patch-grid">
-        <div class="patch-intro">
-          <p class="eyebrow">Patch downloads</p>
-          <h2 id="patch-title">Play the adventures<br> in English.</h2>
-          <p>Download the translation package, then follow the setup instructions to patch your Japanese PlayStation game. The translation continues to improve through player feedback.</p>
-          <!-- release:begin -->
-          <div class="release-download" aria-labelledby="release-title">
-            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.73</span></div>
-            <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <a class="button button-gold" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73-public.zip"><span aria-hidden="true">↓</span> Download v1.0.73</a>
-            <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> 7.56 MB</span>
-            <details class="release-notes"><summary>Release notes</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul><p>See the included README for the full change history and credits.</p></details>
-          </div>
-          <!-- release:end -->
-          <p class="patch-note"><a href="https://www.romhacking.net/translations/7734/">Project page on ROMhacking.net <span aria-hidden="true">↗</span></a></p>
-          <div class="patch-companion"><img class="pixel animated-sprite" src="assets/watabou-walk.gif" width="70" height="70" alt="Watabou"><p>Keep your memory-card saves safe.<br> <span>Back them up before updating your patch.</span></p></div>
-        </div>
-        <div class="install-panel menu-panel">
-          <div class="panel-heading"><h3>How to install</h3><span class="panel-label">PLAYSTATION</span></div>
-          <ol class="install-steps">
-            <li><span class="step-number" aria-hidden="true">1</span><div><h4>Gather your supplies</h4><p>Download and extract the patch package. You’ll need your own unmodified Japanese PlayStation BIN of the game (<strong>SLPM-87050</strong>). Check the package’s README for release-specific instructions. Game disc images are not included.</p></div></li>
-            <li><span class="step-number" aria-hidden="true">2</span><div><h4>Apply the English patch</h4><p>Open <a href="https://www.marcrobledo.com/RomPatcher.js/">Rom Patcher JS</a>, select your original BIN and the <code>.bps</code> patch, then apply it. Keep checksum validation enabled.</p></div></li>
-            <li><span class="step-number" aria-hidden="true">3</span><div><h4>Keep the BIN and CUE together</h4><p>Give the patched BIN the exact filename listed inside the accompanying CUE file. Place both files in the same folder.</p></div></li>
-            <li><span class="step-number" aria-hidden="true">4</span><div><h4>Start your adventure</h4><p>Open the CUE in your PlayStation emulator. When updating, boot the game fresh and load a normal memory-card save, rather than a save state from an older patch.</p></div></li>
-          </ol>
-          <details class="source-check"><summary>Check your original game image</summary><div><p>The original Japanese BIN should be <strong>260,975,568 bytes</strong>.</p><p class="hash-label">SHA-256</p><code class="file-hash">a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29</code><p>If validation fails, check that you selected an unmodified BIN and the correct patch. Follow the included README if a release has different requirements.</p></div></details>
-        </div>
+    <section id="faq" class="faq-section paper-surface" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-heading"><h2 id="faq-title">Frequently asked questions</h2></div>
+
+        <section id="faq-project" class="faq-group" aria-labelledby="faq-project-title">
+          <h3 id="faq-project-title">The project</h3>
+          <details id="the-patch">
+            <summary>What is this patch?</summary>
+            <div class="faq-answer"><p>This is an unofficial English fan translation patch for the Japanese PlayStation release of <em>Dragon Quest Monsters 1 &amp; 2: The Starry Night Hero and Friends at the Ranch</em>. It covers Terry’s, Cobi’s, and Tara’s adventures.</p></div>
+            <a class="answer-link" href="#the-patch" aria-label="Link to this answer: What is this patch?">Link to this answer</a>
+          </details>
+          <details id="translation-team">
+            <summary>Who is working on it? Is this Adrikvej’s project?</summary>
+            <div class="faq-answer"><p>This project was started by diethylpentane (3xad). It is a separate project from Adrikvej’s translation.</p><p>Nejimakipiyo, who also worked on <em>DQM: Delocalized</em> for Game Boy, is helping refine the translation. Community playtesting, reports, and suggestions continue to improve the patch. You can propose corrections through the <a href="https://dqm-psx.github.io/translations/">translation comparison</a>.</p></div>
+            <a class="answer-link" href="#translation-team" aria-label="Link to this answer: Who is working on it? Is this Adrikvej’s project?">Link to this answer</a>
+          </details>
+          <details id="ai-assistance">
+            <summary>Was AI used to make the patch?</summary>
+            <div class="faq-answer"><p>Yes. The team used ChatGPT (Astra), Claude Opus, Claude Fable, and Grok. Translation review and playtesting continue, and players can <a href="#translation-corrections">suggest corrections</a>.</p></div>
+            <a class="answer-link" href="#ai-assistance" aria-label="Link to this answer: Was AI used to make the patch?">Link to this answer</a>
+          </details>
+          <details id="ready-to-play">
+            <summary>Is it ready to play?</summary>
+            <div class="faq-answer"><p>Yes. Several players have completed Terry’s adventure, and players have reported success on a range of devices and emulators. Testing of all three campaigns and different setups continues.</p></div>
+            <a class="answer-link" href="#ready-to-play" aria-label="Link to this answer: Is it ready to play?">Link to this answer</a>
+          </details>
+          <details id="game-and-bios">
+            <summary>Does the download include the game or a PlayStation BIOS?</summary>
+            <div class="faq-answer"><p>No. The package contains the patch, its matching CUE file, and a README. You need your own original game image and any BIOS required by your emulator.</p></div>
+            <a class="answer-link" href="#game-and-bios" aria-label="Link to this answer: Does the download include the game or a PlayStation BIOS?">Link to this answer</a>
+          </details>
+        </section>
+
+        <section id="faq-installation" class="faq-group" aria-labelledby="faq-installation-title">
+          <h3 id="faq-installation-title">Installation &amp; updates</h3>
+          <p class="faq-intro">For first-time setup, see <a href="#install">How to install</a> and the <a href="#source-image">original BIN size and SHA-256</a>.</p>
+          <details id="renaming-disc-files">
+            <summary>Can I rename the patched BIN or CUE?</summary>
+            <div class="faq-answer"><p>Yes. The CUE’s own filename can differ from the BIN’s, but the quoted filename on its <code>FILE</code> line must exactly match your BIN’s filename, including <code>.bin</code>.</p><p>For example, if you rename the patched image to <code>DQM-English.bin</code>, edit that line in the CUE to:</p><pre><code>FILE "DQM-English.bin" BINARY</code></pre><p>Leave the other CUE lines unchanged and keep both files in the same folder. Save the text file with a <code>.cue</code> extension, not <code>.cue.txt</code>, then open the CUE.</p></div>
+            <a class="answer-link" href="#renaming-disc-files" aria-label="Link to this answer: Can I rename the patched BIN or CUE?">Link to this answer</a>
+          </details>
+          <details id="earlier-patches">
+            <summary>Do I need earlier patches? Can I patch an older English version?</summary>
+            <div class="faq-answer"><p>No earlier patches are needed. Each release applies directly to the clean Japanese BIN and includes the earlier translation work and fixes. Do not stack patches or apply a new patch to an already translated image.</p></div>
+            <a class="answer-link" href="#earlier-patches" aria-label="Link to this answer: Do I need earlier patches? Can I patch an older English version?">Link to this answer</a>
+          </details>
+          <details id="updating-your-patch">
+            <summary>How do I update without losing my progress?</summary>
+            <div class="faq-answer"><ol><li>Back up your memory-card saves.</li><li>Apply the new patch to the original Japanese BIN to make a new translated image.</li><li>Boot that image fresh through its matching CUE.</li><li>Load your normal in-game memory-card save.</li></ol><p>Avoid loading save states from another patch version: they can restore old game code and bring old bugs back. A memory-card save carries your game progress without restoring that old running state.</p></div>
+            <a class="answer-link" href="#updating-your-patch" aria-label="Link to this answer: How do I update without losing my progress?">Link to this answer</a>
+          </details>
+          <details id="checksum-mismatch">
+            <summary>Why does the patcher report a checksum mismatch?</summary>
+            <div class="faq-answer"><p>Compare your Japanese BIN with the <a href="#source-image">original disc image size and SHA-256</a>. Use the clean Japanese image and the BPS file extracted from the ZIP. Keep checksum validation enabled and resolve the mismatch before patching.</p></div>
+            <a class="answer-link" href="#checksum-mismatch" aria-label="Link to this answer: Why does the patcher report a checksum mismatch?">Link to this answer</a>
+          </details>
+        </section>
+
+        <section id="faq-content" class="faq-group" aria-labelledby="faq-content-title">
+          <h3 id="faq-content-title">Restored content</h3>
+          <details id="restored-content">
+            <summary>What content has been restored in Terry’s adventure?</summary>
+            <div class="faq-answer"><p>The patch restores monster table conversations and special dungeon floors: treasure/Mimic rooms, Lost Forest, the traveling colosseum, mazes, and sliding floors.</p><p>These restorations combine retained PlayStation assets with behavior adapted from the Game Boy original. Some mechanics and encounter rates are reconstruction choices.</p></div>
+            <a class="answer-link" href="#restored-content" aria-label="Link to this answer: What content has been restored in Terry’s adventure?">Link to this answer</a>
+          </details>
+          <details id="monster-conversations">
+            <summary>How do I talk to my monsters at the table?</summary>
+            <div class="faq-answer"><p>In the Arena dining room, walk onto the east stool at the right table with one to three living, visible party monsters.</p><ul><li><strong>Up, Left, and Down</strong> select the north, west, and south monster respectively.</li><li><strong>Confirm/Talk</strong> starts the conversation.</li><li><strong>Cancel or Right</strong> makes you stand up.</li></ul><p>Revive any fallen party members first, and leave the stool before sitting again.</p></div>
+            <a class="answer-link" href="#monster-conversations" aria-label="Link to this answer: How do I talk to my monsters at the table?">Link to this answer</a>
+          </details>
+          <details id="traveling-colosseum">
+            <summary>How do I leave Terry’s traveling colosseum?</summary>
+            <div class="faq-answer"><p>Leave through its north door. Travel Bookmark cannot be used inside the traveling colosseum.</p></div>
+            <a class="answer-link" href="#traveling-colosseum" aria-label="Link to this answer: How do I leave Terry’s traveling colosseum?">Link to this answer</a>
+          </details>
+          <details id="colosseum-wagers">
+            <summary>Can we wager monsters in two-player Colosseum battles?</summary>
+            <div class="faq-answer">
+              <p>Yes. v1.0.73 restores monster wagers in the <strong>title-screen Colosseum</strong>, which offers Free Battle, Enix Rules, and Local Rules. Choose <strong>Local Rules</strong> and enable prizes, which are off by default.</p>
+              <ul><li>Use saves from two different players. Each offers an awake farm monster outside their saved adventure party, and both farms need room to receive a prize.</li><li>The winner receives the loser’s offered monster and keeps their own. A draw transfers nothing.</li></ul>
+              <p>Local Rules also lets you set skill restrictions, total or individual level limits, allowed monster families, turns, a command timer, combos, and accessories. Set <strong>Turns to 0</strong> for no turn limit.</p>
+              <p><strong>A transfer saves both Adventure Logs.</strong> Back up your saves beforehand, and keep the game running with both memory cards inserted until both saves finish. If a card error occurs, retry without resetting. Resetting or losing power between saves can lose the prize monster.</p>
+            </div>
+            <a class="answer-link" href="#colosseum-wagers" aria-label="Link to this answer: Can we wager monsters in two-player Colosseum battles?">Link to this answer</a>
+          </details>
+        </section>
+
+        <section id="faq-quality" class="faq-group" aria-labelledby="faq-quality-title">
+          <h3 id="faq-quality-title">Quality of life</h3>
+          <details id="movement-settings">
+            <summary>How do I run or change my movement speed?</summary>
+            <div class="faq-answer">
+              <p>Open <strong>Tactics → Movement</strong>, just below Text Speed, in Terry’s, Cobi’s, or Tara’s adventure. Available since v1.0.73, these settings let you choose <strong>1×, 2×, or 4×</strong> independently for Walk and R1. Walking defaults to 1×. Hold <strong>R1</strong> to run at 2×, or select Toggle to switch speeds each time you press R1.</p>
+              <p>Use <strong>Up/Down</strong> to select a setting and <strong>Left/Right</strong> to change it. <strong>Circle or Triangle</strong> applies changes; <strong>Cross</strong> cancels; <strong>Square</strong> cancels and closes the field menu.</p>
+              <p>Save normally to keep each adventure’s settings. Toggle stays active through doors, battles, and menus, but loading an adventure starts at Walk speed. Riding, sliding floors, and scripted movement keep their original controls.</p>
+            </div>
+            <a class="answer-link" href="#movement-settings" aria-label="Link to this answer: How do I run or change my movement speed?">Link to this answer</a>
+          </details>
+          <details id="encounter-rates">
+            <summary>What do the Time and Distance encounter settings do?</summary>
+            <div class="faq-answer"><p>Under <strong>Tactics → Movement</strong>, <strong>Time</strong> is the default: it keeps roughly the usual number of encounters per minute of travel, even when running. <strong>Distance</strong> uses the normal encounter rate per step, so faster movement brings battles closer together in time.</p></div>
+            <a class="answer-link" href="#encounter-rates" aria-label="Link to this answer: What do the Time and Distance encounter settings do?">Link to this answer</a>
+          </details>
+          <details id="hp-and-mp">
+            <summary>What changed in the HP and MP displays?</summary>
+            <div class="faq-answer"><p>The field and combat displays have expanded HP/MP information, with current and maximum values and visual bars.</p></div>
+            <a class="answer-link" href="#hp-and-mp" aria-label="Link to this answer: What changed in the HP and MP displays?">Link to this answer</a>
+          </details>
+          <details id="grouped-inventory">
+            <summary>How do grouped items and bulk selling work?</summary>
+            <div class="faq-answer"><p>Duplicate items are grouped with quantities in the field item menu, battle item menu, and shop Sell menu.</p><p>To sell multiple copies of the same item, choose the quantity and confirm the sale. Using, discarding, or selling part of a stack keeps the remaining copies in the same inventory position.</p></div>
+            <a class="answer-link" href="#grouped-inventory" aria-label="Link to this answer: How do grouped items and bulk selling work?">Link to this answer</a>
+          </details>
+          <details id="bag-capacity">
+            <summary>Can I carry more than 30 items now?</summary>
+            <div class="faq-answer"><p>No. The limit is still 30 items in total, and every copy counts toward it even when duplicates share a single menu row.</p><p>Bigger bags are planned, but are not available in the current patch.</p></div>
+            <a class="answer-link" href="#bag-capacity" aria-label="Link to this answer: Can I carry more than 30 items now?">Link to this answer</a>
+          </details>
+        </section>
+
+        <section id="faq-help" class="faq-group" aria-labelledby="faq-help-title">
+          <h3 id="faq-help-title">Help &amp; feedback</h3>
+          <details id="report-a-problem">
+            <summary>The game froze or something looks wrong. What should I try?</summary>
+            <div class="faq-answer">
+              <p>Read the <a href="#patches">latest release notes</a>, confirm that you patched a clean Japanese BIN, then boot fresh and load an in-game memory-card save. Some area transitions take longer than in the Japanese game.</p>
+              <p>If the problem repeats, check <a href="https://github.com/dqm-psx/patch/issues">existing patch issues</a>, then use the <a href="https://github.com/dqm-psx/patch/issues/new?template=bug-report.yml">bug report form</a>. Include your patch version, campaign, setup, and the steps that trigger the issue. A screenshot, a memory-card save just before the problem, or a save state from the affected patch version can help reproduce it.</p>
+            </div>
+            <a class="answer-link" href="#report-a-problem" aria-label="Link to this answer: The game froze or something looks wrong. What should I try?">Link to this answer</a>
+          </details>
+          <details id="translation-corrections">
+            <summary>How do I suggest a translation correction?</summary>
+            <div class="faq-answer"><p>Find the entry in the <a href="https://dqm-psx.github.io/translations/">translation comparison</a>, enter your proposed wording in <strong>Suggestions</strong>, and choose <strong>Submit on GitHub</strong>. Review the draft issue, explain your reasoning, and submit it with your GitHub account.</p><p>You can also share the exact wording, location, edition, and a screenshot in <a href="#community">the project Discord</a>.</p></div>
+            <a class="answer-link" href="#translation-corrections" aria-label="Link to this answer: How do I suggest a translation correction?">Link to this answer</a>
+          </details>
+          <details id="helping-out">
+            <summary>How else can I help?</summary>
+            <div class="faq-answer"><p>Playtest Terry’s, Cobi’s, or Tara’s adventure, share a reproducible bug or wording suggestion, or test a new patch to check whether it resolves an issue you reported. You can also <a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml">submit a screenshot for the gallery</a>.</p></div>
+            <a class="answer-link" href="#helping-out" aria-label="Link to this answer: How else can I help?">Link to this answer</a>
+          </details>
+          <details id="breeding-guide">
+            <summary>Where is the breeding guide?</summary>
+            <div class="faq-answer"><p>The <a href="https://dqm-psx.github.io/guide/">breeding guide</a> lists recipes and helps you find breeding pairs and plan your next party.</p></div>
+            <a class="answer-link" href="#breeding-guide" aria-label="Link to this answer: Where is the breeding guide?">Link to this answer</a>
+          </details>
+        </section>
+      </div>
+    </section>
+
+
+    <section id="community" class="community-section paper-surface" aria-label="Community and support">
+      <div class="container community-grid">
+        <article class="community-card">
+          <h2>Project Discord</h2>
+          <p>Ask for setup help, discuss the games, or share your playtesting notes.</p>
+          <a class="button button-blue" href="https://discord.gg/6V9p6Y2pBt">Join the Discord <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="community-card">
+          <h2>Report a patch issue</h2>
+          <p>Include your patch version and the steps that reproduce the problem. You can attach screenshots and saves to the report.</p>
+          <a class="button button-blue" id="report-issue" href="https://github.com/dqm-psx/patch/issues/new?template=bug-report.yml">Report a bug on GitHub <span aria-hidden="true">↗</span></a>
+        </article>
       </div>
     </section>
 
@@ -158,14 +315,14 @@
               <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
                 <!-- contributors:begin -->
                 <ul class="contributor-list" id="contributor-list">
-                  <li>Astra (ChatGPT)</li>
+                  <li>Astra (ChatGPT) <small class="credit-role">AI assistance</small></li>
                   <li>BalK</li>
                   <li>Cats4gold</li>
-                  <li>Claude Fable</li>
-                  <li>Claude Opus</li>
+                  <li>Claude Fable <small class="credit-role">AI assistance</small></li>
+                  <li>Claude Opus <small class="credit-role">AI assistance</small></li>
                   <li>diethylpentane (3xad)</li>
                   <li>gollum_007</li>
-                  <li>Grok</li>
+                  <li>Grok <small class="credit-role">AI assistance</small></li>
                   <li>Lori</li>
                   <li>Nejimakipiyo</li>
                   <li>Nelin</li>
@@ -188,175 +345,22 @@
         </section>
       </div>
     </section>
-
-    <section id="faq" class="faq-section paper-surface" aria-labelledby="faq-title">
-      <div class="container">
-        <div class="section-heading"><h2 id="faq-title">Frequently asked questions.</h2></div>
-
-        <section id="faq-project" class="faq-group" aria-labelledby="faq-project-title">
-          <h3 id="faq-project-title">The project</h3>
-          <details>
-            <summary>What is this patch?</summary>
-            <div class="faq-answer"><p>This is an unofficial English fan translation patch for the Japanese PlayStation release of <em>Dragon Quest Monsters 1 &amp; 2: The Starry Night Hero and Friends at the Ranch</em>. It covers Terry’s, Cobi’s, and Tara’s adventures.</p></div>
-          </details>
-          <details>
-            <summary>Who is working on it? Is this Adrikvej’s project?</summary>
-            <div class="faq-answer"><p>This project was started by diethylpentane (3xad). It is a separate project from Adrikvej’s translation.</p><p>Nejimakipiyo, who also worked on <em>DQM: Delocalized</em> for Game Boy, is helping refine the translation. Community playtesting, reports, and suggestions continue to improve the patch. You can propose corrections through the <a href="https://dqm-psx.github.io/translations/">translation comparison</a>.</p></div>
-          </details>
-          <details>
-            <summary>Was AI used to make the patch?</summary>
-            <div class="faq-answer"><p>Yes. The project uses AI assistance, mainly ChatGPT (Astra), with help from Claude Opus and Claude Fable, plus some Grok.</p><p>Mistakes are possible, and translation review and testing are ongoing. Corrections, explanations of awkward or inaccurate wording, and reproducible bug reports are welcome.</p></div>
-          </details>
-          <details>
-            <summary>Is it ready to play?</summary>
-            <div class="faq-answer"><p>Yes. Several players have completed Terry’s adventure, and the patch reportedly works on a range of devices and emulators. That does not mean every part of every campaign or every setup has been checked.</p><p>Read the current release notes, keep backups of your memory-card saves, and share any problems you encounter.</p></div>
-          </details>
-          <details>
-            <summary>Does the download include the game or a PlayStation BIOS?</summary>
-            <div class="faq-answer"><p>No. The package contains the patch, its matching CUE file, and a README. You need your own original game image and any BIOS required by your emulator.</p></div>
-          </details>
-        </section>
-
-        <section id="faq-installation" class="faq-group" aria-labelledby="faq-installation-title">
-          <h3 id="faq-installation-title">Installation &amp; updates</h3>
-          <details>
-            <summary>Where do I get the latest patch?</summary>
-            <div class="faq-answer"><p>Use the <a href="#patches">latest patch download and setup instructions</a> on this page. Extract the ZIP and read the included README for the package’s filenames, changes, and any release-specific instructions.</p></div>
-          </details>
-          <details>
-            <summary>Which original game image do I need?</summary>
-            <div class="faq-answer"><p>Use a clean, unmodified Japanese PlayStation BIN of the game, serial <strong>SLPM-87050</strong>.</p><dl><dt>File size</dt><dd>260,975,568 bytes</dd><dt>SHA-256</dt><dd><code class="file-hash">a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29</code></dd></dl><p>Apply each release to this original Japanese image, never to an already translated image.</p></div>
-          </details>
-          <details>
-            <summary>How do I apply the patch?</summary>
-            <div class="faq-answer"><ol><li>Download and extract the latest ZIP.</li><li>Open <a href="https://www.marcrobledo.com/RomPatcher.js/">Rom Patcher JS</a>. Select your clean Japanese BIN and the extracted <code>.bps</code> patch. Keep checksum validation enabled.</li><li>Apply the patch and give the output BIN the filename specified in the README and matching CUE.</li><li>Put the patched BIN and included CUE in the same folder.</li><li>Open the CUE in your PlayStation emulator.</li></ol></div>
-          </details>
-          <details>
-            <summary>Can I rename the patched BIN or CUE?</summary>
-            <div class="faq-answer"><p>Yes. The CUE’s own filename can differ from the BIN’s, but the quoted filename on its <code>FILE</code> line must exactly match your BIN’s filename, including <code>.bin</code>.</p><p>For example, if you rename the patched image to <code>DQM-English.bin</code>, edit that line in the CUE to:</p><pre><code>FILE "DQM-English.bin" BINARY</code></pre><p>Leave the other CUE lines unchanged and keep both files in the same folder. Save the text file with a <code>.cue</code> extension, not <code>.cue.txt</code>, then open the CUE.</p></div>
-          </details>
-          <details>
-            <summary>Do I need earlier patches? Can I patch an older English version?</summary>
-            <div class="faq-answer"><p>No earlier patches are needed. Each release applies directly to the clean Japanese BIN and includes the earlier translation work and fixes. Do not stack patches or apply a new patch to an already translated image.</p></div>
-          </details>
-          <details>
-            <summary>How do I update without losing my progress?</summary>
-            <div class="faq-answer"><ol><li>Back up your memory-card saves.</li><li>Apply the new patch to the original Japanese BIN to make a new translated image.</li><li>Boot that image fresh through its matching CUE.</li><li>Load your normal in-game memory-card save.</li></ol><p>Avoid loading save states from another patch version: they can restore old game code and bring old bugs back. A memory-card save carries your game progress without restoring that old running state.</p></div>
-          </details>
-          <details>
-            <summary>Why does the patcher report a checksum mismatch?</summary>
-            <div class="faq-answer"><p>Check the original BIN’s size and SHA-256 against the values above. Make sure you selected the clean Japanese image, not a previously patched image, and that you extracted the ZIP before selecting its BPS file.</p><p>Keep checksum validation enabled and resolve the mismatch before patching.</p></div>
-          </details>
-        </section>
-
-        <section id="faq-content" class="faq-group" aria-labelledby="faq-content-title">
-          <h3 id="faq-content-title">Restored content</h3>
-          <details>
-            <summary>What content has been restored in Terry’s adventure?</summary>
-            <div class="faq-answer"><p>The patch restores monster table conversations and special dungeon floors: treasure/Mimic rooms, Lost Forest, the traveling colosseum, mazes, and sliding floors.</p><p>These restorations combine retained PlayStation assets with behavior adapted from the Game Boy original. Some mechanics and encounter rates are reconstruction choices.</p></div>
-          </details>
-          <details>
-            <summary>How do I talk to my monsters at the table?</summary>
-            <div class="faq-answer"><p>In the Arena dining room, walk onto the east stool at the right table with one to three living, visible party monsters.</p><ul><li><strong>Up, Left, and Down</strong> select the north, west, and south monster respectively.</li><li><strong>Confirm/Talk</strong> starts the conversation.</li><li><strong>Cancel or Right</strong> makes you stand up.</li></ul><p>Revive any fallen party members first, and leave the stool before sitting again.</p></div>
-          </details>
-          <details>
-            <summary>How do I leave Terry’s traveling colosseum?</summary>
-            <div class="faq-answer"><p>Leave through its north door. Travel Bookmark cannot be used inside the traveling colosseum.</p></div>
-          </details>
-          <details>
-            <summary>Can we wager monsters in two-player Colosseum battles?</summary>
-            <div class="faq-answer">
-              <p>Yes. v1.0.73 restores monster wagers in the <strong>title-screen Colosseum</strong>, which offers Free Battle, Enix Rules, and Local Rules. Choose <strong>Local Rules</strong> and enable prizes, which are off by default.</p>
-              <ul><li>Use saves from two different players. Each offers an awake farm monster outside their saved adventure party, and both farms need room to receive a prize.</li><li>The winner receives the loser’s offered monster and keeps their own. A draw transfers nothing.</li></ul>
-              <p>Local Rules also lets you set skill restrictions, total or individual level limits, allowed monster families, turns, a command timer, combos, and accessories. Set <strong>Turns to 0</strong> for no turn limit.</p>
-              <p><strong>A transfer saves both Adventure Logs.</strong> Back up your saves beforehand, and keep the game running with both memory cards inserted until both saves finish. If a card error occurs, retry without resetting. Resetting or losing power between saves can lose the prize monster.</p>
-            </div>
-          </details>
-        </section>
-
-        <section id="faq-quality" class="faq-group" aria-labelledby="faq-quality-title">
-          <h3 id="faq-quality-title">Quality of life</h3>
-          <details>
-            <summary>How do I run or change my movement speed?</summary>
-            <div class="faq-answer">
-              <p>In v1.0.73, open <strong>Tactics → Movement</strong>, just below Text Speed, in Terry’s, Cobi’s, or Tara’s adventure. By default, walking is 1× speed and holding <strong>R1</strong> runs at 2×. You can set Walk and R1 speeds independently to <strong>1×, 2×, or 4×</strong>, and choose Hold or Toggle. Toggle switches speeds each time you press R1.</p>
-              <p>Use <strong>Up/Down</strong> to select a setting and <strong>Left/Right</strong> to change it. <strong>Circle or Triangle</strong> applies changes; <strong>Cross</strong> cancels; <strong>Square</strong> cancels and closes the field menu.</p>
-              <p>Save normally to keep each adventure’s settings. Toggle stays active through doors, battles, and menus, but loading an adventure starts at Walk speed. Riding, sliding floors, and scripted movement keep their original controls.</p>
-            </div>
-          </details>
-          <details>
-            <summary>What do the Time and Distance encounter settings do?</summary>
-            <div class="faq-answer"><p>Under <strong>Tactics → Movement</strong>, <strong>Time</strong> is the default: it keeps roughly the usual number of encounters per minute of travel, even when running. <strong>Distance</strong> uses the normal encounter rate per step, so faster movement brings battles closer together in time.</p></div>
-          </details>
-          <details>
-            <summary>What changed in the HP and MP displays?</summary>
-            <div class="faq-answer"><p>The field and combat displays have expanded HP/MP information, with current and maximum values and visual bars.</p></div>
-          </details>
-          <details>
-            <summary>How do grouped items and bulk selling work?</summary>
-            <div class="faq-answer"><p>Duplicate items are grouped with quantities in the field item menu, battle item menu, and shop Sell menu.</p><p>To sell multiple copies of the same item, choose the quantity and confirm the sale. Using, discarding, or selling part of a stack keeps the remaining copies in the same inventory position.</p></div>
-          </details>
-          <details>
-            <summary>Can I carry more than 30 items now?</summary>
-            <div class="faq-answer"><p>No. The limit is still 30 items in total, and every copy counts toward it even when duplicates share a single menu row.</p><p>Bigger bags are planned, but are not available in the current patch.</p></div>
-          </details>
-        </section>
-
-        <section id="faq-help" class="faq-group" aria-labelledby="faq-help-title">
-          <h3 id="faq-help-title">Help &amp; feedback</h3>
-          <details>
-            <summary>The game froze or crashed. What should I try?</summary>
-            <div class="faq-answer"><p>Check that you are using the <a href="#patches">latest patch</a> and read its release notes. Confirm that you patched a clean original image, then boot fresh and load a memory-card save instead of an old save state.</p><p>Some area transitions may take longer than in the Japanese game. If the problem persists, check <a href="https://github.com/dqm-psx/patch/issues">existing patch issues</a>, then <a href="#community">open a bug report</a> with the details needed to reproduce it.</p></div>
-          </details>
-          <details>
-            <summary>What should I include in a bug report?</summary>
-            <div class="faq-answer"><p>Use the <a href="#report-template">full bug report template below</a>. Include your patch version, campaign, device and emulator or hardware, location, story progress, steps to reproduce, expected and actual results, and whether it repeats after a fresh boot from a memory-card save.</p><p>List any cheats or non-default settings. Screenshots or video and a memory-card save from just before the problem are especially helpful.</p><p>A save state from the affected patch version, captured before or during a freeze or crash, can also be useful for debugging. That is different from using a state from an older patch to continue playing after an update.</p><p>Check <a href="https://github.com/dqm-psx/patch/issues">existing issues in dqm-psx/patch</a>, then choose <a href="#community">Report a bug on GitHub</a> below. The button opens a prefilled issue with the full template. Review it, add your details and attachments, and submit it with your GitHub account. Opening the issue page does not submit it automatically.</p></div>
-          </details>
-          <details>
-            <summary>How do I suggest a translation correction?</summary>
-            <div class="faq-answer"><p>Use the <a href="https://dqm-psx.github.io/translations/">translation comparison</a> to suggest a correction:</p><ol><li>Find the entry in the translation comparison.</li><li>Write your proposal under <strong>Suggestions</strong>.</li><li>Choose <strong>Submit on GitHub</strong>.</li><li>Review the prefilled issue in <strong>dqm-psx/translations</strong>, explain your reasoning, and submit it using your GitHub account.</li></ol><p>Opening a prefilled issue does not submit it; you must review and submit the issue yourself. You can also share the exact text, location, edition or campaign, and a screenshot in <a href="https://discord.gg/6V9p6Y2pBt">Discord</a>. Include your proposed wording and explain why it would be clearer or more accurate.</p></div>
-          </details>
-          <details>
-            <summary>How else can I help?</summary>
-            <div class="faq-answer"><p>Playtest, send <a href="#community">reproducible bug reports with saves</a>, review wording, and confirm whether a new release fixes a reported problem. Join <a href="https://discord.gg/6V9p6Y2pBt">Discord</a> for discussion and setup help.</p></div>
-          </details>
-          <details>
-            <summary>Where is the breeding guide?</summary>
-            <div class="faq-answer"><p>Use the <a href="https://dqm-psx.github.io/guide/">breeding guide</a> for recipes, pair finding, and team planning. The <a href="https://discord.gg/6V9p6Y2pBt">Discord community</a> can also help with gameplay and breeding questions.</p></div>
-          </details>
-        </section>
-      </div>
-    </section>
-
-    <section id="resources" class="resources-section paper-surface" aria-label="Game resources">
-      <div class="container resource-links">
-        <a href="https://dqm-psx.github.io/translations/">Translation comparison <span aria-hidden="true">↗</span></a>
-        <a href="https://dqm-psx.github.io/guide/">Breeding guide <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
-
-    <section id="community" class="community-section paper-surface" aria-label="Community and support">
-      <div class="container">
-        <div class="community-grid">
-          <article class="community-card"><span class="eyebrow">The gathering place</span><h2>Meet the community</h2><p>Talk monsters, trade breeding tips, follow the translation, or get a hand setting things up.</p><a class="button button-blue" href="https://discord.gg/6V9p6Y2pBt">Join us on Discord <span aria-hidden="true">↗</span></a></article>
-          <article class="community-card report-card"><span class="eyebrow">Help make it better</span><h2>Something not quite right?</h2><p>Check the existing patch issues, then tell us your version, campaign, location, and how to reproduce the problem. Screenshots and a save from before the issue help.</p><div class="report-actions"><a class="button button-blue" id="report-issue" href="https://github.com/dqm-psx/patch/issues/new?title=Bug+report%3A+&amp;body=Patch+version%3A%0ACampaign+%28Terry+%2F+Cobi+%2F+Tara%29%3A%0AEmulator+%2B+version%2C+or+hardware%3A%0ADevice+%2F+operating+system%3A%0ALocation+and+story+progress%3A%0ASteps+to+reproduce%3A%0AExpected+result%3A%0AWhat+actually+happened%3A%0ADoes+it+repeat+after+a+fresh+boot+from+a+memory-card+save%3F%0ACheats+or+non-default+settings%2C+if+any%3A%0AScreenshots+or+video%3A%0AMemory-card+save+%28preferably+just+before+the+issue%29%3A%0ASave+state+%28from+the+affected+patch+version%2C+before+or+during+the+issue%29%3A">Report a bug on GitHub <span aria-hidden="true">↗</span></a><button class="text-button" id="copy-report" type="button" hidden>Copy report template</button></div><p class="report-note">Opens a prefilled issue in <a href="https://github.com/dqm-psx/patch/issues">dqm-psx/patch</a>. Review it, add your details, and submit with your GitHub account. Opening the page does not submit the report.</p><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p><details class="report-template" id="report-template"><summary>View the bug report template</summary><pre id="report-text">Patch version:
-Campaign (Terry / Cobi / Tara):
-Emulator + version, or hardware:
-Device / operating system:
-Location and story progress:
-Steps to reproduce:
-Expected result:
-What actually happened:
-Does it repeat after a fresh boot from a memory-card save?
-Cheats or non-default settings, if any:
-Screenshots or video:
-Memory-card save (preferably just before the issue):
-Save state (from the affected patch version, before or during the issue):</pre></details></article>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-inner"><div class="footer-brand"><img class="pixel" src="assets/slime-walk.gif" width="32" height="32" alt=""><span>DQM <b>PSX</b></span></div><p>A fan project celebrating Dragon Quest Monsters 1 &amp; 2.<br> Dragon Quest and its characters belong to their respective owners.</p><div class="footer-links"><a href="https://www.romhacking.net/translations/7734/">ROMhacking.net</a><a href="https://discord.gg/6V9p6Y2pBt">Discord</a><a href="#">Back to top <span aria-hidden="true">↑</span></a></div><button class="motion-toggle" id="motion-toggle" type="button" hidden>Pause sprite animation</button></div></footer>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><img class="pixel" src="assets/slime-walk-still.png" data-animated-src="assets/slime-walk.gif" width="32" height="32" alt=""><span>DQM <b>PSX</b></span></div>
+      <p>Dragon Quest and its characters belong to their respective owners.</p>
+      <div class="footer-links" id="resources">
+        <a href="#about">About &amp; credits</a>
+        <a href="#community">Support</a>
+        <a href="https://dqm-psx.github.io/guide/">Breeding guide</a>
+        <a href="https://dqm-psx.github.io/translations/">Translations</a>
+        <a href="https://www.romhacking.net/translations/7734/">ROMhacking.net</a>
+        <a href="#">Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+      <button class="motion-toggle" id="motion-toggle" type="button" hidden>Pause sprite animation</button>
+    </div>
+  </footer>
 </body>
 </html>

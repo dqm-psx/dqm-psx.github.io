@@ -63,18 +63,21 @@ class ScreenshotUpdateTests(unittest.TestCase):
         self.assertNotIn('patchVersion', output)
         self.assertEqual(json.loads(output.split(' = ', 1)[1][:-2]), [self.scene])
 
-    def test_import_preserves_original_bytes_records_version_and_css_crop(self):
+    def test_crop_preserves_pixels_and_records_original_digest_and_version(self):
         original_data = self.incoming.read_bytes()
         src = self.import_image(patch_version='v1.0.72', crop=[1, 1, 6, 4])
-        self.assertEqual((self.root / src).read_bytes(), original_data)
+        with Image.open(BytesIO(original_data)) as original, Image.open(self.root / src) as actual:
+            self.assertEqual(actual.size, (6, 4))
+            self.assertEqual(actual.convert('RGB').tobytes(), original.crop((1, 1, 7, 5)).tobytes())
         manifest, provenance = updater.read_data(self.root)
         self.assertEqual(manifest['screenshots'][0], self.scene)
         imported = manifest['screenshots'][-1]
         self.assertEqual(imported['patchVersion'], '1.0.72')
         self.assertEqual(imported['sourceIssue'], ISSUE)
-        self.assertEqual(imported['viewport'], {'x': 1, 'y': 1, 'width': 6, 'height': 4})
+        self.assertNotIn('viewport', imported)
+        self.assertEqual(provenance[-1]['sourceCrop'], {'x': 1, 'y': 1, 'width': 6, 'height': 4})
         self.assertEqual(provenance[-1]['patchVersion'], '1.0.72')
-        self.assertEqual(provenance[-1]['sha256'], updater.inspect_image(original_data)['sha256'])
+        self.assertEqual(provenance[-1]['sourceSha256'], updater.inspect_image(original_data)['sha256'])
         updater.update(self.root, check=True)
 
     def test_unknown_cli_version_is_omitted(self):

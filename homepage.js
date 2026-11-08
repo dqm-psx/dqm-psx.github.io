@@ -25,13 +25,12 @@ const scenes = window.DqmScreenshots;
   let latestRequest = 0;
   let activeScene = 0;
   let requestedScene = 0;
-  let userPaused = reducedMotion.matches;
+  let userPaused = true;
   let hovered = gallery.matches(":hover");
   let focusHeld = gallery.contains(document.activeElement);
   let inView = !("IntersectionObserver" in window);
   let autoPending = false;
   let timer = null;
-  let finishLoading = null;
 
   scenes.forEach((scene, index) => {
     const option = document.createElement("option");
@@ -41,8 +40,6 @@ const scenes = window.DqmScreenshots;
   });
 
   function clearLoading() {
-    finishLoading?.();
-    finishLoading = null;
     stage.setAttribute("aria-busy", "false");
     loading.hidden = true;
   }
@@ -82,24 +79,16 @@ const scenes = window.DqmScreenshots;
       userPaused = true;
       updatePauseButton();
     }
-    finishLoading = window.DqmLoading.begin();
     stage.setAttribute("aria-busy", "true");
     loading.hidden = false;
-    const nextImage = new Image();
-    nextImage.src = scene.src;
+    const alreadyDisplayed = featuredScreen.getAttribute("src") === scene.src;
+    const nextImage = alreadyDisplayed ? featuredScreen : new Image();
+    if (!alreadyDisplayed) nextImage.src = scene.src;
     try {
       await nextImage.decode();
       if (request !== latestRequest) return;
-      featuredScreen.src = scene.src;
+      if (!alreadyDisplayed) featuredScreen.src = scene.src;
       featuredScreen.alt = scene.alt;
-      // Frame the original pixels; exclude emulator chrome without regenerating screenshots.
-      const crop = scene.viewport;
-      featuredScreen.classList.toggle("is-cropped", Boolean(crop));
-      stage.style.aspectRatio = crop ? `${crop.width} / ${crop.height}` : "";
-      featuredScreen.style.width = crop ? `${nextImage.naturalWidth / crop.width * 100}%` : "";
-      featuredScreen.style.height = crop ? `${nextImage.naturalHeight / crop.height * 100}%` : "";
-      featuredScreen.style.left = crop ? `${-crop.x / crop.width * 100}%` : "";
-      featuredScreen.style.top = crop ? `${-crop.y / crop.height * 100}%` : "";
       activeScene = index;
       document.getElementById("screen-credit").textContent = scene.credit ? `Screenshot by ${scene.credit}${scene.patchVersion ? ` (v${scene.patchVersion})` : ""}` : "From the English translation";
       selection.value = String(index);
@@ -125,15 +114,33 @@ const scenes = window.DqmScreenshots;
 
   document.getElementById("scene-previous").addEventListener("click", () => showScene((requestedScene - 1 + scenes.length) % scenes.length, true));
   document.getElementById("scene-next").addEventListener("click", () => showScene((requestedScene + 1) % scenes.length, true));
+  let swipeStart = null;
+  stage.addEventListener("pointerdown", event => {
+    if (event.isPrimary && event.pointerType === "touch") {
+      swipeStart = { x: event.clientX, y: event.clientY, id: event.pointerId };
+      stage.setPointerCapture(event.pointerId);
+    }
+  });
+  stage.addEventListener("pointercancel", () => { swipeStart = null; });
+  stage.addEventListener("pointerup", event => {
+    if (swipeStart?.id !== event.pointerId) return;
+    const dx = event.clientX - swipeStart.x;
+    const dy = event.clientY - swipeStart.y;
+    swipeStart = null;
+    if (Math.abs(dx) >= 48 && Math.abs(dx) > 1.5 * Math.abs(dy)) {
+      showScene((requestedScene + (dx < 0 ? 1 : -1) + scenes.length) % scenes.length, true);
+    }
+  });
   selection.addEventListener("change", () => showScene(Number(selection.value), true));
   pauseButton.addEventListener("click", () => {
     userPaused = !userPaused;
-    // Explicit Play may resume while this button retains keyboard focus.
+    // Let an explicit Play start while the pointer and focus are on this button.
     focusHeld = false;
+    hovered = false;
     updatePauseButton();
     schedule();
   });
-  gallery.addEventListener("mouseenter", () => { hovered = true; schedule(); });
+  gallery.addEventListener("mouseenter", () => { hovered = matchMedia("(hover: hover)").matches; schedule(); });
   gallery.addEventListener("mouseleave", () => { hovered = false; schedule(); });
   gallery.addEventListener("focusin", () => { focusHeld = true; schedule(); });
   gallery.addEventListener("focusout", event => {
@@ -158,25 +165,56 @@ const scenes = window.DqmScreenshots;
   showScene(0, false, true);
 })();
 
-const copyButton = document.getElementById("copy-report");
-copyButton.hidden = false;
-copyButton.addEventListener("click", async () => {
-  const template = document.getElementById("report-text").textContent.trim();
-  const status = document.getElementById("copy-status");
-  try {
-    if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-    await navigator.clipboard.writeText(template);
-    status.textContent = "Copied. Fill it in and submit it on GitHub.";
-  } catch {
-    document.getElementById("report-template").open = true;
-    const selection = window.getSelection();
-    const range = document.createRange();
-    range.selectNodeContents(document.getElementById("report-text"));
-    selection.removeAllRanges();
-    selection.addRange(range);
-    status.textContent = "Select and copy the template below.";
-  }
+// Open a linked answer or the source-image checksum, including on a direct visit.
+function openLinkedDetails(hash) {
+  const target = document.getElementById(hash.slice(1));
+  if (target?.tagName === "DETAILS") target.open = true;
+}
+document.addEventListener("click", event => {
+  const link = event.target.closest("a[href^='#']");
+  if (link) openLinkedDetails(link.hash);
 });
+window.addEventListener("hashchange", () => openLinkedDetails(location.hash));
+openLinkedDetails(location.hash);
+
+// The full navigation remains visible when JavaScript is unavailable.
+(() => {
+  const nav = document.querySelector(".main-nav");
+  const button = nav.querySelector(".nav-toggle");
+  const links = document.getElementById("nav-links");
+  const compact = window.matchMedia("(max-width: 768px)");
+
+  function setOpen(open) {
+    button.setAttribute("aria-expanded", String(open));
+    links.hidden = compact.matches && !open;
+    if (!open) nav.querySelector("details").open = false;
+  }
+
+  function setLayout() {
+    button.hidden = !compact.matches;
+    nav.closest(".site-header").classList.toggle("compact-nav", compact.matches);
+    setOpen(false);
+  }
+
+  button.addEventListener("click", () => setOpen(links.hidden));
+  nav.addEventListener("keydown", event => {
+    if (event.key === "Escape" && compact.matches && !links.hidden) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+  links.addEventListener("click", event => {
+    if (compact.matches && event.target.closest("a")) setOpen(false);
+  });
+  nav.addEventListener("focusout", event => {
+    if (compact.matches && !nav.contains(event.relatedTarget)) setOpen(false);
+  });
+  document.addEventListener("click", event => {
+    if (compact.matches && !nav.contains(event.target)) setOpen(false);
+  });
+  compact.addEventListener("change", setLayout);
+  setLayout();
+})();
 
 // GIFs do not honor CSS animation controls; use their static first frames.
 const motionButton = document.getElementById("motion-toggle");
@@ -225,11 +263,12 @@ motionPreference.addEventListener("change", event => {
     if (!menu.contains(event.relatedTarget) && !menu.matches(":hover")) menu.open = false;
   });
   menu.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
+    if (event.key === "Escape" && menu.open) {
       menu.open = false;
       openedByHover = false;
       trigger.focus();
       event.preventDefault();
+      event.stopPropagation();
     }
   });
   menu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { menu.open = false; }));
@@ -296,10 +335,11 @@ motionPreference.addEventListener("change", event => {
   pauseButton.addEventListener("click", () => {
     userPaused = !userPaused;
     focusHeld = false;
+    hovered = false;
     updateControls();
     schedule();
   });
-  panel.addEventListener("mouseenter", () => { hovered = true; schedule(); });
+  panel.addEventListener("mouseenter", () => { hovered = matchMedia("(hover: hover)").matches; schedule(); });
   panel.addEventListener("mouseleave", () => { hovered = false; schedule(); });
   panel.addEventListener("focusin", event => {
     focusHeld = true;
@@ -323,4 +363,45 @@ motionPreference.addEventListener("change", event => {
   render();
   controls.hidden = false;
   schedule();
+})();
+
+// Scroll affects only the English title overlay. The original print stays in place.
+(() => {
+  const intro = document.getElementById("cover-intro");
+  const panel = intro.querySelector(".cover-sticky");
+  const overlay = intro.querySelector(".cover-english");
+  const header = document.querySelector(".site-header");
+  const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  let frame = 0;
+
+  function render() {
+    frame = 0;
+    const offset = header.getBoundingClientRect().bottom - intro.getBoundingClientRect().top;
+    const distance = intro.offsetHeight - panel.offsetHeight;
+    const progress = motion.matches || distance <= 1
+      ? Number(offset >= 10)
+      : Math.min(1, Math.max(0, offset / distance));
+    intro.style.setProperty("--cover-progress", progress.toFixed(4));
+  }
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(render);
+  }
+  function resize() {
+    intro.classList.toggle("is-enhanced", !motion.matches);
+    schedule();
+  }
+  // Reserve the scroll distance before images have decoded, including on fragment visits.
+  intro.classList.toggle("is-enhanced", !motion.matches);
+  overlay.decode().then(() => {
+    resize();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", resize);
+    window.addEventListener("pageshow", schedule);
+    motion.addEventListener("change", resize);
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(schedule);
+      observer.observe(header);
+      observer.observe(panel);
+    }
+  }).catch(() => { intro.classList.remove("is-enhanced"); });
 })();

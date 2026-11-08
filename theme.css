@@ -55,9 +55,9 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .menu-panel { background: linear-gradient(135deg, #233e5e, #172d47); border: 1px solid #e3c17d; border-radius: 5px; box-shadow: inset 0 0 0 3px #14263d, inset 0 0 0 4px #768297, var(--frame-shadow); }
 .skip-link { position: fixed; top: -100px; left: 16px; padding: 12px 20px; z-index: 1000; color: var(--ink); background: var(--gold-bright); }
 .skip-link:focus { top: 10px; }
-.dqm-loading-cursor { position: fixed; inset: 0 auto auto 0; width: 32px; height: 32px; pointer-events: none; z-index: 10000; filter: drop-shadow(0 2px 2px #07132280); }
-html[data-loading], html[data-loading] * { cursor: progress !important; }
-html[data-loading-pointer], html[data-loading-pointer] * { cursor: default !important; }
+.missing-page { max-width: 620px; margin-block: 14vh; }
+.missing-page h1 { margin-block: 16px 8px; font: 500 40px/1.15 var(--font-display); }
+.missing-page .button { margin-top: 24px; }
 @media (max-width: 700px) { .container { width: calc(100% - 40px); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
 html[data-motion="paused"] { scroll-behavior: auto; }

@@ -3,7 +3,8 @@
 Run after editing downloads/releases.json. --check validates without writing.
 The generated HTML is committed, so viewing the site needs no build or JS.
 An optional downloadUrl selects a pinned public dqm-psx/patch release asset.
-Local packages remain required for integrity checks and historical credits.
+Public-only releases keep verified credits in the manifest. Bundled releases
+continue to validate their original ZIPs.
 """
 import argparse
 import hashlib
@@ -17,8 +18,12 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
+VERSION = re.compile(r'(?:0|[1-9][0-9]*)(?:\.(?:0|[1-9][0-9]*)){2}')
 START, END = '<!-- release:begin -->', '<!-- release:end -->'
+HERO_START, HERO_END = '<!-- hero-download:begin -->', '<!-- hero-download:end -->'
+INSTALL_START, INSTALL_END = '<!-- install-download:begin -->', '<!-- install-download:end -->'
 CREDITS_START, CREDITS_END = '<!-- contributors:begin -->', '<!-- contributors:end -->'
+AI_START, AI_END = '<!-- ai-contributors:begin -->', '<!-- ai-contributors:end -->'
 HEADING = re.compile(r"[A-Z][A-Z0-9 '&/():-]*")
 HANDLE = r'[\w][\w.-]*'
 THANKS_NAMES = re.compile(rf'{HANDLE}(?:, {HANDLE})*(?:,? and {HANDLE})?')
@@ -36,12 +41,18 @@ COLLECTIVE_THANKS = re.compile(
 def package_identity(release):
     """Keep package names and remote release paths tied to the recorded version."""
     version = release['version']
-    if not isinstance(version, str) or not re.fullmatch(r'\d+\.\d+\.\d+', version):
+    if not isinstance(version, str) or not VERSION.fullmatch(version):
         raise ValueError('Release version must contain three numeric components')
-    filename = f'DQM1-2-English-v{version}-public.zip'
-    if release['file'] != filename:
+    filename = release['file']
+    stem = f'DQM1-2-English-v{version}'
+    if filename not in (stem + '.zip', stem + '-public.zip'):
         raise ValueError('Package filename does not match the release version')
     return version, filename
+
+
+def package_contents(version):
+    stem = f'DQM1-2-English-v{version}'
+    return [stem + '.bps', stem + '.cue', 'README.txt']
 
 
 def download_target(release):
@@ -57,13 +68,17 @@ def download_target(release):
 
 def validate_package(release, root):
     """Return the size and README from the same bytes whose hash was checked."""
+    _, filename = package_identity(release)
+    return validate_package_bytes(release, (root / 'downloads' / filename).read_bytes())
+
+
+def validate_package_bytes(release, data):
     version, filename = package_identity(release)
     download_target(release)
-    data = (root / 'downloads' / filename).read_bytes()
     if len(data) != release['bytes'] or hashlib.sha256(data).hexdigest() != release['sha256']:
         raise ValueError(f'Package size or SHA-256 differs from the release record: {filename}')
     stem = f'DQM1-2-English-v{version}'
-    contents = [stem + '.bps', stem + '.cue', 'README.txt']
+    contents = package_contents(version)
     if release['contents'] != contents:
         raise ValueError('Expected only the versioned BPS, matching CUE, and README')
     with zipfile.ZipFile(BytesIO(data)) as archive:
@@ -76,21 +91,28 @@ def validate_package(release, root):
     return len(data), readme
 
 
-def download_card(release, package_size):
-    version, filename = package_identity(release)
+def download_attributes(release):
     target = download_target(release)
-    # Cross-origin GitHub downloads use the asset response's Content-Disposition.
-    download_attribute = f' download="{filename}"' if 'downloadUrl' not in release else ''
+    # Keep published asset names and historical URLs intact. Browsers honor a
+    # suggested filename for our same-origin mirror; GitHub names its own files.
+    suggested = f'DQM1-2-English-v{release["version"]}.zip'
+    download_attribute = f' download="{suggested}"' if 'downloadUrl' not in release else ''
+    return f'href="{escape(target, quote=True)}"{download_attribute}'
+
+
+def download_card(release):
+    version, _ = package_identity(release)
     notes = release.get('notes')
     if not isinstance(notes, list) or not notes or not all(isinstance(n, str) and n.strip() for n in notes):
         raise ValueError('The latest release needs a nonempty list of release notes')
     items = ''.join(f'<li>{escape(note)}</li>' for note in notes)
+    release_link = (f'<p><a href="https://github.com/dqm-psx/patch/releases/tag/v{version}">'
+                    'View release on GitHub</a></p>' if 'downloadUrl' in release else '')
     return f'''          <div class="release-download" aria-labelledby="release-title">
             <div class="release-heading"><h3 id="release-title">{escape(release['name'])}</h3><span class="release-version">v{version}</span></div>
             <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <a class="button button-gold" href="{escape(target, quote=True)}"{download_attribute}><span aria-hidden="true">↓</span> Download v{version}</a>
-            <span class="download-meta">ZIP archive <span aria-hidden="true">·</span> {package_size / 1_000_000:.2f} MB</span>
-            <details class="release-notes"><summary>Release notes</summary><ul>{items}</ul><p>See the included README for the full change history and credits.</p></details>
+            <details class="release-notes"><summary>Release notes</summary><ul>{items}</ul>{release_link}</details>
+            <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · {release['bytes']:,} bytes</p><code class="file-hash">{release['sha256']}</code></details>
           </div>
 '''
 
@@ -152,22 +174,18 @@ def project_contributors(root):
     if data.get('schemaVersion') != 1 or not isinstance(data.get('contributors'), list):
         raise ValueError('Unsupported project contributors data')
     names = []
+    aliases = {}
+    ai_names = set()
     for record in data['contributors']:
-        names.append(valid_name(record['name']))
+        name = valid_name(record['name'])
+        names.append(name)
+        aliases.setdefault(name.casefold(), name)
+        if record.get('creditType') == 'ai-assistance':
+            ai_names.add(name.casefold())
         for field in ('contribution', 'source'):
             if not isinstance(record.get(field), str) or not record[field].strip():
                 raise ValueError(f'Project contributor needs a recorded {field}')
-    return names
-
-
-def project_contributor_aliases(root):
-    """Resolve only aliases explicitly recorded with a project's named credit."""
-    records = json.loads((root / 'data/contributors.json').read_text(encoding='utf-8'))['contributors']
-    aliases = {}
-    for record in records:
-        name = valid_name(record['name'])
-        aliases.setdefault(name.casefold(), name)
-    for record in records:
+    for record in data['contributors']:
         name = aliases[valid_name(record['name']).casefold()]
         values = record.get('aliases', [])
         if not isinstance(values, list):
@@ -177,19 +195,22 @@ def project_contributor_aliases(root):
             if key in aliases and aliases[key] != name:
                 raise ValueError('Contributor alias belongs to more than one name')
             aliases[key] = name
-    return aliases
+    return names, aliases, ai_names
 
 
-def contributor_list(names, aliases=None):
-    aliases = aliases or {}
+def contributor_items(names, aliases, ai_names):
     unique = {}
     for name in names:
         name = valid_name(name)
         name = aliases.get(name.casefold(), name)
         unique.setdefault(name.casefold(), name)
     ordered = sorted(unique.values(), key=lambda name: (name.lstrip('_').casefold(), name.casefold()))
-    items = ''.join(f'                  <li>{escape(name)}</li>\n' for name in ordered)
-    return '                <ul class="contributor-list" id="contributor-list">\n' + items + '                </ul>\n'
+    people = []
+    assistants = []
+    for name in ordered:
+        items = assistants if name.casefold() in ai_names else people
+        items.append(f'                <li>{escape(name)}</li>\n')
+    return ''.join(people), ''.join(assistants)
 
 
 def replace_block(source, start, end, body, indent):
@@ -200,39 +221,66 @@ def replace_block(source, start, end, body, indent):
     return before + start + '\n' + body + ' ' * indent + end + after
 
 
-def update(root=ROOT, check=False):
-    manifest = json.loads((root / 'downloads/releases.json').read_text(encoding='utf-8'))
+def rendered_page(root, manifest):
     releases = manifest.get('releases')
     if manifest.get('schemaVersion') != 1 or not isinstance(releases, list) or not releases:
         raise ValueError('Unsupported or empty release manifest')
     if len({release['version'] for release in releases}) != len(releases):
         raise ValueError('Duplicate release version in manifest')
-    packages = [validate_package(release, root) for release in releases]
-    names = project_contributors(root)
-    aliases = project_contributor_aliases(root)
-    for release, (_, readme) in zip(releases, packages):
+    names, aliases, ai_names = project_contributors(root)
+    for release in releases:
+        version, filename = package_identity(release)
+        download_target(release)
         try:
-            names.extend(readme_contributors(readme))
+            if (root / 'downloads' / filename).is_file() or 'downloadUrl' not in release:
+                _, readme = validate_package(release, root)
+                names.extend(readme_contributors(readme))
+            else:
+                # These records are created only after the release sync verifies
+                # the public ZIP, its contents, matching CUE and original README.
+                if (type(release.get('bytes')) is not int or release['bytes'] <= 0
+                        or not re.fullmatch(r'[a-f0-9]{64}', release.get('sha256', ''))
+                        or release.get('contents') != package_contents(version)
+                        or not isinstance(release.get('contributors'), list)):
+                    raise ValueError('Incomplete public release record')
+                names.extend(valid_name(name) for name in release['contributors'])
         except ValueError as error:
             raise ValueError(f'{release["file"]}: {error}') from error
-    card = download_card(releases[0], packages[0][0])
-    credits = contributor_list(names, aliases)
+    current = releases[0]
+    card = download_card(current)
+    credits, ai_credits = contributor_items(names, aliases, ai_names)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
-    updated = replace_block(source, START, END, card, 10)
+    attributes = download_attributes(current)
+    hero_link = (f'            <a id="download" class="button button-gold" {attributes}>'
+                 f'Download v{current["version"]} · {current["bytes"] / 1_000_000:.2f} MB</a>\n')
+    install_link = f'                <a {attributes}>Download</a>\n'
+    updated = replace_block(source, HERO_START, HERO_END, hero_link, 12)
+    updated = replace_block(updated, INSTALL_START, INSTALL_END, install_link, 16)
+    updated = replace_block(updated, START, END, card, 10)
     updated = replace_block(updated, CREDITS_START, CREDITS_END, credits, 16)
+    return replace_block(updated, AI_START, AI_END, ai_credits, 16)
+
+
+def update(root=ROOT, check=False):
+    manifest = json.loads((root / 'downloads/releases.json').read_text(encoding='utf-8'))
+    page = root / 'index.html'
+    updated = rendered_page(root, manifest)
     if check:
-        if updated != source:
-            raise ValueError('Download card or contributor list is stale; run python tools/update_release.py')
+        if updated != page.read_text(encoding='utf-8'):
+            raise ValueError('Download, release details, or contributor list is stale; run python tools/update_release.py')
         return
-    # Nothing is written until every package, credit, and marker has been checked.
+    atomic_write(page, updated)
+
+
+def atomic_write(path, content):
     temporary = None
     try:
-        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', newline='\n', dir=root,
-                                         prefix='.index-', suffix='.tmp', delete=False) as output:
+        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', newline='\n', dir=path.parent,
+                                         prefix=f'.{path.stem}-', suffix='.tmp', delete=False) as output:
             temporary = Path(output.name)
-            output.write(updated)
-        os.replace(temporary, page)
+            output.write(content)
+        os.replace(temporary, path)
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
@@ -243,8 +291,8 @@ def main():
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     update(check=args.check)
-    print('Release packages, download card, and contributor list verified.' if args.check
-          else 'Updated the static download card and contributor list.')
+    print('Release packages, download, release details, and contributor list verified.' if args.check
+          else 'Updated the static download, release details, and contributor list.')
 
 
 if __name__ == '__main__':

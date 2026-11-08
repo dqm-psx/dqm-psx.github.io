@@ -2,119 +2,101 @@
 window.DqmScreenshots = [
   {
     "src": "assets/screenshots/balk-travelers-gate.png",
-    "alt": "Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon",
-    "caption": "Through the Travelers’ Gates",
+    "alt": "A blue gate swirls at the end of a stone corridor. Terry faces it with three monsters lined up behind him.",
+    "caption": "A Travelers’ Gate in a torchlit passage",
     "credit": "BalK"
   },
   {
-    "src": "assets/screenshots/balk-championship.png",
-    "alt": "Terry is encouraged to win the championship in a richly decorated room",
-    "caption": "A championship to chase",
-    "credit": "BalK"
+    "src": "assets/screenshots/3xad-field-menu-game.webp",
+    "alt": "Items is selected in the field menu. Beneath Terry’s party, Sura, Onion, and Sky each have a green HP bar and a blue MP bar with current and maximum values.",
+    "caption": "Checking Sura, Onion, and Sky’s HP and MP",
+    "credit": "3xad"
   },
   {
-    "src": "assets/screenshots/balk-kings-praise.png",
-    "alt": "The king praises Terry and his monster party in the throne room",
-    "caption": "An audience with the king",
-    "credit": "BalK"
-  },
-  {
-    "src": "assets/screenshots/balk-cave-encounter.png",
-    "alt": "Terry faces an angry monster among broken pots in a cave",
-    "caption": "An unexpected encounter",
-    "credit": "BalK"
+    "src": "assets/screenshots/3xad-monster-table-game.webp",
+    "alt": "Terry sits at a square table with three monsters, including two blue slimes. One tells him, “Everything is best in moderation!”",
+    "caption": "A word on moderation at the Arena table",
+    "credit": "3xad"
   },
   {
     "src": "assets/screenshots/balk-field-skills.png",
-    "alt": "The English field skills menu with Seek selected and its description visible",
-    "caption": "The right skill for the journey",
-    "credit": "BalK"
-  },
-  {
-    "src": "assets/screenshots/balk-adventure-record.png",
-    "alt": "Terry’s information screen showing play time, farm monsters, gates cleared, and species found",
-    "caption": "Every adventure leaves a record",
-    "credit": "BalK"
-  },
-  {
-    "src": "assets/screenshots/balk-party-flee.png",
-    "alt": "A monster in Terry’s party warns everyone to run away quickly",
-    "caption": "Knowing when to run",
-    "credit": "BalK"
-  },
-  {
-    "src": "assets/screenshots/balk-party-together.png",
-    "alt": "A party member says it is important to stick together",
-    "caption": "Better together",
-    "credit": "BalK"
-  },
-  {
-    "src": "assets/screenshots/balk-party-attack.png",
-    "alt": "A party member declares that healing wastes time and urges an attack",
-    "caption": "A party with plenty of personality",
+    "alt": "Atlas’s field skills include Seek. Its description reads “Examines the area around you,” and the menu shows a cost of 2 MP.",
+    "caption": "Atlas’s Seek skill examines the surrounding area",
     "credit": "BalK"
   },
   {
     "src": "assets/screenshots/balk-arena-rival.png",
-    "alt": "A rival challenges Terry and his three monsters before an arena match",
-    "caption": "Ready for the arena",
+    "alt": "Two trainers face each other across the Arena, each with three monsters. Terry’s rival says, “I don’t see how you can win with monsters like those!”",
+    "caption": "An Arena rival sizes up Terry’s monsters",
     "credit": "BalK"
   },
   {
+    "src": "assets/screenshots/3xad-title-screen-game.webp",
+    "alt": "A multicolored Dragon Quest Monsters 1 & 2 logo sits on a parchment scroll above the English subtitle, The Starry Night Hero and Friends at the Ranch.",
+    "caption": "The translated Dragon Quest Monsters 1 & 2 title screen",
+    "credit": "3xad"
+  },
+  {
+    "src": "assets/adventure.png",
+    "alt": "Terry stands beside two rows of four red-and-gold treasure chests. A dark hole opens in the floor between the rows.",
+    "caption": "A dungeon treasure room with eight chests"
+  },
+  {
+    "src": "assets/screenshots/balk-adventure-record.png",
+    "alt": "Terry’s Information screen lists 16:40 of play time, 10 farm monsters, four eggs, three barn monsters, nine gates cleared, and 70 species found.",
+    "caption": "Nine gates cleared and 70 species in Terry’s records",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/battle.png",
+    "alt": "Three enemies face the party, including a knight riding a green slime. Fight is highlighted above Items, Tactics, and Run Away.",
+    "caption": "A cave battle against a slime rider and two allies"
+  },
+  {
     "src": "assets/screenshots/balk-volcanic-trail.png",
-    "alt": "Terry leads a monster party along a rocky trail beside glowing lava",
-    "caption": "A trail through a fiery world",
+    "alt": "Terry and three monsters follow a narrow strip of rock between red lava and a brown shoreline. Bare trees dot the path.",
+    "caption": "Terry leads three monsters along the edge of a lava flow",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/screenshots/balk-kings-praise.png",
+    "alt": "Terry stands on a blue carpet before the king’s gold throne. The king tells him, “You do things on a grand scale!”",
+    "caption": "The king praises Terry in the throne room",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/screenshots/balk-cave-encounter.png",
+    "alt": "Terry faces a green monster with a blade. Broken pots line the cave walls as the monster asks, “What have you done...?!”",
+    "caption": "A cave monster confronts Terry over broken pots",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/screenshots/balk-championship.png",
+    "alt": "Terry speaks to a crowned figure at a tea table in a room lined with portraits and flowers. The dialogue reads, “I am satisfied. Terry, win the championship!”",
+    "caption": "At the tea table before the championship",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/screenshots/balk-party-flee.png",
+    "alt": "Terry turns toward the gray monster across the table. It warns, “All around us! We’d better run away quickly...”",
+    "caption": "A warning at the Arena table",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/screenshots/balk-party-together.png",
+    "alt": "Terry looks across the table toward an antlered monster. Its advice reads, “I’ll go along with everyone. It’s important to stick together.”",
+    "caption": "An antlered party member wants to stick together",
+    "credit": "BalK"
+  },
+  {
+    "src": "assets/screenshots/balk-party-attack.png",
+    "alt": "Terry turns toward the purple winged monster at the foot of the table. Its verdict reads, “Healing just wastes time! Blast it all!”",
+    "caption": "A winged party member would rather attack than heal",
     "credit": "BalK"
   },
   {
     "src": "assets/great-tree.png",
-    "alt": "A colorful scene from the world of Dragon Quest Monsters on PlayStation",
-    "caption": "A world beyond the Travelers’ Gates"
-  },
-  {
-    "src": "assets/adventure.png",
-    "alt": "The party exploring a room of treasure chests in the English translation",
-    "caption": "A new discovery around every corner"
-  },
-  {
-    "src": "assets/battle.png",
-    "alt": "An English-language monster battle in the PlayStation game",
-    "caption": "A little courage. A few good monsters."
-  },
-  {
-    "src": "assets/screenshots/3xad-title-screen.png",
-    "alt": "English title screen for Dragon Quest Monsters 1 & 2: The Starry Night Hero and Friends at the Ranch",
-    "caption": "The adventures begin",
-    "credit": "3xad",
-    "viewport": {
-      "x": 162,
-      "y": 29,
-      "width": 673,
-      "height": 500
-    }
-  },
-  {
-    "src": "assets/screenshots/3xad-field-menu.png",
-    "alt": "English field menu with Items selected and current and maximum HP and MP for Terry’s monster party",
-    "caption": "A clearer view of your party",
-    "credit": "3xad",
-    "viewport": {
-      "x": 125,
-      "y": 5,
-      "width": 748,
-      "height": 557
-    }
-  },
-  {
-    "src": "assets/screenshots/3xad-monster-table.png",
-    "alt": "Terry sits with his monsters at the dining table while one says Everything is best in moderation",
-    "caption": "A little table talk",
-    "credit": "3xad",
-    "viewport": {
-      "x": 125,
-      "y": 5,
-      "width": 748,
-      "height": 557
-    }
+    "alt": "A blue crystal ball rests on a red table by a flower-lined balcony. Across the water, a single tree stands on the horizon.",
+    "caption": "The crystal ball and the tree beyond the castle balcony"
   }
 ];

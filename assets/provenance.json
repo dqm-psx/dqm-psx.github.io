@@ -738,74 +738,77 @@
     "sha256": "3ce0b11f4dc5c7b939bcfacdc84ec540b433526a7acadf8188c33a61c3143946"
   },
   {
-    "file": "screenshots/3xad-title-screen.png",
+    "file": "screenshots/3xad-title-screen-game.webp",
     "description": "English title screen.",
     "contributor": "3xad",
-    "width": 1000,
-    "height": 541,
-    "bytes": 640205,
+    "width": 673,
+    "height": 500,
+    "bytes": 464520,
     "sourceFile": "yfei7tcx66ph1.png",
     "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
     "sourceUrl": "https://i.redd.it/yfei7tcx66ph1.png",
-    "sha256": "fb57142bc8354f859956cde19adbd43095b27623d353c12dcac34c796afcfb5b",
-    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
-    "displayCrop": {
+    "sha256": "7eea0a255e2d4ac6348ca7e179f62366f14b9d1994d5d23883e425069b23316c",
+    "processing": "Cropped to the game viewport in source pixels and encoded as lossless WebP. The source URL and digest identify the original capture.",
+    "sourceWidth": 1000,
+    "sourceHeight": 541,
+    "sourceSha256": "fb57142bc8354f859956cde19adbd43095b27623d353c12dcac34c796afcfb5b",
+    "sourceBytes": 640205,
+    "sourceCrop": {
       "x": 162,
       "y": 29,
       "width": 673,
-      "height": 500,
-      "units": "source pixels",
-      "method": "CSS viewport crop",
-      "note": "Excludes emulator title/menu bars, bottom status bar, and black side margins."
+      "height": 500
     }
   },
   {
-    "file": "screenshots/3xad-field-menu.png",
+    "file": "screenshots/3xad-field-menu-game.webp",
     "description": "English field item menu with party HP/MP status.",
     "contributor": "3xad",
-    "width": 1000,
-    "height": 562,
-    "bytes": 518746,
+    "width": 748,
+    "height": 557,
+    "bytes": 411848,
     "sourceFile": "h7gtpscx66ph1.png",
     "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
     "sourceUrl": "https://i.redd.it/h7gtpscx66ph1.png",
-    "sha256": "dc97a8d82cfbfb1a13b5eb652bd8fde0e04124c1d490fdd2ca03b7391ecb4173",
-    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
-    "displayCrop": {
+    "sha256": "cd8fc2c1febd9f6f8552a84f5d0ab184b1a83340ff5b5408633b791c2af7576a",
+    "processing": "Cropped to the game viewport in source pixels and encoded as lossless WebP. The source URL and digest identify the original capture.",
+    "sourceWidth": 1000,
+    "sourceHeight": 562,
+    "sourceSha256": "dc97a8d82cfbfb1a13b5eb652bd8fde0e04124c1d490fdd2ca03b7391ecb4173",
+    "sourceBytes": 518746,
+    "sourceCrop": {
       "x": 125,
       "y": 5,
       "width": 748,
-      "height": 557,
-      "units": "source pixels",
-      "method": "CSS viewport crop",
-      "note": "Excludes black side margins and top strip."
+      "height": 557
     }
   },
   {
-    "file": "screenshots/3xad-monster-table.png",
+    "file": "screenshots/3xad-monster-table-game.webp",
     "description": "Monster table conversation in Terry's adventure.",
     "contributor": "3xad",
-    "width": 1000,
-    "height": 562,
-    "bytes": 353877,
+    "width": 748,
+    "height": 557,
+    "bytes": 282182,
     "sourceFile": "vlilutcx66ph1.png",
     "sourcePage": "https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/",
     "sourceUrl": "https://i.redd.it/vlilutcx66ph1.png",
-    "sha256": "bd0be47edcafbd83616637fc10f62cb4ad1e8f828d26965f3f201e6a1cb1291a",
-    "processing": "Original PNG copied unchanged; browser presentation crops the visible viewport without modifying the image file.",
-    "displayCrop": {
+    "sha256": "fdd983b82cbcf6a1cb53d4b540dbecb68702df22389e07ad5efb4de2e78c5bcd",
+    "processing": "Cropped to the game viewport in source pixels and encoded as lossless WebP. The source URL and digest identify the original capture.",
+    "sourceWidth": 1000,
+    "sourceHeight": 562,
+    "sourceSha256": "bd0be47edcafbd83616637fc10f62cb4ad1e8f828d26965f3f201e6a1cb1291a",
+    "sourceBytes": 353877,
+    "sourceCrop": {
       "x": 125,
       "y": 5,
       "width": 748,
-      "height": 557,
-      "units": "source pixels",
-      "method": "CSS viewport crop",
-      "note": "Excludes black side margins, top strip, and the fast-forward overlay in the upper-right black margin."
+      "height": 557
     }
   },
   {
     "file": "artwork/dqm-1-2-english-cover.png",
-    "description": "Generated English fan cover used as the source for the title layers and paper plate, and as the static lower-artwork overlay in the opening cover composition.",
+    "description": "English fan adaptation retained as the source of the existing English title artwork.",
     "width": 1254,
     "height": 1254,
     "bytes": 2665135,
@@ -819,17 +822,11 @@
     "processing": "English title and subtitle adaptation using the OpenAI built-in image generation tool. This is generated artwork based on a 735 x 735 source, not a higher-resolution original scan.",
     "generatedOn": "2026-11-06",
     "promptFile": "artwork/english-cover-prompt.txt",
-    "promptSha256": "1362e9e5fe95ed1f1466fbb621fcc3b6522011d315cd920949c07a4003827f46",
-    "display": {
-      "role": "Static lower-artwork overlay, unchanged during the scroll transition",
-      "clipTopPercent": 28.6,
-      "blendToOpaquePercent": 29.2,
-      "note": "The generated English cover file is displayed beneath the title layers. Its lower artwork is fully opaque from 29.2% of the cover height; the fixed blend above that joins the generated paper plate."
-    }
+    "promptSha256": "1362e9e5fe95ed1f1466fbb621fcc3b6522011d315cd920949c07a4003827f46"
   },
   {
     "file": "artwork/dqm-1-2-japanese-cover.png",
-    "description": "User-supplied original Japanese front cover retained as the source for the generated Japanese title layer; no longer displayed as a full cover.",
+    "description": "Previously supplied Japanese cover reference, preserved unchanged.",
     "width": 640,
     "height": 640,
     "bytes": 720954,
@@ -838,52 +835,8 @@
     "processing": "User-supplied original cover copied unchanged."
   },
   {
-    "file": "artwork/cover-title-japanese.png",
-    "description": "Generated transparent Japanese title layer; only the main logo is displayed, with the generated subtitle clipped out.",
-    "width": 2172,
-    "height": 724,
-    "bytes": 1483949,
-    "sha256": "bc4dc3d8927808ebd5d208a0d2ef91787c94d5ccaa440995e8dc07325a92d050",
-    "colorMode": "RGBA",
-    "alphaRange": [
-      0,
-      255
-    ],
-    "alphaBounds": {
-      "x": 25,
-      "y": 0,
-      "width": 2134,
-      "height": 700
-    },
-    "sourceFile": "artwork/dqm-1-2-japanese-cover.png",
-    "sourceSha256": "91526ea52884e66638579fb819f4c74b77476a2c6bf2d330ed66dd64653432cd",
-    "processing": "Generated title-only adaptation using the OpenAI built-in image generation tool, with a transparent background. This is a generated asset, not a pixel-exact extraction or an original scan. A second generation refined the Japanese title appearance using the original cover as a reference.",
-    "generatedOn": "2026-11-06",
-    "promptFile": "artwork/cover-layers-prompts.txt",
-    "promptSha256": "1ba135a1194625f0b979720398f9fc1d7ff428be73cb4dd331411cfd31872a17",
-    "promptSections": [
-      "jp_title",
-      "jp_title_refine"
-    ],
-    "display": {
-      "role": "Japanese main logo plus a separate native SVG subtitle; the combined title layer changes during scrolling",
-      "frame": {
-        "leftPercent": 6,
-        "topPercent": 2,
-        "widthPercent": 88,
-        "heightPercent": 25.4
-      },
-      "rasterClipBottomPercent": 23,
-      "subtitle": {
-        "text": "星降りの勇者と牧場の仲間たち",
-        "method": "Inline SVG text in index.html",
-        "note": "The PNG contains a duplicated character in its generated subtitle. CSS hides that subtitle; the displayed replacement uses the exact Japanese text, with browser-rendered typography."
-      }
-    }
-  },
-  {
     "file": "artwork/cover-title-english.png",
-    "description": "Generated transparent English title and subtitle layer for the shared cover composition.",
+    "description": "Transparent English fan title and subtitle used to build the English title overlay.",
     "width": 2172,
     "height": 724,
     "bytes": 1723353,
@@ -907,39 +860,113 @@
     "promptSha256": "1ba135a1194625f0b979720398f9fc1d7ff428be73cb4dd331411cfd31872a17",
     "promptSections": [
       "en_title"
-    ],
-    "display": {
-      "role": "English title layer; only the title layers change during scrolling",
-      "frame": {
-        "leftPercent": 6,
-        "topPercent": 2,
-        "widthPercent": 88,
-        "heightPercent": 25.4
-      }
-    }
+    ]
   },
   {
-    "file": "artwork/cover-paper-base.png",
-    "description": "Generated blank-title paper plate used as the static background of the assembled cover.",
-    "width": 1254,
-    "height": 1254,
-    "bytes": 2297314,
-    "sha256": "ad547ceb0d1202b5d8a10a13e0eb781a5a0ed61e99086c92ce841aa0dc4d4ebd",
-    "colorMode": "RGB",
-    "sourceFile": "artwork/dqm-1-2-english-cover.png",
-    "sourceSha256": "9c97004f9d466b695fc8cb89c5191e915036e09f8a55743fdef79075bcd6a9ef",
-    "processing": "The OpenAI built-in image generation tool removed the English title, subtitle, and logo ornaments. The generated plate is not pixel-identical to the input; it supplies the upper paper area and small portions of the highest artwork. A separate static overlay restores the existing English cover artwork lower down.",
-    "generatedOn": "2026-11-06",
-    "promptFile": "artwork/cover-layers-prompts.txt",
-    "promptSha256": "1ba135a1194625f0b979720398f9fc1d7ff428be73cb4dd331411cfd31872a17",
-    "promptSections": [
-      "blank_cover"
+    "file": "artwork/japanese-retail-front.jpg",
+    "description": "Japanese PlayStation retail front cover for SLPM-87050. Native 600 dpi JPEG scan, including the printed Japanese title and subtitle.",
+    "width": 2906,
+    "height": 2951,
+    "bytes": 1488794,
+    "sha256": "246108fd30f463f6b9da87c3af0d81617ab3895ed9c10ed91325e7bbe59f29c4",
+    "sourcePage": "https://archive.org/details/image-027",
+    "sourceUrl": "https://archive.org/download/image-027/Image001.jpg",
+    "sourceCatalog": "https://psxdatacenter.com/games/J/D/SLPM-87050.html",
+    "processing": "Original Image001.jpg copied byte for byte."
+  },
+  {
+    "file": "artwork/cover-japanese-560.webp",
+    "description": "Responsive display copy of the complete Japanese retail cover. This static layer supplies the artwork for both title states.",
+    "width": 560,
+    "height": 569,
+    "bytes": 92212,
+    "sha256": "5c58076837d49d98416ad37db40c84cd29ae7208ee09eea33bd19553eb5d7c02",
+    "sourceFile": "artwork/japanese-retail-front.jpg",
+    "processing": "Entire scan resized proportionally with Lanczos and encoded as WebP. Includes the original Japanese logo and subtitle.",
+    "recipe": "artwork/build_cover.py"
+  },
+  {
+    "file": "artwork/cover-english-overlay-560.webp",
+    "description": "Transparent English title reveal at the top edge of the fixed Japanese cover.",
+    "width": 560,
+    "height": 168,
+    "bytes": 32184,
+    "sha256": "01fd9dfe1f8cffe5cecc44d0002ba5fc1f2402fd02c614a961f85605d4af3129",
+    "sourceFiles": [
+      "artwork/japanese-retail-front.jpg",
+      "artwork/cover-title-english.png"
     ],
+    "processing": "Mask the printed Japanese title with paper sampled above it, preserve the adjacent pompom and tail, and composite the existing proportional English fan title. Encode only the top strip with alpha.",
     "display": {
-      "role": "Static full-frame paper plate, unchanged during the scroll transition",
-      "overlayFile": "artwork/dqm-1-2-english-cover.png",
-      "overlayClipTopPercent": 28.6,
-      "overlayFullyOpaqueFromPercent": 29.2
-    }
+      "topPercent": 0,
+      "leftPercent": 0,
+      "widthPercent": 100,
+      "aspectRatio": "10 / 3"
+    },
+    "recipe": "artwork/build_cover.py"
+  },
+  {
+    "file": "artwork/cover-japanese-1120.webp",
+    "description": "Responsive display copy of the complete Japanese retail cover. This static layer supplies the artwork for both title states.",
+    "width": 1120,
+    "height": 1137,
+    "bytes": 284680,
+    "sha256": "fda640e96b894ff041f6a15919b827b065067ce8472d215cd3530a7fafb37e57",
+    "sourceFile": "artwork/japanese-retail-front.jpg",
+    "processing": "Entire scan resized proportionally with Lanczos and encoded as WebP. Includes the original Japanese logo and subtitle.",
+    "recipe": "artwork/build_cover.py"
+  },
+  {
+    "file": "artwork/cover-english-overlay-1120.webp",
+    "description": "Transparent English title reveal at the top edge of the fixed Japanese cover.",
+    "width": 1120,
+    "height": 336,
+    "bytes": 81268,
+    "sha256": "72cf652c0b5bb03c403a0303b232190565c8530d25e63104e14e52618da11b99",
+    "sourceFiles": [
+      "artwork/japanese-retail-front.jpg",
+      "artwork/cover-title-english.png"
+    ],
+    "processing": "Mask the printed Japanese title with paper sampled above it, preserve the adjacent pompom and tail, and composite the existing proportional English fan title. Encode only the top strip with alpha.",
+    "display": {
+      "topPercent": 0,
+      "leftPercent": 0,
+      "widthPercent": 100,
+      "aspectRatio": "10 / 3"
+    },
+    "recipe": "artwork/build_cover.py"
+  },
+  {
+    "file": "artwork/social-card.jpg",
+    "description": "Social sharing card with the original Japanese cover and the English patch title.",
+    "width": 1200,
+    "height": 630,
+    "bytes": 164188,
+    "sha256": "b156a970b2820b2abb7bf63695d9936169c7ebd630dfebcffbd84a2221434e5f",
+    "sourceFile": "artwork/japanese-retail-front.jpg",
+    "processing": "Resize the uncropped scan and typeset the English title and site address on a navy field.",
+    "recipe": "artwork/build_cover.py"
+  },
+  {
+    "file": "artwork/favicon.png",
+    "description": "Static Slime icon for the English patch website.",
+    "width": 32,
+    "height": 32,
+    "bytes": 461,
+    "sha256": "5e51320390be87d062435abe7f6d93de6721e0350caa81956d0770be705f04ea",
+    "sourceFile": "slime-still.png",
+    "processing": "Trim transparent padding from the existing Slime sprite, scale with nearest-neighbor filtering and center on a navy square.",
+    "recipe": "artwork/build_cover.py"
+  },
+  {
+    "file": "artwork/apple-touch-icon.png",
+    "description": "Static Slime icon for the English patch website.",
+    "width": 180,
+    "height": 180,
+    "bytes": 841,
+    "sha256": "6cda2a838e36b0397686b96016f6188670d801904b5424775b9519632836c648",
+    "sourceFile": "slime-still.png",
+    "processing": "Trim transparent padding from the existing Slime sprite, scale with nearest-neighbor filtering and center on a navy square.",
+    "recipe": "artwork/build_cover.py"
   }
 ]

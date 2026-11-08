@@ -7,7 +7,7 @@ body:
       value: |
         Share an original screenshot from the English patch. A maintainer will review it before deciding whether to add it to the gallery; submitting this issue does not publish it on the website.
 
-        Please submit one screenshot per issue at its original resolution. PNG is preferred; JPEG and WebP are also accepted. A maintainer can hide emulator borders in the website display without changing your original image.
+        Please submit one screenshot per issue at its original resolution. PNG, JPEG, and WebP are accepted. A maintainer can crop emulator borders from the gallery copy.
   - type: upload
     id: screenshot
     attributes:

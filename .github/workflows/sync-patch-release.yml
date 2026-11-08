@@ -1,0 +1,61 @@
+name: Sync patch release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '19 */6 * * *'
+
+concurrency:
+  group: sync-patch-release
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Verify the latest public package and prepare its download
+        run: python3 tools/sync_release.py
+      - name: Open a release update for review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- downloads/releases.json; then exit 0; fi
+          python3 tools/update_release.py --check
+          python3 -m unittest discover -s tools -p 'test_*release.py'
+          version=$(python3 -c 'import json; print(json.load(open("downloads/releases.json"))["releases"][0]["version"])')
+          branch="codex/sync-patch-v$version"
+          prior=$(gh pr list --head "$branch" --base "$BASE_BRANCH" --state all --json url --jq '.[0].url // empty')
+          if [ -n "$prior" ]; then echo "Existing review: $prior"; exit 0; fi
+
+          git add -- downloads/releases.json index.html
+          if git ls-remote --exit-code --heads origin "refs/heads/$branch"; then
+            # Recover if a previous run pushed before PR creation failed.
+            git fetch --no-tags origin "refs/heads/$branch"
+            git diff --cached --quiet FETCH_HEAD || { echo "Please inspect the existing branch $branch."; exit 1; }
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m "Update the patch download to v$version"
+            git push origin "HEAD:refs/heads/$branch"
+          fi
+          echo "Updates the download and credits from the published v$version package. The sync checked the ZIP size, SHA-256, contents, CUE, and README before generating the page." > "$RUNNER_TEMP/release-review.md"
+          error_file="$RUNNER_TEMP/release-pr-error.txt"
+          if pr=$(gh pr create --base "$BASE_BRANCH" --head "$branch" --title "Update patch download to v$version" --body-file "$RUNNER_TEMP/release-review.md" 2>"$error_file"); then
+            printf 'Release review: %s\n' "$pr" >> "$GITHUB_STEP_SUMMARY"
+          elif grep -Fq 'GitHub Actions is not permitted to create or approve pull requests' "$error_file"; then
+            compare="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$BASE_BRANCH...$branch?expand=1"
+            printf 'The verified v%s branch is ready. [Open the comparison](%s) and select **Create pull request**.\n' "$version" "$compare" >> "$GITHUB_STEP_SUMMARY"
+          else
+            cat "$error_file" >&2
+            exit 1
+          fi

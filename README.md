@@ -2,126 +2,51 @@
 
 The project homepage for the English fan translation of **Dragon Quest Monsters 1 & 2: The Starry Night Hero and Friends at the Ranch** for PlayStation.
 
-[Visit the homepage](https://dqm-psx.github.io/) · [Discord](https://discord.gg/6V9p6Y2pBt) · [ROMhacking.net](https://www.romhacking.net/translations/7734/)
+The homepage is in private preview. GitHub Pages is disabled. The public launch and repository visibility changes require the project owner’s go-ahead.
 
-The site is being prepared as the public landing page for the English patch developed in `phakic/dqm1`. It provides a verified download, installation instructions, screenshots, project credits, a FAQ, and community support. The release home is `dqm-psx/patch`, which remains private. The website bundles the exact published v1.0.73 package locally so its download does not require access to that repository.
+## Preview and build
 
-**Launch status:** GitHub Pages is disabled and the launch PR remains unmerged. Enable publication only after the project owner gives the go-ahead.
-
-## Local preview
-
-This is a static site with no build step or package dependencies. From this repository's root, run:
+Serve the checkout with `python -m http.server 4173 --bind 127.0.0.1` and open [the local preview](http://127.0.0.1:4173/). The source works directly as a static site. For the production layout, install Pillow and build it locally:
 
 ```sh
-python -m http.server 4173 --bind 127.0.0.1
-```
-
-Open `http://127.0.0.1:4173/`.
-
-## GitHub Pages deployment
-
-The hosting repository is `dqm-psx/dqm-psx.github.io`. Publish its `main` branch,
-`/ (root)`, at `https://dqm-psx.github.io/` using **Settings → Pages → Deploy from
-a branch**. The committed `.nojekyll` file keeps this a plain static site; no
-build service, framework, API key, or client-side GitHub API request is needed.
-
-On GitHub Free, the hosting repository must be public to enable Pages. The patch
-development repository can remain private. Public release-asset downloads and
-bug submissions in `dqm-psx/patch` require that repository to be publicly accessible;
-the website currently uses its bundled package while the release repository is
-private. Before changing visibility, review each repository’s files and history
-for anything not intended for publication.
-
-Before pushing an update to `main`, run:
-
-```sh
+python -m pip install Pillow
 python tools/update_release.py --check
 python tools/update_screenshots.py --check
 python -m unittest discover -s tools -p 'test_*.py'
-node --check homepage.js
-node --check cover-intro.js
-node --check gallery-data.js
-node --check loading.js
+python tools/build_site.py
+python -m http.server 4174 --bind 127.0.0.1 --directory dist
 ```
 
-Then check GitHub’s Pages deployment and visit the public URL while signed out.
-Confirm the download, installation links, screenshot gallery, and mobile layout.
-Preview changes on a branch before merging; after Pages is enabled, pushes to
-`main` publish the site.
+The build checks internal anchors, local URLs, gallery and sprite assets, and the two HTML pages. It writes the CSS and a single deferred JavaScript bundle with content hashes in their filenames. Only visitor-facing files and compatible download URLs are included in the artifact. The cover’s responsive WebPs are already optimized and committed. Rebuild them with the artwork recipe below when their source changes.
 
-## Site files
+## Launch plan
 
-- `index.html` contains the patch download and installation instructions, game and project introduction, FAQ, live reference links, and community support. Historical sources are linked beside the relevant text.
-- `theme.css` provides the shared colors, typography, buttons, and RPG-style panels. `homepage.css` controls the homepage layout.
-- `homepage.js` manages screenshots, the bug-report template, animation preferences, contributor rotation, and anchor offsets for the sticky navigation.
-- `cover-intro.js` reveals the English title over shared cover artwork during ordinary page scrolling, with a reduced-motion alternative.
-- `data/screenshots.json` is the reviewed gallery catalog. `tools/update_screenshots.py` validates it and generates `gallery-data.js`, loaded before `homepage.js`.
-- `loading.js` provides a spinning-slime loading indicator. Call `const finish = DqmLoading.begin()` before an asynchronous task and `finish()` when it settles.
-- `assets/provenance.json` records asset sources, dimensions, hashes, and screenshot display crops. Sprite animation can be paused and respects reduced-motion preferences.
-- `downloads/releases.json` records packages newest first. The first entry supplies the current download card and release notes; every retained package supplies its explicitly credited contributors.
-- `data/contributors.json` records project contributors credited separately from release READMEs, with a contribution and its source. Optional aliases preserve corrected names such as Claude Fable when an older release says Fable. It includes Cats4gold's help with the breeding tool and Nejimakipiyo's translation review, confirmed by the project owner.
+1. Keep serving the verified v1.0.73 ZIP locally during private preview. The hero links directly to the package and shows its version and actual size. The release record supplies the button, notes, and credits.
+2. When the owner approves launch, make the intended distribution and issue destinations accessible to visitors. On GitHub Free for organizations, the Pages hosting repository must be public. The development repository can stay private. The patch repository needs public releases and Issues, and the website repository needs its screenshot issue form. Run `python tools/check_public_links.py` to test those destinations without credentials, then verify a versioned release asset against the manifest before switching the download.
+3. Select **Settings → Pages → Source → GitHub Actions** in the website repository when ready to publish. The workflow builds and checks each PR. On the default branch it deploys only when Pages is already configured for Actions. It never enables Pages. The same workflow can be run manually after changing the hosting source.
+4. Check the published download, install anchors, bug and screenshot forms, compact navigation, and cover on a phone while signed out. Bring matching project navigation to the separate Guide and Translations sites when the homepage destination is reachable.
+
+[GitHub Pages availability and Actions deployment](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 
 ## Navigation and FAQ
 
-The top navigation stays visible while scrolling. Section links account for its
-height on desktop and mobile, including wrapped navigation. FAQ topic links live
-in a dropdown that opens on hover, or on click, tap, or keyboard activation. The
-FAQ answers and navigation use native HTML disclosures and work without JavaScript.
+The homepage opens with the original Japanese cover, patch download, and install link. Installation and release notes lead into screenshots, the FAQ, support, and project credits. The sticky header has a compact menu on phones and a FAQ topic dropdown that supports hover, keyboard, and touch. Each FAQ answer has a fragment URL. Source-image questions link to the original Japanese BIN size and SHA-256 in the first installation step. The separate ZIP checksum identifies the translation package.
 
-FAQ content comes from the project owner's Discord FAQ and covers the project,
-AI assistance, installation and updating, restored content, quality-of-life
-changes, troubleshooting, and contributing. The FAQ covers v1.0.73, including
-Terry’s restored table conversations and special dungeon floors, plus restored
-monster wagers and expanded rules in the title-screen Colosseum. It explains the prize
-transfer’s effect on both Adventure Logs and the need for save backups.
-Movement settings under **Tactics → Movement** let each adventure choose independent
-Walk and R1 speeds of 1×, 2×, or 4×, with Hold or Toggle controls. The defaults are
-1× walking and 2× while holding R1. **Time** encounters, the default, preserve roughly
-the usual encounter frequency per minute of travel; **Distance** uses the normal
-rate per step. The full report template distinguishes
-memory-card saves for normal play from patch-matched save states for debugging.
-The bug-report button opens a prefilled issue in `dqm-psx/patch`; visitors review
-and submit it on GitHub. Its URL body must match the visible `report-text`
-template. Opening the issue page does not submit a report. Confirm that the
-repository is public and Issues is enabled before the website launch.
-The public translation comparison and breeding guide are linked from the FAQ
-and Resources section. Both were verified to return HTTP 200. Translation
-suggestions go through the comparison site to `dqm-psx/translations`; Discord
-remains an alternative for corrections and general help.
+The FAQ follows the project’s Discord FAQ and the release README. It covers translation and AI assistance, installation and updating, Terry’s restored content, Colosseum monster wagers, Movement settings, and troubleshooting. Bug reports go to the issue form in `dqm-psx/patch`. Translation corrections go through the comparison site and open issues in `dqm-psx/translations`.
 
 ## Screenshot gallery
 
-The screenshot gallery rotates through seventeen screenshots every seven seconds,
-including eleven original 960×720 captures shared by BalK and three screenshots
-posted by [3xad on Reddit](https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/).
-The added 3xad images show the title screen, field item menu and HP/MP status,
-and a monster table conversation. They live in `assets/screenshots/`, with
-credit, source URLs, dimensions, and SHA-256 hashes in `assets/provenance.json`.
+The reviewed catalog in `data/screenshots.json` includes BalK’s eleven captures, three project images, and 3xad’s title screen, field menu, and restored table conversation. The opening set highlights patch features. All approved captures are available from the selector. The first image loads from the HTML and its caption and credit remain visible without JavaScript. Visitors can swipe, use the arrows, or start the seven-second slideshow with the play button. The gallery pauses during manual browsing and while offscreen. The animated party sprites have their own motion preference.
 
-All three 3xad PNGs are byte-for-byte copies of their downloaded sources. CSS
-shows only their game viewports, hiding black side margins, the title screenshot's
-emulator bars, and the table screenshot's fast-forward overlay. The source-pixel
-crop rectangles are recorded in the provenance file. The other fourteen images
-appear uncropped. No generated or repainted screenshot is used.
-
-The screenshot footer contains the selector, credit, and previous/pause/next
-icons. The selected option is the single visible caption; the standalone caption
-is retained only as the no-JavaScript fallback. All icon buttons keep accessible
-labels and tooltips. Previous, Next, and the screenshot selector pause automatic
-rotation until the play icon is chosen. Hover, keyboard focus, hidden tabs, and an offscreen gallery
-also suspend rotation; reduced-motion users start paused. The first screenshot
-and its credit remain visible without JavaScript. The dropdown count updates
-automatically from the reviewed screenshot catalog.
+The three Reddit captures are cropped to the actual game viewport and encoded as lossless WebP. The source URLs, dimensions, hashes, source-pixel crop rectangles, and output hashes are in `assets/provenance.json`. Other captures retain their original framing. [3xad’s original screenshot post](https://www.reddit.com/r/DragonQuestMonsters/comments/1weqzrc/dragon_quest_monsters_12_psx_english_translation/)
 
 ## Screenshot submissions and approval
 
 The gallery's **Submit a screenshot** link opens
 `.github/ISSUE_TEMPLATE/screenshot.yml` in this website repository. Visitors
 attach an original image, choose their credit name, describe the scene, and
-optionally enter the patch version. Opening the form does not submit the issue.
-The template becomes available after this PR is merged into the default branch;
-public submissions also require the planned public repository launch.
-The link has no accompanying submission teaser; the approval process is unchanged.
+optionally enter the patch version. The form must be on the default branch and
+the repository accessible to visitors at launch.
 
 Submissions never enter the slideshow automatically. A maintainer reviews the
 issue and image, then prepares an approved addition in a branch for review and
@@ -140,8 +65,7 @@ Replace the example issue URL with the real submission. Omit `--patch-version`
 when unknown. A known version displays as `Screenshot by PlayerName (v1.0.72)`;
 an unknown version displays as `Screenshot by PlayerName`. Existing screenshot
 versions are deliberately left unknown rather than inferred from a release date.
-Optional `--crop X Y WIDTH HEIGHT` hides emulator borders using source-pixel
-coordinates without modifying the original image.
+Optional `--crop X Y WIDTH HEIGHT` saves the selected source-pixel rectangle as lossless WebP and records the original hash and dimensions. Without a crop the file is copied byte for byte.
 
 The helper validates the image, metadata, and provenance before copying anything.
 Review the image in the local preview and commit its asset, catalog entry,
@@ -151,91 +75,63 @@ verify the catalog, or omit `--check` to regenerate after an intentional edit.
 
 ## Cover artwork
 
-The opening panel assembles a Japanese title over shared artwork from the English
-fan cover and a fixed paper background. Scrolling replaces only the title and
-subtitle with their English counterparts, from top to bottom with a soft edge;
-older browsers blend the title layers. The artwork and paper stay fixed throughout.
-The cover stays in view during the transition, then ordinary scrolling continues
-into the patch homepage. Navigation and **Explore the English patch** bypass the
-intro. Direct section URLs still work. Reduced-motion mode swaps the title without
-a blend or extra scroll distance; without JavaScript, the assembled Japanese-title
-cover and direct link remain available. There is no separate cover caption.
+The opener shows the complete printed Japanese retail front for SLPM-87050,
+including its original lettering, subtitle, illustration, and platform marks.
+The source is a 2,906 × 2,951, 600 dpi JPEG. Its SHA-256 is
+`246108fd30f463f6b9da87c3af0d81617ab3895ed9c10ed91325e7bbe59f29c4`.
+[Archival scan collection](https://archive.org/details/image-027) ·
+[Original front scan](https://archive.org/download/image-027/Image001.jpg).
 
-The shared background uses `assets/artwork/cover-paper-base.png`, a generated
-1254×1254 version of the English cover with its title removed. This plate is not
-pixel-identical to its source: its upper paper area and small portions of the
-highest artwork remain visible. A static overlay of `dqm-1-2-english-cover.png`
-restores the existing lower artwork, beginning at 28.6% of the cover height and
-becoming fully opaque at 29.2%. Neither background layer participates in the
-scroll reveal.
+`cover-japanese-560.webp` and `cover-japanese-1120.webp` are full-frame display
+copies of the scan. An English title overlay in matching widths covers the
+printed Japanese title as visitors scroll. The overlay uses paper sampled above
+the original heading and retains the visible edges of the hat pompom and tail.
+It spans the full width of the cover, begins at the top left and has a 10:3
+aspect ratio. The underlying scan stays fixed throughout the reveal. Without
+JavaScript the Japanese cover and navigation remain available.
 
-`cover-title-japanese.png` and `cover-title-english.png` are generated 2172×724
-transparent PNGs, based on the supplied Japanese cover and the English fan cover
-respectively. The Japanese PNG's generated subtitle contains a duplicated character,
-so its bottom 23% is hidden and an inline SVG renders the exact text
-`星降りの勇者と牧場の仲間たち`. Both title compositions occupy the same frame: 6%
-from the left, 2% from the top, 88% wide, and 25.4% high. Only these title layers
-receive the scroll masks. The original
-640×640 Japanese cover remains as a source asset; it is no longer displayed in
-full. The layer-generation and Japanese refinement prompts are retained in
-`assets/artwork/cover-layers-prompts.txt`.
+The English lettering comes from `cover-title-english.png`, the existing fan
+title based on the [English cover's original reference](https://bdjogos.com.br/jogo.php?id=10712).
+Its generation prompts are recorded in `assets/artwork/cover-layers-prompts.txt`.
+The source scan, processed artwork, dimensions, and SHA-256 hashes are recorded
+in `assets/provenance.json`.
 
-The English fan adaptation was made with the built-in image generation tool from the
-[735×735 BD Jogos source](https://bdjogos.com.br/jogo.php?id=10712).
-`assets/artwork/dqm-1-2-english-cover.png` is the 1254×1254 generated output;
-that size is not the resolution of an original scan. The edit localizes the title
-and subtitle. Its exact prompt is retained in
-`assets/artwork/english-cover-prompt.txt`. Sources, dimensions, hashes, transparency,
-and display roles for the cover assets are recorded in `assets/provenance.json`.
-Historical source links on the homepage sit beside the relevant text.
+To rebuild the WebPs, 1,200 × 630 social card, and static Slime icons, run
+`python assets/artwork/build_cover.py` with Pillow and WebP support. The build
+uses the local source images, verifies the input hashes and checks the decoded
+overlay's transparency around the illustration at both output sizes. The
+committed files were made with Pillow 12.1.1 and libwebp 1.6.0.
 
 ## Updating the patch download and contributor credits
 
-`dqm-psx/patch` is the release home. v1.0.73 is published and verified, but the
-repository remains private. The website therefore serves the exact release ZIP
-from its own `downloads/` directory. A manifest entry’s `releaseUrl` records the
-upstream release as provenance; it does not change the download destination.
+The authoritative packages live in [dqm-psx/patch](https://github.com/dqm-psx/patch/releases). Its [archive manifest](https://github.com/dqm-psx/patch/blob/main/release-manifest.json) records the 28 migrated packages and their source snapshot. Published ZIPs retain their original filenames and hashes. For a new stable release, use `DQM1-2-English-vX.Y.Z.zip`. The helper also accepts the historical `-public.zip` suffix.
 
-The release repository now contains all 28 packages from the source repository’s
-root and archive, copied unchanged with verified hashes. Its
-[`release-manifest.json`](https://github.com/dqm-psx/patch/blob/main/release-manifest.json)
-records the source snapshot and every migrated package. v1.0.73 is marked latest.
+The **Sync patch release** workflow checks GitHub’s public latest release every six hours. You can run it immediately from this repository’s Actions tab. It reads the published tag and asset metadata without credentials, downloads the versioned ZIP, checks its declared size and SHA-256, verifies the BPS/CUE/README file list and CUE contents, and reads the named credits. It proposes a site pull request with the pinned release asset URL, notes, checksum, and credits. New publicly accessible releases use the ZIP on GitHub Releases and add only metadata and generated HTML to this repository.
 
-Only after a release asset is accessible without signing in and its downloaded
-bytes match the recorded size and SHA-256 should an entry gain `downloadUrl`.
-The helper accepts only the pinned form
-`https://github.com/dqm-psx/patch/releases/download/v{version}/{filename}`,
-matching that entry’s version and package filename. It rejects other destinations,
-floating latest-release links, queries, and fragments. Omit `downloadUrl` while
-the repository is private to retain the local download. Public availability is
-verified separately; the helper performs its validation offline. Do not link
-visitors to the private development repository or promote a draft release.
+The workflow runs on the website’s default branch and pushes a verified review branch using its built-in token. This repository currently disables **Allow GitHub Actions to create and approve pull requests**. A maintainer can open **Actions → Sync patch release → the completed run → Summary**, follow **Open the comparison**, and select **Create pull request**. If the administrator later enables the option under **Settings → Actions → General → Workflow permissions**, the workflow opens the PR automatically. Review and merge the resulting PR like any other site change. [GitHub’s Actions settings guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#preventing-github-actions-from-creating-or-approving-pull-requests)
 
-The current preview uses the existing local package workflow below. Retained
-packages also preserve historical credits and allow integrity checks offline.
-
-Copy the published ZIP unchanged to `downloads/` and prepend its version, filename, byte size,
-SHA-256, contents, and player-facing `notes` to `downloads/releases.json`. Then run:
+To preview the public release check or prepare the same change locally, run:
 
 ```sh
-python tools/update_release.py
+python tools/sync_release.py --dry-run
+python tools/sync_release.py
 python tools/update_release.py --check
 ```
 
-The helper validates the recorded size, SHA-256, ZIP contents and integrity, and
-matching CUE of **every** package in the manifest. It reads their original
-`README.txt` files, merges their explicitly named contributors with
-`data/contributors.json`, and updates both marked blocks in `index.html` in one
-atomic replacement. Any validation or credit-parsing failure leaves the page
-untouched. `--check` checks both generated blocks without writing.
+While `dqm-psx/patch` is private, the site serves the verified bundled ZIP. If the sync cannot see a public latest release, it keeps this local route. For a new private preview, copy the original release ZIP into `downloads/`, verify its SHA-256 against the release asset, and prepend its version, filename, byte count, SHA-256, contents, and release notes to `downloads/releases.json`. Leave `downloadUrl` absent. Run `python tools/update_release.py` and then `python tools/update_release.py --check`.
+
+The generator updates the hero and installation download links, release information, and both contributor lists in `index.html`. Both download links point directly to the current ZIP. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
 
 Names are deduplicated without regard to case and sorted alphabetically, ignoring
 leading underscores for sorting while preserving them in displayed names. The
 first spelling wins: manual project entries first, then releases newest first.
 Retain older packages and manifest entries so credits survive when a newer README
 shortens its release history. To preserve a credit independently of a package,
-add it to `data/contributors.json` with its explicit contribution and source;
-do not infer contributors from commits or issue activity. The creator and named AI assistants are included in the rotating list. Kingcom
+add it to `data/contributors.json` with its explicit contribution and source.
+Credit people only when a source explicitly names them for their work.
+Entries with `"creditType": "ai-assistance"` appear in the static AI contributors
+list beside the carousel. Use `aliases` to group historical model names under
+one public credit. The AI FAQ can name the models and describe their roles. Kingcom
 and Tom are acknowledged separately as historical inspiration.
 
 Existing READMEs use `Thanks [also] [to] NAME for ...!` within
@@ -261,8 +157,7 @@ ends the list. Unrecognized thanks outside the supported highlights section must
 also be clarified before generating the page. Published ZIPs remain unchanged;
 make source README corrections before packaging a new release.
 
-Commit the package, manifest, any project-credit updates, and generated HTML
-together. The committed page includes every name and works without JavaScript;
+Commit the manifest, any bundled preview package or project-credit updates, and generated HTML together. The committed page includes every name and works without JavaScript;
 there is no visitor-time build, GitHub API request, or background polling. The
 browser's optional rotation is presentation only. Run the helper checks with:
 
@@ -296,7 +191,7 @@ migration is needed for this launch.
 
 ## Release and support notes
 
-The current package is `DQM1-2-English-v1.0.73-public.zip`, verified against its
+The bundled v1.0.73 package is `DQM1-2-English-v1.0.73-public.zip`, verified against its
 published release asset: **7,558,537 bytes**, SHA-256
 `652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a`.
 The local copy is byte-for-byte identical and includes only the BPS patch, matching

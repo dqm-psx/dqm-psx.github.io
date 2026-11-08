@@ -23,7 +23,8 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.page.write_text(
             '<main>\n            <!-- hero-download:begin -->\nold hero\n            <!-- hero-download:end -->\n'
             '          <!-- release:begin -->\nold download\n          <!-- release:end -->\n'
-            '                <!-- contributors:begin -->\nold credits\n                <!-- contributors:end -->\n</main>\n',
+            '                <!-- contributors:begin -->\nold credits\n                <!-- contributors:end -->\n'
+            '                <!-- ai-contributors:begin -->\nold AI credits\n                <!-- ai-contributors:end -->\n</main>\n',
             encoding='utf-8',
         )
         self.write_contributors([{'name': 'Cats4gold', 'contribution': 'Breeding tool', 'source': 'Project owner'}])
@@ -185,20 +186,18 @@ class ReleaseUpdateTests(unittest.TestCase):
                          ['Wingforth', 'nextlvlroy', 'Schnaki', '_Zev', 'Alice', 'Bob', 'Carol'])
 
     def test_explicit_alias_merges_old_and_new_release_credits(self):
-        self.write_contributors([{'name': 'Claude Fable', 'aliases': ['Fable'],
+        self.write_contributors([{'name': 'Claude (Anthropic)', 'aliases': ['Claude Fable', 'Fable', 'Claude Opus'],
                                   'creditType': 'ai-assistance',
                                   'contribution': 'AI assistance', 'source': 'Owner correction'}])
         old = self.package('1.0.63', 'PUBLIC RELEASE HIGHLIGHTS\nThanks to Fable for testing!\n')
-        latest = self.package('1.0.72', 'CONTRIBUTORS\n- CLAUDE FABLE\n- fable\n- Other\n')
+        latest = self.package('1.0.72', 'CONTRIBUTORS\n- CLAUDE FABLE\n- fable\n- Claude Opus\n- Other\n')
         self.manifest(latest, old)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertEqual(source.count('<li>Claude Fable <small class="credit-role">AI assistance</small></li>'), 1)
-        self.assertEqual(source.count('class="credit-role"'), 1)
-        self.assertNotIn('<li>Fable</li>', source)
-        self.assertNotIn('<li>fable</li>', source)
-        self.assertNotIn('<li>CLAUDE FABLE</li>', source)
-        self.assertIn('<li>Other</li>', source)
+        people = source.split(updater.CREDITS_START)[1].split(updater.CREDITS_END)[0]
+        assistants = source.split(updater.AI_START)[1].split(updater.AI_END)[0]
+        self.assertEqual(people.strip(), '<li>Other</li>')
+        self.assertEqual(assistants.strip(), '<li>Claude (Anthropic)</li>')
         updater.update(self.root, check=True)
 
     def test_conflicting_or_malformed_aliases_do_not_write(self):

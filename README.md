@@ -120,15 +120,18 @@ python tools/update_release.py --check
 
 While `dqm-psx/patch` is private, the site serves the verified bundled ZIP. If the sync cannot see a public latest release, it keeps this local route. For a new private preview, copy the original release ZIP into `downloads/`, verify its SHA-256 against the release asset, and prepend its version, filename, byte count, SHA-256, contents, and release notes to `downloads/releases.json`. Leave `downloadUrl` absent. Run `python tools/update_release.py` and then `python tools/update_release.py --check`.
 
-The generator updates three marked blocks in `index.html`: the versioned hero download, release information, and contributor list. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
+The generator updates the versioned hero download, release information, and both contributor lists in `index.html`. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
 
 Names are deduplicated without regard to case and sorted alphabetically, ignoring
 leading underscores for sorting while preserving them in displayed names. The
 first spelling wins: manual project entries first, then releases newest first.
 Retain older packages and manifest entries so credits survive when a newer README
 shortens its release history. To preserve a credit independently of a package,
-add it to `data/contributors.json` with its explicit contribution and source;
-do not infer contributors from commits or issue activity. The rotating list labels the four entries with `"creditType": "ai-assistance"` as AI assistance. Kingcom
+add it to `data/contributors.json` with its explicit contribution and source.
+Credit people only when a source explicitly names them for their work.
+Entries with `"creditType": "ai-assistance"` appear in the static AI contributors
+list beside the carousel. Use `aliases` to group historical model names under
+one public credit. The AI FAQ can name the models and describe their roles. Kingcom
 and Tom are acknowledged separately as historical inspiration.
 
 Existing READMEs use `Thanks [also] [to] NAME for ...!` within

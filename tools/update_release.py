@@ -22,6 +22,7 @@ VERSION = re.compile(r'(?:0|[1-9][0-9]*)(?:\.(?:0|[1-9][0-9]*)){2}')
 START, END = '<!-- release:begin -->', '<!-- release:end -->'
 HERO_START, HERO_END = '<!-- hero-download:begin -->', '<!-- hero-download:end -->'
 CREDITS_START, CREDITS_END = '<!-- contributors:begin -->', '<!-- contributors:end -->'
+AI_START, AI_END = '<!-- ai-contributors:begin -->', '<!-- ai-contributors:end -->'
 HEADING = re.compile(r"[A-Z][A-Z0-9 '&/():-]*")
 HANDLE = r'[\w][\w.-]*'
 THANKS_NAMES = re.compile(rf'{HANDLE}(?:, {HANDLE})*(?:,? and {HANDLE})?')
@@ -198,19 +199,19 @@ def project_contributors(root):
     return names, aliases, ai_names
 
 
-def contributor_list(names, aliases=None, ai_names=()):
-    aliases = aliases or {}
+def contributor_items(names, aliases, ai_names):
     unique = {}
     for name in names:
         name = valid_name(name)
         name = aliases.get(name.casefold(), name)
         unique.setdefault(name.casefold(), name)
     ordered = sorted(unique.values(), key=lambda name: (name.lstrip('_').casefold(), name.casefold()))
-    items = []
+    people = []
+    assistants = []
     for name in ordered:
-        role = ' <small class="credit-role">AI assistance</small>' if name.casefold() in ai_names else ''
-        items.append(f'                  <li>{escape(name)}{role}</li>\n')
-    return '                <ul class="contributor-list" id="contributor-list">\n' + ''.join(items) + '                </ul>\n'
+        items = assistants if name.casefold() in ai_names else people
+        items.append(f'                <li>{escape(name)}</li>\n')
+    return ''.join(people), ''.join(assistants)
 
 
 def replace_block(source, start, end, body, indent):
@@ -248,12 +249,13 @@ def rendered_page(root, manifest):
             raise ValueError(f'{release["file"]}: {error}') from error
     current = releases[0]
     card = download_card(current)
-    credits = contributor_list(names, aliases, ai_names)
+    credits, ai_credits = contributor_items(names, aliases, ai_names)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
     updated = replace_block(source, HERO_START, HERO_END, hero_download(current, current['bytes']), 12)
     updated = replace_block(updated, START, END, card, 10)
-    return replace_block(updated, CREDITS_START, CREDITS_END, credits, 16)
+    updated = replace_block(updated, CREDITS_START, CREDITS_END, credits, 16)
+    return replace_block(updated, AI_START, AI_END, ai_credits, 16)
 
 
 def update(root=ROOT, check=False):

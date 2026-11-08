@@ -154,7 +154,7 @@
           </details>
           <details id="ai-assistance">
             <summary>Was AI used to make the patch?</summary>
-            <div class="faq-answer"><p>Yes. The team used ChatGPT (Astra), Claude Opus, Claude Fable, and Grok. Translation review and playtesting continue, and players can <a href="#translation-corrections">suggest corrections</a>.</p></div>
+            <div class="faq-answer"><p>Yes. Most of the AI assistance came from Astra (ChatGPT), with help from Claude (Opus and Fable) and Grok. Google Gemini helped answer questions during development. Translation review and playtesting continue, and players can <a href="#translation-corrections">suggest corrections</a>.</p></div>
           </details>
           <details id="ready-to-play">
             <summary>Is it ready to play?</summary>
@@ -336,39 +336,49 @@
             <p><a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Released in Japan on <time datetime="2002-05-30">May 30, 2002</time></a> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <a href="https://blog.ja.playstation.com/?p=278297"><em>Dragon Quest Monsters 1 &amp; 2</em></a> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
             <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation. Thanks to community effort, an English translation patch is now available. Many thanks to <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a>, whose incredible early hacking and translation efforts inspired this independent project.</p>
         </div>
-        <section class="contributor-panel" id="contributor-panel" aria-labelledby="contributor-title">
-              <h3 id="contributor-title">Contributors</h3>
-              <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
+        <div class="credits-layout">
+          <section id="ai-contributors" aria-labelledby="ai-contributor-title">
+            <h3 id="ai-contributor-title">AI contributors</h3>
+            <ul class="ai-contributor-list">
+                <!-- ai-contributors:begin -->
+                <li>Astra (ChatGPT)</li>
+                <li>Claude (Anthropic)</li>
+                <li>Google Gemini</li>
+                <li>Grok</li>
+                <!-- ai-contributors:end -->
+            </ul>
+            <a href="#ai-assistance">How was AI used?</a>
+          </section>
+          <section id="contributor-panel" aria-labelledby="contributor-title">
+            <h3 id="contributor-title">Contributors</h3>
+            <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
+              <ul class="contributor-list" id="contributor-list">
                 <!-- contributors:begin -->
-                <ul class="contributor-list" id="contributor-list">
-                  <li>Astra (ChatGPT) <small class="credit-role">AI assistance</small></li>
-                  <li>BalK</li>
-                  <li>Cats4gold</li>
-                  <li>Claude Fable <small class="credit-role">AI assistance</small></li>
-                  <li>Claude Opus <small class="credit-role">AI assistance</small></li>
-                  <li>diethylpentane (3xad)</li>
-                  <li>gollum_007</li>
-                  <li>Grok <small class="credit-role">AI assistance</small></li>
-                  <li>Lori</li>
-                  <li>Nejimakipiyo</li>
-                  <li>Nelin</li>
-                  <li>nextlvlroy</li>
-                  <li>PkmnTrainerAbram</li>
-                  <li>Schnaki</li>
-                  <li>Sparrow</li>
-                  <li>Suppi</li>
-                  <li>Wingforth</li>
-                  <li>_Zev</li>
-                </ul>
+                <li>BalK</li>
+                <li>Cats4gold</li>
+                <li>diethylpentane (3xad)</li>
+                <li>gollum_007</li>
+                <li>Lori</li>
+                <li>Nejimakipiyo</li>
+                <li>Nelin</li>
+                <li>nextlvlroy</li>
+                <li>PkmnTrainerAbram</li>
+                <li>Schnaki</li>
+                <li>Sparrow</li>
+                <li>Suppi</li>
+                <li>Wingforth</li>
+                <li>_Zev</li>
                 <!-- contributors:end -->
-              </div>
-              <div class="contributor-controls" id="contributor-controls" hidden>
-                <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
-                <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
-                <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
-              </div>
-              <span class="visually-hidden" id="contributor-announcement" role="status"></span>
-        </section>
+              </ul>
+            </div>
+            <div class="contributor-controls" id="contributor-controls" hidden>
+              <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
+              <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
+              <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
+            </div>
+            <span class="visually-hidden" id="contributor-announcement" role="status"></span>
+          </section>
+        </div>
       </div>
     </section>
   </main>

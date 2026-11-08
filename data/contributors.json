@@ -9,25 +9,28 @@
     {
       "name": "Astra (ChatGPT)",
       "creditType": "ai-assistance",
+      "aliases": ["Astra", "ChatGPT", "ChatGPT (Astra)", "Codex"],
       "contribution": "Primary AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },
     {
-      "name": "Claude Opus",
+      "name": "Claude (Anthropic)",
       "creditType": "ai-assistance",
+      "aliases": ["Claude", "Claude Opus", "Opus", "Claude Fable", "Fable"],
       "contribution": "AI assistance with the project",
-      "source": "Explicitly credited in the FAQ supplied by the project owner."
+      "source": "The project owner supplied the Opus and Fable credits and their preference for a shared Claude credit."
     },
     {
-      "name": "Claude Fable",
+      "name": "Google Gemini",
       "creditType": "ai-assistance",
-      "aliases": ["Fable"],
-      "contribution": "AI assistance with the project",
-      "source": "Explicitly credited in the FAQ supplied by the project owner; the owner clarified the display name as Claude Fable."
+      "aliases": ["Gemini"],
+      "contribution": "Answered questions during patch development",
+      "source": "The project owner described its role and supplied its preferred credit name."
     },
     {
       "name": "Grok",
       "creditType": "ai-assistance",
+      "aliases": ["Grok (xAI)"],
       "contribution": "AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },

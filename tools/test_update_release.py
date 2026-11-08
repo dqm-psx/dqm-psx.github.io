@@ -23,6 +23,7 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.page.write_text(
             '<main>\n            <!-- hero-download:begin -->\nold hero\n            <!-- hero-download:end -->\n'
             '          <!-- release:begin -->\nold download\n          <!-- release:end -->\n'
+            '                <!-- install-download:begin -->\nold link\n                <!-- install-download:end -->\n'
             '                <!-- contributors:begin -->\nold credits\n                <!-- contributors:end -->\n'
             '                <!-- ai-contributors:begin -->\nold AI credits\n                <!-- ai-contributors:end -->\n</main>\n',
             encoding='utf-8',
@@ -278,7 +279,9 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.manifest(release)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertIn(f'href="downloads/{release["file"]}" download="DQM1-2-English-v1.0.73.zip"', source)
+        attributes = f'href="downloads/{release["file"]}" download="DQM1-2-English-v1.0.73.zip"'
+        self.assertEqual(source.count(attributes), 2)
+        self.assertIn(f'<a {attributes}>Download</a>', source)
         self.assertEqual(source.count('id="download"'), 1)
         self.assertIn(release['sha256'], source)
         self.assertNotIn(release['releaseUrl'], source)
@@ -290,7 +293,8 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.manifest(release)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertIn(f'href="{release["downloadUrl"]}"', source)
+        self.assertEqual(source.count(f'href="{release["downloadUrl"]}"'), 2)
+        self.assertIn(f'<a href="{release["downloadUrl"]}">Download</a>', source)
         self.assertNotIn(' download=', source)
         self.assertIn('Download v1.0.73', source)
         self.assertIn('<li>Player</li>', source)
@@ -370,6 +374,7 @@ class ReleaseUpdateTests(unittest.TestCase):
     def test_missing_credit_markers_do_not_partially_update_card(self):
         self.manifest(self.package('1.0.64', 'CONTRIBUTORS\n- Alice\n'))
         self.page.write_text('<!-- hero-download:begin --><!-- hero-download:end -->'
+                             '<!-- install-download:begin --><!-- install-download:end -->'
                              '<!-- release:begin -->old<!-- release:end -->', encoding='utf-8')
         original = self.page.read_bytes()
         with self.assertRaisesRegex(ValueError, 'contributors:begin'):

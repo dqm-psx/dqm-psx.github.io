@@ -120,7 +120,7 @@ python tools/update_release.py --check
 
 While `dqm-psx/patch` is private, the site serves the verified bundled ZIP. If the sync cannot see a public latest release, it keeps this local route. For a new private preview, copy the original release ZIP into `downloads/`, verify its SHA-256 against the release asset, and prepend its version, filename, byte count, SHA-256, contents, and release notes to `downloads/releases.json`. Leave `downloadUrl` absent. Run `python tools/update_release.py` and then `python tools/update_release.py --check`.
 
-The generator updates the versioned hero download, release information, and both contributor lists in `index.html`. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
+The generator updates the hero and installation download links, release information, and both contributor lists in `index.html`. Both download links point directly to the current ZIP. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
 
 Names are deduplicated without regard to case and sorted alphabetically, ignoring
 leading underscores for sorting while preserving them in displayed names. The

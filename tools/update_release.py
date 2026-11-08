@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = re.compile(r'(?:0|[1-9][0-9]*)(?:\.(?:0|[1-9][0-9]*)){2}')
 START, END = '<!-- release:begin -->', '<!-- release:end -->'
 HERO_START, HERO_END = '<!-- hero-download:begin -->', '<!-- hero-download:end -->'
+INSTALL_START, INSTALL_END = '<!-- install-download:begin -->', '<!-- install-download:end -->'
 CREDITS_START, CREDITS_END = '<!-- contributors:begin -->', '<!-- contributors:end -->'
 AI_START, AI_END = '<!-- ai-contributors:begin -->', '<!-- ai-contributors:end -->'
 HEADING = re.compile(r"[A-Z][A-Z0-9 '&/():-]*")
@@ -90,15 +91,13 @@ def validate_package_bytes(release, data):
     return len(data), readme
 
 
-def hero_download(release, package_size):
-    version, _ = package_identity(release)
+def download_attributes(release):
     target = download_target(release)
     # Keep published asset names and historical URLs intact. Browsers honor a
     # suggested filename for our same-origin mirror; GitHub names its own files.
-    suggested = f'DQM1-2-English-v{version}.zip'
+    suggested = f'DQM1-2-English-v{release["version"]}.zip'
     download_attribute = f' download="{suggested}"' if 'downloadUrl' not in release else ''
-    return (f'            <a id="download" class="button button-gold" href="{escape(target, quote=True)}"'
-            f'{download_attribute}>Download v{version} · {package_size / 1_000_000:.2f} MB</a>\n')
+    return f'href="{escape(target, quote=True)}"{download_attribute}'
 
 
 def download_card(release):
@@ -252,7 +251,12 @@ def rendered_page(root, manifest):
     credits, ai_credits = contributor_items(names, aliases, ai_names)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
-    updated = replace_block(source, HERO_START, HERO_END, hero_download(current, current['bytes']), 12)
+    attributes = download_attributes(current)
+    hero_link = (f'            <a id="download" class="button button-gold" {attributes}>'
+                 f'Download v{current["version"]} · {current["bytes"] / 1_000_000:.2f} MB</a>\n')
+    install_link = f'                <a {attributes}>Download</a>\n'
+    updated = replace_block(source, HERO_START, HERO_END, hero_link, 12)
+    updated = replace_block(updated, INSTALL_START, INSTALL_END, install_link, 16)
     updated = replace_block(updated, START, END, card, 10)
     updated = replace_block(updated, CREDITS_START, CREDITS_END, credits, 16)
     return replace_block(updated, AI_START, AI_END, ai_credits, 16)

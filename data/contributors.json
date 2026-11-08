@@ -7,9 +7,9 @@
       "source": "Explicitly credited in the project owner's FAQ and the phakic/dqm1 README."
     },
     {
-      "name": "Astra (ChatGPT)",
+      "name": "ChatGPT (OpenAI)",
       "creditType": "ai-assistance",
-      "aliases": ["Astra", "ChatGPT", "ChatGPT (Astra)", "Codex"],
+      "aliases": ["Astra", "Astra (ChatGPT)", "ChatGPT", "ChatGPT (Astra)", "Codex"],
       "contribution": "Primary AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },
@@ -21,16 +21,16 @@
       "source": "The project owner supplied the Opus and Fable credits and their preference for a shared Claude credit."
     },
     {
-      "name": "Google Gemini",
+      "name": "Gemini (Google)",
       "creditType": "ai-assistance",
-      "aliases": ["Gemini"],
+      "aliases": ["Gemini", "Google Gemini"],
       "contribution": "Answered questions during patch development",
-      "source": "The project owner described its role and supplied its preferred credit name."
+      "source": "The project owner described its role and requested the credit Gemini (Google)."
     },
     {
-      "name": "Grok",
+      "name": "Grok (xAI)",
       "creditType": "ai-assistance",
-      "aliases": ["Grok (xAI)"],
+      "aliases": ["Grok"],
       "contribution": "AI assistance with the project",
       "source": "Explicitly credited in the FAQ supplied by the project owner."
     },

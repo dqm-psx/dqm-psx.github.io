@@ -100,7 +100,11 @@
         <div class="install-panel menu-panel" id="install">
           <div class="panel-heading"><h3>How to install</h3></div>
           <ol class="install-steps">
-            <li><span class="step-number" aria-hidden="true">1</span><div><h4>Check your original Japanese BIN</h4><p>Use your own unmodified Japanese PlayStation disc image (<strong>SLPM-87050</strong>). Download and extract the patch ZIP.</p>
+            <li><span class="step-number" aria-hidden="true">1</span><div><h4>Check your original Japanese BIN</h4><p>Use your own unmodified Japanese PlayStation disc image (<strong>SLPM-87050</strong>).
+                <!-- install-download:begin -->
+                <a href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download</a>
+                <!-- install-download:end -->
+                and extract the patch ZIP.</p>
               <details class="source-check" id="source-image"><summary>Original BIN size and SHA-256</summary><div><p><strong>260,975,568 bytes</strong></p><code class="file-hash">a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29</code></div></details></div></li>
             <li><span class="step-number" aria-hidden="true">2</span><div><h4>Apply the English patch</h4><p>Open <a href="https://www.marcrobledo.com/RomPatcher.js/">Rom Patcher JS</a>, select your original BIN and the <code>.bps</code> patch, then apply it. Keep checksum validation enabled.</p></div></li>
             <li><span class="step-number" aria-hidden="true">3</span><div><h4>Keep the BIN and CUE together</h4><p>Give the patched BIN the exact filename listed inside the accompanying CUE file. Place both files in the same folder.</p></div></li>
@@ -116,11 +120,11 @@
         <div class="gallery-view" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
           <div class="screenshot-frame">
             <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
-              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="Terry and three monsters approaching a blue Travelers’ Gate in a torchlit dungeon" decoding="async">
+              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="A blue gate swirls at the end of a stone corridor. Terry faces it with three monsters lined up behind him." decoding="async">
               <div class="screenshot-loading" id="screenshot-loading" hidden>Loading screenshot…</div>
             </div>
             <div class="screenshot-footer">
-              <p class="screen-caption" id="screen-caption">Terry at a Travelers’ Gate</p>
+              <p class="screen-caption" id="screen-caption">A Travelers’ Gate in a torchlit passage</p>
               <div class="scene-picker" id="scene-controls" hidden>
                 <select class="scene-select" id="scene-select" aria-label="Choose a screenshot" aria-controls="screenshot-stage"></select>
                 <div class="scene-navigation" role="group" aria-label="Screenshot controls">
@@ -147,6 +151,13 @@
           <details id="the-patch">
             <summary>What is this patch?</summary>
             <div class="faq-answer"><p>This is an unofficial English fan translation patch for the Japanese PlayStation release of <em>Dragon Quest Monsters 1 &amp; 2: The Starry Night Hero and Friends at the Ranch</em>. It covers Terry’s, Cobi’s, and Tara’s adventures.</p></div>
+          </details>
+          <details id="the-game">
+            <summary>What game is this?</summary>
+            <div class="faq-answer">
+              <p><a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Released in Japan on <time datetime="2002-05-30">May 30, 2002</time></a> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <a href="https://blog.ja.playstation.com/?p=278297"><em>Dragon Quest Monsters 1 &amp; 2</em></a> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
+              <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation. Thanks to community effort, an English translation patch is now available. Many thanks to <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a>, whose incredible early hacking and translation efforts inspired this independent project.</p>
+            </div>
           </details>
           <details id="translation-team">
             <summary>Who is working on it? Is this Adrikvej’s project?</summary>
@@ -331,20 +342,16 @@
 
     <section id="about" class="about-section paper-surface" aria-labelledby="about-title">
       <div class="container">
-        <h2 id="about-title" class="eyebrow">The game &amp; the project</h2>
-        <div class="game-story">
-            <p><a href="https://www.dragonquest.jp/products/list/device/videogame/page/17/base/13/">Released in Japan on <time datetime="2002-05-30">May 30, 2002</time></a> as <span lang="ja">ドラゴンクエストモンスターズ1・2 星降りの勇者と牧場の仲間たち</span>, <a href="https://blog.ja.playstation.com/?p=278297"><em>Dragon Quest Monsters 1 &amp; 2</em></a> remakes the first two Game Boy adventures in one PlayStation collection. It includes Terry’s story and both Cobi’s and Tara’s journeys, with richer pixel art, animated battles, and updated sound.</p>
-            <p>Recruit monsters, raise a party, and breed new companions who inherit their parents’ abilities. Explore strange worlds through Travelers’ Gates and mysterious keys. The PlayStation collection was released only in Japanese, leaving English-speaking fans hoping for a translation. Thanks to community effort, an English translation patch is now available. Many thanks to <a href="https://www.woodus.com/forums/topic/22726-dragon-quest-monsters-12-psx-translation-progress/">Kingcom and Tom</a>, whose incredible early hacking and translation efforts inspired this independent project.</p>
-        </div>
+        <h2 id="about-title" class="visually-hidden">Project credits</h2>
         <div class="credits-layout">
           <section id="ai-contributors" aria-labelledby="ai-contributor-title">
             <h3 id="ai-contributor-title">AI contributors</h3>
             <ul class="ai-contributor-list">
                 <!-- ai-contributors:begin -->
-                <li>Astra (ChatGPT)</li>
+                <li>ChatGPT (OpenAI)</li>
                 <li>Claude (Anthropic)</li>
-                <li>Google Gemini</li>
-                <li>Grok</li>
+                <li>Gemini (Google)</li>
+                <li>Grok (xAI)</li>
                 <!-- ai-contributors:end -->
             </ul>
             <a href="#ai-assistance">How was AI used?</a>
@@ -388,7 +395,7 @@
       <div class="footer-brand"><img class="pixel" src="assets/slime-walk-still.png" data-animated-src="assets/slime-walk.gif" width="32" height="32" alt=""><span>DQM <b>PSX</b></span></div>
       <p>Dragon Quest and its characters belong to their respective owners.</p>
       <div class="footer-links" id="resources">
-        <a href="#about">About &amp; credits</a>
+        <a href="#about">Credits</a>
         <a href="#community">Support</a>
         <a href="https://dqm-psx.github.io/guide/">Breeding guide</a>
         <a href="https://dqm-psx.github.io/translations/">Translations</a>

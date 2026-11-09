@@ -108,14 +108,11 @@ def download_card(release, attributes):
     items = ''.join(f'<li>{escape(note)}</li>' for note in notes)
     release_link = (f'<p><a href="https://github.com/dqm-psx/patch/releases/tag/v{version}">'
                     'View release on GitHub</a></p>' if 'downloadUrl' in release else '')
-    return f'''          <h2 id="patch-title"><a {attributes}>Download</a> &amp; installation</h2>
+    return f'''          <h2 id="patch-title">Download &amp; installation</h2>
           <article class="release-download" aria-labelledby="release-title">
             <div class="release-heading">
-              <div class="release-description">
-                <h3 id="release-title">Latest patch <span class="release-version">v{version}</span></h3>
-                <p>{escape(release['name'])} with restored content and quality-of-life improvements.</p>
-              </div>
-              <a class="button button-gold release-action" {attributes}>Download ZIP <small>{release['bytes'] / 1_000_000:.2f} MB</small></a>
+              <h3 id="release-title"><a {attributes}>Latest patch</a> <span class="release-version">v{version}</span></h3>
+              <p>{escape(release['name'])} with restored content and quality-of-life improvements.</p>
             </div>
             <details id="release-notes" class="release-notes"><summary>What’s new in v{version}?</summary><ul>{items}</ul>{release_link}</details>
             <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · {release['bytes']:,} bytes</p><code class="file-hash">{release['sha256']}</code></details>

@@ -19,9 +19,9 @@
   <link rel="icon" href="assets/artwork/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/artwork/apple-touch-icon.png">
   <link rel="stylesheet" href="theme.css?v=20261107">
-  <link rel="stylesheet" href="homepage.css?v=20261109">
+  <link rel="stylesheet" href="homepage.css?v=20261107">
   <script src="gallery-data.js?v=20261107" defer></script>
-  <script src="homepage.js?v=20261109" defer></script>
+  <script src="homepage.js?v=20261107" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -56,8 +56,7 @@
   </header>
 
   <main id="main" tabindex="-1">
-    <div class="night-surface">
-    <section class="hero cover-intro" id="cover-intro" aria-labelledby="hero-title">
+    <section class="hero cover-intro night-surface" id="cover-intro" aria-labelledby="hero-title">
       <div class="container cover-sticky">
         <figure class="cover-reveal" role="img" aria-label="Original Japanese PlayStation cover of Dragon Quest Monsters 1 &amp; 2. Scroll to reveal the English fan title.">
           <img class="cover-print" src="assets/artwork/cover-japanese-560.webp" srcset="assets/artwork/cover-japanese-560.webp 560w, assets/artwork/cover-japanese-1120.webp 1120w" sizes="(max-width: 720px) min(85vw, 36svh), (max-width: 1100px) 44vw, 520px" width="1120" height="1137" alt="" fetchpriority="high">
@@ -67,6 +66,12 @@
           <h1 id="hero-title">Dragon Quest <span>Monsters <em>1 &amp; 2</em></span></h1>
           <p class="hero-subtitle">The Starry Night Hero and Friends at the Ranch</p>
           <p class="hero-description">Play Terry’s, Cobi’s, and Tara’s adventures in English with this fan translation for the original Japanese PlayStation game.</p>
+          <div class="button-row">
+            <!-- hero-download:begin -->
+            <a id="download" class="button button-gold" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download v1.0.73 · 7.56 MB</a>
+            <!-- hero-download:end -->
+            <a class="button button-outline" href="#install">How to install</a>
+          </div>
           <div class="hero-party">
             <div class="party-sprites" aria-hidden="true">
               <img class="pixel animated-sprite party-terry" src="assets/terry-still.png" data-animated-src="assets/terry.gif" width="28" height="44" alt="">
@@ -75,30 +80,22 @@
               <img class="pixel animated-sprite" src="assets/sabrecat-walk-still.png" data-animated-src="assets/sabrecat-walk.gif" width="44" height="44" alt="">
             </div>
           </div>
-          <div class="button-row">
-            <div id="download-home" class="download-slot">
-            <!-- hero-download:begin -->
-            <a id="download" class="button button-gold" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download v1.0.73 · 7.56 MB</a>
-            <!-- hero-download:end -->
-            </div>
-            <a class="hero-install-link" href="#install">Install <span aria-hidden="true">↓</span></a>
-          </div>
         </div>
       </div>
     </section>
 
-    <section id="patches" class="patch-section" aria-labelledby="patch-title">
+    <section id="patches" class="patch-section night-surface" aria-labelledby="patch-title">
       <div class="container patch-grid">
-        <h2 id="patch-title">Download &amp; installation</h2>
-        <div id="download-dock" class="download-slot"></div>
         <div class="patch-intro">
           <!-- release:begin -->
+          <h2 id="patch-title"><a href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download</a> &amp; installation</h2>
           <article class="release-download" aria-labelledby="release-title">
             <div class="release-heading">
               <div class="release-description">
                 <h3 id="release-title">Latest patch <span class="release-version">v1.0.73</span></h3>
                 <p>English translation with restored content and quality-of-life improvements.</p>
               </div>
+              <a class="button button-gold release-action" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download ZIP <small>7.56 MB</small></a>
             </div>
             <details id="release-notes" class="release-notes"><summary>What’s new in v1.0.73?</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul></details>
             <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · 7,558,537 bytes</p><code class="file-hash">652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a</code></details>
@@ -125,8 +122,6 @@
         </div>
       </div>
     </section>
-
-    </div>
 
     <section class="gallery-section night-surface" aria-labelledby="gallery-title">
       <div class="container gallery-inner">

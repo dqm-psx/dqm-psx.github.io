@@ -178,7 +178,7 @@ scrollable list.
 
 The patch landing page stands on its own and links to these existing public tools:
 
-- [Guide](https://dqm-psx.github.io/guide/) for breeding recipes, pair finding, and team planning.
+- [Player Guide](https://dqm-psx.github.io/guide/) for walkthroughs, maps, monster profiles and breeding tools.
 - [Translation comparison](https://dqm-psx.github.io/translations/): names, text, and correction proposals to `dqm-psx/translations`.
 
 A broader wiki/game reference and decompilation/research site remain future

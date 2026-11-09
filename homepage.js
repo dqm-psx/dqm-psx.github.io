@@ -165,15 +165,10 @@ const scenes = window.DqmScreenshots;
   showScene(0, false, true);
 })();
 
-// Choose an initial layout once. Resizing preserves the player's choice.
-const installation = document.getElementById("install");
-if (window.matchMedia("(max-width: 850px)").matches) installation.open = false;
-
+// Open a linked answer or the source-image checksum, including on a direct visit.
 function openLinkedDetails(hash) {
   const target = document.getElementById(hash.slice(1));
-  for (let details = target?.closest("details"); details; details = details.parentElement.closest("details")) {
-    details.open = true;
-  }
+  if (target?.tagName === "DETAILS") target.open = true;
 }
 document.addEventListener("click", event => {
   const link = event.target.closest("a[href^='#']");

@@ -20,6 +20,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = re.compile(r'(?:0|[1-9][0-9]*)(?:\.(?:0|[1-9][0-9]*)){2}')
 START, END = '<!-- release:begin -->', '<!-- release:end -->'
+HERO_START, HERO_END = '<!-- hero-download:begin -->', '<!-- hero-download:end -->'
 INSTALL_START, INSTALL_END = '<!-- install-download:begin -->', '<!-- install-download:end -->'
 CREDITS_START, CREDITS_END = '<!-- contributors:begin -->', '<!-- contributors:end -->'
 AI_START, AI_END = '<!-- ai-contributors:begin -->', '<!-- ai-contributors:end -->'
@@ -107,13 +108,14 @@ def download_card(release, attributes):
     items = ''.join(f'<li>{escape(note)}</li>' for note in notes)
     release_link = (f'<p><a href="https://github.com/dqm-psx/patch/releases/tag/v{version}">'
                     'View release on GitHub</a></p>' if 'downloadUrl' in release else '')
-    return f'''          <article class="release-download" aria-labelledby="release-title">
+    return f'''          <h2 id="patch-title"><a {attributes}>Download</a> &amp; installation</h2>
+          <article class="release-download" aria-labelledby="release-title">
             <div class="release-heading">
               <div class="release-description">
                 <h3 id="release-title">Latest patch <span class="release-version">v{version}</span></h3>
                 <p>{escape(release['name'])} with restored content and quality-of-life improvements.</p>
               </div>
-              <a id="download" class="button button-gold release-action" {attributes}>Download ZIP <small>{release['bytes'] / 1_000_000:.2f} MB</small></a>
+              <a class="button button-gold release-action" {attributes}>Download ZIP <small>{release['bytes'] / 1_000_000:.2f} MB</small></a>
             </div>
             <details id="release-notes" class="release-notes"><summary>What’s new in v{version}?</summary><ul>{items}</ul>{release_link}</details>
             <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · {release['bytes']:,} bytes</p><code class="file-hash">{release['sha256']}</code></details>
@@ -256,8 +258,11 @@ def rendered_page(root, manifest):
     credits, ai_credits = contributor_items(names, aliases, ai_names)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
+    hero_link = (f'            <a id="download" class="button button-gold" {attributes}>'
+                 f'Download v{current["version"]} · {current["bytes"] / 1_000_000:.2f} MB</a>\n')
     install_link = f'                <a {attributes}>Download</a>\n'
-    updated = replace_block(source, INSTALL_START, INSTALL_END, install_link, 16)
+    updated = replace_block(source, HERO_START, HERO_END, hero_link, 12)
+    updated = replace_block(updated, INSTALL_START, INSTALL_END, install_link, 16)
     updated = replace_block(updated, START, END, card, 10)
     updated = replace_block(updated, CREDITS_START, CREDITS_END, credits, 16)
     return replace_block(updated, AI_START, AI_END, ai_credits, 16)

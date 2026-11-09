@@ -19,9 +19,9 @@
   <link rel="icon" href="assets/artwork/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/artwork/apple-touch-icon.png">
   <link rel="stylesheet" href="theme.css?v=20261107">
-  <link rel="stylesheet" href="homepage.css?v=20261109">
+  <link rel="stylesheet" href="homepage.css?v=20261107">
   <script src="gallery-data.js?v=20261107" defer></script>
-  <script src="homepage.js?v=20261109" defer></script>
+  <script src="homepage.js?v=20261107" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -66,7 +66,12 @@
           <h1 id="hero-title">Dragon Quest <span>Monsters <em>1 &amp; 2</em></span></h1>
           <p class="hero-subtitle">The Starry Night Hero and Friends at the Ranch</p>
           <p class="hero-description">Play Terry’s, Cobi’s, and Tara’s adventures in English with this fan translation for the original Japanese PlayStation game.</p>
-          <a class="button button-outline hero-patch-link" href="#patches">Download &amp; installation <span aria-hidden="true">↓</span></a>
+          <div class="button-row">
+            <!-- hero-download:begin -->
+            <a id="download" class="button button-gold" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download v1.0.73 · 7.56 MB</a>
+            <!-- hero-download:end -->
+            <a class="button button-outline" href="#install">How to install</a>
+          </div>
           <div class="hero-party">
             <div class="party-sprites" aria-hidden="true">
               <img class="pixel animated-sprite party-terry" src="assets/terry-still.png" data-animated-src="assets/terry.gif" width="28" height="44" alt="">
@@ -80,17 +85,17 @@
     </section>
 
     <section id="patches" class="patch-section night-surface" aria-labelledby="patch-title">
-      <h2 id="patch-title" class="container">Download &amp; installation</h2>
-      <div class="container patch-grid menu-panel">
-        <div class="patch-release">
+      <div class="container patch-grid">
+        <div class="patch-intro">
           <!-- release:begin -->
+          <h2 id="patch-title"><a href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download</a> &amp; installation</h2>
           <article class="release-download" aria-labelledby="release-title">
             <div class="release-heading">
               <div class="release-description">
                 <h3 id="release-title">Latest patch <span class="release-version">v1.0.73</span></h3>
                 <p>English translation with restored content and quality-of-life improvements.</p>
               </div>
-              <a id="download" class="button button-gold release-action" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download ZIP <small>7.56 MB</small></a>
+              <a class="button button-gold release-action" href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download ZIP <small>7.56 MB</small></a>
             </div>
             <details id="release-notes" class="release-notes"><summary>What’s new in v1.0.73?</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul></details>
             <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · 7,558,537 bytes</p><code class="file-hash">652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a</code></details>
@@ -101,8 +106,8 @@
             <a href="https://github.com/dqm-psx/patch">Patch repository <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <details class="install-panel" id="install" open>
-          <summary><h3>How to install</h3></summary>
+        <div class="install-panel menu-panel" id="install">
+          <div class="panel-heading"><h3>How to install</h3></div>
           <ol class="install-steps">
             <li><span class="step-number" aria-hidden="true">1</span><div><h4>Check your original Japanese BIN</h4><p>Use your own unmodified Japanese PlayStation disc image (<strong>SLPM-87050</strong>).
                 <!-- install-download:begin -->
@@ -114,7 +119,7 @@
             <li><span class="step-number" aria-hidden="true">3</span><div><h4>Keep the BIN and CUE together</h4><p>Give the patched BIN the exact filename listed inside the accompanying CUE file. Place both files in the same folder.</p></div></li>
             <li><span class="step-number" aria-hidden="true">4</span><div><h4>Start your adventure</h4><p>Open the CUE in your PlayStation emulator. If you’re <a href="#updating-your-patch">updating an existing game</a>, boot fresh and load your in-game memory-card save.</p></div></li>
           </ol>
-        </details>
+        </div>
       </div>
     </section>
 

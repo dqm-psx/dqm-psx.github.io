@@ -21,8 +21,7 @@ class ReleaseUpdateTests(unittest.TestCase):
         (self.root / 'data').mkdir()
         self.page = self.root / 'index.html'
         self.page.write_text(
-            '<main>\n            <!-- hero-download:begin -->\nold hero\n            <!-- hero-download:end -->\n'
-            '          <!-- release:begin -->\nold download\n          <!-- release:end -->\n'
+            '<main>\n          <!-- release:begin -->\nold download\n          <!-- release:end -->\n'
             '                <!-- install-download:begin -->\nold link\n                <!-- install-download:end -->\n'
             '                <!-- contributors:begin -->\nold credits\n                <!-- contributors:end -->\n'
             '                <!-- ai-contributors:begin -->\nold AI credits\n                <!-- ai-contributors:end -->\n</main>\n',
@@ -148,7 +147,7 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.manifest(latest, old)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertIn('Download v1.0.64', source)
+        self.assertIn('<span class="release-version">v1.0.64</span>', source)
         self.assertIn('<li>Cats4gold</li>', source)
         self.assertIn('<li>Newer</li>', source)
         self.assertIn('<li>Older</li>', source)
@@ -157,7 +156,7 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.manifest(future, latest, old)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertIn('Download v1.0.65', source)
+        self.assertIn('<span class="release-version">v1.0.65</span>', source)
         for name in ('Cats4gold', 'Newer', 'Older', 'Future Name'):
             self.assertEqual(source.count(f'<li>{name}</li>'), 1)
         updater.update(self.root, check=True)
@@ -280,8 +279,9 @@ class ReleaseUpdateTests(unittest.TestCase):
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
         attributes = f'href="downloads/{release["file"]}" download="DQM1-2-English-v1.0.73.zip"'
-        self.assertEqual(source.count(attributes), 4)
-        self.assertIn(f'<h2 id="patch-title"><a {attributes}>Download</a> &amp; installation</h2>', source)
+        self.assertEqual(source.count(attributes), 2)
+        self.assertIn(f'<a {attributes}>Download</a>', source)
+        self.assertIn(f'<a id="download" class="button button-gold release-action" {attributes}>Download ZIP', source)
         self.assertEqual(source.count('id="download"'), 1)
         self.assertIn(release['sha256'], source)
         self.assertNotIn(release['releaseUrl'], source)
@@ -293,10 +293,10 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.manifest(release)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertEqual(source.count(f'href="{release["downloadUrl"]}"'), 4)
+        self.assertEqual(source.count(f'href="{release["downloadUrl"]}"'), 2)
         self.assertIn(f'<a href="{release["downloadUrl"]}">Download</a>', source)
         self.assertNotIn(' download=', source)
-        self.assertIn('Download v1.0.73', source)
+        self.assertIn('<span class="release-version">v1.0.73</span>', source)
         self.assertIn('<li>Player</li>', source)
         updater.update(self.root, check=True)
 
@@ -373,8 +373,7 @@ class ReleaseUpdateTests(unittest.TestCase):
 
     def test_missing_credit_markers_do_not_partially_update_card(self):
         self.manifest(self.package('1.0.64', 'CONTRIBUTORS\n- Alice\n'))
-        self.page.write_text('<!-- hero-download:begin --><!-- hero-download:end -->'
-                             '<!-- install-download:begin --><!-- install-download:end -->'
+        self.page.write_text('<!-- install-download:begin --><!-- install-download:end -->'
                              '<!-- release:begin -->old<!-- release:end -->', encoding='utf-8')
         original = self.page.read_bytes()
         with self.assertRaisesRegex(ValueError, 'contributors:begin'):

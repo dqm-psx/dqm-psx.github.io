@@ -78,7 +78,7 @@ def build(output):
     files.update(scene['src'] for scene in gallery['screenshots'])
     files.update(str(Path(path).with_suffix('')).replace('\\', '/') + '-still.png'
                  for path in tuple(files) if path.endswith('.gif'))
-    # Keep existing download bookmarks working when the hero switches to GitHub Releases.
+    # Keep existing ZIP bookmarks working when the release panel points to GitHub Releases.
     files.update(path.relative_to(ROOT).as_posix() for path in (ROOT / 'downloads').glob('*.zip'))
     files.difference_update(PAGES)
     files.add('.nojekyll')

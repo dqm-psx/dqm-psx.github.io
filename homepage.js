@@ -165,10 +165,15 @@ const scenes = window.DqmScreenshots;
   showScene(0, false, true);
 })();
 
-// Open a linked answer or the source-image checksum, including on a direct visit.
+// Choose an initial layout once. Resizing preserves the player's choice.
+const installation = document.getElementById("install");
+if (window.matchMedia("(max-width: 850px)").matches) installation.open = false;
+
 function openLinkedDetails(hash) {
   const target = document.getElementById(hash.slice(1));
-  if (target?.tagName === "DETAILS") target.open = true;
+  for (let details = target?.closest("details"); details; details = details.parentElement.closest("details")) {
+    details.open = true;
+  }
 }
 document.addEventListener("click", event => {
   const link = event.target.closest("a[href^='#']");

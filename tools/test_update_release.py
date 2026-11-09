@@ -280,7 +280,7 @@ class ReleaseUpdateTests(unittest.TestCase):
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
         attributes = f'href="downloads/{release["file"]}" download="DQM1-2-English-v1.0.73.zip"'
-        self.assertEqual(source.count(attributes), 3)
+        self.assertEqual(source.count(attributes), 4)
         self.assertIn(f'<h2 id="patch-title"><a {attributes}>Download</a> &amp; installation</h2>', source)
         self.assertEqual(source.count('id="download"'), 1)
         self.assertIn(release['sha256'], source)
@@ -293,7 +293,7 @@ class ReleaseUpdateTests(unittest.TestCase):
         self.manifest(release)
         updater.update(self.root)
         source = self.page.read_text(encoding='utf-8')
-        self.assertEqual(source.count(f'href="{release["downloadUrl"]}"'), 3)
+        self.assertEqual(source.count(f'href="{release["downloadUrl"]}"'), 4)
         self.assertIn(f'<a href="{release["downloadUrl"]}">Download</a>', source)
         self.assertNotIn(' download=', source)
         self.assertIn('Download v1.0.73', source)

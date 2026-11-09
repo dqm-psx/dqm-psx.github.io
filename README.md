@@ -120,7 +120,9 @@ python tools/update_release.py --check
 
 While `dqm-psx/patch` is private, the site serves the verified bundled ZIP. If the sync cannot see a public latest release, it keeps this local route. For a new private preview, copy the original release ZIP into `downloads/`, verify its SHA-256 against the release asset, and prepend its version, filename, byte count, SHA-256, contents, and release notes to `downloads/releases.json`. Leave `downloadUrl` absent. Run `python tools/update_release.py` and then `python tools/update_release.py --check`.
 
-The generator updates the download links in the hero, section heading, and installation steps, along with the release information and both contributor lists in `index.html`. All three links point directly to the current ZIP. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
+The hero, download heading, release card, and installation steps all link to the current ZIP. The release card shows the version, size, notes, and SHA-256. Links below it lead to the full release archive and the patch repository. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
+
+When a second playable edition ships, give each edition a named download with a one-line description in the download section. Publish each ZIP as a distinct asset with its own checksum. The current sync recognizes the standard ZIP filenames only.
 
 Names are deduplicated without regard to case and sorted alphabetically, ignoring
 leading underscores for sorting while preserving them in displayed names. The

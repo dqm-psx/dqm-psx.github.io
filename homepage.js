@@ -365,43 +365,82 @@ motionPreference.addEventListener("change", event => {
   schedule();
 })();
 
-// Scroll affects only the English title overlay. The original print stays in place.
+// The button scrolls with the cover, holds its place, then joins the incoming release.
 (() => {
   const intro = document.getElementById("cover-intro");
   const panel = intro.querySelector(".cover-sticky");
   const overlay = intro.querySelector(".cover-english");
   const header = document.querySelector(".site-header");
+  const home = document.getElementById("download-home");
+  const dock = document.getElementById("download-dock");
+  const button = document.getElementById("download");
+  const main = document.getElementById("main");
+  const patches = document.getElementById("patches");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
+  let coverAvailable = true;
   let frame = 0;
+
+  function placeButton(slot) {
+    if (button.parentElement === slot) return;
+    if (slot.moveBefore) {
+      slot.moveBefore(button, null);
+    } else {
+      const focused = document.activeElement === button;
+      slot.append(button);
+      if (focused) button.focus({ preventScroll: true });
+    }
+  }
 
   function render() {
     frame = 0;
-    const offset = header.getBoundingClientRect().bottom - intro.getBoundingClientRect().top;
+    const headerBottom = header.getBoundingClientRect().bottom;
+    const offset = headerBottom - intro.getBoundingClientRect().top;
     const distance = intro.offsetHeight - panel.offsetHeight;
     const progress = motion.matches || distance <= 1
       ? Number(offset >= 10)
       : Math.min(1, Math.max(0, offset / distance));
+    const start = home.getBoundingClientRect();
+    const end = dock.getBoundingClientRect();
+    const pin = headerBottom + Math.min(180, Math.max(80, innerHeight * .22));
+    const docked = end.top <= pin;
     intro.style.setProperty("--cover-progress", progress.toFixed(4));
+    placeButton(docked ? dock : home);
+    if (!docked && start.top < pin && !motion.matches) {
+      const lift = pin - start.top;
+      const travel = lift / (end.top - start.top);
+      button.style.translate = `${(end.left - start.left) * travel}px ${lift}px`;
+    } else {
+      button.style.removeProperty("translate");
+    }
+    const reveal = Math.max(0, Math.min(1, (innerHeight - end.top) / (innerHeight * .42)));
+    patches.style.setProperty("--setup-reveal", motion.matches ? 1 : reveal.toFixed(4));
   }
   function schedule() {
     if (!frame) frame = requestAnimationFrame(render);
   }
-  function resize() {
-    intro.classList.toggle("is-enhanced", !motion.matches);
+  function sizeSlots() {
+    main.style.setProperty("--download-width", button.offsetWidth + "px");
+    main.style.setProperty("--download-height", button.offsetHeight + "px");
     schedule();
   }
-  // Reserve the scroll distance before images have decoded, including on fragment visits.
-  intro.classList.toggle("is-enhanced", !motion.matches);
-  overlay.decode().then(() => {
-    resize();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", resize);
-    window.addEventListener("pageshow", schedule);
-    motion.addEventListener("change", resize);
-    if ("ResizeObserver" in window) {
-      const observer = new ResizeObserver(schedule);
-      observer.observe(header);
-      observer.observe(panel);
-    }
-  }).catch(() => { intro.classList.remove("is-enhanced"); });
+  function setMotion() {
+    intro.classList.toggle("is-enhanced", !motion.matches && coverAvailable);
+    schedule();
+  }
+  sizeSlots();
+  main.classList.add("download-ready");
+  setMotion();
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", sizeSlots);
+  window.addEventListener("pageshow", schedule);
+  window.addEventListener("hashchange", schedule);
+  motion.addEventListener("change", setMotion);
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(sizeSlots);
+    [button, header, panel].forEach(element => observer.observe(element));
+  }
+  overlay.decode().catch(() => {
+    coverAvailable = false;
+    setMotion();
+  });
 })();

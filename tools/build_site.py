@@ -82,8 +82,11 @@ def build(output):
     files.update(path.relative_to(ROOT).as_posix() for path in (ROOT / 'downloads').glob('*.zip'))
     files.difference_update(PAGES)
     files.add('.nojekyll')
-    if tuple(parsed['index.html'].scripts) != SCRIPTS:
+    if tuple(parsed['index.html'].scripts) != ('theme.js', *SCRIPTS):
         raise ValueError('The homepage scripts and bundle inputs must match in load order')
+    # Inline the small theme preference script so a saved choice applies before first paint.
+    theme_script = (ROOT / 'theme.js').read_text(encoding='utf-8')
+    files.remove('theme.js')
     files.difference_update(SCRIPTS)
     bundle = b'\n;\n'.join((ROOT / path).read_bytes() for path in SCRIPTS)
     script_name = fingerprint('site.js', bundle)
@@ -99,6 +102,8 @@ def build(output):
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / path, dest)
     for name, html in pages.items():
+        theme_path = '/theme.js' if name == '404.html' else 'theme.js'
+        html = html.replace(f'<script src="{theme_path}"></script>', f'<script>\n{theme_script}</script>')
         for path, fingerprinted in styles.items():
             html = re.sub(r'(href="/?)' + re.escape(path) + r'(?:\?[^"]*)?"', r'\g<1>' + fingerprinted + '"', html)
         if name == 'index.html':

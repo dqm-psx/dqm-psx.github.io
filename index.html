@@ -18,6 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/artwork/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/artwork/apple-touch-icon.png">
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="theme.css?v=20261107">
   <link rel="stylesheet" href="homepage.css?v=20261107">
   <script src="gallery-data.js?v=20261107" defer></script>
@@ -32,7 +33,7 @@
         <span>DQM <b>PSX</b></span>
       </a>
       <nav class="main-nav" aria-label="Main navigation">
-        <a class="nav-download" href="#download">Download</a>
+        <a class="nav-download" href="#patches">Download</a>
         <button type="button" class="nav-toggle" aria-controls="nav-links" aria-expanded="false" hidden>Menu</button>
         <div class="nav-links" id="nav-links">
           <a href="#install">Install</a>
@@ -47,9 +48,16 @@
               <a href="#faq-help">Help &amp; feedback</a>
             </div>
           </details>
-          <a href="https://dqm-psx.github.io/guide/">Breeding guide <span aria-hidden="true">↗</span></a>
+          <a href="https://dqm-psx.github.io/guide/">Guide <span aria-hidden="true">↗</span></a>
           <a href="https://dqm-psx.github.io/translations/">Translations <span aria-hidden="true">↗</span></a>
           <a href="https://discord.gg/6V9p6Y2pBt">Discord <span aria-hidden="true">↗</span></a>
+          <label class="theme-picker" hidden>Theme
+            <select id="theme-select">
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
         </div>
       </nav>
     </div>
@@ -88,14 +96,20 @@
       <div class="container patch-grid">
         <div class="patch-intro">
           <!-- release:begin -->
-          <h2 id="patch-title"><a href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Download</a> &amp; installation</h2>
-          <div class="release-download" aria-labelledby="release-title">
-            <div class="release-heading"><h3 id="release-title">English translation</h3><span class="release-version">v1.0.73</span></div>
-            <p>Includes the BPS patch, matching CUE file, and README.</p>
-            <details class="release-notes"><summary>Release notes</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul></details>
+          <h2 id="patch-title">Download &amp; installation</h2>
+          <article class="release-download" aria-labelledby="release-title">
+            <div class="release-heading">
+              <h3 id="release-title"><a href="downloads/DQM1-2-English-v1.0.73-public.zip" download="DQM1-2-English-v1.0.73.zip">Latest patch</a> <span class="release-version">v1.0.73</span></h3>
+              <p>English translation with restored content and quality-of-life improvements.</p>
+            </div>
+            <details id="release-notes" class="release-notes"><summary>What’s new in v1.0.73?</summary><ul><li>Adds saved movement settings in all three adventures: independent walking and R1 speeds, Hold or Toggle running, and Time or Distance encounter rates.</li><li>Restores monster wagers in two-player Colosseum battles, with configurable Local Rules. Prizes are optional; transfers save both Adventure Logs.</li><li>Updates the dialogue font and reduces memory use, with fixes for battle loading, scene and NPC graphics, and walking sprites.</li><li>Revises monster names, default nicknames, and matching dialogue, including MiniDrak, Slib, and Hellblast. Existing saved nicknames stay unchanged. Includes all earlier translation and gameplay fixes.</li></ul></details>
             <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · 7,558,537 bytes</p><code class="file-hash">652ae16c06cc2291495b592bde5a2737e68e483879b4dc684ed4d58a56e1493a</code></details>
-          </div>
+          </article>
           <!-- release:end -->
+          <div class="release-links">
+            <a href="https://github.com/dqm-psx/patch/releases">Release archive <span aria-hidden="true">↗</span></a>
+            <a href="https://github.com/dqm-psx/patch">Patch repository <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
         <div class="install-panel menu-panel" id="install">
           <div class="panel-heading"><h3>How to install</h3></div>
@@ -304,7 +318,7 @@
           <details id="report-a-problem">
             <summary>The game froze or something looks wrong. What should I try?</summary>
             <div class="faq-answer">
-              <p>Read the <a href="#patches">latest release notes</a>, confirm that you patched a clean Japanese BIN, then boot fresh and load an in-game memory-card save. Some area transitions take longer than in the Japanese game.</p>
+              <p>Read the <a href="#release-notes">latest release notes</a>, confirm that you patched a clean Japanese BIN, then boot fresh and load an in-game memory-card save. Some area transitions take longer than in the Japanese game.</p>
               <p>If the problem repeats, check <a href="https://github.com/dqm-psx/patch/issues">existing patch issues</a>, then use the <a href="https://github.com/dqm-psx/patch/issues/new?template=bug-report.yml">bug report form</a>. Include your patch version, campaign, setup, and the steps that trigger the issue. A screenshot, a memory-card save just before the problem, or a save state from the affected patch version can help reproduce it.</p>
             </div>
           </details>
@@ -317,8 +331,8 @@
             <div class="faq-answer"><p>Playtest Terry’s, Cobi’s, or Tara’s adventure, share a reproducible bug or wording suggestion, or test a new patch to check whether it resolves an issue you reported. You can also <a href="https://github.com/dqm-psx/dqm-psx.github.io/issues/new?template=screenshot.yml">submit a screenshot for the gallery</a>.</p></div>
           </details>
           <details id="breeding-guide">
-            <summary>Where is the breeding guide?</summary>
-            <div class="faq-answer"><p>The <a href="https://dqm-psx.github.io/guide/">breeding guide</a> lists recipes and helps you find breeding pairs and plan your next party.</p></div>
+            <summary>Where is the Guide?</summary>
+            <div class="faq-answer"><p>The <a href="https://dqm-psx.github.io/guide/">Guide</a> lists breeding recipes and helps you find pairs and plan your next party.</p></div>
           </details>
         </section>
       </div>
@@ -397,7 +411,7 @@
       <div class="footer-links" id="resources">
         <a href="#about">Credits</a>
         <a href="#community">Support</a>
-        <a href="https://dqm-psx.github.io/guide/">Breeding guide</a>
+        <a href="https://dqm-psx.github.io/guide/">Guide</a>
         <a href="https://dqm-psx.github.io/translations/">Translations</a>
         <a href="https://www.romhacking.net/translations/7734/">ROMhacking.net</a>
         <a href="#">Back to top <span aria-hidden="true">↑</span></a>

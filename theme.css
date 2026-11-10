@@ -1,22 +1,47 @@
 /* Shared foundations for the DQM PSX homepage and future reference pages. */
 :root {
-  color-scheme: light;
-  --night: #11233b;
-  --night-raised: #1b3554;
-  --night-deep: #0b192c;
-  --ink: #24334a;
-  --muted: #66707b;
-  --paper: #f8f4e8;
-  --paper-raised: #fffdf5;
-  --paper-line: #d6cbb2;
+  color-scheme: light dark;
+  --night: light-dark(#11233b, #0c1929);
+  --night-raised: light-dark(#1b3554, #223950);
+  --night-deep: light-dark(#0b192c, #080f1b);
+  --ink: light-dark(#24334a, #e4e9ed);
+  --muted: light-dark(#66707b, #b6c2ce);
+  --paper: light-dark(#f8f4e8, #17232e);
+  --paper-raised: light-dark(#fffdf5, #243444);
+  --paper-inset: light-dark(#eae2d0, #111b26);
+  --paper-line: light-dark(#d6cbb2, #465769);
+  --paper-rule: light-dark(#c4b393, #58687a);
+  --paper-focus: light-dark(#805916, #efc678);
+  --button-blue-border: light-dark(#203d5e, #708498);
   --gold: #e5bb68;
   --gold-bright: #f4d490;
-  --gold-dark: #8c682e;
-  --blue-link: #214f79;
+  --gold-dark: light-dark(#8c682e, #e5bb68);
+  --blue-link: light-dark(#214f79, #9dcef4);
   --font-body: "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-display: Georgia, "Times New Roman", serif;
   --page-width: 1200px;
   --frame-shadow: 0 8px 0 #09162855, 0 20px 44px #07132235;
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+/* Native system colors follow the selected scheme in older browsers. */
+@supports not (color: light-dark(white, black)) {
+  :root {
+    --night: #11233b;
+    --night-raised: #1b3554;
+    --night-deep: #0b192c;
+    --ink: CanvasText;
+    --muted: CanvasText;
+    --paper: Canvas;
+    --paper-raised: Canvas;
+    --paper-inset: Canvas;
+    --paper-line: GrayText;
+    --paper-rule: GrayText;
+    --paper-focus: Highlight;
+    --button-blue-border: #708498;
+    --gold-dark: CanvasText;
+    --blue-link: LinkText;
+  }
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 28px; }
@@ -33,7 +58,7 @@ h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #d18a26; outline-offset: 5px; }
 [hidden] { display: none !important; }
-::selection { background: #e5bb6890; }
+::selection { color: #24334a; background: #f4d490; }
 .container { width: min(var(--page-width), calc(100% - 80px)); margin-inline: auto; }
 .pixel { image-rendering: pixelated; object-fit: contain; }
 .eyebrow { font-size: .75rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
@@ -42,18 +67,18 @@ button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px soli
 .night-surface .eyebrow { color: var(--gold); }
 .paper-surface { background-color: var(--paper); background-image: radial-gradient(#b99b6417 .6px, transparent .6px); background-size: 5px 5px; }
 .paper-surface .eyebrow { color: var(--gold-dark); }
-.paper-surface :is(button, a, summary):focus-visible { outline-color: #805916; }
+.paper-surface :is(button, a, summary):focus-visible { outline-color: var(--paper-focus); }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 48px; padding: 12px 22px; border: 1px solid transparent; border-radius: 3px; font-size: .9rem; line-height: 1.4; font-weight: 700; text-decoration: none; transition: background .18s, transform .18s, box-shadow .18s; }
 .button:hover { transform: translateY(-2px); }
 .button-gold, .night-surface .button-gold { color: #30291f; background: linear-gradient(#f1d18e, #dfb362); border-color: #f6d89b #c6984b #bc8c40; box-shadow: inset 0 0 0 2px #f3d49370, 0 3px 0 #715329; }
 .button-gold:hover { background: #f4d490; }
-.button-outline { color: var(--paper); border-color: #b6b6ab73; box-shadow: inset 0 0 0 2px #b6b6ab0b; background: #0f22374a; }
+.button-outline { color: #f8f4e8; border-color: #b6b6ab73; box-shadow: inset 0 0 0 2px #b6b6ab0b; background: #0f22374a; }
 .button-outline:hover { background: #2c4663; border-color: var(--gold); }
-.button-blue { background: var(--night); color: var(--paper); border-color: #203d5e; box-shadow: 0 3px 0 #071729; }
+.button-blue { background: var(--night); color: #f8f4e8; border-color: var(--button-blue-border); box-shadow: 0 3px 0 #071729; }
 .button-blue:hover { background: #2a4869; }
 .button-row { display: flex; gap: 14px; flex-wrap: wrap; }
 .menu-panel { background: linear-gradient(135deg, #233e5e, #172d47); border: 1px solid #e3c17d; border-radius: 5px; box-shadow: inset 0 0 0 3px #14263d, inset 0 0 0 4px #768297, var(--frame-shadow); }
-.skip-link { position: fixed; top: -100px; left: 16px; padding: 12px 20px; z-index: 1000; color: var(--ink); background: var(--gold-bright); }
+.skip-link { position: fixed; top: -100px; left: 16px; padding: 12px 20px; z-index: 1000; color: #24334a; background: var(--gold-bright); }
 .skip-link:focus { top: 10px; }
 .missing-page { max-width: 620px; margin-block: 14vh; }
 .missing-page h1 { margin-block: 16px 8px; font: 500 40px/1.15 var(--font-display); }

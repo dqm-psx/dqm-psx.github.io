@@ -17,7 +17,7 @@ python tools/build_site.py
 python -m http.server 4174 --bind 127.0.0.1 --directory dist
 ```
 
-The build checks internal anchors, local URLs, gallery and sprite assets, and the two HTML pages. It writes the CSS and a single deferred JavaScript bundle with content hashes in their filenames. Only visitor-facing files and compatible download URLs are included in the artifact. The cover’s responsive WebPs are already optimized and committed. Rebuild them with the artwork recipe below when their source changes.
+The build checks internal anchors, local URLs, gallery and sprite assets, and the two HTML pages. It inlines the theme preference script before the stylesheets so a saved choice applies on first paint. The CSS and deferred JavaScript bundle have content hashes in their filenames. Only visitor-facing files and compatible download URLs are included in the artifact. The cover’s responsive WebPs are already optimized and committed. Rebuild them with the artwork recipe below when their source changes.
 
 ## Launch plan
 

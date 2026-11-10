@@ -16,7 +16,10 @@ class SiteBuildTests(unittest.TestCase):
             build_site.build(out)
             build_site.build(out)
             for name in build_site.PAGES:
-                page = build_site.Page((out / name).read_text(encoding='utf-8'))
+                html = (out / name).read_text(encoding='utf-8')
+                theme = (build_site.ROOT / 'theme.js').read_text(encoding='utf-8')
+                self.assertLess(html.index(theme), html.index('rel="stylesheet"'), name)
+                page = build_site.Page(html)
                 for url in page.urls:
                     parts = urlsplit(url)
                     if parts.netloc or not parts.path.strip('/'):

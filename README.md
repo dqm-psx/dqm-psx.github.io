@@ -112,6 +112,8 @@ Each new release in [dqm-psx/patch](https://github.com/dqm-psx/patch/releases) c
 
 The website follows GitHub's **Latest** stable release, including deliberate rollbacks. New releases after v1.0.73 require the two-edition catalog. Historical single-package releases remain supported. The current v1.0.73 preview keeps its verified local download until a new edition pair is published.
 
+Automatic import requires publicly downloadable release assets. While the distribution repository remains private, use the prepared-bundle preview below to review new releases; the public importer retains the existing local preview. Making release downloads public remains part of the owner's launch decision.
+
 The **Sync patch release** workflow checks every six hours and supports a manual run from Actions. The build also accepts a `patch-release` repository dispatch. The distribution repository can send that notification immediately when its `WEBSITE_DISPATCH_TOKEN` secret is configured with permission to dispatch to this website repository. The scheduled check provides automatic updates when the notification is unavailable. That secret is an optional launch setup step.
 
 Automatic synchronization builds the website directly from the published release information. It does not require a release-update PR. It verifies the current ZIPs, their hashes, CUE filenames, BPS headers, build records, and complete feature explanations before producing an artifact. Historical catalog hashes are verified against GitHub so their FAQ entries can be retained. Failure stops deployment and reports the missing or invalid information in Actions. Each successful run provides a `homepage-preview` artifact.

@@ -17,6 +17,8 @@ import re
 import tempfile
 import zipfile
 
+import release_catalog as catalog
+
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = re.compile(r'(?:0|[1-9][0-9]*)(?:\.(?:0|[1-9][0-9]*)){2}')
 START, END = '<!-- release:begin -->', '<!-- release:end -->'
@@ -24,6 +26,9 @@ HERO_START, HERO_END = '<!-- hero-download:begin -->', '<!-- hero-download:end -
 INSTALL_START, INSTALL_END = '<!-- install-download:begin -->', '<!-- install-download:end -->'
 CREDITS_START, CREDITS_END = '<!-- contributors:begin -->', '<!-- contributors:end -->'
 AI_START, AI_END = '<!-- ai-contributors:begin -->', '<!-- ai-contributors:end -->'
+FAQ_START, FAQ_END = '<!-- feature-faq:begin -->', '<!-- feature-faq:end -->'
+EDITIONS_START, EDITIONS_END = '<!-- editions-faq:begin -->', '<!-- editions-faq:end -->'
+FAQ_NAV_START, FAQ_NAV_END = '<!-- feature-faq-nav:begin -->', '<!-- feature-faq-nav:end -->'
 HEADING = re.compile(r"[A-Z][A-Z0-9 '&/():-]*")
 HANDLE = r'[\w][\w.-]*'
 THANKS_NAMES = re.compile(rf'{HANDLE}(?:, {HANDLE})*(?:,? and {HANDLE})?')
@@ -118,6 +123,107 @@ def download_card(release, attributes):
             <details class="release-notes"><summary>Verify the ZIP download</summary><p>SHA-256 · {release['bytes']:,} bytes</p><code class="file-hash">{release['sha256']}</code></details>
           </article>
 '''
+
+
+def edition_attributes(release, edition):
+    target = catalog.edition_url(release, edition)
+    download = f' download="{edition["file"]}"' if 'downloadUrl' not in edition else ''
+    return f'href="{escape(target, quote=True)}"{download}'
+
+
+def edition_picker(release, element_id):
+    options = []
+    for edition in release['editions']:
+        data = {
+            'href': catalog.edition_url(release, edition),
+            'filename': edition['file'] if 'downloadUrl' not in edition else '',
+            'description': edition['description'],
+            'bytes': str(edition['bytes']),
+            'sha256': edition['sha256'],
+        }
+        attrs = ' '.join(f'data-{key}="{escape(value, quote=True)}"' for key, value in data.items())
+        selected = ' selected' if edition['id'] == release['defaultEdition'] else ''
+        options.append(f'<option value="{edition["id"]}" {attrs}{selected}>{escape(edition["name"])}</option>')
+    return (f'<div class="edition-picker" hidden><label for="{element_id}">Edition</label>'
+            f'<select id="{element_id}" data-edition-select data-version="{release["version"]}">'
+            + ''.join(options) + '</select></div>')
+
+
+def edition_card(release, edition):
+    version = release['version']
+    notes = ''.join(f'<li>{escape(note)}</li>' for note in release['notes'])
+    release_link = (f'<p><a href="{release["releaseUrl"]}">View release on GitHub</a></p>'
+                    if 'releaseUrl' in release else '')
+    return f'''          <h2 id="patch-title">Download &amp; installation</h2>
+          <article class="release-download" aria-labelledby="release-title">
+            <div class="release-heading">
+              <h3 id="release-title"><a data-edition-download {edition_attributes(release, edition)}>Latest patch</a> <span class="release-version">v{version}</span></h3>
+              {edition_picker(release, 'release-edition')}
+              <p id="edition-description">{escape(edition['description'])}</p>
+            </div>
+            <details id="release-notes" class="release-notes"><summary>What’s new in v{version}?</summary><ul>{notes}</ul>{release_link}</details>
+            <details class="release-notes"><summary>Verify the ZIP download</summary><p id="edition-checksum-label">SHA-256 · {edition['bytes']:,} bytes</p><code id="edition-checksum" class="file-hash">{edition['sha256']}</code></details>
+          </article>
+'''
+
+
+def editions_faq(release):
+    descriptions = ''.join(f'<li><strong>{escape(edition["name"])}</strong> — {escape(edition["description"])}</li>'
+                           for edition in release['editions'])
+    return f'''          <details id="patch-editions">
+            <summary>Which patch edition should I choose?</summary>
+            <div class="faq-answer"><ul>{descriptions}</ul><p>Choose an edition beside the download. Both packages apply directly to the original Japanese BIN. The answers below explain the features available across the project.</p></div>
+          </details>
+'''
+
+
+def released_answers(releases):
+    """Keep released answers available even when Latest intentionally rolls back."""
+    released = [release for release in releases if release.get('schemaVersion') == 2]
+    released.sort(key=lambda release: (release.get('publishedAt', '9999'),
+                                      tuple(map(int, release['version'].split('.')))))
+    answers = {}
+    features = {}
+    for release in released:
+        features.update({feature['id']: feature for feature in release['features']})
+        for answer in release['faq']:
+            answers[answer['id']] = answer
+    result = []
+    for answer in answers.values():
+        introduced = {features[feature]['introduced'] for feature in answer['features']}
+        since = next(iter(introduced)) if len(introduced) == 1 and None not in introduced else None
+        result.append({**answer, 'since': since})
+    return result
+
+
+def feature_faq(releases):
+    answers = released_answers(releases)
+    sections = []
+    for key, (anchor, title) in catalog.SECTIONS.items():
+        entries = [answer for answer in answers if answer['section'] == key]
+        if not entries:
+            continue
+        details = ''
+        for answer in entries:
+            since = answer['since']
+            availability = (f'<p class="faq-availability">Available since v{since}.</p>'
+                            if since and f'v{since}' not in answer['answerHtml'] else '')
+            details += f'''          <details id="{answer['id']}">
+            <summary>{escape(answer['question'])}</summary>
+            <div class="faq-answer">{answer['answerHtml']}{availability}</div>
+          </details>
+'''
+        sections.append(f'''        <section id="{anchor}" class="faq-group" aria-labelledby="{anchor}-title">
+          <h3 id="{anchor}-title">{title}</h3>
+{details}        </section>
+''')
+    return '\n'.join(sections)
+
+
+def feature_faq_navigation(releases):
+    present = {answer['section'] for answer in released_answers(releases)}
+    return ''.join(f'              <a href="#{anchor}">{title}</a>\n'
+                   for section, (anchor, title) in catalog.SECTIONS.items() if section in present)
 
 
 def valid_name(value):
@@ -232,6 +338,14 @@ def rendered_page(root, manifest):
         raise ValueError('Duplicate release version in manifest')
     names, aliases, ai_names = project_contributors(root)
     for release in releases:
+        if release.get('schemaVersion') == 2:
+            catalog.validate_catalog(release)
+            for edition in release['editions']:
+                package = root / 'downloads' / edition['file']
+                if package.is_file() or 'downloadUrl' not in edition:
+                    catalog.validate_edition_package(release, edition, package.read_bytes())
+            names.extend(valid_name(name) for name in release['contributors'])
+            continue
         version, filename = package_identity(release)
         download_target(release)
         try:
@@ -250,14 +364,32 @@ def rendered_page(root, manifest):
         except ValueError as error:
             raise ValueError(f'{release["file"]}: {error}') from error
     current = releases[0]
-    attributes = download_attributes(current)
-    card = download_card(current, attributes)
     credits, ai_credits = contributor_items(names, aliases, ai_names)
     page = root / 'index.html'
     source = page.read_text(encoding='utf-8')
-    hero_link = (f'            <a id="download" class="button button-gold" {attributes}>'
-                 f'Download v{current["version"]} · {current["bytes"] / 1_000_000:.2f} MB</a>\n')
-    install_link = f'                <a {attributes}>Download</a>\n'
+    if current.get('schemaVersion') == 2:
+        edition = next(item for item in current['editions'] if item['id'] == current['defaultEdition'])
+        attributes = edition_attributes(current, edition)
+        card = edition_card(current, edition)
+        hero_link = (f'            {edition_picker(current, "hero-edition")}\n'
+                     f'            <a id="download" class="button button-gold" data-edition-download {attributes}>'
+                     f'Download v{current["version"]} · {edition["bytes"] / 1_000_000:.2f} MB</a>\n')
+        other = next(item for item in current['editions'] if item['id'] != current['defaultEdition'])
+        hero_link += (f'            <a class="edition-fallback" data-edition-fallback {edition_attributes(current, other)}>'
+                      f'{escape(other["name"])} · {other["bytes"] / 1_000_000:.2f} MB</a>\n')
+        install_link = f'                <a data-edition-download {attributes}>Download</a>\n'
+        source = replace_block(source, EDITIONS_START, EDITIONS_END, editions_faq(current), 10)
+    else:
+        attributes = download_attributes(current)
+        card = download_card(current, attributes)
+        hero_link = (f'            <a id="download" class="button button-gold" {attributes}>'
+                     f'Download v{current["version"]} · {current["bytes"] / 1_000_000:.2f} MB</a>\n')
+        install_link = f'                <a {attributes}>Download</a>\n'
+        if EDITIONS_START in source:
+            source = replace_block(source, EDITIONS_START, EDITIONS_END, '', 10)
+    if any(release.get('schemaVersion') == 2 for release in releases):
+        source = replace_block(source, FAQ_START, FAQ_END, feature_faq(releases), 8)
+        source = replace_block(source, FAQ_NAV_START, FAQ_NAV_END, feature_faq_navigation(releases), 14)
     updated = replace_block(source, HERO_START, HERO_END, hero_link, 12)
     updated = replace_block(updated, INSTALL_START, INSTALL_END, install_link, 16)
     updated = replace_block(updated, START, END, card, 10)

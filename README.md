@@ -102,27 +102,47 @@ uses the local source images, verifies the input hashes and checks the decoded
 overlay's transparency around the illustration at both output sizes. The
 committed files were made with Pillow 12.1.1 and libwebp 1.6.0.
 
-## Updating the patch download and contributor credits
+## Release-driven downloads and FAQ
 
-The authoritative packages live in [dqm-psx/patch](https://github.com/dqm-psx/patch/releases). Its [archive manifest](https://github.com/dqm-psx/patch/blob/main/release-manifest.json) records the 28 migrated packages and their source snapshot. Published ZIPs retain their original filenames and hashes. For a new stable release, use `DQM1-2-English-vX.Y.Z.zip`. The helper also accepts the historical `-public.zip` suffix.
+The source builder prepares both editions and their public release information. Enhanced uses its default full selection. Translation only includes the translation, its required runtime support, and original-game bug fixes. The website displays those recorded selections.
 
-The **Sync patch release** workflow checks GitHub’s public latest release every six hours. You can run it immediately from this repository’s Actions tab. It reads the published tag and asset metadata without credentials, downloads the versioned ZIP, checks its declared size and SHA-256, verifies the BPS/CUE/README file list and CUE contents, and reads the named credits. It proposes a site pull request with the pinned release asset URL, notes, checksum, and credits. New publicly accessible releases use the ZIP on GitHub Releases and add only metadata and generated HTML to this repository.
+Each new release in [dqm-psx/patch](https://github.com/dqm-psx/patch/releases) contains two edition ZIPs, `release.json`, and `SHA256SUMS.txt`. Each ZIP contains a versioned BPS, matching CUE, README, and `BUILD.json`. The build record identifies the version, edition, source revision, fonts, language, selected features, and output checksum. Release preparation creates a draft for review. The owner publishes it when ready.
 
-The workflow runs on the website’s default branch and pushes a verified review branch using its built-in token. This repository currently disables **Allow GitHub Actions to create and approve pull requests**. A maintainer can open **Actions → Sync patch release → the completed run → Summary**, follow **Open the comparison**, and select **Create pull request**. If the administrator later enables the option under **Settings → Actions → General → Workflow permissions**, the workflow opens the PR automatically. Review and merge the resulting PR like any other site change. [GitHub’s Actions settings guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#preventing-github-actions-from-creating-or-approving-pull-requests)
+`release.json` supplies the download identity, notes, credits, available features, and complete player-facing FAQ answers. The builder's shared feature documentation is reviewed as part of release preparation. A new feature must have its explanation before the website can adopt the release. FAQ answers cover all released project features and stay identical when a visitor chooses a different edition. Published answers and their anchors remain available when GitHub Latest intentionally returns to an older release.
 
-To preview the public release check or prepare the same change locally, run:
+The website follows GitHub's **Latest** stable release, including deliberate rollbacks. New releases after v1.0.73 require the two-edition catalog. Historical single-package releases remain supported. The current v1.0.73 preview keeps its verified local download until a new edition pair is published.
+
+The **Sync patch release** workflow checks every six hours and supports a manual run from Actions. The build also accepts a `patch-release` repository dispatch. The distribution repository can send that notification immediately when its `WEBSITE_DISPATCH_TOKEN` secret is configured with permission to dispatch to this website repository. The scheduled check provides automatic updates when the notification is unavailable. That secret is an optional launch setup step.
+
+Automatic synchronization builds the website directly from the published release information. It does not require a release-update PR. It verifies the current ZIPs, their hashes, CUE filenames, BPS headers, build records, and complete feature explanations before producing an artifact. Historical catalog hashes are verified against GitHub so their FAQ entries can be retained. Failure stops deployment and reports the missing or invalid information in Actions. Each successful run provides a `homepage-preview` artifact.
+
+Deployment uses the existing Pages configuration. Enable hosting only after the owner's launch approval. Ordinary website code changes continue through PR review.
+
+To check the currently published release without writing source files:
 
 ```sh
 python tools/sync_release.py --dry-run
+```
+
+To import its information into a local checkout for inspection:
+
+```sh
 python tools/sync_release.py
 python tools/update_release.py --check
 ```
 
-While `dqm-psx/patch` is private, the site serves the verified bundled ZIP. If the sync cannot see a public latest release, it keeps this local route. For a new private preview, copy the original release ZIP into `downloads/`, verify its SHA-256 against the release asset, and prepend its version, filename, byte count, SHA-256, contents, and release notes to `downloads/releases.json`. Leave `downloadUrl` absent. Run `python tools/update_release.py` and then `python tools/update_release.py --check`.
+A prepared release bundle can be previewed before publication using an isolated build:
 
-The gold button beside the cover, the “Latest patch” text link, and the first installation step all link to the current ZIP. The release card shows the version, size, notes, and SHA-256. Links below it lead to the full release archive and the patch repository. The local download suggests the shorter versioned filename when saved. GitHub serves public assets under their published filenames. Local ZIPs are rechecked against their manifest entries on every generation. For public releases without a bundled ZIP, the offline generator uses the credits and package metadata captured during verification.
+```sh
+python tools/preview_release.py --release-dir /path/to/release-bundle --output /path/to/release-preview
+python -m http.server 4174 --bind 127.0.0.1 --directory /path/to/release-preview
+```
 
-When a second playable edition ships, give each edition a named download with a one-line description in the download section. Publish each ZIP as a distinct asset with its own checksum. The current sync recognizes the standard ZIP filenames only.
+The preview validates both ZIPs, renders the edition controls and global FAQ, and labels the page as a release preview. The builder's `prepare_release.py --website /path/to/this-checkout` invokes the same preview step. The preview directory contains the public patch packages and website assets.
+
+The gold button beside the cover, the “Latest patch” text link, and the first installation step all use the selected edition. Both edition selectors synchronize those links, the description, and the ZIP size/checksum. Without JavaScript, both named downloads remain accessible. The release archive and patch repository links remain available alongside the download.
+
+The committed `downloads/releases.json` retains the verified legacy packages and credits. The release-sync build imports newer catalog records into the same format in its workspace. Public releases link to pinned GitHub Release assets, and compatible local download bookmarks continue to work.
 
 Names are deduplicated without regard to case and sorted alphabetically, ignoring
 leading underscores for sorting while preserving them in displayed names. The

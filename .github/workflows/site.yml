@@ -5,6 +5,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_call:
+  repository_dispatch:
+    types: [patch-release]
+
+concurrency:
+  group: homepage-${{ github.event_name == 'pull_request' && github.ref || 'release' }}
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -23,8 +30,19 @@ jobs:
       - run: python -m unittest discover -s tools -p 'test_*.py'
       - run: python tools/update_release.py --check
       - run: python tools/update_screenshots.py --check
+      - name: Import the latest published release
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python tools/sync_release.py
+      - run: python tools/update_release.py --check
       - run: python tools/build_site.py
       - run: node --check dist/site.*.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: homepage-preview
+          path: dist
+          retention-days: 7
       - name: Check existing hosting configuration
         id: hosting
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

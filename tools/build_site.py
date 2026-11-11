@@ -47,13 +47,14 @@ def fingerprint(name, content):
     return f'{path.stem}.{digest}{path.suffix}'
 
 
-def build(output):
+def build(output, root=ROOT):
     output = output.resolve()
-    if output == ROOT or output in ROOT.parents:
+    root = root.resolve()
+    if output == root or output in root.parents:
         raise ValueError('The output must be separate from the source tree')
     if output.exists() and any(output.iterdir()) and not (output / '.dqm-site-build').is_file():
         raise ValueError(f'Choose an empty directory or a previous homepage build: {output}')
-    pages = {name: (ROOT / name).read_text(encoding='utf-8') for name in PAGES}
+    pages = {name: (root / name).read_text(encoding='utf-8') for name in PAGES}
     parsed = {name: Page(html) for name, html in pages.items()}
     files = set()
 
@@ -70,25 +71,25 @@ def build(output):
             target = path or name
             if parts.fragment and (target not in parsed or unquote(parts.fragment) not in parsed[target].ids):
                 raise ValueError(f'{name}: missing anchor {url}')
-            if not (ROOT / target).resolve().is_relative_to(ROOT) or not (ROOT / target).is_file():
+            if not (root / target).resolve().is_relative_to(root) or not (root / target).is_file():
                 raise ValueError(f'{name}: missing local file {url}')
             files.add(target)
 
-    gallery = json.loads((ROOT / 'data/screenshots.json').read_text(encoding='utf-8'))
+    gallery = json.loads((root / 'data/screenshots.json').read_text(encoding='utf-8'))
     files.update(scene['src'] for scene in gallery['screenshots'])
     files.update(str(Path(path).with_suffix('')).replace('\\', '/') + '-still.png'
                  for path in tuple(files) if path.endswith('.gif'))
     # Keep existing download bookmarks working when the hero switches to GitHub Releases.
-    files.update(path.relative_to(ROOT).as_posix() for path in (ROOT / 'downloads').glob('*.zip'))
+    files.update(path.relative_to(root).as_posix() for path in (root / 'downloads').glob('*.zip'))
     files.difference_update(PAGES)
     files.add('.nojekyll')
     if tuple(parsed['index.html'].scripts) != ('theme.js', *SCRIPTS):
         raise ValueError('The homepage scripts and bundle inputs must match in load order')
     # Inline the small theme preference script so a saved choice applies before first paint.
-    theme_script = (ROOT / 'theme.js').read_text(encoding='utf-8')
+    theme_script = (root / 'theme.js').read_text(encoding='utf-8')
     files.remove('theme.js')
     files.difference_update(SCRIPTS)
-    bundle = b'\n;\n'.join((ROOT / path).read_bytes() for path in SCRIPTS)
+    bundle = b'\n;\n'.join((root / path).read_bytes() for path in SCRIPTS)
     script_name = fingerprint('site.js', bundle)
     output.mkdir(parents=True, exist_ok=True)
     (output / script_name).write_bytes(bundle)
@@ -96,11 +97,11 @@ def build(output):
     for path in sorted(files):
         destination = path
         if path.endswith('.css'):
-            destination = fingerprint(path, (ROOT / path).read_bytes())
+            destination = fingerprint(path, (root / path).read_bytes())
             styles[path] = destination
         dest = output / destination
         dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / path, dest)
+        shutil.copyfile(root / path, dest)
     for name, html in pages.items():
         theme_path = '/theme.js' if name == '404.html' else 'theme.js'
         html = html.replace(f'<script src="{theme_path}"></script>', f'<script>\n{theme_script}</script>')

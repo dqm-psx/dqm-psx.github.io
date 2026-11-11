@@ -52,6 +52,13 @@ html { --site-header-height: 68px; scroll-padding-top: calc(var(--site-header-he
 .release-heading h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font: 500 24px/1.25 var(--font-display); color: #f4e6c4; }
 .release-version { color: var(--gold-bright); font: 600 .875rem/1.4 var(--font-body); }
 .release-heading p { max-width: 42ch; margin-top: 8px; font-size: .9375rem; line-height: 1.6; color: #c5d2e0; }
+.edition-picker { display: flex; align-items: center; gap: 10px; color: #d9e1e9; font-size: .875rem; }
+.edition-picker select { min-height: 44px; max-width: 100%; padding: 6px 10px; color: #f7efd9; color-scheme: dark; background: var(--night-deep); border: 1px solid #63738a; border-radius: 3px; cursor: pointer; }
+.edition-picker select:hover { border-color: var(--gold); }
+.edition-picker select:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.release-heading .edition-picker { margin-top: 16px; }
+.hero .edition-picker, .edition-fallback { flex-basis: 100%; }
+.edition-fallback { font-size: .875rem; }
 .release-notes { border-top: 1px solid #98acbf33; font-size: .875rem; color: #c5d2e0; }
 .release-notes summary { padding-block: 11px; color: #e6d2a7; }
 .release-links { display: flex; flex-wrap: wrap; gap: 0 24px; margin-top: 4px; }
@@ -191,6 +198,7 @@ html { --site-header-height: 68px; scroll-padding-top: calc(var(--site-header-he
 
 .install-steps p, .faq-answer, .community-card > p { font-size: 1rem; }
 .faq-answer { max-width: 76ch; }
+.faq-answer .faq-availability { color: var(--muted); font-size: .8125rem; margin-top: 12px; }
 .screen-credit, .footer-inner > p, .footer-links a, .motion-toggle { font-size: .8125rem; }
 .footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
 
@@ -257,6 +265,7 @@ html { --site-header-height: 68px; scroll-padding-top: calc(var(--site-header-he
   .cover-sticky { grid-template-columns: minmax(0,1fr); gap: 18px; padding-block: 16px 24px; }
   .cover-reveal { width: min(85vw,36svh,360px); }
   .hero-copy { text-align: center; }
+  .hero .edition-picker { justify-content: center; }
   .hero h1 { font-size: clamp(26px, 5.5vw, 39px); line-height: 1.1; }
   .hero h1 > span { display: inline; }
   .hero-subtitle { margin: 6px auto 10px; }

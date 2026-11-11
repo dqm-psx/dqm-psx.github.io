@@ -1,5 +1,35 @@
 "use strict";
 
+// The download edition changes package details only; the FAQ describes the whole project.
+(() => {
+  const selectors = Array.from(document.querySelectorAll("[data-edition-select]"));
+  if (!selectors.length) return;
+
+  function chooseEdition(selector) {
+    const option = selector.selectedOptions[0];
+    const details = option.dataset;
+    selectors.forEach(other => { other.value = option.value; });
+    document.querySelectorAll("[data-edition-download]").forEach(link => {
+      link.href = details.href;
+      if (details.filename) link.setAttribute("download", details.filename);
+      else link.removeAttribute("download");
+    });
+    const download = document.getElementById("download");
+    download.textContent = `Download v${selector.dataset.version} · ${(Number(details.bytes) / 1_000_000).toFixed(2)} MB`;
+    download.setAttribute("aria-label", `Download ${option.textContent} v${selector.dataset.version}`);
+    document.getElementById("edition-description").textContent = details.description;
+    document.getElementById("edition-checksum-label").textContent = `SHA-256 · ${Number(details.bytes).toLocaleString("en-US")} bytes`;
+    document.getElementById("edition-checksum").textContent = details.sha256;
+  }
+
+  selectors.forEach(selector => {
+    selector.closest(".edition-picker").hidden = false;
+    selector.addEventListener("change", () => chooseEdition(selector));
+  });
+  document.querySelectorAll("[data-edition-fallback]").forEach(link => { link.hidden = true; });
+  chooseEdition(selectors[0]);
+})();
+
 // Keep anchor headings below the sticky navigation, including when it wraps.
 (() => {
   const header = document.querySelector(".site-header");

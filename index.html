@@ -365,7 +365,7 @@
       <div class="container">
         <h2 id="about-title" class="visually-hidden">Project credits</h2>
         <div class="credits-layout">
-          <section id="ai-contributors" aria-labelledby="ai-contributor-title">
+          <section id="ai-contributors" class="ai-credits" aria-labelledby="ai-contributor-title">
             <h3 id="ai-contributor-title">AI contributors</h3>
             <ul class="ai-contributor-list">
                 <!-- ai-contributors:begin -->
@@ -375,11 +375,11 @@
                 <li>Grok (xAI)</li>
                 <!-- ai-contributors:end -->
             </ul>
-            <a href="#ai-assistance">How was AI used?</a>
+            <a class="ai-credit-details" href="#ai-assistance">How was AI used? <span aria-hidden="true">→</span></a>
           </section>
           <section id="contributor-panel" aria-labelledby="contributor-title">
             <h3 id="contributor-title">Contributors</h3>
-            <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
+            <div class="contributors-viewport" id="contributors-viewport" role="region" aria-label="Contributor names">
               <ul class="contributor-list" id="contributor-list">
                 <!-- contributors:begin -->
                 <li>BalK</li>
@@ -400,9 +400,12 @@
               </ul>
             </div>
             <div class="contributor-controls" id="contributor-controls" hidden>
-              <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
-              <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
-              <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
+              <div class="contributor-navigation" id="contributor-navigation">
+                <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
+                <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
+                <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
+              </div>
+              <button type="button" class="contributors-view-all" id="contributors-view-all" aria-expanded="false" aria-controls="contributor-list">View all</button>
             </div>
             <span class="visually-hidden" id="contributor-announcement" role="status"></span>
           </section>

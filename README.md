@@ -189,12 +189,13 @@ browser's optional rotation is presentation only. Run the helper checks with:
 python -m unittest discover -s tools -p 'test_*.py'
 ```
 
-The credits panel shows four names at a time, advancing every seven seconds.
-Its centered pause/play icon and previous/next arrows have accessible labels;
-there are no visible page counts. Hover, keyboard focus, hidden tabs, and
-offscreen panels pause rotation. Manual browsing pauses until Resume is chosen.
-Reduced-motion users start paused. Without JavaScript, all names remain in the
-scrollable list.
+The human credits use a distinct panel beside the separate AI list, with larger
+names and compact previous/pause/next controls. Four names appear at a time,
+advancing every seven seconds. View all expands the same list and pauses
+rotation; Show fewer restores the previous group, still paused. There are no
+visible page counts. Hover, keyboard focus, hidden tabs, and offscreen panels
+pause rotation. Reduced-motion users start paused. Without JavaScript, every
+name remains visible. The columns stack on narrow screens.
 
 ## Reference tools and future scope
 

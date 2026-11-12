@@ -307,22 +307,27 @@ motionPreference.addEventListener("change", event => {
   });
 })();
 
-// The complete list remains scrollable without JavaScript. Rotation is optional.
+// All credits are visible without JavaScript. View all pauses the optional rotation.
 (() => {
   const panel = document.getElementById("contributor-panel");
   const viewport = document.getElementById("contributors-viewport");
   const list = document.getElementById("contributor-list");
+  if (!panel || !viewport || !list) return;
   const names = [...list.children];
   const controls = document.getElementById("contributor-controls");
   const previous = document.getElementById("contributors-prev");
   const next = document.getElementById("contributors-next");
   const pauseButton = document.getElementById("contributors-pause");
+  const navigation = document.getElementById("contributor-navigation");
+  const viewAll = document.getElementById("contributors-view-all");
   const announcement = document.getElementById("contributor-announcement");
   const groupSize = 4;
   const groupCount = Math.ceil(names.length / groupSize);
   if (groupCount < 2) return;
+  panel.classList.add("has-rotation");
 
   let group = 0;
+  let expanded = false;
   let userPaused = motionPreference.matches;
   let hovered = panel.matches(":hover");
   let focusHeld = panel.contains(document.activeElement);
@@ -331,7 +336,7 @@ motionPreference.addEventListener("change", event => {
 
   function schedule() {
     clearTimeout(timer);
-    if (userPaused || hovered || focusHeld || !inView || document.hidden) return;
+    if (expanded || userPaused || hovered || focusHeld || !inView || document.hidden) return;
     timer = setTimeout(() => {
       group = (group + 1) % groupCount;
       render();
@@ -344,14 +349,18 @@ motionPreference.addEventListener("change", event => {
     pauseButton.setAttribute("aria-label", label);
     pauseButton.title = label;
     pauseButton.classList.toggle("is-paused", userPaused);
+    navigation.hidden = expanded;
+    viewAll.textContent = expanded ? "Show fewer" : `View all (${names.length})`;
+    viewAll.setAttribute("aria-expanded", String(expanded));
   }
 
   function render(manual = false) {
     const start = group * groupSize;
-    names.forEach((name, index) => { name.hidden = index < start || index >= start + groupSize; });
-    viewport.scrollTop = 0;
+    names.forEach((name, index) => { name.hidden = !expanded && (index < start || index >= start + groupSize); });
+    panel.classList.toggle("is-expanded", expanded);
     updateControls();
-    if (manual) announcement.textContent = names.slice(start, start + groupSize).map(name => name.textContent).join(", ");
+    if (manual) announcement.textContent = expanded ? `All ${names.length} contributors are shown.`
+      : names.slice(start, start + groupSize).map(name => name.textContent.trim()).join(", ");
   }
 
   function browse(delta) {
@@ -362,6 +371,12 @@ motionPreference.addEventListener("change", event => {
   }
   previous.addEventListener("click", () => browse(-1));
   next.addEventListener("click", () => browse(1));
+  viewAll.addEventListener("click", () => {
+    expanded = !expanded;
+    userPaused = true;
+    render(true);
+    schedule();
+  });
   pauseButton.addEventListener("click", () => {
     userPaused = !userPaused;
     focusHeld = false;

@@ -86,6 +86,13 @@ class ReleaseCatalogTests(unittest.TestCase):
         for name, data in assets.items():
             (self.root / 'downloads' / name).write_bytes(data)
         (self.root / 'downloads/releases.json').write_text(json.dumps({'schemaVersion': 1, 'releases': [record]}))
+        self.write_website_faq(record)
+
+    def write_website_faq(self, *records):
+        (self.root / 'data/feature-faq.json').write_text(json.dumps({
+            'schemaVersion': 1,
+            'releases': [{'version': record['version'], 'faq': record['faq']} for record in records],
+        }))
 
     def test_both_editions_render_with_one_gold_button_and_global_faq(self):
         record, assets = sample_catalog()
@@ -174,8 +181,9 @@ class ReleaseCatalogTests(unittest.TestCase):
         newer['faq'][0]['answerHtml'] = '<p>Newer instructions.</p>'
         newer['faq'].append({'id': 'extra-answer', 'section': 'quality-of-life',
                              'question': 'More help?', 'answerHtml': '<p>More help.</p>', 'features': ['movement']})
-        html = updater.feature_faq([older, newer])
-        self.assertEqual(html, updater.feature_faq([newer, older]))
+        self.write_website_faq(older, newer)
+        html = updater.feature_faq([older, newer], self.root)
+        self.assertEqual(html, updater.feature_faq([newer, older], self.root))
         self.assertIn('id="movement-settings"', html)
         self.assertIn('Newer instructions.', html)
         self.assertIn('id="extra-answer"', html)

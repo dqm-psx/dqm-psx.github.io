@@ -18,6 +18,7 @@ import tempfile
 import zipfile
 
 import release_catalog as catalog
+import website_faq
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = re.compile(r'(?:0|[1-9][0-9]*)(?:\.(?:0|[1-9][0-9]*)){2}')
@@ -177,11 +178,13 @@ def editions_faq(release):
 '''
 
 
-def released_answers(releases):
+def released_answers(releases, root=ROOT):
     """Keep released answers available even when Latest intentionally rolls back."""
-    released = [release for release in releases if release.get('schemaVersion') == 2]
-    released.sort(key=lambda release: (release.get('publishedAt', '9999'),
-                                      tuple(map(int, release['version'].split('.')))))
+    published = [release for release in releases if release.get('schemaVersion') == 2]
+    released = website_faq.apply(published, root) if published else []
+    # Backports can be published later than a higher version. Their older
+    # answers must not replace the newer documentation when Latest rolls back.
+    released.sort(key=lambda release: tuple(map(int, release['version'].split('.'))))
     answers = {}
     features = {}
     for release in released:
@@ -196,8 +199,8 @@ def released_answers(releases):
     return result
 
 
-def feature_faq(releases):
-    answers = released_answers(releases)
+def feature_faq(releases, root=ROOT):
+    answers = released_answers(releases, root)
     sections = []
     for key, (anchor, title) in catalog.SECTIONS.items():
         entries = [answer for answer in answers if answer['section'] == key]
@@ -220,8 +223,8 @@ def feature_faq(releases):
     return '\n'.join(sections)
 
 
-def feature_faq_navigation(releases):
-    present = {answer['section'] for answer in released_answers(releases)}
+def feature_faq_navigation(releases, root=ROOT):
+    present = {answer['section'] for answer in released_answers(releases, root)}
     return ''.join(f'              <a href="#{anchor}">{title}</a>\n'
                    for section, (anchor, title) in catalog.SECTIONS.items() if section in present)
 
@@ -388,8 +391,8 @@ def rendered_page(root, manifest):
         if EDITIONS_START in source:
             source = replace_block(source, EDITIONS_START, EDITIONS_END, '', 10)
     if any(release.get('schemaVersion') == 2 for release in releases):
-        source = replace_block(source, FAQ_START, FAQ_END, feature_faq(releases), 8)
-        source = replace_block(source, FAQ_NAV_START, FAQ_NAV_END, feature_faq_navigation(releases), 14)
+        source = replace_block(source, FAQ_START, FAQ_END, feature_faq(releases, root), 8)
+        source = replace_block(source, FAQ_NAV_START, FAQ_NAV_END, feature_faq_navigation(releases, root), 14)
     updated = replace_block(source, HERO_START, HERO_END, hero_link, 12)
     updated = replace_block(updated, INSTALL_START, INSTALL_END, install_link, 16)
     updated = replace_block(updated, START, END, card, 10)

@@ -84,6 +84,11 @@ class CatalogSyncTests(unittest.TestCase):
         newer, newer_packages = fixtures.sample_catalog('1.0.75')
         newer['faq'][0]['answerHtml'] = '<p>Improved instructions from the newer release.</p>'
         historical, history_responses = public_release(newer, newer_packages, published='2026-11-12T01:00:00Z')
+        (self.root / 'data/feature-faq.json').write_text(json.dumps({
+            'schemaVersion': 1,
+            'releases': [{'version': record['version'], 'faq': record['faq']}
+                         for record in (self.record, newer)],
+        }))
         all_responses = latest_responses | history_responses
         fetched = []
         fetch = self.fetcher(latest, all_responses, [historical, latest])
@@ -98,6 +103,14 @@ class CatalogSyncTests(unittest.TestCase):
         for asset in historical['assets']:
             if asset['name'].endswith('.zip'):
                 self.assertNotIn(asset['browser_download_url'], fetched)
+
+    def test_latest_without_website_faq_preserves_current_download_and_page(self):
+        newer, packages = fixtures.sample_catalog('1.0.75')
+        release, responses = public_release(newer, packages)
+        before = self.manifest.read_bytes(), self.page.read_bytes()
+        with self.assertRaisesRegex(ValueError, 'v1.0.75 has not been prepared'):
+            sync_release.sync(self.root, self.fetcher(release, responses))
+        self.assertEqual((self.manifest.read_bytes(), self.page.read_bytes()), before)
 
     def test_draft_or_prerelease_cannot_become_homepage_latest(self):
         release, responses = public_release(self.record, self.packages)

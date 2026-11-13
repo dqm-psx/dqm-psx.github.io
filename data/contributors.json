@@ -2,11 +2,6 @@
   "schemaVersion": 1,
   "contributors": [
     {
-      "name": "diethylpentane (3xad)",
-      "contribution": "Project creator and English translation",
-      "source": "Explicitly credited in the project owner's FAQ and the phakic/dqm1 README."
-    },
-    {
       "name": "ChatGPT (OpenAI)",
       "creditType": "ai-assistance",
       "aliases": ["Astra", "Astra (ChatGPT)", "ChatGPT", "ChatGPT (Astra)", "Codex"],

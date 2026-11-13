@@ -63,6 +63,27 @@ class ScreenshotUpdateTests(unittest.TestCase):
         self.assertNotIn('patchVersion', output)
         self.assertEqual(json.loads(output.split(' = ', 1)[1][:-2]), [self.scene])
 
+    def test_initial_image_and_credit_follow_gallery_order(self):
+        self.import_image(patch_version='1.0.74', alt='A "new" scene & a monster.')
+        manifest, _ = updater.read_data(self.root)
+        manifest['screenshots'].reverse()
+        (self.root / updater.MANIFEST).write_text(json.dumps(manifest), encoding='utf-8')
+        homepage = self.root / 'index.html'
+        homepage.write_text('<img id="featured-screen" src="old.png" loading="lazy">\n'
+                            '<p class="screen-caption" id="screen-caption">Old caption</p>\n'
+                            '<p class="screen-credit" id="screen-credit">Old credit</p>')
+        updater.update(self.root)
+        page = homepage.read_text()
+        self.assertIn('src="assets/screenshots/new-scene.png" width="8" height="6"', page)
+        self.assertIn('alt="A &quot;new&quot; scene &amp; a monster."', page)
+        self.assertIn('>At the table</p>', page)
+        self.assertIn('Screenshot by New contributor (v1.0.74)', page)
+        self.assertNotIn('loading="lazy"', page)
+        updater.update(self.root, check=True)
+        homepage.write_text(page.replace('At the table', 'Stale caption'))
+        with self.assertRaisesRegex(ValueError, 'Initial screenshot markup is stale'):
+            updater.update(self.root, check=True)
+
     def test_crop_preserves_pixels_and_records_original_digest_and_version(self):
         original_data = self.incoming.read_bytes()
         src = self.import_image(patch_version='v1.0.72', crop=[1, 1, 6, 4])

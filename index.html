@@ -43,8 +43,10 @@
               <a href="#faq">All questions</a>
               <a href="#faq-project">The project</a>
               <a href="#faq-installation">Installation &amp; updates</a>
+              <!-- feature-faq-nav:begin -->
               <a href="#faq-content">Restored content</a>
               <a href="#faq-quality">Quality of life</a>
+              <!-- feature-faq-nav:end -->
               <a href="#faq-help">Help &amp; feedback</a>
             </div>
           </details>
@@ -134,11 +136,11 @@
         <div class="gallery-view" id="screenshot-gallery" role="region" aria-roledescription="carousel" aria-label="Game screenshots">
           <div class="screenshot-frame">
             <div class="screenshot-stage" id="screenshot-stage" aria-busy="false">
-              <img id="featured-screen" src="assets/screenshots/balk-travelers-gate.png" width="960" height="720" alt="A blue gate swirls at the end of a stone corridor. Terry faces it with three monsters lined up behind him." decoding="async">
+              <img id="featured-screen" src="assets/screenshots/3xad-title-screen-game.webp" width="673" height="500" alt="A multicolored Dragon Quest Monsters 1 &amp; 2 logo sits on a parchment scroll above the English subtitle, The Starry Night Hero and Friends at the Ranch." decoding="async">
               <div class="screenshot-loading" id="screenshot-loading" hidden>Loading screenshot…</div>
             </div>
             <div class="screenshot-footer">
-              <p class="screen-caption" id="screen-caption">Through the Travelers’ Gates</p>
+              <p class="screen-caption" id="screen-caption">The adventures begin</p>
               <div class="scene-picker" id="scene-controls" hidden>
                 <select class="scene-select" id="scene-select" aria-label="Choose a screenshot" aria-controls="screenshot-stage"></select>
                 <div class="scene-navigation" role="group" aria-label="Screenshot controls">
@@ -147,7 +149,7 @@
                   <button class="scene-button" id="scene-next" type="button" aria-label="Next screenshot" title="Next screenshot" aria-controls="screenshot-stage">→</button>
                 </div>
               </div>
-              <p class="screen-credit" id="screen-credit">Screenshot by BalK</p>
+              <p class="screen-credit" id="screen-credit">Screenshot by 3xad</p>
               <p class="screenshot-status visually-hidden" id="screenshot-status" role="status" aria-live="polite"></p>
             </div>
           </div>
@@ -189,6 +191,8 @@
             <summary>Does the download include the game or a PlayStation BIOS?</summary>
             <div class="faq-answer"><p>No. The package contains the patch, its matching CUE file, and a README. You need your own original game image and any BIOS required by your emulator.</p></div>
           </details>
+          <!-- editions-faq:begin -->
+          <!-- editions-faq:end -->
         </section>
 
         <section id="faq-installation" class="faq-group" aria-labelledby="faq-installation-title">
@@ -212,6 +216,7 @@
           </details>
         </section>
 
+        <!-- feature-faq:begin -->
         <section id="faq-content" class="faq-group" aria-labelledby="faq-content-title">
           <h3 id="faq-content-title">Restored content</h3>
           <details id="restored-content">
@@ -313,6 +318,8 @@
           </details>
         </section>
 
+        <!-- feature-faq:end -->
+
         <section id="faq-help" class="faq-group" aria-labelledby="faq-help-title">
           <h3 id="faq-help-title">Help &amp; feedback</h3>
           <details id="report-a-problem">
@@ -358,26 +365,13 @@
       <div class="container">
         <h2 id="about-title" class="visually-hidden">Project credits</h2>
         <div class="credits-layout">
-          <section id="ai-contributors" aria-labelledby="ai-contributor-title">
-            <h3 id="ai-contributor-title">AI contributors</h3>
-            <ul class="ai-contributor-list">
-                <!-- ai-contributors:begin -->
-                <li>ChatGPT (OpenAI)</li>
-                <li>Claude (Anthropic)</li>
-                <li>Gemini (Google)</li>
-                <li>Grok (xAI)</li>
-                <!-- ai-contributors:end -->
-            </ul>
-            <a href="#ai-assistance">How was AI used?</a>
-          </section>
           <section id="contributor-panel" aria-labelledby="contributor-title">
             <h3 id="contributor-title">Contributors</h3>
-            <div class="contributors-viewport" id="contributors-viewport" role="region" tabindex="0" aria-label="Contributor names">
+            <div class="contributors-viewport" id="contributors-viewport" role="region" aria-label="Contributor names">
               <ul class="contributor-list" id="contributor-list">
                 <!-- contributors:begin -->
                 <li>BalK</li>
                 <li>Cats4gold</li>
-                <li>diethylpentane (3xad)</li>
                 <li>gollum_007</li>
                 <li>Lori</li>
                 <li>Nejimakipiyo</li>
@@ -393,11 +387,26 @@
               </ul>
             </div>
             <div class="contributor-controls" id="contributor-controls" hidden>
-              <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
-              <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
-              <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
+              <div class="contributor-navigation" id="contributor-navigation">
+                <button type="button" id="contributors-prev" aria-label="Previous contributors" title="Previous contributors" aria-controls="contributor-list">←</button>
+                <button type="button" id="contributors-pause" aria-label="Pause contributor rotation" title="Pause contributor rotation" aria-controls="contributor-list"><span class="pause-icon" aria-hidden="true"></span></button>
+                <button type="button" id="contributors-next" aria-label="Next contributors" title="Next contributors" aria-controls="contributor-list">→</button>
+              </div>
+              <button type="button" class="contributors-view-all" id="contributors-view-all" aria-expanded="false" aria-controls="contributor-list">View all</button>
             </div>
             <span class="visually-hidden" id="contributor-announcement" role="status"></span>
+          </section>
+          <section id="ai-contributors" class="ai-credits" aria-labelledby="ai-contributor-title">
+            <h3 id="ai-contributor-title">AI contributors</h3>
+            <ul class="ai-contributor-list">
+                <!-- ai-contributors:begin -->
+                <li>ChatGPT (OpenAI)</li>
+                <li>Claude (Anthropic)</li>
+                <li>Gemini (Google)</li>
+                <li>Grok (xAI)</li>
+                <!-- ai-contributors:end -->
+            </ul>
+            <a class="ai-credit-details" href="#ai-assistance">How was AI used? <span aria-hidden="true">→</span></a>
           </section>
         </div>
       </div>

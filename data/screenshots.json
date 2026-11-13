@@ -2,6 +2,12 @@
   "schemaVersion": 1,
   "screenshots": [
     {
+      "src": "assets/screenshots/3xad-title-screen-game.webp",
+      "alt": "A multicolored Dragon Quest Monsters 1 & 2 logo sits on a parchment scroll above the English subtitle, The Starry Night Hero and Friends at the Ranch.",
+      "caption": "The adventures begin",
+      "credit": "3xad"
+    },
+    {
       "src": "assets/screenshots/balk-travelers-gate.png",
       "alt": "A blue gate swirls at the end of a stone corridor. Terry faces it with three monsters lined up behind him.",
       "caption": "Through the Travelers’ Gates",
@@ -30,12 +36,6 @@
       "alt": "Two trainers face each other across the Arena, each with three monsters. Terry’s rival says, “I don’t see how you can win with monsters like those!”",
       "caption": "Big talk before the Arena battle",
       "credit": "BalK"
-    },
-    {
-      "src": "assets/screenshots/3xad-title-screen-game.webp",
-      "alt": "A multicolored Dragon Quest Monsters 1 & 2 logo sits on a parchment scroll above the English subtitle, The Starry Night Hero and Friends at the Ranch.",
-      "caption": "The adventures begin",
-      "credit": "3xad"
     },
     {
       "src": "assets/adventure.png",

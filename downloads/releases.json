@@ -2,6 +2,493 @@
   "schemaVersion": 1,
   "releases": [
     {
+      "schemaVersion": 2,
+      "version": "1.0.74",
+      "defaultEdition": "enhanced",
+      "sourceImage": {
+        "bytes": 260975568,
+        "sha256": "a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29"
+      },
+      "notes": [
+        "Enhanced and Translation only are now available, using the same English wording, fonts, and bug fixes.",
+        "Revised English dialogue, monster names, and other wording following community review.",
+        "Restored rarity stars in the monster library’s detail display.",
+        "GreatTree Arena: unlock class replays, Pro Classes, and Survival by winning the Monster Elder’s revenge match.",
+        "GreatLog: Cobi and Tara can talk with their party monsters at the Arena table.",
+        "Aibou eggs: obtain the mobile-service exclusive offline through a new Medal Man exchange in all three adventures."
+      ],
+      "contributors": [],
+      "features": [
+        {
+          "id": "movement",
+          "name": "Running and movement settings",
+          "category": "quality-of-life",
+          "requires": [],
+          "introduced": "1.0.73"
+        },
+        {
+          "id": "greattree-arena",
+          "name": "GreatTree postgame Arena modes",
+          "category": "additional-content",
+          "requires": [],
+          "introduced": "1.0.74"
+        },
+        {
+          "id": "item-stacks",
+          "name": "Grouped items and bulk selling",
+          "category": "quality-of-life",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "field-party-status",
+          "name": "Field HP and MP displays",
+          "category": "quality-of-life",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "battle-party-status",
+          "name": "Battle HP and MP displays",
+          "category": "quality-of-life",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "truth-gate-fix",
+          "name": "Truth gate encounter fix",
+          "category": "bug-fix",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "aibou-gift",
+          "name": "Aibou egg exchange",
+          "category": "additional-content",
+          "requires": [],
+          "introduced": "1.0.74"
+        },
+        {
+          "id": "table-conversations",
+          "name": "Terry's monster table conversations",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "dqm2-table-conversations",
+          "name": "Cobi's and Tara's monster table conversations",
+          "category": "additional-content",
+          "requires": [],
+          "introduced": "1.0.74"
+        },
+        {
+          "id": "restored-treasure",
+          "name": "Treasure and Mimic rooms",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "restored-forest",
+          "name": "Lost Forest floors",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "restored-colosseum",
+          "name": "Traveling colosseum",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "restored-maze",
+          "name": "Maze floors",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "restored-sliding",
+          "name": "Sliding floors",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": null
+        },
+        {
+          "id": "pvp-rules",
+          "name": "Two-player Colosseum rules",
+          "category": "restored-content",
+          "requires": [],
+          "introduced": "1.0.73"
+        },
+        {
+          "id": "pvp-wagers",
+          "name": "Two-player monster wagers",
+          "category": "restored-content",
+          "requires": [
+            "pvp-rules"
+          ],
+          "introduced": "1.0.73"
+        }
+      ],
+      "faq": [
+        {
+          "id": "restored-content",
+          "section": "restored-content",
+          "question": "What content does the English patch restore?",
+          "answerHtml": "<p>The original Japanese PlayStation disc still contains dialogue, maps, and menu code for features that were cut or left unfinished. The patch makes those features playable again, using the Game Boy games as a reference where behavior was missing. Some details, including how often special floors appear, were reconstructed for the patch.</p><ul><li>In Terry’s Arena, you can have <a href=\"#monster-conversations\">table conversations with your party monsters</a>.</li><li>Terry’s Travelers’ Gates can lead to five special floors: <a href=\"#treasure-rooms\">treasure rooms with Mimics</a>, the <a href=\"#lost-forest\">Lost Forest</a>, the <a href=\"#traveling-colosseum\">traveling colosseum</a>, <a href=\"#maze-floors\">mazes</a>, and <a href=\"#sliding-floors\">sliding floors</a>.</li><li>In the title-screen Colosseum, two players can <a href=\"#colosseum-rules\">choose their battle rules</a> and <a href=\"#colosseum-wagers\">wager farm monsters</a>.</li></ul>",
+          "features": [
+            "table-conversations",
+            "restored-treasure",
+            "restored-forest",
+            "restored-colosseum",
+            "restored-maze",
+            "restored-sliding",
+            "pvp-rules",
+            "pvp-wagers"
+          ]
+        },
+        {
+          "id": "monster-conversations",
+          "section": "restored-content",
+          "question": "How do I talk to my monsters at the Arena table?",
+          "answerHtml": "<p>The Japanese disc contains 112 table conversations. The patch restores the seating interaction and matches each monster’s lines to its personality.</p><p>In Terry’s Arena dining room, bring one to three living, visible party monsters to the right-hand table. Walk onto the stool on its east side to sit down.</p><ul><li><strong>Up, Left, or Down</strong> selects the monster to the north, west, or south.</li><li><strong>Confirm/Talk</strong> starts the conversation.</li><li><strong>Cancel or Right</strong> makes Terry stand up.</li></ul><p>Revive fallen party members before sitting down. To sit again, step off the stool first.</p>",
+          "features": [
+            "table-conversations"
+          ]
+        },
+        {
+          "id": "treasure-rooms",
+          "section": "restored-content",
+          "question": "What’s inside a treasure room?",
+          "answerHtml": "<p>Terry finds a room full of chests. One holds an item. Each of the others is a Mimic that attacks when you open its chest. You can leave through the exit whenever you’re ready to continue.</p>",
+          "features": [
+            "restored-treasure"
+          ]
+        },
+        {
+          "id": "lost-forest",
+          "section": "restored-content",
+          "question": "How do I find my way through the Lost Forest?",
+          "answerHtml": "<p>The forest has five connected clearings. Paths at their edges can lead back to a clearing you’ve already visited. Keep track of the openings you’ve tried and take a different path when you loop back, until you find the way down.</p>",
+          "features": [
+            "restored-forest"
+          ]
+        },
+        {
+          "id": "traveling-colosseum",
+          "section": "restored-content",
+          "question": "How does Terry’s traveling colosseum work?",
+          "answerHtml": "<p>This is an arena inside a Travelers’ Gate. Win the opening three battles and you’ll be offered another three for a named item. Choose <strong>Yes</strong> to fight for that prize or <strong>No</strong> to finish.</p><p>Leave through the <strong>north door</strong>. If your bag was full when you earned a prize, make room and return to that door to collect it. Travel Bookmark cannot be used inside the arena.</p>",
+          "features": [
+            "restored-colosseum"
+          ]
+        },
+        {
+          "id": "maze-floors",
+          "section": "restored-content",
+          "question": "How do maze floors work?",
+          "answerHtml": "<p>Terry can encounter three maze layouts. Follow the corridors and backtrack at dead ends to find the way down to the next dungeon floor.</p>",
+          "features": [
+            "restored-maze"
+          ]
+        },
+        {
+          "id": "sliding-floors",
+          "section": "restored-content",
+          "question": "How do I cross a sliding floor?",
+          "answerHtml": "<p>Step onto an arrow tile and it carries Terry in the direction it points. Follow the arrows ahead to see where they’ll send you, then choose where to step on. You regain control on ordinary ground and can line up your next slide toward the exit.</p>",
+          "features": [
+            "restored-sliding"
+          ]
+        },
+        {
+          "id": "colosseum-rules",
+          "section": "restored-content",
+          "question": "Which battle rules can two players choose in the Colosseum?",
+          "answerHtml": "<p>The Japanese game already had two-player battles, but entering the Colosseum skipped the rule menus. The patch restores those menus. Open <strong>Colosseum</strong> from the title screen and choose <strong>Free Battle</strong>, <strong>Enix Rules</strong>, or <strong>Local Rules</strong>.</p><p>Local Rules lets you set skill restrictions, total or individual level limits, allowed monster families, turns, the command timer, combos, and accessories. Set <strong>Turns to 0</strong> for no turn limit. You can also enable monster prizes here.</p>",
+          "features": [
+            "pvp-rules"
+          ]
+        },
+        {
+          "id": "colosseum-wagers",
+          "section": "restored-content",
+          "question": "How do we wager monsters in a two-player Colosseum battle?",
+          "answerHtml": "<p>The Japanese game retained the prize menus but never transferred the monster after a match. Since v1.0.73, you can turn on <strong>prizes</strong> under <strong>Local Rules</strong> in the title-screen Colosseum. Prizes are off by default.</p><p>Use saves from two different players and leave space on both farms. Each player can offer an awake farm monster outside their saved adventure party. Confirm the wager before battle. The winner keeps their own monster and receives the one the loser offered. On a draw, both players keep their monsters.</p><p><strong>A transfer saves both Adventure Logs.</strong> Back up both saves before you wager. Keep both memory cards inserted and the game running until both saves finish. If a card error occurs, choose <strong>Retry</strong>. Resetting or losing power between saves can lose the prize monster.</p>",
+          "features": [
+            "pvp-wagers"
+          ]
+        },
+        {
+          "id": "quality-of-life-features",
+          "section": "quality-of-life",
+          "question": "What quality-of-life features does the patch add?",
+          "answerHtml": "<ul><li>Choose separate <a href=\"#movement-settings\">walking and running speeds</a> of 1×, 2×, or 4×. You can hold R1 to run or press it to toggle.</li><li>Choose how running affects <a href=\"#encounter-rates\">random encounters</a>. Keep roughly the usual number of battles per minute, or keep the usual rate per step.</li><li>See each party monster’s <a href=\"#hp-and-mp\">current and maximum HP and MP</a> at a glance, with bars in the field and in battle.</li><li>Browse <a href=\"#grouped-inventory\">duplicate items in a single row</a> with a quantity count, and sell several copies at once.</li></ul>",
+          "features": [
+            "movement",
+            "item-stacks",
+            "field-party-status",
+            "battle-party-status"
+          ]
+        },
+        {
+          "id": "movement-settings",
+          "section": "quality-of-life",
+          "question": "How do I run or change my movement speed?",
+          "answerHtml": "<p>Open <strong>Tactics → Movement</strong>, just below Text Speed, in Terry’s, Cobi’s, or Tara’s adventure. Available since v1.0.73, these settings let you choose <strong>1×, 2×, or 4×</strong> independently for Walk and R1. Walking defaults to 1×. Hold <strong>R1</strong> to run at 2×, or select Toggle to switch speeds each time you press R1.</p><p>Use <strong>Up/Down</strong> to select a setting and <strong>Left/Right</strong> to change it. <strong>Circle or Triangle</strong> applies changes; <strong>Cross</strong> cancels; <strong>Square</strong> cancels and closes the field menu.</p><p>Save normally to keep each adventure’s settings. Toggle stays active through doors, battles, and menus, but loading an adventure starts at Walk speed. Riding, sliding floors, and scripted movement keep their original controls.</p>",
+          "features": [
+            "movement"
+          ]
+        },
+        {
+          "id": "encounter-rates",
+          "section": "quality-of-life",
+          "question": "What do the Time and Distance encounter settings do?",
+          "answerHtml": "<p>Under <strong>Tactics → Movement</strong>, <strong>Time</strong> is the default: it keeps roughly the usual number of encounters per minute of travel, even when running. <strong>Distance</strong> uses the normal encounter rate per step, so faster movement brings battles closer together in time.</p>",
+          "features": [
+            "movement"
+          ]
+        },
+        {
+          "id": "hp-and-mp",
+          "section": "quality-of-life",
+          "question": "What changed in the HP and MP displays?",
+          "answerHtml": "<p>The field and combat displays have expanded HP/MP information, with current and maximum values and visual bars.</p>",
+          "features": [
+            "field-party-status",
+            "battle-party-status"
+          ]
+        },
+        {
+          "id": "grouped-inventory",
+          "section": "quality-of-life",
+          "question": "How do grouped items and bulk selling work?",
+          "answerHtml": "<p>Duplicate items are grouped with quantities in the field item menu, battle item menu, and shop Sell menu.</p><p>To sell multiple copies of the same item, choose the quantity and confirm the sale. Using, discarding, or selling part of a stack keeps the remaining copies in the same inventory position.</p>",
+          "features": [
+            "item-stacks"
+          ]
+        },
+        {
+          "id": "bag-capacity",
+          "section": "quality-of-life",
+          "question": "Can I carry more than 30 items now?",
+          "answerHtml": "<p>The bag holds 30 items in total. Every copy counts toward that limit, including copies grouped into a single menu row.</p>",
+          "features": [
+            "item-stacks"
+          ]
+        },
+        {
+          "id": "additional-content",
+          "section": "additional-content",
+          "question": "What additional content does the patch include?",
+          "answerHtml": "<ul><li>After the Monster Elder's revenge match, Terry can return to the <a href=\"#greattree-arena\">GreatTree Arena</a> for class replays, Pro Classes, and Survival.</li><li>Cobi and Tara can have <a href=\"#greatlog-monster-conversations\">table conversations with their party monsters</a> in GreatLog.</li><li>All three adventures can earn an <a href=\"#aibou-egg\">Aibou egg through the Medal Man</a>.</li></ul>",
+          "features": [
+            "greattree-arena",
+            "dqm2-table-conversations",
+            "aibou-gift"
+          ]
+        },
+        {
+          "id": "greattree-arena",
+          "section": "additional-content",
+          "question": "How do I unlock the new GreatTree Arena modes?",
+          "answerHtml": "<p>Win the Monster Elder's <strong>revenge match</strong> in Terry's adventure. After returning to normal play, visit GreatTree's registration desk to choose <strong>Replay a Class</strong>, <strong>Pro Classes</strong>, <strong>Survival Arena</strong>, or <strong>Elder Rematch</strong>.</p><p>Replay a Class lets you fight the three original teams from any class, including Starry Night. These replays let you revisit the tournament without changing story progress. Pro Classes and Survival offer <a href=\"#pro-classes\">new opponents and prizes</a>.</p><p>Save normally to keep the unlock. If your save comes from an older patch or the Japanese game, win the revenge match once on a patch with these modes to unlock the desk.</p>",
+          "features": [
+            "greattree-arena"
+          ]
+        },
+        {
+          "id": "pro-classes",
+          "section": "additional-content",
+          "question": "How do Pro Classes work?",
+          "answerHtml": "<p>Choose <strong>Pro Classes</strong> at the GreatTree Arena desk after unlocking the postgame modes. All nine classes are available, from G through Starry Night. Choose a class and pay its displayed entry fee to fight three Masters.</p><p>Each Master draws a team of three from six possible monster species, so return visits can bring different teams. HP, MP, poison, and knockouts carry between bouts. Fleeing forfeits the entry. Win all three fights to receive a random class prize and return to reception.</p><p>Leave at least one free bag slot before entering, or two for Pro Starry Night. Higher classes offer stronger opponents and different prize pools.</p>",
+          "features": [
+            "greattree-arena"
+          ]
+        },
+        {
+          "id": "survival-arena",
+          "section": "additional-content",
+          "question": "How does Survival Arena work?",
+          "answerHtml": "<p>Choose <strong>Survival Arena</strong> at GreatTree's registration desk after unlocking the postgame modes. The first lap runs through the nine original classes in order, for 27 consecutive battles ending with Milly. Current HP, MP, and knockouts carry between fights, and the run continues across class boundaries.</p><p>After every 27 wins, choose <strong>50,000 G</strong>, <strong>one item</strong>, <strong>one rare monster egg</strong>, or <strong>three Tiny Medals</strong>. Your wallet, bag, or farm must have room for the chosen prize. You can choose another reward if one will not fit.</p><p>After collecting a prize, retire or continue into another lap. Later laps draw different teams and raise enemy stats up to a cap. Losing, forfeiting, or retiring ends the run. Terry keeps prizes already collected, and the next run starts at Class G.</p>",
+          "features": [
+            "greattree-arena"
+          ]
+        },
+        {
+          "id": "greatlog-monster-conversations",
+          "section": "additional-content",
+          "question": "How do Cobi and Tara talk to their monsters at the Arena table?",
+          "answerHtml": "<p>In GreatLog's arena lobby, use the lower table on the west side of the room. Bring one to three living, visible party monsters and walk onto the stool on the table's east side.</p><p>Use <strong>Up, Left, or Down</strong> to face a monster, then <strong>Confirm/Talk</strong> to start a conversation. After closing the dialogue, <strong>Cancel or Right</strong> makes Cobi or Tara stand up. Step away before sitting again.</p><p>This addition brings Terry's 112 personality-based monster conversations to both of the GreatLog adventures.</p>",
+          "features": [
+            "dqm2-table-conversations"
+          ]
+        },
+        {
+          "id": "aibou-egg",
+          "section": "additional-content",
+          "question": "What is Aibou, and how do I get its egg?",
+          "answerHtml": "<p>The original Japanese game linked to <a href=\"https://www.jp.square-enix.com/dragonquest/psdqm12/psdqmimain/dqmi_top.html\">Dragon Quest Monsters i</a> and its J-PHONE counterpart: mobile-phone games where players could raise monsters and transfer them to and from the PlayStation game. <a href=\"https://plaza.rakuten.co.jp/buchu/diary/201511270000/\">Aibou could be brought over from the mobile game</a>. Those services have since closed, so that route is no longer available.</p><p>The patch gives this existing monster a new, offline way to join your party: an egg exchange with the Medal Man in Terry's, Cobi's, and Tara's adventures.</p><p>Collect the Medal Man's four milestone rewards to open his regular exchange. Once your monster book has <strong>312 registered species</strong> and he holds <strong>99 Tiny Medals</strong>, he offers an Aibou egg before the usual prize list. Leave a space on the farm and accept the offer to spend the medals.</p><p>Aibou is outside the 312 book entries, so you can complete the requirement before obtaining it. The egg hatches at level 1 with Aibou's native skills and a level cap of 99. You can earn another egg after refilling the Medal Man's balance.</p>",
+          "features": [
+            "aibou-gift"
+          ]
+        },
+        {
+          "id": "truth-gate-fix",
+          "section": "bug-fixes",
+          "question": "What does the Truth gate encounter fix do?",
+          "answerHtml": "<p>In the original Japanese game, losing the Truth gate encounter can leave its encounter flag set. Returning to the room then skips the normal encounter and exit options.</p><p>The patch clears that unfinished encounter state when you enter the room again, allowing the original event to work. It preserves completed victories and the event that resumes immediately after a successful battle. This fix is included in Enhanced and Translation only.</p>",
+          "features": [
+            "truth-gate-fix"
+          ]
+        }
+      ],
+      "editions": [
+        {
+          "id": "enhanced",
+          "name": "Enhanced",
+          "description": "English translation and bug fixes, with quality-of-life improvements, restored content, and additional features.",
+          "file": "DQM1-2-English-v1.0.74-enhanced.zip",
+          "bytes": 7641981,
+          "sha256": "8ff3ec16f0eb78281c6718aaf96fd0dc59035a40f0cfe0a3a501a46df9ba1017",
+          "contents": [
+            "DQM1-2-English-v1.0.74-enhanced.bps",
+            "DQM1-2-English-v1.0.74-enhanced.cue",
+            "README.txt",
+            "BUILD.json"
+          ],
+          "features": [
+            "aibou-gift",
+            "battle-party-status",
+            "dqm2-table-conversations",
+            "field-party-status",
+            "greattree-arena",
+            "item-stacks",
+            "movement",
+            "pvp-rules",
+            "pvp-wagers",
+            "restored-colosseum",
+            "restored-forest",
+            "restored-maze",
+            "restored-sliding",
+            "restored-treasure",
+            "table-conversations",
+            "truth-gate-fix"
+          ],
+          "build": {
+            "schemaVersion": 1,
+            "version": "1.0.74",
+            "edition": "enhanced",
+            "sourceRevision": "11d6abacc1ce217b8f1e5521a180c3135628b296",
+            "sourceModified": false,
+            "translation": "current",
+            "language": "en",
+            "fonts": {
+              "dialogue": "dialogue-v2",
+              "menu": "onion",
+              "battle": "battle-v1"
+            },
+            "features": [
+              "aibou-gift",
+              "battle-party-status",
+              "dqm2-table-conversations",
+              "field-party-status",
+              "greattree-arena",
+              "item-stacks",
+              "movement",
+              "pvp-rules",
+              "pvp-wagers",
+              "restored-colosseum",
+              "restored-forest",
+              "restored-maze",
+              "restored-sliding",
+              "restored-treasure",
+              "table-conversations",
+              "truth-gate-fix"
+            ],
+            "sourceImage": {
+              "bytes": 260975568,
+              "sha256": "a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29"
+            },
+            "output": {
+              "file": "DQM1-2-English-v1.0.74-enhanced.bin",
+              "bytes": 260975568,
+              "sha256": "04b30048a0dc1c207801041a410925aba0283da6793ba3989b98f46a38543b15"
+            },
+            "buildId": "671a82f315ed854f9316555bf063e2901eb48abd7fc02195c32d1fee639c73b3"
+          },
+          "readme": {
+            "format": "authored-v1",
+            "templateSha256": "28a247eebb0d009dabfaa5463cdc3411718257b9dfe582299340301faef5086c",
+            "proseSha256": "7cd95861f7f537529dbe0029c5296f81cc049bbe90b166717a76f87da7f7b98a",
+            "bytes": 8464,
+            "sha256": "fd1ebab46855782e3fd996df0615f0d9f4111f765ff887254459d0667cfccf28"
+          },
+          "downloadUrl": "https://github.com/dqm-psx/patch/releases/download/v1.0.74/DQM1-2-English-v1.0.74-enhanced.zip"
+        },
+        {
+          "id": "translation-only",
+          "name": "Translation only",
+          "description": "English translation and bug fixes. Additional features, quality-of-life improvements, and restored content are exclusive to Enhanced.",
+          "file": "DQM1-2-English-v1.0.74-translation-only.zip",
+          "bytes": 7543470,
+          "sha256": "92e03a29c4e0e29353615219269a78b9891d06e4ce66aea113cdbb9ba7447415",
+          "contents": [
+            "DQM1-2-English-v1.0.74-translation-only.bps",
+            "DQM1-2-English-v1.0.74-translation-only.cue",
+            "README.txt",
+            "BUILD.json"
+          ],
+          "features": [
+            "truth-gate-fix"
+          ],
+          "build": {
+            "schemaVersion": 1,
+            "version": "1.0.74",
+            "edition": "translation-only",
+            "sourceRevision": "11d6abacc1ce217b8f1e5521a180c3135628b296",
+            "sourceModified": false,
+            "translation": "current",
+            "language": "en",
+            "fonts": {
+              "dialogue": "dialogue-v2",
+              "menu": "onion",
+              "battle": "battle-v1"
+            },
+            "features": [
+              "truth-gate-fix"
+            ],
+            "sourceImage": {
+              "bytes": 260975568,
+              "sha256": "a1217657786430ac1c3ad71f16cdadb65d47b0df9a7e30278900651c1f1eec29"
+            },
+            "output": {
+              "file": "DQM1-2-English-v1.0.74-translation-only.bin",
+              "bytes": 260975568,
+              "sha256": "2551cae3237279e2bbe531f235602bb155390fef28002c446c82bdaf2820796e"
+            },
+            "buildId": "08118de981b78aa1fd662b8c7f7c468c2d60bb5c10bd1bc65c85871aae479831"
+          },
+          "readme": {
+            "format": "authored-v1",
+            "templateSha256": "28a247eebb0d009dabfaa5463cdc3411718257b9dfe582299340301faef5086c",
+            "proseSha256": "7cd95861f7f537529dbe0029c5296f81cc049bbe90b166717a76f87da7f7b98a",
+            "bytes": 8525,
+            "sha256": "460785425860d0095dbddda6f10cdb44f03182d58b9fd1259aacd246373aa7ad"
+          },
+          "downloadUrl": "https://github.com/dqm-psx/patch/releases/download/v1.0.74/DQM1-2-English-v1.0.74-translation-only.zip"
+        }
+      ],
+      "releaseUrl": "https://github.com/dqm-psx/patch/releases/tag/v1.0.74",
+      "publishedAt": "2026-11-13T08:03:17Z",
+      "releaseId": 443962047,
+      "metadataSha256": "f59d21dfa1300a72969e645edcd9d43111a3539e60e77fbe0ccfaa1fc7f66fad"
+    },
+    {
       "version": "1.0.73",
       "file": "DQM1-2-English-v1.0.73-public.zip",
       "bytes": 7558537,

@@ -66,8 +66,8 @@ window.DqmScreenshots = [
   },
   {
     "src": "assets/screenshots/balk-cave-encounter.png",
-    "alt": "Terry faces a green monster with a blade. Broken pots line the cave walls as the monster asks, “What have you done...?!”",
-    "caption": "Who broke all those pots?",
+    "alt": "Terry faces a green monster with a blade in a cave lined with eggs. The monster says, “What have you done...?! Unforgivable... Utterly unforgivable!”",
+    "caption": "Warning: May require warcrimes",
     "credit": "BalK"
   },
   {

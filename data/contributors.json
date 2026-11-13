@@ -36,8 +36,131 @@
     },
     {
       "name": "Nejimakipiyo",
+      "aliases": ["Sparrow"],
       "contribution": "Helping refine the translation; also worked on DQM: Delocalized for Game Boy",
-      "source": "Explicitly credited in the FAQ supplied by the project owner."
+      "source": "Explicitly credited in the FAQ supplied by the project owner, who confirmed Sparrow is the same contributor."
+    },
+    {
+      "name": "Schnaki",
+      "aliases": ["Schnaki89"],
+      "contribution": "Project Discord community member and previously credited contributor",
+      "source": "The project owner confirmed Schnaki89 is Schnaki and requested retaining the Schnaki credit on 2026-11-13."
+    },
+    {
+      "name": "Wingforth",
+      "aliases": ["Wing"],
+      "contribution": "Project Discord community member",
+      "source": "The project owner requested credit for all server members on 2026-11-13; Discord identifies Wing as wingforth."
+    },
+    {
+      "name": "Anton",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Aquila9791",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "arieltabachnik51_18536",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all server members on 2026-11-13; full name verified in the Discord member list."
+    },
+    {
+      "name": "cheeseking",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "DeeDubz90",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Dragon king",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Dsylexia",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Feliz",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Guerric Samples",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "ILoveTranslations",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "jonnyblues",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Kev22nd",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Larkas",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "lordelan",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "nope",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "pk87",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Shantak",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Spooky Dracky",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "stepphone",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "tramiam",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Valkristh",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13."
+    },
+    {
+      "name": "Zap Blaze",
+      "contribution": "Project Discord community member",
+      "source": "Project owner requested credit for all members in the supplied Discord roster on 2026-11-13; decorative lettering normalized to plain text."
     }
   ]
 }

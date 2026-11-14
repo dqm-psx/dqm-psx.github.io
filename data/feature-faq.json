@@ -165,7 +165,7 @@
           "id": "greattree-arena",
           "section": "additional-content",
           "question": "How do I unlock the new GreatTree Arena modes?",
-          "answerHtml": "<p>Win the Monster Elder's <strong>revenge match</strong> in Terry's adventure. After returning to normal play, visit GreatTree's registration desk to choose <strong>Replay a Class</strong>, <strong>Pro Classes</strong>, <strong>Survival Arena</strong>, or <strong>Elder Rematch</strong>.</p><p>Replay a Class lets you fight the three original teams from any class, including Starry Night. These replays let you revisit the tournament without changing story progress. Pro Classes and Survival offer <a href=\"#pro-classes\">new opponents and prizes</a>.</p><p>Save normally to keep the unlock. If your save comes from an older patch or the Japanese game, win the revenge match once on a patch with these modes to unlock the desk.</p>",
+          "answerHtml": "<p>In Terry’s <strong>Enhanced</strong> adventure, the Monster Elder fights you twice. Winning his <strong>second</strong> match unlocks the new Arena modes.</p><ol><li>Win the <strong>Starry Night Tournament</strong> and continue Terry’s adventure after the ending.</li><li>Go to the <strong>registration desk on the left</strong> in GreatTree Arena. The receptionist offers a mystery challenger. Choose <strong>Yes</strong> and defeat him. This is your first fight with the Monster Elder.</li><li>Speak to the Elder at the <strong>Starry Shrine</strong>, where you breed and hatch monsters. He talks about befriending all 312 species. That conversation is enough to open the rematch.</li><li>Return to the <strong>same Arena desk</strong>. This time the receptionist says the Elder wants revenge. Accept the challenge and defeat him again.</li></ol><p>Speak to the receptionist again and choose <strong>Replay a Class</strong>, <a href=\"#pro-classes\">Pro Classes</a>, <a href=\"#survival-arena\">Survival Arena</a>, or <strong>Elder Rematch</strong>. Save to your memory card to keep the unlock.</p><p>Replay a Class lets you revisit the three original battles in any class, including Starry Night. If you already beat the Elder twice on the Japanese game or an older patch, win his revenge match once in Enhanced to unlock these options on that save.</p>",
           "features": [
             "greattree-arena"
           ]
@@ -207,13 +207,50 @@
           ]
         },
         {
-          "id": "truth-gate-fix",
+          "id": "original-game-bug-fixes",
           "section": "bug-fixes",
-          "question": "What does the Truth gate encounter fix do?",
-          "answerHtml": "<p>In the original Japanese game, losing the Truth gate encounter can leave its encounter flag set. Returning to the room then skips the normal encounter and exit options.</p><p>The patch clears that unfinished encounter state when you enter the room again, allowing the original event to work. It preserves completed victories and the event that resumes immediately after a successful battle. This fix is included in Enhanced and Translation only.</p>",
+          "question": "What original game bugs does this patch fix?",
+          "answerHtml": "<p>Both <strong>Enhanced</strong> and <strong>Translation only</strong> include these fixes for the original Japanese PlayStation game.</p><ul><li><a href=\"#truth-gate-fix\">Truth Gate softlock</a> after losing to the guardian of the spring.</li><li><a href=\"#memory-leaks\">Memory leaks</a> when loading scene graphics, characters, and sound.</li><li><a href=\"#walking-sprite-fix\">Walking sprites</a> that could load with damaged graphics.</li><li><a href=\"#screen-transition-fix\">Screen and portal transitions</a> that reused graphics memory before the last frame was drawn.</li><li><a href=\"#breeding-animation-fix\">Breeding and hatching animations</a> that could discard data still in use.</li></ul>",
           "features": [
             "truth-gate-fix"
           ]
+        },
+        {
+          "id": "truth-gate-fix",
+          "section": "bug-fixes",
+          "question": "Why could Terry get stuck in the Truth Gate after losing to Dungeon Shrimp?",
+          "answerHtml": "<p>Dungeon Shrimp guards the spring at the end of Terry’s Truth Gate. If you lost to it in the Japanese game and came back, the game could still treat the previous fight as underway. The guardian encounter would never start, and the room’s usual exit would never open.</p><p>With the patch, re-enter the spring room after a loss. You can challenge Dungeon Shrimp again or use the room’s normal exit. If you already defeated the guardian, your victory still counts.</p>",
+          "features": [
+            "truth-gate-fix"
+          ]
+        },
+        {
+          "id": "memory-leaks",
+          "section": "bug-fixes",
+          "question": "What memory leaks did the original game have?",
+          "answerHtml": "<p>When you left a scene or the music changed, the game could keep some old graphics or sound data in the PlayStation’s RAM. Over a play session, that left less room to load the next area or battle.</p><p>The patch releases old scene graphics, reuses the same buffer when loading character graphics, and frees sound data when tracks change or a sound load fails partway through.</p>",
+          "features": []
+        },
+        {
+          "id": "walking-sprite-fix",
+          "section": "bug-fixes",
+          "question": "What could go wrong when the game loaded walking sprites?",
+          "answerHtml": "<p>When loading a walking sprite for an encounter, the game could reuse the memory holding its artwork before it had finished reading it. If other data landed there, the sprite could be drawn with the wrong pixels. The patch finishes reading the artwork before releasing that memory.</p>",
+          "features": []
+        },
+        {
+          "id": "screen-transition-fix",
+          "section": "bug-fixes",
+          "question": "What did the patch fix during screen changes and portal travel?",
+          "answerHtml": "<p>The original game could start loading the next scene while the PlayStation was still drawing the last frame of the old one. A portal could also try to draw one extra frame after its animation had finished. The patch waits for the drawing to finish before reusing that memory and ends the portal animation while its graphics are still available.</p>",
+          "features": []
+        },
+        {
+          "id": "breeding-animation-fix",
+          "section": "bug-fixes",
+          "question": "What could go wrong at the end of breeding and hatching animations?",
+          "answerHtml": "<p>After displaying an animation, the game could try to release the same artwork twice. If another part of the game had already reused that memory, the second cleanup could discard the newer data. The patch keeps track of which artwork it has released so that cleanup only frees data the animation still owns.</p>",
+          "features": []
         }
       ]
     }

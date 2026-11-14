@@ -94,6 +94,20 @@ class WebsiteFAQTests(unittest.TestCase):
         self.assertEqual(self.read(), data)
         self.assertIn('movement-settings', report['suggestions'])
 
+    def test_shared_fix_without_a_build_option_survives_next_release(self):
+        data = self.read()
+        answer = {'id': 'scene-memory', 'section': 'bug-fixes',
+                  'question': 'How does scene cleanup work?',
+                  'answerHtml': '<p>Both editions release old graphics.</p>', 'features': []}
+        data['releases'][0]['faq'].append(answer)
+        self.write(data)
+        newer, _ = fixtures.sample_catalog('1.0.75')
+        website_faq.prepare(newer, self.root)
+        # Render just the new catalog to verify that preparation carried the answer forward.
+        html = update_release.feature_faq([newer], self.root)
+        self.assertIn('id="scene-memory"', html)
+        self.assertIn('Both editions release old graphics.</p></div>', html)
+
     def add_movement_feature(self, record):
         record['features'].append({'id': 'movement-upgrade', 'name': 'More movement options',
                                    'category': 'quality-of-life', 'requires': ['movement'],

@@ -28,8 +28,8 @@ def validate_document(data):
                             and catalog.text(answer.get('question')), 'Incomplete website FAQ question')
             catalog.require(isinstance(answer.get('answerHtml'), str), 'Website FAQ answerHtml is missing')
             catalog.AnswerHTML(answer['answerHtml'])
-            catalog.require(catalog.identifiers(answer.get('features'), 'Website FAQ features'),
-                            'Website FAQ answer needs feature references')
+            # Shared fixes can ship in every build without a selectable feature ID.
+            catalog.identifiers(answer.get('features'), 'Website FAQ features')
     catalog.require(len(versions) == len(set(versions)), 'Duplicate website FAQ release version')
     return data
 
@@ -82,7 +82,7 @@ def proposed_document(record, current):
             + (proposal['features'] if proposal else [])))
         if (proposal is not None and old != proposal) or answer != old:
             suggestions.append(old['id'])
-        if answer['features']:
+        if answer['features'] or not old['features']:
             answers.append(answer)
     for proposal in incoming.values():
         answers.append(deepcopy(proposal))

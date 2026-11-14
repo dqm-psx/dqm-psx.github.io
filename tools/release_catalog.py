@@ -22,7 +22,7 @@ SECTIONS = {
     'restored-content': ('faq-content', 'Restored content'),
     'quality-of-life': ('faq-quality', 'Quality of life'),
     'additional-content': ('faq-additions', 'Additional content'),
-    'bug-fixes': ('faq-fixes', 'Game fixes'),
+    'bug-fixes': ('faq-fixes', 'Original game bug fixes'),
 }
 CATEGORIES = {'restored-content', 'quality-of-life', 'additional-content', 'bug-fix'}
 UPSTREAM = 'https://github.com/dqm-psx/patch'

@@ -109,7 +109,7 @@ class ReleaseCatalogTests(unittest.TestCase):
         self.assertIn('<strong>R1</strong>', faq)
         self.assertIn('original-game-fix', faq)
         self.assertIn('Available since v1.0.73.', faq)
-        self.assertIn('<a href="#faq-fixes">Game fixes</a>', html)
+        self.assertIn('<a href="#faq-fixes">Original game bug fixes</a>', html)
         updater.update(self.root, check=True)
 
     def test_missing_explanation_or_edition_holds_entire_update(self):

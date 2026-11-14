@@ -218,8 +218,8 @@
         {
           "id": "truth-gate-fix",
           "section": "bug-fixes",
-          "question": "Why could Terry get stuck in the Truth Gate after losing to Dungeon Shrimp?",
-          "answerHtml": "<p>Dungeon Shrimp guards the spring at the end of Terry’s Truth Gate. If you lost to it in the Japanese game and came back, the game could still treat the previous fight as underway. The guardian encounter would never start, and the room’s usual exit would never open.</p><p>With the patch, re-enter the spring room after a loss. You can challenge Dungeon Shrimp again or use the room’s normal exit. If you already defeated the guardian, your victory still counts.</p>",
+          "question": "Why could Terry get stuck in the Truth Gate after losing to Digster?",
+          "answerHtml": "<p>Digster guards the spring at the end of Terry’s Truth Gate. In v1.0.74, you’ll see its name as <strong>Dungeon Shrimp</strong>. If you lost to it in the Japanese game and came back, the game could still treat the previous fight as underway. The guardian encounter would never start, and the room’s usual exit would never open.</p><p>With the patch, re-enter the spring room after a loss. You can challenge Digster again or use the room’s normal exit. If you already defeated the guardian, your victory still counts.</p>",
           "features": [
             "truth-gate-fix"
           ]

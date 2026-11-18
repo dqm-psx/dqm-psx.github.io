@@ -27,7 +27,7 @@ configuration is enabled. It never changes Pages settings or repository visibili
 
 The patch repository provides public Releases and the bug-report issue form; this
 repository provides the screenshot submission form. Run
-`python tools/check_public_links.py` to check those destinations and the Guide and
+`python tools/check_public_links.py` to check those destinations and the Player Guide and
 Translations sites without credentials. At launch, also check downloads, install
 anchors, the compact navigation, and the cover on a phone while signed out.
 
@@ -260,7 +260,7 @@ name remains visible. The columns stack on narrow screens.
 
 The patch landing page stands on its own and links to these existing public tools:
 
-- [Guide](https://dqm-psx.github.io/guide/) for breeding recipes, pair finding, and team planning.
+- [Player Guide](https://dqm-psx.github.io/guide/) for walkthroughs, maps, monster profiles and breeding tools.
 - [Translation comparison](https://dqm-psx.github.io/translations/): names, text, and correction proposals to `dqm-psx/translations`.
 
 A broader wiki/game reference and decompilation/research site remain future

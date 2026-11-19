@@ -219,6 +219,10 @@ html { --site-header-height: 68px; scroll-padding-top: calc(var(--site-header-he
   .header-inner { width: calc(100% - 40px); gap: 12px; }
   .main-nav, .nav-links { gap: 10px; }
 }
+/* "Player Guide" is a longer label: drop the decorative arrows where the full menu is tightest. */
+@media (min-width: 769px) and (max-width: 889px) {
+  .nav-links > a > span[aria-hidden="true"] { display: none; }
+}
 
 @media (max-width: 768px) {
   html { --site-header-height: 60px; }
